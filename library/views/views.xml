@@ -1,0 +1,135 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="book_list_view">
+      <field name="name">Library list</field>
+      <field name="model">library.book</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="author"/>
+          <field name="description"/>
+          <field name="pages"/>
+          <field name="year"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- form view for books -->
+    <record model="ir.ui.view" id="book_form_view">
+      <field name="name">book.form.view</field>
+      <field name="model">library.book</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="action_on_hand" string="On Hand" class="oe_hightlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'scrap'])]}"/>
+            <button name="action_on_shelf" string="On Shelf" class="oe_hightlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'scrap'])]}"/>
+            <field name="status" widget="statusbar" statusbar_visible="on shelf, on hand" />
+          </header>
+          <sheet>
+                <div class="oe_title">
+                  <label for="name"/>
+                  <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
+                </div>
+                <group>
+                  <group string="Info">
+                    <field name="serial_number"/>
+                    <field name="book_id"/>
+                    <field name="author"/>
+                    <field name="year"/>
+                    <field name="pages"/>
+                    <field name="lang_id"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="publishing_house"/>
+                  </group>
+                  <group>
+                    <field name="partner_id" string="Client"/>
+                  </group>
+                </group>
+                <notebook>
+                  <page string="Description">
+                    <field name="description"/>
+                  </page>
+                  <page string="History">
+                    <field name="history_ids" options="{'no_open': True}" >
+                      <tree create="false" edit="false" delete="false" default_order="id">
+                        <field name="partner_id"/>
+                        <field name="due_date"/>
+                        <field name="date_on_hand"/>
+                        <field name="date_on_shelf"/>
+                    </tree>
+                    </field>
+                  </page>
+                </notebook>
+              </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" groups="base.group_user"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="book_info_form_view">
+      <field name="name">book.form.view</field>
+      <field name="model">library.book.info</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+                <div class="oe_title">
+                  <label for="name"/>
+                  <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
+                </div>
+                <group>
+                  <group string="Info">
+                    <field name="author"/>
+                    <field name="lang_id"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                  </group>
+                </group>
+                <notebook>
+                  <page string="Description">
+                    <field name="description"/>
+                  </page>
+                </notebook>
+              </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" groups="base.group_user"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_book">
+      <field name="name">Library window</field>
+      <field name="res_model">library.book</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_book_info">
+      <field name="name">Books Info</field>
+      <field name="res_model">library.book.info</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="Library" id="menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Books" id="books" parent="menu_root"/>
+    <menuitem name="Configuration" id="configuration" parent="menu_root"/>
+-->
+    <!-- actions -->
+    <menuitem name="Books On Shelf" id="on_shelf" parent="books"
+              action="action_book"/>
+    <menuitem name="Book On Hand" id="on_hand" parent="books"
+              action="action_book"/>
+    <menuitem name="All" id="menu_all_books" parent="books"
+              action="action_book"/>
+    <menuitem name="Books Info" id="menu_book_info" parent="configuration"
+              action="action_book_info"/>
+  </data>
+</odoo>
