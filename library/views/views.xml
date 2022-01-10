@@ -22,7 +22,7 @@
         <form>
           <header>
             <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
-            <button name="%(library.action_wizard_on_hand)d" string="On Hand2" class="oe_highlight" type="action" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
+            <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
             <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
           </header>
           <sheet>
@@ -55,6 +55,16 @@
             <notebook>
               <page string="Description">
                 <field name="description"/>
+              </page>
+              <page string="History">
+                <field name="history_ids"  options="{'no_open': True}">
+                  <tree create="false" delete="false" edit="false" default_order="id desc">
+                    <field name="partner_id"/>
+                    <field name="date_on_hand"/>
+                    <field name="date_on_shelf"/>
+                    <field name="due_date"/>
+                  </tree>
+                </field>
               </page>
             </notebook>
           </sheet>
