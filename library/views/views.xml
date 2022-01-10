@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+         <record id="action_books" model="ir.actions.act_window">
+            <field name="name">library window</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="action_authors" model="ir.actions.act_window">
+            <field name="name">author window</field>
+            <field name="res_model">library.author</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="action_editions" model="ir.actions.act_window">
+            <field name="name">edition window</field>
+            <field name="res_model">library.edition</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="book_form_view" model="ir.ui.view">
+            <field name="name">Book form view</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <form>
+                     <header>
+                         <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
+                         <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
+                         <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
+                     </header>
+                    <sheet>
+                            <div class="oe_title">
+                                <label for="name"/>
+                                <h1><field name="name"/></h1>
+                            </div>
+                        <group>
+                            <group string="Info">
+                                <field name="author_id"/>
+                                <field name="tag_id" widget="many2many_tags"/>
+                                <field name="language_id"/>
+                                <field name="pages"/>
+                            </group>
+                            <group string="Edition">
+                                <field name="edition"/>
+                                <field name="number"/>
+                                <field name="year_of_publication"/>
+                                <field name="cover"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                 <field name="description"/>
+                            </page>
+                            <page string="History">
+                                <field name="book_history_id"  options="{'no_open': True}">
+                                          <tree create="false" delete="false" edit="false" default_order="id desc">
+                                                <field name="client_id"/>
+                                                <field name="date_on_hand"/>
+                                                <field name="date_on_shelf"/>
+                                                <field name="due_date"/>
+                                          </tree>
+                                    </field>
+                              </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="author_form_view" model="ir.ui.view">
+            <field name="name">Author form view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group string="Info">
+                            <field name="country"/>
+                            <field name="city"/>
+                            <field name="birth_date"/>
+                        </group>
+                        <notebook>
+                            <page string="Biography">
+                                 <field name="bio"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="edition_form_view" model="ir.ui.view">
+            <field name="name">Edition form view</field>
+            <field name="model">library.edition</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id = "book_tree_view" model="ir.ui.view">
+            <field name="name">Book Tree View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree string="Book">
+                    <field name="name"/>
+                    <field name="author_id"/>
+                    <field name="tag_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_root" name="Library" sequence = "10" />
+        <menuitem id="books" name = "Books" parent = "menu_root" action="action_books"/>
+        <menuitem id="all" name = "All Books" parent = "books" action="action_books"/>
+        <menuitem id="on_shelf" name = "Books on Shelf" parent = "books" action="action_books"/>
+        <menuitem id="on_hand" name = "Books on Hand" parent = "books" action="action_books"/>
+        <menuitem id="authors" name = "Authors" parent = "menu_root" action="action_authors"/>
+        <menuitem id="editions" name = "Editions" parent = "menu_root" action="action_editions"/>
+    </data>
+</odoo>
