@@ -19,8 +19,11 @@
     # any module necessary for this one to work correctly
     'depends': ['mail'],
 
+    'license': 'LGPL-3',
+
     # always loaded
     'data': [
+        'data/ir_cron.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_book_on_hand.xml',
         'views/views.xml',

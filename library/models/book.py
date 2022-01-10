@@ -6,6 +6,7 @@ from odoo import models, fields, api, _
 
 class Author(models.Model):
     _name = 'library.author'
+    _description = 'Author'
 
     name = fields.Char()
     country_id = fields.Many2one('res.country')
@@ -15,12 +16,14 @@ class Author(models.Model):
 
 class Language(models.Model):
     _name = 'library.language'
+    _description = 'Language'
 
     name = fields.Char()
 
 
 class Tag(models.Model):
     _name = 'library.tag'
+    _description = 'Tag'
 
     def _get_default_color(self):
         return randint(1, 11)
@@ -31,11 +34,12 @@ class Tag(models.Model):
 
 class History(models.Model):
     _name = 'library.history'
+    _description = 'History'
 
     book_id = fields.Many2one('library.book')
     partner_id = fields.Many2one('res.partner')
-    date_on_hand = fields.Date()
-    date_on_shelf = fields.Date()
+    date_on_hand = fields.Datetime()
+    date_on_shelf = fields.Datetime()
     due_date = fields.Date()
 
 
@@ -74,6 +78,7 @@ class Book(models.Model):
     image = fields.Image(string="Image", max_width=256, max_height=256)
     description = fields.Text(related='book_id.description')
     due_date = fields.Date()
+    overdue_notification_date = fields.Date()
 
     _sql_constraints = [
         ('number_uniq', 'unique (number)', """Only one number can be defined for each book!"""),
@@ -88,3 +93,28 @@ class Book(models.Model):
             'target': 'new'
         }
 
+    def action_on_shelf(self):
+        last_history = self.history_ids[-1]
+        if last_history:
+            last_history.write({
+                'date_on_shelf': fields.Datetime.now()
+            })
+        self.write({
+            'status': 'on_shelf',
+            'partner_id': False
+        })
+
+    def _cron_overdue_book_notification(self):
+        today = fields.Date.today()
+        overdue_books = self.env['library.book'].search([
+            ('status', '=', 'on_hand'),
+            ('due_date', '<', today),
+            ('overdue_notification_date', '!=', today)
+        ])
+        for book in overdue_books:
+            body = '%s пожалуйста верните книгу %s' % (book.partner_id.name, book.name)
+            subtype = self.env.ref('mail.mt_comment')
+            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
+            book.write({
+                'overdue_notification_date': fields.Datetime.now()
+            })
