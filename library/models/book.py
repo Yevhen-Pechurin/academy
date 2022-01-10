@@ -87,3 +87,4 @@ class Book(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'new'
         }
+
