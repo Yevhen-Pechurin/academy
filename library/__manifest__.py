@@ -26,6 +26,7 @@
         'security/ir.model.access.csv',
         'wizards/view_wizard_book_on_hand.xml',
         'views/views.xml',
+        'views/res_partner_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
