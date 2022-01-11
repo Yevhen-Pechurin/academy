@@ -52,7 +52,8 @@ class BookInfo(models.Model):
     author_id = fields.Many2one('library.author', tracking=True)
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
-    description = fields.Text(tracking=True)
+    tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
+    description = fields.Text(tracking=True, index=True)
 
 
 class Book(models.Model):
@@ -62,7 +63,7 @@ class Book(models.Model):
 
     book_id = fields.Many2one('library.book.info')
     name = fields.Char(related='book_id.name', readonly=False)
-    number = fields.Char()
+    number = fields.Char(copy=False)
     author_id = fields.Many2one(related='book_id.author_id')
     year = fields.Integer()
     lang_id = fields.Many2one(related='book_id.lang_id')
@@ -70,15 +71,17 @@ class Book(models.Model):
         ('on_shelf', 'On Shelf'),
         ('on_hand', 'On Hand'),
         ('unavailable', 'Unavailable'),
-    ], default='on_shelf')
+    ], default='on_shelf', compute='_compute_status',
+        store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
     tag_ids = fields.Many2many(related='book_id.tag_ids')
-    publishing_house = fields.Many2one('res.partner')
+    publishing_house_id = fields.Many2one('res.partner')
     image = fields.Image(string="Image", max_width=256, max_height=256)
     description = fields.Text(related='book_id.description')
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
+    active = fields.Boolean(default=True)
 
     _sql_constraints = [
         ('number_uniq', 'unique (number)', """Only one number can be defined for each book!"""),
@@ -118,3 +121,11 @@ class Book(models.Model):
             book.write({
                 'overdue_notification_date': fields.Datetime.now()
             })
+
+    @api.depends('active')
+    def _compute_status(self):
+        for book in self:
+            if not book.active:
+                book.status = 'unavailable'
+            else:
+                book.status = 'on_shelf'
