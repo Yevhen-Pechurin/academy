@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <odoo>
         <record id="act_res_partner_2_library_book" model="ir.actions.act_window">
-            <field name="name">Quotations and Sales</field>
+            <field name="name">Books On Hand</field>
             <field name="res_model">library.book</field>
             <field name="view_mode">tree,form,graph</field>
             <field name="context">{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
-            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
                 Add a new client to database!
@@ -22,11 +21,9 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="priority" eval="3"/>
-            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
                     <button class="oe_stat_button" type="action" name="%(library.act_res_partner_2_library_book)d"
-                        groups="sales_team.group_sale_salesman"
                         icon="fas fa-book">
                         <field string="Books" name="library_book_count" widget="statinfo"/>
                     </button>
