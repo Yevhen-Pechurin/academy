@@ -47,7 +47,9 @@ class Book(models.Model):
     due_date = fields.Date()
     overdue_notification = fields.Date()
 
-    _sql_constraints = [('number_uniq', 'unique (number)', "Only one number can be defined for each books!")]
+    _sql_constraints = [
+        ('number_uniq', 'unique (number)', """Only one number can be defined for each book!"""),
+    ]
 
     def action_on_hand(self):
         return {
