@@ -79,6 +79,7 @@ class Book(models.Model):
 
     def action_get(self):
         self.write({'status': 'ready', 'partner_id': False})
+
         last_history = self.history_ids[-1]
         last_history.write({'end': True})
 
@@ -94,6 +95,32 @@ class Book(models.Model):
         for book in books:
             last_history = book.history_ids
         if len(last_history) != 0:
+
             if book.status == 'are_used' and last_history[-1].due_date < fields.Date.today():
                 book.message_post(body=f'{book.partner_id.name} верните книгу {book.name}',
-                                  partner_ids=book.partner_id.ids, message_type='comment',subtype_id=self.env.ref('mail.mt_comment').id)
+                                  partner_ids=book.partner_id.ids, message_type='comment',
+                                  subtype_id=self.env.ref('mail.mt_comment').id)
+
+
+class Partner(models.Model):
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+    kek = fields.Integer(default=2)
+    books_ids = fields.One2many('library.book', 'partner_id')
+    books_count = fields.Integer(compute='_compute_line')
+
+    @api.depends('books_ids')
+    def _compute_line(self):
+        for i in self:
+            i.books_count = len(i.books_ids)
+    def actionget(self):
+        books=self.books_ids.ids
+        return {
+            'name': _('User Books'),
+            'view_mode': 'tree',
+            'res_model': 'library.book',
+            'type': 'ir.actions.act_window',
+            'domain':[('id', 'in',books)]
+
+        }
+

@@ -16,6 +16,21 @@
             <field name="view_mode">tree,kanban,form</field>
             <field name="domain"> [('status', '=', 'ready')]</field>
         </record>
+        <record id="view_form_todo_task_inherited" model="ir.ui.view">
+            <field name="name">Test</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                     <field name="books_count" invisible="1" />
+
+                    <button type="object" name="actionget" icon="fa-book"  >
+                        <field string="Books" name="books_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
 
         <!-- action for books which are user by partners right now-->
         <record id="are_used_books_action" model="ir.actions.act_window">
@@ -72,7 +87,7 @@
                         <notebook>
                             <page string="Description"><field name="description"/></page>
                             <page string="History">
-                                <field name="history_ids" >
+                                <field name="history_ids">
                                     <tree create="false" edit="false">
                                         <field name="partner_id"></field>
                                         <field name="due_date"></field>
@@ -84,7 +99,7 @@
                         </notebook>
 
                     </sheet>
-                     <div class="oe_chatter">
+                    <div class="oe_chatter">
                         <field name="message_follower_ids"/>
 
                         <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
