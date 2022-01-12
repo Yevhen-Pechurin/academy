@@ -9,8 +9,8 @@
           <field name="name"/>
           <field name="author"/>
           <field name="description"/>
-          <field name="pages"/>
-          <field name="year"/>
+          <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+          <field name="status"/>
         </tree>
       </field>
     </record>
@@ -40,7 +40,7 @@
                     <field name="year"/>
                     <field name="pages"/>
                     <field name="lang_id"/>
-                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="publishing_house"/>
                   </group>
                   <group>

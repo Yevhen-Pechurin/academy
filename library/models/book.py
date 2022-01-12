@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, _
+from odoo.tools.populate import randint
 
 
 class Language(models.Model):
@@ -23,6 +24,11 @@ class Tag(models.Model):
     _name = 'library.tag'
 
     name = fields.Char()
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    color = fields.Integer('Color', default=_get_default_color)
+
 
 
 class Book(models.Model):
