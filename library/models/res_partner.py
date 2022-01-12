@@ -29,3 +29,4 @@ class BooksAtClient(models.Model):
                     partners |= partner
                 partner = partner.parent_id
         (self - partners).book_order_count = 0
+
