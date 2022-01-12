@@ -21,6 +21,7 @@ dist/
 
 # Maven
 target/
+dist/
 
 # JetBrains IDE
 .idea/
@@ -52,3 +53,5 @@ Thumbs.db
 
 # Virtual environment
 venv/
+
+__pycache__/

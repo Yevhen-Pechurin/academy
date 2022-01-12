@@ -1,34 +1,40 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-        <record id="act_res_partner_2_library_book" model="ir.actions.act_window">
-            <field name="name">Books On Hand</field>
-            <field name="res_model">library.book</field>
-            <field name="view_mode">tree,form,graph</field>
-            <field name="context">{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Add a new client to database!
-              </p><p>
-                If the book on hand, it will be here in list.<br/>
-              </p>
-            </field>
-        </record>
-
-
-
-        <record id="res_partner_view_buttons" model="ir.ui.view">
-            <field name="name">res.partner.view.buttons</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form" />
-            <field name="priority" eval="3"/>
-            <field name="arch" type="xml">
+    <record model="ir.ui.view" id="partner_view_book_button">
+        <field name="name">partner.view.book.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <data>
                 <div name="button_box" position="inside">
-                    <button class="oe_stat_button" type="action" name="%(library.act_res_partner_2_library_book)d"
-                        icon="fa-book">
-                        <field string="Books" name="library_book_count" widget="statinfo"/>
+                    <button class="oe_stat_button" type="object" name="action_view_books" icon="fa-book" attrs="{'invisible': [('book_count', '=', 0)]}">
+                        <div class="o_stat_info">
+                            <field name="book_count" class="o_stat_value"/>
+                            <span class="o_stat_text" attrs="{'invisible': [('book_count', '&lt;', 2)]}"> Books</span>
+                            <span class="o_stat_text" attrs="{'invisible': [('book_count', '&gt;', 1)]}"> Book</span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button" type="action" name="%(action_partners_books)d" icon="fa-book" attrs="{'invisible': [('book_count', '=', 0)]}">
+                        <div class="o_stat_info">
+                            <field name="book_count" class="o_stat_value"/>
+                            <span class="o_stat_text" attrs="{'invisible': [('book_count', '&lt;', 2)]}"> Books Action</span>
+                            <span class="o_stat_text" attrs="{'invisible': [('book_count', '&gt;', 1)]}"> Book Action</span>
+                        </div>
                     </button>
                 </div>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_view_book_button_tree">
+        <field name="name">partner.view.tree.book.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="book_count"/>
             </field>
-        </record>
+        </field>
+    </record>
 
 </odoo>

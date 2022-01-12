@@ -54,6 +54,7 @@ class BookInfo(models.Model):
     tag_ids = fields.Many2many('library.tag', tracking=True)
     tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
     description = fields.Text(tracking=True, index=True)
+    image = fields.Image(tracking=True, string="Image", max_width=256, max_height=256)
 
 
 class Book(models.Model):
