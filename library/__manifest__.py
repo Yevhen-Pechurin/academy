@@ -17,7 +17,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['mail'],
+    'depends': ['mail', 'website'],
 
     'license': 'LGPL-3',
 
@@ -26,7 +26,9 @@
         'data/ir_cron.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_book_on_hand.xml',
-        'views/views.xml',
+        'views/book_views.xml',
+        'views/res_partner_views.xml',
+        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
