@@ -1,24 +1,27 @@
 <odoo>
-    <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
-    </data>
+    <template id="listing">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'homepage'"/>
+            <t t-set="title" t-value="'Books'"/>
+            <div id="wrap" class="oe_structure oe_empty">
+                <ul class="container list-unstyled">
+                    <li t-foreach="objects" t-as="object">
+                        <a t-attf-href="#{ root }/book/#{ slug(object) }">
+                            <t t-esc="object.display_name"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+
+    <template id="object">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'homepage'"/>
+            <t t-set="title" t-value="'Books'"/>
+
+            <h1 class="container"><t t-esc="object.display_name"/></h1>
+            <p class="container" t-esc="object.description"/>
+        </t>
+    </template>
 </odoo>
