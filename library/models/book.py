@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, _
+from odoo import models, fields, _, api
 from odoo.tools.populate import randint
 
 
@@ -44,14 +44,16 @@ class Book(models.Model):
     tag_ids = fields.Many2many(related='book_id.tag_ids')
     description = fields.Text(related='book_id.description')
     history_ids = fields.One2many('library.history', 'book_id')
-    serial_number = fields.Char()
-    status = fields.Selection([('on_shelf', 'On shelf'), ('on_hand', 'On hand'), ('scrap', 'Scrap'), ], default='on_shelf')
+    serial_number = fields.Char(copy=False)
+    status = fields.Selection([('on_shelf', 'On shelf'), ('on_hand', 'On hand'), ('scrap', 'Scrap'), ], default='on_shelf', compute='_compute_status',
+        store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     publishing_house = fields.Many2many('res.company')
     pages = fields.Integer()
     year = fields.Integer()
     due_date = fields.Date()
     overdue_notification = fields.Date()
+    active = fields.Boolean(default=True)
 
     _sql_constraints = [('number_uniq', 'unique (serial_number)', "Only one number can be defined for each books!")]
 
@@ -81,7 +83,8 @@ class Book(models.Model):
         overdue_books = self.env['library.book'].search([
             ('status', '=', 'on_hand'),
             ('due_date', '>', today),
-            ('overdue_notification', '!=', today)
+            ('overdue_notification', '!=', today),
+            ('active', '=', True),
         ])
         for book in overdue_books:
             body = f'{book.partner_id.name}, please return library book {book.name}'
@@ -91,6 +94,13 @@ class Book(models.Model):
                 'overdue_notification': fields.Datetime.now()
             })
 
+    @api.depends('active')
+    def _compute_status(self):
+        for book in self:
+            if not book.active:
+                book.status = 'scrap'
+            else:
+                book.status = 'on_shelf'
 
 
 class BookInfo(models.Model):
@@ -102,6 +112,8 @@ class BookInfo(models.Model):
     author = fields.Many2one('library.author', tracking=True)
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
+    tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id',
+                                tracking=True)
     description = fields.Text(tracking=True)
 
 
@@ -114,4 +126,6 @@ class History(models.Model):
     date_on_hand = fields.Date()
     date_on_shelf = fields.Date()
     due_date = fields.Date()
+
+
 

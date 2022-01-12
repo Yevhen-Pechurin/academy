@@ -15,13 +15,13 @@ class WizardOnHand(models.TransientModel):
         book.write({
             'partner_id': self.partner_id.id,
             'due_date': self.due_date,
-            'status': 'on_hand'
-        })
-        self.env['library.history'].create({
-            'book_id': book.id,
-            'partner_id': self.partner_id.id,
-            'date_on_hand': today,
-            'due_date': self.due_date,
+            'status': 'on_hand',
+            'history_ids': [(0, 0, {
+                'book_id': book.id,
+                'partner_id': self.partner_id.id,
+                'date_on_hand': today,
+                'due_date': self.due_date,
+            })]
         })
 
 

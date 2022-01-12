@@ -1,135 +1,157 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-    <record model="ir.ui.view" id="book_list_view">
-      <field name="name">Library list</field>
-      <field name="model">library.book</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="author"/>
-          <field name="description"/>
-          <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-          <field name="status"/>
-        </tree>
-      </field>
-    </record>
-
-
-    <!-- form view for books -->
-    <record model="ir.ui.view" id="book_form_view">
-      <field name="name">book.form.view</field>
-      <field name="model">library.book</field>
-      <field name="arch" type="xml">
-        <form>
-          <header>
-            <button name="action_on_hand" string="On Hand" class="oe_hightlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'scrap'])]}"/>
-            <button name="action_on_shelf" string="On Shelf" class="oe_hightlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'scrap'])]}"/>
-            <field name="status" widget="statusbar" statusbar_visible="on shelf, on hand" />
-          </header>
-          <sheet>
-                <div class="oe_title">
-                  <label for="name"/>
-                  <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
-                </div>
-                <group>
-                  <group string="Info">
-                    <field name="serial_number"/>
-                    <field name="book_id"/>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="book_list_view">
+            <field name="name">library list</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
                     <field name="author"/>
-                    <field name="year"/>
-                    <field name="pages"/>
-                    <field name="lang_id"/>
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    <field name="publishing_house"/>
-                  </group>
-                  <group>
-                    <field name="partner_id" string="Client"/>
-                  </group>
-                </group>
-                <notebook>
-                  <page string="Description">
-                    <field name="description"/>
-                  </page>
-                  <page string="History">
-                    <field name="history_ids" options="{'no_open': True}" >
-                      <tree create="false" edit="false" delete="false" default_order="id">
-                        <field name="partner_id"/>
-                        <field name="due_date"/>
-                        <field name="date_on_hand"/>
-                        <field name="date_on_shelf"/>
-                    </tree>
-                    </field>
-                  </page>
-                </notebook>
-              </sheet>
-          <div class="oe_chatter">
-            <field name="message_follower_ids" groups="base.group_user"/>
-            <field name="message_ids"/>
-          </div>
-        </form>
-      </field>
-    </record>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="book_info_form_view">
-      <field name="name">book.form.view</field>
-      <field name="model">library.book.info</field>
-      <field name="arch" type="xml">
-        <form>
-          <sheet>
-                <div class="oe_title">
-                  <label for="name"/>
-                  <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
-                </div>
-                <group>
-                  <group string="Info">
+        <!-- explicit search view definition -->
+        <record model="ir.ui.view" id="book_search_view">
+            <field name="name">library search</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('author', 'ilike', self), ('description', 'ilike', self)]"/>
                     <field name="author"/>
-                    <field name="lang_id"/>
-                    <field name="tag_ids" widget="many2many_tags"/>
-                  </group>
-                </group>
-                <notebook>
-                  <page string="Description">
-                    <field name="description"/>
-                  </page>
-                </notebook>
-              </sheet>
-          <div class="oe_chatter">
-            <field name="message_follower_ids" groups="base.group_user"/>
-            <field name="message_ids"/>
-          </div>
-        </form>
-      </field>
-    </record>
+                    <field name="partner_id" string="Client"/>
+                    <filter name="active" string="Archive" domain="[('active','=',False)]"/>
+                    <separator/>
+                    <filter name="on_shelf" string="On Shelf" domain="[('status','=', 'on_shelf')]"/>
+                    <filter name="on_hand" string="On Hand" domain="[('status','=', 'on_hand')]"/>
+                    <filter name="group_status" string="Status" context="{'group_by':'status'}"/>
+                </search>
+            </field>
+        </record>
 
-    <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="action_book">
-      <field name="name">Library window</field>
-      <field name="res_model">library.book</field>
-      <field name="view_mode">kanban,tree,form</field>
-    </record>
+        <!-- form view for books -->
+        <record model="ir.ui.view" id="book_info_form_view">
+            <field name="name">books.form.view</field>
+            <field name="model">library.book.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!--            <div class="oe_button_box" name="button_box">-->
+                        <!--                <button name="action_in_progress" type="object" class="oe_stat_button" icon="fa-calendar">-->
+                        <!--                    <div class="o_stat_info">-->
+                        <!--                        <field name="value" class="o_stat_value"/>-->
+                        <!--                        <span class="o_stat_text"> Meeting</span>-->
+                        <!--                    </div>-->
+                        <!--                </button>-->
+                        <!--            </div>-->
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
+                        </div>
+                        <group>
+                            <group string="Info" name="info">
+                                <field name="author"/>
+                                <field name="lang_id"/>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" class="tag"/>
+                                <field name="tag2_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" id="description" class="description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
 
-    <record model="ir.actions.act_window" id="action_book_info">
-      <field name="name">Books Info</field>
-      <field name="res_model">library.book.info</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <record model="ir.ui.view" id="book_form_view">
+            <field name="name">books.form.view</field>
+            <field name="model">library.book</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="library.book_info_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'scrap'])]}"/>
+                        <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'scrap'])]}"/>
+                        <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
+                    </header>
+                </xpath>
+                <field name="tag2_ids" position="replace"/>
+                <field name="author_id" position="before">
+                    <field name="active" invisible="1"/>
+                    <field name="number"/>
+                    <field name="book_id"/>
+                </field>
+                <xpath expr="//notebook/page[@id='description']" position="after">
+                    <page string="History">
+                        <field name="history_ids" options="{'no_open': True}">
+                            <tree create="false" delete="false" edit="false" default_order="id desc">
+                                <field name="partner_id"/>
+                                <field name="date_on_hand"/>
+                                <field name="date_on_shelf"/>
+                                <field name="due_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//field[hasclass('tag')]" position="after">
+                    <field name="publishing_house"/>
+                </xpath>
+                <xpath expr="//group/group" position="after">
+                    <group string="Client">
+                        <field name="partner_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
 
-    <!-- Top menu item -->
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="action_book">
+            <field name="name">Books</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
 
-    <menuitem name="Library" id="menu_root"/>
-    <!-- menu categories -->
-    <menuitem name="Books" id="books" parent="menu_root"/>
-    <menuitem name="Configuration" id="configuration" parent="menu_root"/>
--->
-    <!-- actions -->
-    <menuitem name="Books On Shelf" id="on_shelf" parent="books"
-              action="action_book"/>
-    <menuitem name="Book On Hand" id="on_hand" parent="books"
-              action="action_book"/>
-    <menuitem name="All" id="menu_all_books" parent="books"
-              action="action_book"/>
-    <menuitem name="Books Info" id="menu_book_info" parent="configuration"
-              action="action_book_info"/>
-  </data>
+        <record model="ir.actions.act_window" id="action_book_on_hand">
+            <field name="name">Books On Hand</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="context">{'search_default_on_hand': 1,}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_book_on_shelf">
+            <field name="name">Books On Shelf</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="context">{'search_default_on_shelf': 1,}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_book_info">
+            <field name="name">Books Info</field>
+            <field name="res_model">library.book.info</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="library" id="menu_root">
+            <menuitem name="Books" id="books">
+                <menuitem name="All" id="menu_all_books" action="action_book" sequence="1"/>
+                <menuitem name="Books On Hand" id="on_hand" action="action_book_on_hand" sequence="2"/>
+                <menuitem name="Books On Shelf" id="on_shelf" action="action_book_on_shelf" sequence="3"/>
+            </menuitem>
+            <menuitem name="Configuration" id="configuration">
+                 <menuitem name="Books Info" id="menu_book_info" action="action_book_info"/>
+            </menuitem>
+        </menuitem>
+
+    </data>
 </odoo>
