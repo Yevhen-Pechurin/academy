@@ -16,21 +16,7 @@
             <field name="view_mode">tree,kanban,form</field>
             <field name="domain"> [('status', '=', 'ready')]</field>
         </record>
-        <record id="view_form_todo_task_inherited" model="ir.ui.view">
-            <field name="name">Test</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <!-- to insert your fields at the end of the list -->
-                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
-                     <field name="books_count" invisible="1" />
 
-                    <button type="object" name="actionget" icon="fa-book"  >
-                        <field string="Books" name="books_count" widget="statinfo"></field>
-                    </button>
-                </xpath>
-            </field>
-        </record>
 
         <!-- action for books which are user by partners right now-->
         <record id="are_used_books_action" model="ir.actions.act_window">
@@ -57,6 +43,57 @@
             </field>
         </record>
 
+        <!-- kanban view for books -->
+        <record id="books_kanban_view" model="ir.ui.view">
+            <field name="name"> libraryr.book.kanban</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="partner_id"/>
+                    <field name="authors_id"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
+                                 style="width:60mm; height:40mm;;">
+                                <div class="oe_kanban_content flex-grow-1" style="display:flex">
+                                    <div>
+                                        <field
+                                                name="image_128"
+                                                widget="image"
+                                                class="oe_centered"
+                                        />
+                                    </div>
+                                    <div style="margin-left:10px">
+                                        <div class="o_kanban_record_title o_kanban_details">
+                                            <strong><field name="name"></field></strong>
+                                        </div>
+                                        <div style="max-width:85px">
+                                            <span class="o_text_overflow" t-if="record.partner_id.value"
+                                                  t-esc="record.partner_id.value">
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <field widget="many2many_tags" options="{'color_field':'color'}"
+                                                   name="tags"/>
+                                        </div>
+                                        <div>
+                                            <field name="authors_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
         <!-- form view for books -->
         <record id="books_form_view" model="ir.ui.view">
 
@@ -80,10 +117,17 @@
                             <field name="code"/>
                             <field name="authors_id"/>
                             <field name="tags" widget="many2many_tags" options="{'color_field':'color'}"/>
+                            <field
+                                    name="image_1920"
+                                    widget="image"
+                                    class="oe_avatar oe_left"
+                            />
                         </group>
+
                         <group string="Partner">
                             <field name="partner_id"/>
                         </group>
+
                         <notebook>
                             <page string="Description"><field name="description"/></page>
                             <page string="History">
@@ -95,7 +139,6 @@
                                     </tree>
                                 </field>
                             </page>
-
                         </notebook>
 
                     </sheet>
@@ -206,6 +249,22 @@
             </field>
         </record>
 
+        <!-- Extension of contacts for books-->
+        <record id="view_form_todo_task_inherited" model="ir.ui.view">
+            <field name="name">Test</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="actionget" icon="fa-book"
+                            attrs="{'invisible': [('books_count', '=', 0)]}">
+                        <field string="Books" name="books_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
         <!-- menues -->
         <menuitem id="library_menu" name="Library" sequence="1"/>
         <menuitem id="books_menu" name="Books" parent="library_menu" sequence="1"/>
@@ -215,5 +274,7 @@
         <menuitem id="ready_books_menu" name="Ready" action="ready_books_action" parent="books_menu" sequence="2"/>
         <menuitem id="are_used_books_menu" name="Are Used" action="are_used_books_action" parent="books_menu"
                   sequence="3"/>
+
+
     </data>
 </odoo>

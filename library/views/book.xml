@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <template id="book">
+            <t t-call="website.layout">
+                <div class="oe_structure">
+                    <div class="container">
+                        <t t-esc="book.name"/>
+                        <br/>
+                        <t t-esc="book.description"/>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

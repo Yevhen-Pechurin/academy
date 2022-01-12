@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+
+        <template id="books">
+            <t t-call="website.layout">
+                <div class="oe_structure">
+                    <div class="container">
+
+                        <t t-foreach="books" t-as="book">
+                            <p>Название -
+                                <a t-attf-href="/library/{{ slug(book) }}">
+                                    <t t-esc="book.name"/>
+                                </a>
+                            </p>
+                        </t>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

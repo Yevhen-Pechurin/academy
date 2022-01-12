@@ -53,7 +53,7 @@ class BookInfo(models.Model):
 class Book(models.Model):
     _name = 'library.book'
     _description = 'class for books'
-    _inherit = 'mail.thread'
+    _inherit = ['mail.thread','image.mixin']
 
     name = fields.Char(related='books_id.name')
     books_id = fields.Many2one('library.info')
@@ -64,8 +64,9 @@ class Book(models.Model):
     status = fields.Selection([('ready', "Ready"),
                                ('are_used', 'Are Used'),
                                ('unavailable', 'Unavailable')], default='ready')
-    partner_id = fields.Many2one('res.partner')
+    partner_id = fields.Many2one('res.partner',readonly=True)
     history_ids = fields.One2many('library.history', 'books_id')
+    picture=fields.Image()
 
     def action_on_hand(self):
         self.write({'status': 'are_used'})
@@ -102,25 +103,5 @@ class Book(models.Model):
                                   subtype_id=self.env.ref('mail.mt_comment').id)
 
 
-class Partner(models.Model):
-    _name = 'res.partner'
-    _inherit = 'res.partner'
-    kek = fields.Integer(default=2)
-    books_ids = fields.One2many('library.book', 'partner_id')
-    books_count = fields.Integer(compute='_compute_line')
 
-    @api.depends('books_ids')
-    def _compute_line(self):
-        for i in self:
-            i.books_count = len(i.books_ids)
-    def actionget(self):
-        books=self.books_ids.ids
-        return {
-            'name': _('User Books'),
-            'view_mode': 'tree',
-            'res_model': 'library.book',
-            'type': 'ir.actions.act_window',
-            'domain':[('id', 'in',books)]
-
-        }
 
