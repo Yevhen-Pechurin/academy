@@ -87,7 +87,7 @@
                     </header>
                 </xpath>
                 <field name="tag2_ids" position="replace"/>
-                <field name="author_id" position="before">
+                <field name="author" position="before">
                     <field name="active" invisible="1"/>
                     <field name="number"/>
                     <field name="book_id"/>
