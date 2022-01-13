@@ -23,8 +23,9 @@
 
     # always loaded
     'data': [
-        'data/ir_cron.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
+        'data/ir_cron.xml',
         'wizards/view_wizard_book_on_hand.xml',
         'views/book_views.xml',
         'views/res_partner_views.xml',

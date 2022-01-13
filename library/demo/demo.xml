@@ -1,30 +1,47 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="library.library">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
+        <!--Authors-->
+          <record id="author_rowling" model="library.author">
+            <field name="name">J. K. Rowling</field>
+          </record>
+        <!--Languages-->
+          <record id="language_english" model="library.language">
+            <field name="name">English</field>
+          </record>
+          <record id="language_ukrainian" model="library.language">
+            <field name="name">Ukrainian</field>
+          </record>
+        <!--Tag-->
+          <record id="fantasy" model="library.tag">
+            <field name="name">Fantasy</field>
+          </record>
+          <record id="adventures" model="library.tag">
+            <field name="name">Adventures</field>
+          </record>
+        <!--Books Info-->
+          <record id="book_info_1" model="library.book.info">
+            <field name="name">Harry Potter and smth</field>
+            <field name="lang_id" ref="language_english"/>
+            <field name="author_id" ref="author_rowling"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'),ref('adventures'),])]"/>
+            <field name="description">Description of Harry Potter and smth strange</field>
           </record>
 
-          <record id="object1" model="library.library">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
+        <!--Books Books-->
+        <record id="book_1" model="library.book">
+            <field name="number">767676767676</field>
+            <field name="book_id" ref="book_info_1"/>
+            <field name="partner_id" ref="base.res_partner_address_28"/>
+            <field name="status">on_hand</field>
+            <field name="due_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id' : ref('base.res_partner_address_28'),
+                'date_on_hand' : (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
+                'due_date' : DateTime.today()
+            })]"/>
           </record>
 
-          <record id="object2" model="library.library">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
 
-          <record id="object3" model="library.library">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
 
-          <record id="object4" model="library.library">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
     </data>
 </odoo>

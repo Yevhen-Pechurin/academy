@@ -54,7 +54,6 @@ class BookInfo(models.Model):
     tag_ids = fields.Many2many('library.tag', tracking=True)
     tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
     description = fields.Text(tracking=True, index=True)
-    image = fields.Image(tracking=True, string="Image", max_width=256, max_height=256)
 
 
 class Book(models.Model):
@@ -78,9 +77,8 @@ class Book(models.Model):
     history_ids = fields.One2many('library.history', 'book_id')
     tag_ids = fields.Many2many(related='book_id.tag_ids')
     publishing_house_id = fields.Many2one('res.partner')
-    # image = fields.Image(string="Image", max_width=256, max_height=256)
     description = fields.Text(related='book_id.description')
-    image = fields.Image(related='book_id.image', store=True, tracking=True)
+    image = fields.Image(tracking=True, string="Image", max_width=256, max_height=256)
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
     active = fields.Boolean(default=True)
@@ -101,10 +99,10 @@ class Book(models.Model):
     def action_on_shelf(self):
         last_history = self.history_ids[-1]
         if last_history:
-            last_history.write({
+            last_history.sudo().write({
                 'date_on_shelf': fields.Datetime.now()
             })
-        self.write({
+        self.sudo().write({
             'status': 'on_shelf',
             'partner_id': False
         })
