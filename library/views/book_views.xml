@@ -26,12 +26,13 @@
                     <field name="status"/>
                     <field name="partner_id"/>
                     <field name="image"/>
+                    <field name="id"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
                                 <div class="oe_kanban_content flex-grow-1">
                                     <div class="o_kanban_image">
-                                        <img alt="Book image" t-att-src="kanban_image('library.book', 'image', record.image.raw_value)"/>
+                                        <img alt="Book image" t-att-src="kanban_image('library.book', 'image', record.id.raw_value)"/>
                                     </div>
                                     <div class="o_kanban_record_title oe_kanban_details">
                                         <strong><field name="name"/></strong>
