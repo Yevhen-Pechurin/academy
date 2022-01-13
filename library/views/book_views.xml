@@ -80,7 +80,6 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-
                         <div class="oe_title">
                             <label for="name"/>
                             <h1><field class="o_text_overflow" name="name" placeholder="e.g. Harry Potter"/></h1>
@@ -88,7 +87,6 @@
                         <group>
                             <group string="Info" name="info">
                                 <field name="author_id"/>
-                                <field name="lang_id"/>
                                 <field name="lang_id"/>
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" class="tag"/>
                                 <field name="tag2_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
