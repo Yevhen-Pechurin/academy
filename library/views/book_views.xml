@@ -128,7 +128,7 @@
                 <field name="author_id" position="before">
                     <field name="active" invisible="1"/>
                     <field name="number"/>
-                    <field name="book_id"/>
+                    <field name="book_id" groups="base.group_no_one"/>
                 </field>
                 <xpath expr="//notebook/page[@id='description']" position="after">
                     <page string="History">
