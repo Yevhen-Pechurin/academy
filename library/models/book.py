@@ -62,7 +62,7 @@ class Book(models.Model):
     _inherits = {'library.book.info': 'book_id'}
     _description = 'Book'
 
-    book_id = fields.Many2one('library.book.info')
+    book_id = fields.Many2one('library.book.info', required=True, ondelete="cascade")
     number = fields.Char(copy=False)
     year = fields.Integer()
     status = fields.Selection([
