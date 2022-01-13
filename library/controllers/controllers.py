@@ -12,11 +12,11 @@ class Library(http.Controller):
     def list(self, **kw):
         return http.request.render('library.listing', {
             'root': '/library',
-            'objects': http.request.env['library.book'].search([]),
+            'objects': http.request.env['library.book'].sudo().search([]),
         })
 
     @http.route('/library/book/<model("library.book"):obj>', auth='public', website=True)
     def object(self, obj, **kw):
         return http.request.render('library.object', {
-            'object': obj
+            'object': http.request.env['library.book'].sudo().browse(obj.id)
         })

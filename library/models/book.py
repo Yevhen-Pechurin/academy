@@ -59,14 +59,12 @@ class BookInfo(models.Model):
 class Book(models.Model):
     _name = 'library.book'
     _inherit = 'mail.thread'
+    _inherits = {'library.book.info': 'book_id'}
     _description = 'Book'
 
     book_id = fields.Many2one('library.book.info')
-    name = fields.Char(related='book_id.name', readonly=False)
     number = fields.Char(copy=False)
-    author_id = fields.Many2one(related='book_id.author_id')
     year = fields.Integer()
-    lang_id = fields.Many2one(related='book_id.lang_id')
     status = fields.Selection([
         ('on_shelf', 'On Shelf'),
         ('on_hand', 'On Hand'),
@@ -75,10 +73,8 @@ class Book(models.Model):
         store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
-    tag_ids = fields.Many2many(related='book_id.tag_ids')
     publishing_house_id = fields.Many2one('res.partner')
     image = fields.Image(string="Image", max_width=256, max_height=256)
-    description = fields.Text(related='book_id.description')
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
     active = fields.Boolean(default=True)
