@@ -12,26 +12,38 @@
             <field name="name">Ukrainian</field>
           </record>
 <!--      Tags-->
-          <record id="tag_fantasy" model="library.tag">
+          <record id="fantasy" model="library.tag">
             <field name="name">Fantasy</field>
           </record>
-          <record id="tag_adventure" model="library.tag">
-            <field name="name">Adventure</field>
+          <record id="adventures" model="library.tag">
+            <field name="name">Adventures</field>
           </record>
-          <record id="tag_modern" model="library.tag">
+          <record id="modern" model="library.tag">
             <field name="name">Modern</field>
           </record>
-<!--      Books-->
-          <record id="book_1" model="library.book.info">
+<!--      Book Info-->
+          <record id="book_info_1" model="library.book.info">
             <field name="name">Harry Potter and the Order of the Phoenix</field>
-            <field name="author_id" ref="author_rowling"/>
             <field name="lang_id" ref="language_english"/>
-            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'), ref('adventures'), ref('modern'),])]"/>
-            <field name="description"/>
-Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time.
+            <field name="author_id" ref="author_rowling"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'),ref('adventures'),ref('modern'),])]"/>
+            <field name="description">
+Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time.</field>
           </record>
 
-
+<!--      Books-->
+            <record id="book_1" model="library.book">
+            <field name="number">75432</field>
+            <field name="book_id" ref="book_info_1"/>
+            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="status">on_hand</field>
+            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id': ref('base.res_partner_address_31'),
+                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
+                'due_date': DateTime.today()
+            })]"/>
+        </record>
 
     </data>
 </odoo>
