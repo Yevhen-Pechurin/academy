@@ -86,7 +86,6 @@ class Book(models.Model):
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
     tag_ids = fields.Many2many(related='book_id.tag_ids')
-    tag2_ids = fields.Many2many(related='book_id.tag2_ids')
     publishing_house_id = fields.Many2one('res.partner')
     image = fields.Image(string="Image", max_width=256, max_height=256, help="Select image here", verify_resolution=True)
     description = fields.Text(related='book_id.description')
