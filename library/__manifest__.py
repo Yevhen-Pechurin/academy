@@ -16,7 +16,7 @@
     'category': 'Library',
     'version': '0.1',
 
-    # 'license': 'LGPL-3',
+    'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
     'depends': ['mail', 'website'],
