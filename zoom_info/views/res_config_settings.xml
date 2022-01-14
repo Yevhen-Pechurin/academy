@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_zoom_info" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.zoom.info</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='external_pads_setting']" position="before">
+                <div class="col-12 col-lg-6 o_setting_box" id="sync_zoom_info_setting">
+                    <div class="o_setting_left_pane">
+                        <field name="module_zoom_info" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label string="Zoom Info" for="module_zoom_info"/>
+                        <div class="text-muted">
+                            Synchronize with Zoom Info
+                        </div>
+                        <div class="content-group" attrs="{'invisible': [('module_zoom_info','=',False)]}">
+                            <div class="row mt16">
+                                <label for="zi_username" string="Username:" class="col-lg-3 o_light_label"/>
+                                <field name="zi_username" placeholder="info@gmail.com"/>
+                                <label for="zi_password" string="Password:" class="col-3 col-lg-3 o_light_label"/>
+                                <field name="zi_password" password="True" nolabel="1"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="zoom_info_token">
+                    <div class="o_setting_left_pane">
+                        <field name="is_zi_token_generated" readonly="True"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label string="Zoom Info Token" for="is_zi_token_generated"/>
+                        <div class="content-group"
+                             attrs="{'invisible': [('module_zoom_info','=',False)]}">
+                            <div class="mt8 row">
+                                <div class="col-sm">
+                                    <field name="is_zi_token_generated" invisible="1"/>
+                                    <div role="alert"
+                                         attrs="{'invisible': [('is_zi_token_generated', '=', False)]}">
+                                        <i class="text-success fa fa-check"/> &amp;nbsp; Token is set
+                                    </div>
+                                    <div role="alert"
+                                         attrs="{'invisible': [('is_zi_token_generated', '=', True)]}">
+                                        <i class="fa fa-exclamation-triangle text-warning"/> &amp;nbsp; No refresh token set
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
