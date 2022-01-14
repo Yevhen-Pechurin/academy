@@ -9,7 +9,6 @@
             <field name="name"/>
             <field name="author_id"/>
             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-<!--            <field name="tag2_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>-->
             <field name="status"/>
         </tree>
     </field>
@@ -28,6 +27,7 @@
             <field name="image"/>
             <field name="lang_id"/>
             <field name="partner_id"/>
+            <field name="id"/>
             <templates>
                 <t t-name="kanban-box">
                     <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
@@ -38,14 +38,12 @@
                             <div>
                                 <field name="author_id"/>
                             </div>
-<!--                            <div class="o_kanban_image">-->
-<!--                                <img alt="Picture" t-att-src="kanban_image('library.book', 'image', record.id.raw_value)"/>-->
-<!--                            </div>-->
-
-                            <div>
-                                <field name="image" widget="image"/>
+                            <div class="o_kanban_image">
+                                <img alt="Picture" t-att-src="kanban_image('library.book', 'image', record.id.raw_value)"/>
                             </div>
-
+<!--                            <div>-->
+<!--                                <field name="image" widget="image"/>-->
+<!--                            </div>-->
                             <div>
                                 Language:
                                 <field name="lang_id"/>

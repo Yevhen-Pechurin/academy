@@ -1,30 +1,37 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="library.library">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
+<!--      Authors-->
+          <record id="author_rowling" model="library.author">
+            <field name="name">J. K. Rowling</field>
+          </record>
+<!--      Languages-->
+          <record id="language_english" model="library.language">
+            <field name="name">English</field>
+          </record>
+          <record id="language_ukrainian" model="library.language">
+            <field name="name">Ukrainian</field>
+          </record>
+<!--      Tags-->
+          <record id="tag_fantasy" model="library.tag">
+            <field name="name">Fantasy</field>
+          </record>
+          <record id="tag_adventure" model="library.tag">
+            <field name="name">Adventure</field>
+          </record>
+          <record id="tag_modern" model="library.tag">
+            <field name="name">Modern</field>
+          </record>
+<!--      Books-->
+          <record id="book_1" model="library.book.info">
+            <field name="name">Harry Potter and the Order of the Phoenix</field>
+            <field name="author_id" ref="author_rowling"/>
+            <field name="lang_id" ref="language_english"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'), ref('adventures'), ref('modern'),])]"/>
+            <field name="description"/>
+Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time.
           </record>
 
-          <record id="object1" model="library.library">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
-          </record>
 
-          <record id="object2" model="library.library">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
 
-          <record id="object3" model="library.library">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
-
-          <record id="object4" model="library.library">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
     </data>
 </odoo>
