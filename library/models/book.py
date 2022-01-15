@@ -138,4 +138,4 @@ class Book(models.Model):
             if not book.active:
                 book.status = 'unavailable'
             else:
-                book.status = 'on_shelf'
+                book.status = book.status

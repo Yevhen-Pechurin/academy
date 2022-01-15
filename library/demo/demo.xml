@@ -21,6 +21,10 @@
           <record id="modern" model="library.tag">
             <field name="name">Modern</field>
           </record>
+<!--      Publishing House-->
+          <record id="publishing_house_bloomsbury" model="res.partner">
+            <field name="name">Bloomsbury Children`s</field>
+          </record>
 <!--      Book Info-->
           <record id="book_info_1" model="library.book.info">
             <field name="name">Harry Potter and the Order of the Phoenix</field>
@@ -34,7 +38,7 @@ Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudl
 <!--      Books-->
             <record id="book_1" model="library.book">
             <field name="number">75432</field>
-<!--            <field name="publishing_house_id">Bloomsbury Children`s</field>-->
+            <field name="publishing_house_id" ref="publishing_house_bloomsbury"/>
             <field name="year">2014</field>
             <field name="image" type="base64" file="library/img/Harry_Potter_and_the_Order_of_the_Phoenix.jpg"/>
             <field name="book_id" ref="book_info_1"/>
@@ -69,6 +73,10 @@ Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudl
           <record id="family" model="library.tag">
             <field name="name">Family</field>
           </record>
+<!--      Publishing House-->
+          <record id="publishing_house_poetose" model="res.partner">
+            <field name="name">Poetose Press</field>
+          </record>
 <!--      Book Info-->
           <record id="book_info_2" model="library.book.info">
             <field name="name">Polyanna</field>
@@ -83,7 +91,7 @@ The novel's success brought the term "Pollyanna" (along with the adjective "poll
 <!--      Books-->
             <record id="book_2" model="library.book">
             <field name="number">32456</field>
-<!--            <field name="publishing_house_id">Poetose Press</field>-->
+            <field name="publishing_house_id" ref="publishing_house_poetose"/>
             <field name="year">2019</field>
             <field name="image" type="base64" file="library/img/pollyanna.jpg"/>
             <field name="book_id" ref="book_info_2"/>
@@ -118,6 +126,10 @@ The novel's success brought the term "Pollyanna" (along with the adjective "poll
           <record id="family" model="library.tag">
             <field name="name">Family</field>
           </record>
+<!--      Publishing House-->
+          <record id="publishing_house_seawolf" model="res.partner">
+             <field name="name">SeaWolf Press</field>
+          </record>
 <!--      Book Info-->
           <record id="book_info_3" model="library.book.info">
             <field name="name">The Adventures of Tom Sawyer</field>
@@ -131,7 +143,7 @@ The Adventures of Tom Sawyer revolves around the youthful adventures of the nove
 <!--      Books-->
 <record id="book_3" model="library.book">
             <field name="number">64538</field>
-<!--            <field name="publishing_house_id">SeaWolf Press</field>-->
+            <field name="publishing_house_id" ref="publishing_house_seawolf"/>
             <field name="year">2020</field>
             <field name="image" type="base64" file="library/img/tom_sawyer.jpg"/>
             <field name="book_id" ref="book_info_3"/>
