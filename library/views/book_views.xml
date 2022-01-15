@@ -38,12 +38,17 @@
                     <field name="tag_ids"/>
                     <field name="status"/>
                     <field name="partner_id"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
                                 <div class="oe_kanban_content flex-grow-1">
                                     <div class="o_kanban_record_title oe_kanban_details">
                                         <strong><field name="name"/></strong>
+                                    </div>
+                                    <!--my code-->
+                                    <div class="o_kanban_image">
+                                        <img type="open" t-att-src="kanban_image('library.book', 'image', record.id.raw_value)" alt="Acquirer"/>
                                     </div>
                                     <div>
                                         <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
@@ -99,7 +104,6 @@
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" class="tag"/>
                                 <field name="tag2_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                                 <field name="year"/>
-
                             </group>
                         </group>
                         <notebook>

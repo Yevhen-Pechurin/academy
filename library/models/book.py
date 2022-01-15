@@ -49,8 +49,8 @@ class CustomerList(models.Model):
     _description = 'Customer List'
 
     name = fields.Char(tracking=True)
-    # customer = fields.Many2one(tracking=True)
     author_id = fields.Many2one('library.author', tracking=True)
+    # customer = fields.Many2one(tracking=True)
     # partner_id = fields.Many2one('res.partner', tracking=True)
     # date_on_hand = fields.Datetime(tracking=True)
 
@@ -70,7 +70,7 @@ class BookInfo(models.Model):
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
     tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
-    year = fields.Text()
+    year = fields.Integer()
     description = fields.Text(tracking=True, index=True)
 
 
@@ -144,6 +144,6 @@ class Book(models.Model):
             if not book.active:
                 book.status = 'unavailable'
             else:
-                book.status = 'on_shelf'
+                book.status = book.status
 
 

@@ -52,6 +52,7 @@
         <record id="book_info_1" model="library.book.info">
             <field name="name">Harry Potter and the Philosopher’s Stone</field>
             <field name="lang_id" ref="language_english"/>
+            <field name="year">2001</field>
             <field name="author_id" ref="author_rowling"/>
             <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'),ref('adventures'),ref('modern'),])]"/>
             <field name="description">
@@ -63,6 +64,7 @@
         <record id="book_info_2" model="library.book.info">
             <field name="name">The Little Prince</field>
             <field name="lang_id" ref="language_french"/>
+            <field name="year">1943</field>
             <field name="author_id" ref="author_exupery"/>
             <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'),ref('childrens'),ref('philosophy'),ref('classics'),])]"/>
             <field name="description">
@@ -72,6 +74,7 @@ A pilot stranded in the desert awakes one morning to see, standing before him, t
         <record id="book_info_3" model="library.book.info">
             <field name="name">To Kill a Mockingbird</field>
             <field name="lang_id" ref="language_english"/>
+            <field name="year">1960</field>
             <field name="author_id" ref="author_lee"/>
             <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fiction'),ref('historical'),])]"/>
             <field name="description">
@@ -83,6 +86,7 @@ Compassionate, dramatic, and deeply moving, To Kill A Mockingbird takes readers 
         <record id="book_info_4" model="library.book.info">
             <field name="name">The Adventures of Tom Sawyer</field>
             <field name="lang_id" ref="language_english"/>
+            <field name="year">1876</field>
             <field name="author_id" ref="author_twain"/>
             <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('adventures'),ref('childrens'),])]"/>
             <field name="description">
@@ -102,6 +106,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
+<!--            <field name="image" type="base64" file="img/poter.jpg"/>-->
         </record>
         <record id="book_2" model="library.book">
             <field name="number">22</field>
@@ -115,6 +120,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
+<!--            <field name="image" type="base64" file="img/Littleprince.jpg"/>-->
         </record>
         <record id="book_3" model="library.book">
             <field name="number">18</field>
@@ -128,12 +134,14 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
+<!--            <field name="image" type="base64" file="img/mockingbird.jpg"/>-->
         </record>
         <record id="book_4" model="library.book">
             <field name="number">455</field>
             <field name="year">1876</field>
             <field name="book_id" ref="book_info_4"/>
             <field name="status">on_shelf</field>
+            <field name="image" type="base64" file="library/img/sawyer.jpg"/>
         </record>
 
     </data>
