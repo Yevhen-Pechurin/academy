@@ -92,6 +92,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
 
         <record id="book_1" model="library.book">
             <field name="number">3465342634</field>
+            <field name="year">2001</field>
             <field name="book_id" ref="book_info_1"/>
             <field name="partner_id" ref="base.res_partner_address_28"/>
             <field name="status">on_hand</field>
@@ -104,6 +105,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
         </record>
         <record id="book_2" model="library.book">
             <field name="number">22</field>
+            <field name="year">1943</field>
             <field name="book_id" ref="book_info_2"/>
             <field name="partner_id" ref="base.res_partner_address_16"/>
             <field name="status">on_hand</field>
@@ -116,6 +118,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
         </record>
         <record id="book_3" model="library.book">
             <field name="number">18</field>
+            <field name="year">1960</field>
             <field name="book_id" ref="book_info_3"/>
             <field name="partner_id" ref="base.res_partner_address_15"/>
             <field name="status">on_hand</field>
@@ -128,6 +131,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
         </record>
         <record id="book_4" model="library.book">
             <field name="number">455</field>
+            <field name="year">1876</field>
             <field name="book_id" ref="book_info_4"/>
             <field name="status">on_shelf</field>
         </record>

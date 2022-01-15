@@ -13,6 +13,19 @@
                 </tree>
             </field>
         </record>
+        <!--my code-->
+        <record model="ir.ui.view" id="customer_list_view">
+            <field name="name">Customer list</field>
+            <field name="model">library.customer.list</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="author_id"/>
+<!--                    <field name="date_on_hand"/>-->
+<!--                    <field name="partner_id"/>-->
+                </tree>
+            </field>
+        </record>
 
         <!-- explicit kanban view definition -->
         <record model="ir.ui.view" id="book_kanban_view">
@@ -85,6 +98,8 @@
                                 <field name="lang_id"/>
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" class="tag"/>
                                 <field name="tag2_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                <field name="year"/>
+
                             </group>
                         </group>
                         <notebook>
@@ -177,6 +192,13 @@
             <field name="res_model">library.book.info</field>
             <field name="view_mode">tree,form</field>
         </record>
+            <!--my code-->
+        <record model="ir.actions.act_window" id="action_customer_list">
+            <field name="name">Customers</field>
+<!--            <field name="res_model">library.book.info</field>-->
+            <field name="res_model">library.customer.list</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
         <menuitem name="library" id="menu_root" groups="library.group_library_user">
             <menuitem name="Books" id="books">
@@ -186,6 +208,10 @@
             </menuitem>
             <menuitem name="Configuration" id="configuration" groups="library.group_library_manager">
                  <menuitem name="Books Info" id="menu_book_info" action="action_book_info"/>
+            </menuitem>
+            <!--my code-->
+            <menuitem name="Customer list" id="customer_list" groups="library.group_library_manager">
+                 <menuitem name="Customers" id="menu_customer_list" action="action_customer_list"/>
             </menuitem>
         </menuitem>
 

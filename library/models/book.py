@@ -43,6 +43,23 @@ class History(models.Model):
     due_date = fields.Date()
 
 
+# my code --
+class CustomerList(models.Model):
+    _name = 'library.customer.list'
+    _description = 'Customer List'
+
+    name = fields.Char(tracking=True)
+    # customer = fields.Many2one(tracking=True)
+    author_id = fields.Many2one('library.author', tracking=True)
+    # partner_id = fields.Many2one('res.partner', tracking=True)
+    # date_on_hand = fields.Datetime(tracking=True)
+
+    # def partner_book_on_hand(self):
+    #     return {
+    #
+    #     }
+
+
 class BookInfo(models.Model):
     _name = 'library.book.info'
     _inherit = 'mail.thread'
@@ -53,6 +70,7 @@ class BookInfo(models.Model):
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
     tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
+    year = fields.Text()
     description = fields.Text(tracking=True, index=True)
 
 
@@ -62,6 +80,8 @@ class Book(models.Model):
     _inherits = {'library.book.info': 'book_id'}
     _description = 'Book'
 
+    customer_id = fields.Many2one('library.book.info')
+    name = fields.Char(related='book_id.name', readonly=False)
     book_id = fields.Many2one('library.book.info')
     number = fields.Char(copy=False)
     year = fields.Integer()
@@ -125,3 +145,5 @@ class Book(models.Model):
                 book.status = 'unavailable'
             else:
                 book.status = 'on_shelf'
+
+
