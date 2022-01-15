@@ -97,5 +97,45 @@ The novel's success brought the term "Pollyanna" (along with the adjective "poll
             })]"/>
         </record>
 
+<!--      Authors-->
+          <record id="author_twain" model="library.author">
+            <field name="name">Mark Twain</field>
+          </record>
+<!--      Languages-->
+          <record id="language_english" model="library.language">
+            <field name="name">English</field>
+          </record>
+          <record id="language_ukrainian" model="library.language">
+            <field name="name">Ukrainian</field>
+          </record>
+<!--      Tags-->
+          <record id="adventures" model="library.tag">
+            <field name="name">Adventures</field>
+          </record>
+          <record id="satire" model="library.tag">
+            <field name="name">Satire</field>
+          </record>
+          <record id="family" model="library.tag">
+            <field name="name">Family</field>
+          </record>
+<!--      Book Info-->
+          <record id="book_info_3" model="library.book.info">
+            <field name="name">The Adventures of Tom Sawyer</field>
+            <field name="lang_id" ref="language_english"/>
+            <field name="author_id" ref="author_twain"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('adventures'),ref('satire'),ref('family'),])]"/>
+            <field name="description">
+The Adventures of Tom Sawyer revolves around the youthful adventures of the novel's schoolboy protagonist, Thomas Sawyer, whose reputation precedes him for causing mischief and strife. Tom lives with his Aunt Polly, half-brother Sid, and cousin Mary in the quaint town of St. Petersburg, just off the shore of the Mississippi River. St. Petersburg is described as a typical small-town atmosphere where the Christian faith is predominant, the social network is close-knit, and familiarity resides.</field>
+          </record>
+
+<!--      Books-->
+<record id="book_3" model="library.book">
+            <field name="number">64538</field>
+<!--            <field name="publishing_house_id">SeaWolf Press</field>-->
+            <field name="year">2020</field>
+            <field name="image" type="base64" file="library/img/tom_sawyer.jpg"/>
+            <field name="book_id" ref="book_info_3"/>
+            <field name="status">on_shelf</field>
+        </record>
     </data>
 </odoo>
