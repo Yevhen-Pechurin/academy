@@ -7,16 +7,16 @@ class Library(http.Controller):
     def index(self, **kw):
         return "Hello, world"
 
-    @http.route('/library/books', auth='public')
+    @http.route('/library/books', auth='public', website=True)
     def list(self, **kw):
         return http.request.render('library.listing', {
-            'root': '/library/books',
-            'objects': http.request.env['library.book'].search([]),
+            'root': '/library',
+            'objects': http.request.env['library.book'].sudo().search([]),
         })
 
     @http.route('/library/book/<model("library.book"):obj>', auth='public', website=True)
     def object(self, obj, **kw):
         return http.request.render('library.object', {
-            'object': obj
+            'object': http.request.env['library.book'].sudo().browse(obj.id)
         })
 
