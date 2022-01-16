@@ -1,30 +1,83 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="library.library">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
-          </record>
+        <!-- Authors -->
+        <record id="author_rowling" model="library.author">
+            <field name="name">J. K. Rowling</field>
+        </record>
+        <record id="author_tolkien" model="library.author">
+            <field name="name">J. R. R. Tolkien</field>
+        </record>
+        <!-- Languages -->
+        <record id="language_english" model="library.language">
+            <field name="name">English</field>
+        </record>
+        <record id="language_ukrainian" model="library.language">
+            <field name="name">Ukrainian</field>
+        </record>
+        <!-- Tags -->
+        <record id="fantasy" model="library.tag">
+            <field name="name">Fantasy</field>
+        </record>
+        <record id="high_fantasy" model="library.tag">
+            <field name="name">High fantasy</field>
+        </record>
+        <record id="adventures" model="library.tag">
+            <field name="name">Adventures</field>
+        </record>
+        <record id="modern" model="library.tag">
+            <field name="name">Modern</field>
+        </record>
+        <!-- Book info -->
+        <record id="book_info_1" model="library.book.info">
+            <field name="title">Harry Potter and the Philosopher’s Stone</field>
+            <field name="lang_ids" eval="[(5, 0), (6, 0, [ref('language_english')])]"/>
+            <field name="author_ids" eval="[(5, 0), (6, 0, [ref('author_rowling')])]"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('fantasy'),ref('adventures'),ref('modern'),])]"/>
+            <field name="description">
+              Пока в дом № 4 по Тисовой улице не стали доставлять письма, Гарри Поттер ничего не знал о Хогвартсе. Зеленые чернила на желтом пергаменте с лиловой печатью. Со скоростью света дядя и тетя отбирали эти письма. И вот однажды на 11-й День рождения Гарри к ним врывается великан по имени Рубиус Хагрид. Ко всеобщему удивлению он объявляет Гарри Поттера волшебником, утверждая, что его место в Хогварсте, Школе Чародейства и Волшебства. Фантастические приключения начинаются!
 
-          <record id="object1" model="library.library">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
-          </record>
+              Новое издание классической серии международного бестселлера, многократного лауреата премий представлено в новой обложке с очаровательными, созданными для детей иллюстрациями Джонни Даддла, которые привлекут новых читателей книг о Гарри Поттере. Пришло время передать магию новому поколению.
+            </field>
+        </record>
+        <record id="book_1" model="library.book">
+            <field name="ISBN">3465342634</field>
+            <field name="book_id" ref="book_info_1"/>
+            <field name="partner_id" ref="base.res_partner_address_28"/>
+            <field name="status">on_hand</field>
+            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id': ref('base.res_partner_address_28'),
+                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
+                'due_date': DateTime.today()
+            })]"/>
+        </record>
 
-          <record id="object2" model="library.library">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
 
-          <record id="object3" model="library.library">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
+        <record id="book_info_2" model="library.book.info">
+            <field name="title">The Lord of the Rings</field>
+            <field name="lang_ids" eval="[(5, 0), (6, 0, [ref('language_english')])]"/>
+            <field name="author_ids" eval="[(5, 0), (6, 0, [ref('author_tolkien')])]"/>
+            <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('high_fantasy'),ref('adventures'),])]"/>
+            <field name="description">
+                The Lord of the Rings is an epic high-fantasy novel[a] by English author and scholar J. R. R. Tolkien.
+                Set in Middle-earth, intended to be Earth at some distant time in the past, the story began as a sequel to Tolkien's 1937 children's book The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling books ever written, with over 150 million copies sold.
+            </field>
+        </record>
 
-          <record id="object4" model="library.library">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
+        <record id="book_2" model="library.book">
+            <field name="ISBN">9780261103207</field>
+            <field name="book_id" ref="book_info_2"/>
+            <field name="partner_id" eval="False"/>
+            <field name="status">on_shelf</field>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id': ref('base.res_partner_address_27'),
+                'date_on_hand': (DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-%d'),
+                'due_date': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')
+            }),
+            (0, 0, {
+                'date_on_shelf': (DateTime.today() - relativedelta(days=35)).strftime('%Y-%m-%d'),
+                }),]"/>
+        </record>
+
     </data>
 </odoo>

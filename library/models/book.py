@@ -10,8 +10,7 @@ class Author(models.Model):
 
     name = fields.Char()
     country_id = fields.Many2one('res.country')
-    city = fields.Char()
-    birthday_date = fields.Date()
+    birth_date = fields.Date()
 
 
 class Language(models.Model):
@@ -34,7 +33,7 @@ class Tag(models.Model):
 
 class History(models.Model):
     _name = 'library.history'
-    _description = 'History'
+    _description = 'Book handling history'
 
     book_id = fields.Many2one('library.book')
     partner_id = fields.Many2one('res.partner')
@@ -46,11 +45,11 @@ class History(models.Model):
 class BookInfo(models.Model):
     _name = 'library.book.info'
     _inherit = 'mail.thread'
-    _description = 'Book Info'
+    _description = 'An abstract notion of a book'
 
-    name = fields.Char(tracking=True)
-    author_id = fields.Many2one('library.author', tracking=True)
-    lang_id = fields.Many2one('library.language', tracking=True)
+    title = fields.Char(tracking=True)
+    author_ids = fields.Many2many('library.author', tracking=True)
+    lang_ids = fields.Many2many('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
     description = fields.Text(tracking=True)
 
@@ -58,30 +57,28 @@ class BookInfo(models.Model):
 class Book(models.Model):
     _name = 'library.book'
     _inherit = 'mail.thread'
-    _description = 'Book'
+    _inherits = {'library.book.info': 'book_id'}
+    _description = 'A physical representation of a book as the ones that are printed and published'
 
     book_id = fields.Many2one('library.book.info')
-    name = fields.Char(related='book_id.name', readonly=False)
-    number = fields.Char()
-    author_id = fields.Many2one(related='book_id.author_id')
     year = fields.Integer()
-    lang_id = fields.Many2one(related='book_id.lang_id')
     status = fields.Selection([
         ('on_shelf', 'On Shelf'),
         ('on_hand', 'On Hand'),
         ('unavailable', 'Unavailable'),
-    ], default='on_self')
+        ], default='on_shelf', compute='_compute_status',
+        store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
-    tag_ids = fields.Many2many(related='book_id.tag_ids')
-    publishing_house = fields.Many2one('res.partner')
-    image = fields.Image(string="Image", max_width=256, max_height=256)
-    description = fields.Text(related='book_id.description')
+    publisher = fields.Many2one('res.partner')
+    cover = fields.Image(string="Image", max_width=256, max_height=256)
+    ISBN = fields.Char()
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
+    active = fields.Boolean(default=True)
 
     _sql_constraints = [
-        ('number_uniq', 'unique (number)', """Only one number can be defined for each book!"""),
+        ('ISBN', 'unique(ISBN)', """ISBN is unique for every book!"""),
     ]
 
     def action_on_hand(self):
@@ -112,9 +109,17 @@ class Book(models.Model):
             ('overdue_notification_date', '!=', today)
         ])
         for book in overdue_books:
-            body = '%s пожалуйста верните книгу %s' % (book.partner_id.name, book.name)
+            body = '%s , please, return the book %s' % (book.partner_id.name, book.name)
             subtype = self.env.ref('mail.mt_comment')
             book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
             book.write({
                 'overdue_notification_date': fields.Datetime.now()
             })
+
+    @api.depends('active')
+    def _compute_status(self):
+        for book in self:
+            if not book.active:
+                book.status = 'unavailable'
+            else:
+                book.status = 'on_shelf'

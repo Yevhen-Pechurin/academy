@@ -1,0 +1,15 @@
+<odoo>
+  <!-- Top menu item -->
+  <menuitem name="library" id="menu_root" groups="library.group_library_user"/>
+  <menuitem name="Books" id="books" parent="menu_root"/>
+  <menuitem name="Configuration" id="configuration" groups="library.group_library_manager" parent="menu_root"/>
+  <!-- actions -->
+  <menuitem name="All" id="menu_all_books" parent="books"
+            action="action_book"/>
+  <menuitem name="Books On Shelf" id="on_shelf" parent="books"
+            action="action_book_on_shelf"/>
+  <menuitem name="Books On Hand" id="on_hand" parent="books"
+            action="action_book_on_hand"/>
+  <menuitem name="Books Info" id="menu_book_info" parent="configuration"
+            action="action_book_info"/>
+</odoo>

@@ -13,20 +13,25 @@
     'author': "Smartteksas",
     'website': "https://smartteksas.com/",
 
-    'category': 'Library',
+    'category': 'Services/Library',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['mail'],
+    'depends': ['mail', 'website'],
 
     'license': 'LGPL-3',
 
     # always loaded
     'data': [
-        'data/ir_cron.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
+        'views/library_actions.xml',
+        'views/library_menus.xml',
+        'views/library_views.xml',
+        'views/templates.xml',
+        'data/ir_cron.xml',
         'wizards/view_wizard_book_on_hand.xml',
-        'views/views.xml',
+        'views/res_partner_button.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,0 +1,150 @@
+<odoo>
+  <!-- explicit list view definition -->
+  <record model="ir.ui.view" id="book_list_view">
+    <field name="name">library list</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="title"/>
+        <field name="author_ids">
+          <tree>
+            <field name="name"/>
+          </tree>
+        </field>
+        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+        <field name="status"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- form view for books -->
+  <record model="ir.ui.view" id="book_info_form_view">
+    <field name="name">books.form.view</field>
+    <field name="model">library.book.info</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <div class="oe_title">
+            <label for="title"/>
+            <h1><field class="o_text_overflow" name="title" placeholder="e.g. Harry Potter"/></h1>
+          </div>
+          <group>
+            <group string="Info" id="info">
+              <field name="author_ids"/>
+              <field name="lang_ids"/>
+              <field name="tag_ids" class="tags" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Description" id="description">
+              <field name="description"/>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" groups="base.group_user"/>
+          <field name="message_ids"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="book_form_view">
+    <field name="name">books.form.view</field>
+    <field name="model">library.book</field>
+    <field name="mode">primary</field>
+    <field name="inherit_id" ref="library.book_info_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet" position="before">
+        <header>
+          <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
+          <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
+          <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
+        </header>
+      </xpath>
+      <xpath expr="//group[@id='info']" position="inside">
+        <field name="active" invisible="1"/>
+        <field name="ISBN" string="ISBN"/>
+        <field name="year"/>
+        <field name="publisher"/>
+        <field name="book_id" groups="base.group_no_one"/>
+      </xpath>
+      <xpath expr="//field[hasclass('tags')]" position="after">
+        <group attrs="{'invisible': [('partner_id', '=', False)]}">
+          <field name="partner_id" string="Borrower"/>
+          <field name="due_date"/>
+        </group>
+      </xpath>
+      <xpath expr="//page[@id='description']" position="after">
+        <page string="History">
+          <field name="history_ids"  options="{'no_open': True}">
+            <tree create="false" delete="false" edit="false" default_order="id desc">
+              <field name="partner_id"/>
+              <field name="date_on_hand"/>
+              <field name="date_on_shelf"/>
+              <field name="due_date"/>
+            </tree>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- explicit kanban view definition -->
+  <record model="ir.ui.view" id="book_kanban_view">
+    <field name="name">Books Kanban</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+            <field name="id"/>
+            <field name="title"/>
+            <field name="author_ids"/>
+            <field name="tag_ids"/>
+            <field name="status"/>
+            <field name="partner_id"/>
+            <field name="cover"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                        <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url(#{kanban_image('library.book', 'cover', record.id.raw_value)})" role="img"/>
+                        <div class="oe_kanban_details d-flex flex-column">
+                            <div class="o_kanban_record_title oe_kanban_details">
+                                <strong><field name="title"/></strong>
+                            </div>
+                            <div>
+                                <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+                            </div>
+                            <div>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </div>
+                            <div t-if="record.due_date.value">
+                                Due date:
+                                <field name="due_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+  </record>
+
+  <!-- explicit search view definition -->
+  <record model="ir.ui.view" id="book_search_view">
+      <field name="name">library search</field>
+      <field name="model">library.book</field>
+      <field name="arch" type="xml">
+          <search>
+              <field name="title" filter_domain="['|', '|', ('title', 'ilike', self), ('author_ids', 'ilike', self), ('description', 'ilike', self)]"/>
+              <field name="author_ids"/>
+              <field name="partner_id" string="Client"/>
+              <filter name="active" string="Archive" domain="[('active','=',False)]"/>
+              <separator/>
+              <filter name="on_shelf" string="On Shelf" domain="[('status', '=', 'on_shelf')]"/>
+              <filter name="on_hand" string="On Hand" domain="[('status', '=', 'on_hand')]"/>
+              <filter name="group_status" string="Status" context="{'group_by':'status'}"/>
+          </search>
+      </field>
+  </record>
+
+</odoo>

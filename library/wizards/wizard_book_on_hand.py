@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 
 
 class WizardOnHand(models.TransientModel):
@@ -11,7 +11,7 @@ class WizardOnHand(models.TransientModel):
 
     def action_on_hand(self):
         ctx = self._context
-        book = self.env[ctx['active_model']].browse(ctx['active_ids'])
+        book = self.env[ctx['active_model']].sudo().browse(ctx['active_ids'])
         today = fields.Datetime().now()
         book.write({
             'partner_id': self.partner_id.id,
@@ -25,7 +25,7 @@ class WizardOnHand(models.TransientModel):
             'due_date': self.due_date,
         })
 
-    # @api.constrains('due_date')
-    # def constrain_due_date(self):
-    #     if self.due_date <= fields.Date.today():
-    #         raise ValidationError('Вы не можете выбрать такую дату')
+    @api.constrains('due_date')
+    def constrain_due_date(self):
+        if self.due_date <= fields.Date.today():
+            raise ValidationError('Due date cannot be set to past dates.')
