@@ -84,7 +84,7 @@ Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudl
             <field name="author_id" ref="author_porter"/>
             <field name="tag_ids" eval="[(5, 0), (6, 0, [ref('comedy'),ref('drama'),ref('family'),])]"/>
             <field name="description">
-Pollyanna is a best-selling novel by Eleanor H. Porter that is now considered a classic of children's literature. The book was such a success that Porter soon produced a sequel, Pollyanna Grows Up (ISBN 9781439297513 ).
+Pollyanna is a best-selling novel by Eleanor H. Porter that is now considered a classic of children's literature. The book was such a success that Porter soon produced a sequel, Pollyanna Grows Up.
 The novel's success brought the term "Pollyanna" (along with the adjective "pollyannaish" and the noun "Pollyannaism") into the language to describe someone who seems always to be able to find something to be "glad" about no matter what circumstances arise.</field>
           </record>
 
