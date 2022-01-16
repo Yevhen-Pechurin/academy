@@ -106,7 +106,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
-<!--            <field name="image" type="base64" file="img/poter.jpg"/>-->
+            <field name="image" type="base64" file="library/img/poter.jpg"/>
         </record>
         <record id="book_2" model="library.book">
             <field name="number">22</field>
@@ -120,7 +120,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
-<!--            <field name="image" type="base64" file="img/Littleprince.jpg"/>-->
+            <field name="image" type="base64" file="library/img/Littleprince.jpg"/>
         </record>
         <record id="book_3" model="library.book">
             <field name="number">18</field>
@@ -134,7 +134,7 @@ The Adventures of Tom Sawyer by Mark Twain is an 1876 novel about a young boy gr
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
-<!--            <field name="image" type="base64" file="img/mockingbird.jpg"/>-->
+            <field name="image" type="base64" file="library/img/mockingbird.jpg"/>
         </record>
         <record id="book_4" model="library.book">
             <field name="number">455</field>

@@ -158,6 +158,7 @@
                     <group string="Client">
                         <field name="partner_id"/>
                         <field name="due_date"/>
+                        <field name="image" widget="image"/>
                     </group>
                 </xpath>
             </field>
