@@ -31,6 +31,7 @@
     <field name="arch" type="xml">
       <form>
         <header>
+          <button string="To rent"/>
           <field name="status" widget="statusbar"/>
         </header>
 
@@ -43,8 +44,26 @@
                 <field name="model"/>
                 <field name="number"/>
               </group>
+              <group>
+                  <field name="year_edition"/>
+                  <field name="partner_id"/>
+                  <field name="odometr_id"/>
+              </group>
             </group>
           </div>
+            <notebook>
+                <page string="History">
+                    <field name="history_ids" options="{'no_open': False}">
+                        <!--                    <tree create="false" delete="false" edit="false" default_order="id desc">-->
+                        <tree create="true" delete="false" edit="true" default_order="id desc">
+                            <field name="partner_id"/>
+                            <field name="date_to_rent"/>
+                            <field name="date_to_return"/>
+                            <field name="due_date"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
         </sheet>
         <div class="oe_chatter">
             <field name="message_ids" options="{'post_refresh': 'recipients'}" groups="base.group_user"/>
