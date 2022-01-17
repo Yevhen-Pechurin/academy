@@ -1,0 +1,12 @@
+<odoo>
+    <record id="car_rental_action" model="ir.actions.act_window">
+        <field name="name">All Cars</field>
+        <field name="res_model">car_rental.car</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="car_rental_menu_root" name="Car Rental">
+        <menuitem id="car_rental_first_level_menu" name="Car Menu">
+            <menuitem id="car_rental_menu_action" action="car_rental_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>

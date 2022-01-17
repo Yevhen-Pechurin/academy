@@ -7,7 +7,8 @@
         'base',
 	],
     'data': [
-
+        'security/ir.model.access.csv',
+        'views/car_views.xml'
     ],
     'application': True,
     'installable': True,
