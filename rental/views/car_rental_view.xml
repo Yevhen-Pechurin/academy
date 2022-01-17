@@ -1,0 +1,206 @@
+<odoo>
+    <data>
+        <!-- action for all cars -->
+        <record id="all_cars_action" model="ir.actions.act_window">
+            <field name="name">Cars</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+        <!-- action for garage cars -->
+        <record id="garage_cars_action" model="ir.actions.act_window">
+            <field name="name">In The Garage</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'in_garage')]</field>
+        </record>
+        <!-- action for loan cars -->
+        <record id="loan_cars_action" model="ir.actions.act_window">
+            <field name="name">On Loan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'on_loan')]</field>
+        </record>
+        <!-- action for repair cars -->
+        <record id="under_repair_cars_action" model="ir.actions.act_window">
+            <field name="name">Under Repair</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'under_repair')]</field>
+        </record>
+        <!-- action for unavailable cars -->
+        <record id="unavailable_cars_action" model="ir.actions.act_window">
+            <field name="name">Unavailable</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'unavailable')]</field>
+        </record>
+
+        <!-- tree view for cars -->
+        <record id="cars_tree_view" model="ir.ui.view">
+            <field name="name">cars.tree.view</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="status"/>
+                    <field name="year"/>
+                    <field name="model"/>
+                    <field name="number"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view for cars -->
+        <record id="books_form_view" model="ir.ui.view">
+            <field name="name">cars.form.view</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button attrs="{'invisible':['|',('status','=','on_loan'),'|',('status','=','under_repair'),('status','=','unavailable')]}"
+                                string="Loan" class="oe_highlight"
+                                name="action_loan"
+                                type="object"/>
+                        <button attrs="{'invisible':[('status','=','in_garage')]}" string="Get" class="oe_highlight"
+                                name="action_garage"
+                                type="object"/>
+                        <button attrs="{'invisible':['|',('status','=','on_loan'),'|',('status','=','under_repair'),('status','=','unavailable')]}"
+                                string="Repair" class="oe_highlight"
+                                name="action_repair"
+                                type="object"/>
+                        <button attrs="{'invisible':['|',('status','=','on_loan'),'|',('status','=','under_repair'),('status','=','unavailable')]}"
+                                string="Unavailable" class="oe_highlight"
+                                name="action_unavailable"
+                                type="object"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group string="Info">
+                                <field name="model"/>
+                                <field name="number"/>
+                                <field name="year"/>
+                                <field name="odometer"/>
+
+                            </group>
+                            <group>
+                                <group string="Partner">
+                                    <field name="partner_id"/>
+                                </group>
+                                <group string="Logo">
+                                    <field
+                                            name="image_1920"
+                                            widget="image"
+                                            class="oe_avatar oe_left"
+                                    />
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Loan History">
+                                <field name="loan_history_ids">
+                                    <tree create="false" delete="false" edit="false">
+                                        <field name="partner_id"/>
+                                        <field name="due_date"/>
+                                        <field name="end"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Repair History">
+                                <field name="repair_history_ids">
+                                    <tree create="false" delete="false" edit="false">
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="end"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- kanban view for cars-->
+        <record id="books_kanban_view" model="ir.ui.view">
+            <field name="name"> cars.book.kanban</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="status"/>
+                    <field name="year"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
+                                 style="width:60mm; height:40mm;;">
+                                <div class="oe_kanban_content flex-grow-1" style="display:flex">
+                                    <div>
+                                        <field
+                                                name="image_128"
+                                                widget="image"
+                                                class="oe_centered"
+                                        />
+                                    </div>
+                                    <div style="margin-left:10px">
+                                        <div class="o_kanban_record_title o_kanban_details">
+                                            <strong><field name="name"></field></strong>
+                                        </div>
+                                        <div style="max-width:85px">
+                                            <span class="o_text_overflow" t-if="record.partner_id.value"
+                                                  t-esc="record.partner_id.value">
+                                            </span>
+                                            <p><field name="status"></field></p>
+                                            <p><field name="year"></field></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Extension of contacts for cars-->
+        <record id="extension" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" icon="fa-car"
+                            attrs="{'invisible': [('cars_count', '=', 0)]}" name="getcars">
+                        <field string="Cars" name="cars_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- car rental menues -->
+        <menuitem id="car_rental_menu" name="Rental" sequence="1"/>
+        <menuitem id="cars" name="Cars" parent="car_rental_menu" sequence="1"/>
+        <menuitem id="all_cars" name="All" parent="cars" action="all_cars_action" sequence="1"/>
+        <menuitem id="garage_cars" name="In Garage" parent="cars" action="garage_cars_action" sequence="2"/>
+        <menuitem id="loan_cars" name="On Loan" parent="cars" action="loan_cars_action" sequence="3"/>
+        <menuitem id="repair_cars" name="Under Repair" parent="cars" action="under_repair_cars_action" sequence="4"/>
+        <menuitem id="unavailable_cars" name="Unavailable" parent="cars" action="unavailable_cars_action" sequence="5"/>
+
+    </data>
+</odoo>

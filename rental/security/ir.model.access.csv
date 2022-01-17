@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+rental.access_rental_car_manager,access_rental_car,rental.model_rental_car,rental.group_rental_manager,1,1,1,0
+rental.access_rental_repair_manager,access_rental_repair,rental.model_rental_repair,rental.group_rental_manager,1,1,1,0
+rental.access_rental_loan_manager,access_rental_loan,rental.model_rental_loan,rental.group_rental_manager,1,1,1,0
+rental.access_rental_wizard_loan,access_rental_wizard_loan,rental.model_rental_wizard_loan,,1,1,1,1
+rental.access_rental_car_user,access_rental_car,rental.model_rental_car,rental.group_rental_user,1,1,1,0
+rental.access_rental_repair_user,access_rental_repair,rental.model_rental_repair,rental.group_rental_user,1,1,1,0
+rental.access_rental_loan_user,access_rental_loan,rental.model_rental_loan,rental.group_rental_user,1,1,1,0
