@@ -14,6 +14,53 @@
     </field>
 </record>
 
+<!-- form view for cars -->
+<record model="ir.ui.view" id="car_info_form_view">
+    <field name="name">car.form.view</field>
+    <field name="model">rental.car.info</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+
+                <div class="oe_title">
+                    <label for="name"/>
+                    <h1><field class="o_text_overflow" name="name" placeholder="e.g. Opel"/></h1>
+                </div>
+                <group>
+                    <group string="Info" name="info">
+                        <field name="model_id"/>
+                        <field name="country_id"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Description" id="description" class="description">
+                        <field name="description"/>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" groups="base.group_user"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<!-- actions opening views on models -->
+<record model="ir.actions.act_window" id="action_car">
+    <field name="name">Cars</field>
+    <field name="res_model">rental.car</field>
+    <field name="view_mode">tree,kanban,form</field>
+</record>
+
+<record model="ir.actions.act_window" id="action_car_info">
+    <field name="name">Cars Info</field>
+    <field name="res_model">rental.car.info</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+
+
     <!-- actions opening views on models -->
 <!--
     <record model="ir.actions.act_window" id="rental_car.action_window">
