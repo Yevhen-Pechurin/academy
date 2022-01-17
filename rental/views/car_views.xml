@@ -59,6 +59,16 @@
     <field name="view_mode">tree,form</field>
 </record>
 
+    <!-- Top menu item -->
+    <menuitem name="rental" id="rental.menu_root"/>
+
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="rental_car.menu_1" parent="rental_car.menu_root"/>
+    <menuitem name="Menu 2" id="rental_car.menu_2" parent="rental_car.menu_root"/>
+-->
+
+
 
 
     <!-- actions opening views on models -->
