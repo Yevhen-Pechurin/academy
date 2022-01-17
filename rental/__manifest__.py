@@ -25,7 +25,8 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
+        # 'wizards/view_wizard_book_on_hand.xml',
+        'views/car_views.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
