@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Library",
+    'name': "rental_car",
 
     'summary': """
-    The best Library""",
+apps.rental-car.com""",
 
     'description': """
-        My Library
+        web for car rent
     """,
 
-    'author': "Stepanov Bohdan",
-    'website': "http://www.Bohdan_smart.net",
+    'author': "SmartTeck",
+    'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -23,7 +23,7 @@
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -31,5 +31,5 @@
     'demo': [
         'demo/demo.xml',
     ],
-    "application": True,
+    'applications': True
 }
