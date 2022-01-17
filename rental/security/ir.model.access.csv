@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_rental_car,rental.car,model_rental_car,base.group_user,1,1,1,1
 access_rental_history,rental.history,model_rental_history,base.group_user,1,1,1,1
+rental.access_rental_wizard_on_hand,access_rental_wizard_on_hand,rental.model_rental_wizard_on_hand,base.group_user,1,1,1,1

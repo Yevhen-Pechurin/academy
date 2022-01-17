@@ -7,12 +7,9 @@
         <field name="model">rental.car</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <field name="status" widget="statusbar" statusbar_visible="in_garage,tented,on_maintanance,unavailable"/>
-                </header>
-                                    <header>
-                        <button name="action_on_hand" string="on_loan" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
-                        <button name="action_on_shelf" string="in_garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
+                   <header>
+                        <button name="action_on_hand" string="On Loan" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
+                        <button name="action_on_shelf" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
                         <field name="status" widget="statusbar" statusbar_visible="in_garage,on_loan"/>
                     </header>
                 <sheet>
@@ -28,6 +25,10 @@
                             <field name="status"/>
                             <field name="odometer"/>
                         </group>
+                        <group string="Client">
+                        <field name="partner_id"/>
+                        <field name="date_on_loan"/>
+                    </group>
                     </group>
                     <notebook>
                         <page string="History">

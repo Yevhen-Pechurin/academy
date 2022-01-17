@@ -40,11 +40,13 @@ class Car(models.Model):
     image = fields.Image(string="Image", max_width=256, max_height=256)
     active = fields.Boolean(default=True)
     odometer = fields.Integer()
+    date_on_loan = fields.Date()
     _sql_constraints = [
         ('number_uniq', 'unique (number)', """Only one number can be defined for each car!"""),
     ]
 
     def action_on_hand(self):
+        pass
         return {
             'name': _('On Hand %s') % self.name,
             'view_mode': 'form',
