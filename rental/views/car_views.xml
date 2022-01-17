@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+
+<!-- explicit list view definition -->
+<record model="ir.ui.view" id="car_list_view">
+    <field name="name">rental list</field>
+    <field name="model">rental.car</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="model_id"/>
+<!--            <field name="status"/>-->
+        </tree>
+    </field>
+</record>
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="rental_car.action_window">
+      <field name="name">rental_car window</field>
+      <field name="res_model">rental_car.rental_car</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="rental_car.action_server">
+      <field name="name">rental_car server</field>
+      <field name="model_id" ref="model_rental_car_rental_car"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="rental_car" id="rental_car.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="rental_car.menu_1" parent="rental_car.menu_root"/>
+    <menuitem name="Menu 2" id="rental_car.menu_2" parent="rental_car.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="rental_car.menu_1_list" parent="rental_car.menu_1"
+              action="rental_car.action_window"/>
+    <menuitem name="Server to list" id="rental_car" parent="rental_car.menu_2"
+              action="rental_car.action_server"/>
+-->
+
+<!--<menuitem name="Rental car" id="menu_root">-->
+<!--    <menuitem name="Cars" id="cars">-->
+<!--        <menuitem name="All" id="menu_all_cars" action="action_car" sequence="1"/>-->
+<!--        <menuitem name="Car on Rent" id="on_rent" action="action_car_on_rent" sequence="2"/>-->
+<!--        <menuitem name="Car in Garage" id="in_garage" action="action_car_in_garage" sequence="3"/>-->
+<!--    </menuitem>-->
+<!--    <menuitem name="Configuration" id="configuration">-->
+<!--         <menuitem name="Car Info" id="menu_car_info" action="action_car_info"/>-->
+<!--    </menuitem>-->
+<!--</menuitem>    -->
+
+
+  </data>
+</odoo>
