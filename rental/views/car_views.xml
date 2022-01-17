@@ -14,8 +14,56 @@
     </field>
 </record>
 
-
-
+<!-- explicit kanban view definition -->
+<record model="ir.ui.view" id="car_kanban_view">
+    <field name="name">Cars Kanban</field>
+    <field name="model">rental.car</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+            <field name="name"/>
+            <field name="model_id"/>
+            <field name="status"/>
+            <field name="image"/>
+            <field name="country_id"/>
+            <field name="partner_id"/>
+            <field name="id"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                        <div class="oe_kanban_content flex-grow-1">
+                            <div class="o_kanban_record_title oe_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <field name="model_id"/>
+                            </div>
+                            <div class="o_kanban_image">
+                                <img alt="Picture" t-att-src="kanban_image('rental.car', 'image', record.id.raw_value)"/>
+                            </div>
+                            <div>
+                                Country:
+                                <field name="country_id"/>
+                            </div>
+                            <div>
+                                Year:
+                                <field name="year"/>
+                            </div>
+                            <div>
+                                Mileage
+                                <field name="mileage"/>
+                            </div>
+                            <div>
+                                <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+                            </div>
+                            <div>
+                                Due date:
+                                <field name="due_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
 
 <!-- explicit search view definition -->
 <record model="ir.ui.view" id="car_search_view">

@@ -95,4 +95,3 @@ class Car(models.Model):
                 car.status = 'unavailable'
             else:
                 car.status = car.status
-
