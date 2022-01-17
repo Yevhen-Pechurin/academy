@@ -9,16 +9,21 @@
         <tree>
           <field name="name"/>
           <field name="number"/>
-          <field name="model"/>
+<!--          <field name="model"/>-->
           <field name="year"/>
 <!--          <field name="status"/>-->
+          <field name="lease_data"/>
+<!--          <field name="partner_id"/>-->
+<!--          <field name="history_ids"/>-->
+          <field name="logo_image"/>
+          <field name="odometer"/>
         </tree>
       </field>
     </record>
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
-      <field name="name">rental_car window</field>
+      <field name="name">New order</field>
       <field name="res_model">rental_car.car</field>
       <field name="view_mode">tree,form</field>
     </record>
@@ -40,18 +45,15 @@
 -->
 
     <!-- Top menu item -->
-    <menuitem name="Rental car" id="rental_car_menu"/>
-
+    <menuitem name="Rental car" id="rental_car.menu_root"/>
     <!-- menu categories -->
-    <menuitem name="Car Info" id="rental_car_one" parent="rental_car_menu"/>
-<!--    <menuitem name="Menu 2" id="rental_car_two" parent="rental_car_menu"/>-->
-
+    <menuitem name="Car Info" id="rental_car.menu_1" parent="rental_car.menu_root"/>
     <!-- actions -->
-    <menuitem name="All" id="rental_car.menu_1_list" parent="rental_car_one" action="rental_car.action_window" sequence="1"/>
-    <menuitem name="In Garage" id="rental_car.menu_2_list" parent="rental_car_one" action="rental_car.action_window" sequence="2"/>
-    <menuitem name="Rented" id="rental_car.menu_3_list" parent="rental_car_one" action="rental_car.action_window" sequence="3"/>
-    <menuitem name="Under Repair" id="rental_car.menu_4_list" parent="rental_car_one" action="rental_car.action_window" sequence="4"/>
-    <menuitem name="Unavailable" id="rental_car.menu_5_list" parent="rental_car_one" action="rental_car.action_window" sequence="5"/>
+    <menuitem name="All" id="rental_car.menu_1_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="1"/>
+    <menuitem name="In Garage" id="rental_car.menu_2_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="2"/>
+    <menuitem name="Rented" id="rental_car.menu_3_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="3"/>
+    <menuitem name="Under Repair" id="rental_car.menu_4_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="4"/>
+    <menuitem name="Unavailable" id="rental_car.menu_5_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="5"/>
 
   </data>
 </odoo>
