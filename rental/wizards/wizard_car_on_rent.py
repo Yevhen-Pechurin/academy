@@ -29,3 +29,11 @@ class WizardOnRent(models.TransientModel):
     def constrain_due_date(self):
         if self.due_date <= fields.Date.today():
             raise ValidationError('Вы не можете выбрать такую дату')
+
+
+class WizardUnderRepair(models.TransientModel):
+    _name = 'rental.wizard.under_repair'
+    _description = 'Wizard Under Repair'
+    pass
+
+

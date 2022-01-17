@@ -54,6 +54,7 @@ class Car(models.Model):
     status = fields.Selection([
         ('in_garage', 'In Garage'),
         ('on_rent', 'On Rent'),
+        ('under_repair', 'Under Repair'),
         ('unavailable', 'Unavailable'),
     ], default='in_garage', compute='_compute_status', store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
@@ -73,6 +74,15 @@ class Car(models.Model):
             'name': _('On Rent %s') % self.name,
             'view_mode': 'form',
             'res_model': 'rental.wizard.on_rent',
+            'type': 'ir.actions.act_window',
+            'target': 'new'
+        }
+
+    def action_under_repair(self):
+        return {
+            'name': _('Under Repair %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.under_repair',
             'type': 'ir.actions.act_window',
             'target': 'new'
         }

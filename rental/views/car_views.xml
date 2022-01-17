@@ -47,7 +47,7 @@
                                 <field name="year"/>
                             </div>
                             <div>
-                                Mileage
+                                Mileage:
                                 <field name="mileage"/>
                             </div>
                             <div>
@@ -78,6 +78,7 @@
             <separator/>
             <filter name="on_rent" string="On Rent" domain="[('status','=', 'on_rent')]"/>
             <filter name="in_garage" string="In Garage" domain="[('status','=', 'in_garage')]"/>
+            <filter name="under_repair" string="Under Repair" domain="[('status','=', 'under_repair')]"/>
             <filter name="group_status" string="Status" context="{'group_by':'status'}"/>
         </search>
     </field>
@@ -126,7 +127,8 @@
             <header>
                 <button name="action_on_rent" string="On Rent" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_rent', 'unavailable'])]}"/>
                 <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
-                <field name="status" widget="statusbar" statusbar_visible="on_rent,in_garage"/>
+                <button name="action_under_repair" string="Under Repair" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['under_repair', 'unavailable'])]}"/>
+                <field name="status" widget="statusbar" statusbar_visible="on_rent,in_garage,under_repair"/>
             </header>
         </xpath>
         <field name="model_id" position="before">
@@ -181,6 +183,13 @@
     <field name="context">{'search_default_in_garage': 1,}</field>
 </record>
 
+<record model="ir.actions.act_window" id="action_car_under_repair">
+    <field name="name">Cars under Repair</field>
+    <field name="res_model">rental.car</field>
+    <field name="view_mode">tree,kanban,form</field>
+    <field name="context">{'search_default_under_repair': 1,}</field>
+</record>
+
 <record model="ir.actions.act_window" id="action_car_info">
     <field name="name">Cars Info</field>
     <field name="res_model">rental.car.info</field>
@@ -193,39 +202,12 @@
        <menuitem name="All" id="menu_all_cars" action="action_car" sequence="1"/>
        <menuitem name="Cars on Rent" id="on_rent" action="action_car_on_rent" sequence="2"/>
        <menuitem name="Cars in Garage" id="in_garage" action="action_car_in_garage" sequence="3"/>
+       <menuitem name="Cars under Repair" id="under_repair" action="action_car_under_repair" sequence="4"/>
     </menuitem>
     <menuitem name="Configuration" id="configuration">
          <menuitem name="Car Info" id="menu_car_info" action="action_car_info"/>
     </menuitem>
 </menuitem>
-
-
-
-
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="rental_car.action_window">
-      <field name="name">rental_car window</field>
-      <field name="res_model">rental_car.rental_car</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="rental_car.action_server">
-      <field name="name">rental_car server</field>
-      <field name="model_id" ref="model_rental_car_rental_car"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
 
    </data>
 </odoo>
