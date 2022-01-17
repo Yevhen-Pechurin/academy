@@ -2,6 +2,36 @@
   <data>
     <!-- explicit list view definition -->
 
+      <record model="ir.ui.view" id="book_kanban_view">
+        <field name="name">Cars Kanban</field>
+        <field name="model">rental.car</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                <field name="name"/>
+                <field name="date_on_loan"/>
+                <field name="partner_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                            <div class="oe_kanban_content flex-grow-1">
+                                <div class="o_kanban_record_title oe_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div>
+                                    <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+                                </div>
+                                <div>
+                                    date_on_loan:
+                                    <field name="date_on_loan"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="car_rental_car_form_view">
         <field name="name">rental.car.form.view</field>
         <field name="model">rental.car</field>
@@ -71,7 +101,7 @@
     <record model="ir.actions.act_window" id="rental.action_window">
       <field name="name">rental window</field>
       <field name="res_model">rental.car</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
 
