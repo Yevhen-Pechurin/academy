@@ -1,0 +1,284 @@
+<odoo>
+    <data>
+        <!-- action for all books -->
+        <record id="all_books_action" model="ir.actions.act_window">
+            <field name="name">Books</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <!-- action for ready books -->
+        <record id="ready_books_action" model="ir.actions.act_window">
+            <field name="name">Books</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'ready')]</field>
+        </record>
+
+        <!-- action for on hand books -->
+        <record id="on_hand_books_action" model="ir.actions.act_window">
+            <field name="name">Books</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('status', '=', 'on_hand')]</field>
+        </record>
+
+        <!-- action for authors -->
+        <record id="authors_action" model="ir.actions.act_window">
+            <field name="name">Authors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.author</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <!-- action for book`s config -->
+        <record id="config_action" model="ir.actions.act_window">
+            <field name="name">Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.info</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <!-- books tree view -->
+        <record id="books_tree_view" model="ir.ui.view">
+            <field name="name">books.tree.view</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="author_id"/>
+                    <field name="tags" widget="many2many_tags" options="{'color_field':'color'}"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- books form view -->
+        <record id="books_form_view" model="ir.ui.view">
+            <field name="name">books.form.view</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button attrs="{'invisible':[('status','=','on_hand')]}" string="On Hand" class="oe_highlight"
+                                name="action_on_hand"
+                                type="object"/>
+                        <button attrs="{'invisible':[('status','=','ready')]}" string="Get" class="oe_highlight"
+                                name="action_get"
+                                type="object"/>
+
+                        <field name="status" widget="statusbar"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group string="Info">
+                                <field name="book_id"/>
+                                <field name="code"/>
+                                <field name="author_id"/>
+                                <field name="tags" widget="many2many_tags" options="{'color_field':'color'}"/>
+                                <field
+                                        name="image_1920"
+                                        widget="image"
+                                        class="oe_avatar oe_left"
+                                />
+                            </group>
+                            <group string="Partner">
+                                <field name="partner_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page string="History">
+                                <field name="history_ids">
+                                    <tree create="false" delete="false" edit="false">
+                                        <field name="due_date"/>
+                                        <field name="partner_id"/>
+                                        <field name="end"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- books kanban view -->
+        <record id="books_kanban_view" model="ir.ui.view">
+            <field name="name"> libraryr.book.kanban</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="partner_id"/>
+                    <field name="author_id"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
+                                 style="width:60mm; height:40mm;;">
+                                <div class="oe_kanban_content flex-grow-1" style="display:flex">
+                                    <div>
+                                        <field
+                                                name="image_128"
+                                                widget="image"
+                                                class="oe_centered"
+                                        />
+                                    </div>
+                                    <div style="margin-left:10px">
+                                        <div class="o_kanban_record_title o_kanban_details">
+                                            <strong><field name="name"></field></strong>
+                                        </div>
+                                        <div style="max-width:85px">
+                                            <span class="o_text_overflow" t-if="record.partner_id.value"
+                                                  t-esc="record.partner_id.value">
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <field widget="many2many_tags" options="{'color_field':'color'}"
+                                                   name="tags"/>
+                                        </div>
+                                        <div>
+                                            <field name="author_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Extension of contacts for books-->
+        <record id="extension" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="actionget" icon="fa-book"
+                            attrs="{'invisible': [('books_count', '=', 0)]}">
+                        <field string="Books" name="books_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- config tree view -->
+        <record id="config_tree_view" model="ir.ui.view">
+            <field name="name">config.tree.view</field>
+            <field name="model">library.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="author_id"/>
+                    <field name="tags"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- config form view -->
+        <record id="config_form_view" model="ir.ui.view">
+            <field name="name">config.form.view</field>
+            <field name="model">library.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group string="Info">
+                            <field name="author_id"/>
+                            <field name="code"/>
+                            <field name="tags" widget="many2many_tags" options="{'color_field':'color'}"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- authors tree view -->
+        <record id="authors_tree_view" model="ir.ui.view">
+            <field name="name">authors.tree.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="books_count"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- authors form view -->
+        <record id="authors_form_view" model="ir.ui.view">
+            <field name="name">authors.form.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group string="Info">
+                            <field name="year"/>
+                            <field name="books_count"/>
+
+                        </group>
+                        <notebook>
+                            <page string="Books">
+                                <field name="books_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- library menues -->
+        <menuitem id="library_menu" name="Library" sequence="1" groups="library.group_library_user"/>
+        <menuitem id="books_menu" name='Books' parent="library_menu" sequence="1" />
+        <menuitem id="all_books_menu" name="All Books" parent="books_menu" action="all_books_action"/>
+        <menuitem id="ready_books_menu" name="Ready Books" parent="books_menu" action="ready_books_action"/>
+        <menuitem id="on_hand_books_menu" name="On Hand" parent="books_menu" action="on_hand_books_action"/>
+        <menuitem id="authors_menu" name='Authors' parent="library_menu" sequence="2" action="authors_action" groups="library.group_library_manager"/>
+        <menuitem id="config_menu" name='Config' parent="library_menu" sequence="3" action="config_action" groups="library.group_library_manager"/>
+
+
+    </data>
+</odoo>

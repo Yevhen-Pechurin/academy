@@ -1,23 +1,17 @@
 <odoo>
     <data>
-        <record id="on_hand_form_view" model="ir.ui.view">
-            <field name="name">library.info.form</field>
+        <record id="wizard_on_hand_from_view" model="ir.ui.view">
+            <field name="name">wizard.on_hand.form.view</field>
             <field name="model">library.wizard.on_hand</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group>
-                            <group>
-                                <field name="partner_id"/>
-                            </group>
-                            <group>
-                                <field name="due_date"/>
-                            </group>
-                        </group>
+                        <group><field name="partner_id"/></group>
+                        <group><field name="due_date"/></group>
+                        <footer>
+                            <button string="On Hand" class="oe_highlight" type="object" name="on_hand"/>
+                        </footer>
                     </sheet>
-                     <footer>
-                         <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object"/>
-                    </footer>
                 </form>
             </field>
         </record>

@@ -1,6 +1,4 @@
-from odoo import fields, api, models
-
-
+from odoo import fields, api, models,_
 class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'

@@ -1,2 +1,2 @@
-from . import books
-from . import partners
+from . import book
+from . import partner

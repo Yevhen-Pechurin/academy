@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <!-- Authors -->
+        <record id="demo_author" model="library.author">
+            <field name="name">Demo Author</field>
+        </record>
+
+        <!-- Tags -->
+        <record id="demo_tag" model="library.tag">
+            <field name="name">Demo Tag</field>
+            <field name="color">2</field>
+        </record>
+
+        <!-- Book Info -->
+        <record id="demo_book_info" model="library.info">
+            <field name="name">Demo Book</field>
+            <field name="code">1234demo</field>
+            <field name="description">Demo Description</field>
+            <field name="author_id" ref="demo_author"/>
+            <field name="tags" eval="[(5,0),(6,0,[ref('demo_tag')])]"/>
+        </record>
+
+        <!-- Book -->
+        <record id="demo_book" model="library.book">
+            <field name="book_id" ref="demo_book_info"/>
+            <field name="history_ids" eval="[(5,0),(0,0,{
+            'due_date':DateTime.today(),
+            'end':True,
+            'partner_id':ref('base.res_partner_1')
+            })]"/>
+        </record>
+
+    </data>
+</odoo>

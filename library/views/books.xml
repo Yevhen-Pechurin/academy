@@ -1,7 +1,7 @@
 <odoo>
     <data>
-
         <template id="books">
+
             <t t-call="website.layout">
                 <div class="oe_structure">
                     <div class="container">
@@ -17,7 +17,7 @@
 
                 </div>
             </t>
-        </template>
 
+        </template>
     </data>
 </odoo>
