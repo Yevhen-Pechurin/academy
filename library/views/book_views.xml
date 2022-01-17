@@ -174,6 +174,13 @@
     <field name="view_mode">tree,kanban,form</field>
 </record>
 
+<record model="ir.actions.act_window" id="action_partner_books">
+    <field name="name">Partners Books</field>
+    <field name="res_model">library.book</field>
+    <field name="view_mode">tree,kanban,form</field>
+    <field name="context">{'search_default_partner_id': active_id}</field>
+</record>
+
 <record model="ir.actions.act_window" id="action_book_on_hand">
     <field name="name">Books On Hand</field>
     <field name="res_model">library.book</field>

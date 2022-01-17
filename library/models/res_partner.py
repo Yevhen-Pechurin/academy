@@ -17,14 +17,12 @@ class ResPartner(models.Model):
             partner.book_count = group['partner_id_count']
 
     def action_view_books(self):
-        pass
-
-        # self.ensure_one()
-        # return {
-        #     'name': _('Partners Books'),
-        #     'view_mode': 'tree,form',
-        #     'res_model': 'library.book',
-        #     # 'domain': [('partner_id', '=', self.id)],
-        #     'type': 'ir.actions.act_window',
-        #     'context': {'search_default_partner_id': self.id}
-        # }
+        self.ensure_one()
+        return {
+            'name': _('Partners Books'),
+            'view_mode': 'tree,form',
+            'res_model': 'library.book',
+            # 'domain': [('partner_id', '=', self.id)],
+            'type': 'ir.actions.act_window',
+            'context': {'search_default_partner_id': self.id}
+        }
