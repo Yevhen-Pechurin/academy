@@ -68,7 +68,7 @@ class Book(models.Model):
         ('on_shelf', 'On Shelf'),
         ('not_available', 'Not Available'),
     ])
-    tag_id = fields.Many2many("library.tag")
+    tag_id = fields.Many2many("library.tag", tracking=True)
     cover = fields.Selection([
         ('hard', 'Hard Cover'),
         ('soft', 'Soft Cover'),
@@ -112,9 +112,37 @@ class Book(models.Model):
             ('overdue_notification_date', '!=', today)
         ])
         for book in overdue_books:
-            body = '%s , термін користуваня книгою %s вийшов. Поверніть, будь ласка, книгу на полицю' % (book.client_id.name, book.name)
+            body = '%s , термін користуваня книгою %s вийшов. Поверніть, будь ласка, книгу на полицю' % (
+                book.client_id.name, book.name)
             subtype = self.env.ref('mail.mt_comment')
             book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)
             book.write({
                 'overdue_notification_date': fields.Datetime.now()
             })
+
+
+class ResPartner(models.Model):
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+
+    books_count = fields.Integer(compute='_compute_books_count')
+
+    def _compute_books_count(self):
+        book_data = self.env['library.book'].read_group(
+            domain=[('client_id', 'in', self.ids)],
+            fields=['client_id'], groupby=['client_id']
+        )
+        self.books_count = 0
+        for group in book_data:
+            partner = self.browse(group['client_id'][0])
+            partner.books_count = group['client_id_count']
+
+    def show_books(self):
+        self.ensure_one()
+        return {
+            'name': _('Client`s Books'),
+            'view_mode': 'tree,form',
+            'res_model': 'library.book',
+            'domain': [('client_id', '=', self.id)],
+            'type': 'ir.actions.act_window',
+        }

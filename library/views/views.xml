@@ -24,6 +24,83 @@
         </record>
 
 
+        <record id="res_partner_inherited" model="ir.ui.view">
+            <field name="name">Books</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="show_books" icon="fa-book" attrs="{'invisible': [('books_count', '=', 0)]}" >
+                        <field string="Books" name="books_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+
+         <record id="book_kanban_view" model="ir.ui.view">
+            <field name="name">Book Kanban View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" sample="1">
+                    <field name="name"/>
+                    <field name="author_id"/>
+                    <field name="tag_id"/>
+                    <field name="status"/>
+                    <field name="client_id"/>
+                    <field name="cover"/>
+                    <field name="image"/>
+                    <field name="due_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div><field name="image" widget="image" class="oe_centered"/></div>
+                                <div class="oe_kanban_details d-flex flex-column" style="margin-left:30px">
+                                    <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li><field name="author_id"/></li>
+                                        <li><field name="tag_id" widget="many2many_tags"/></li>
+                                        <li><field name="cover"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+          <record id="book_search" model="ir.ui.view">
+            <field name="name">Book Search</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search string="Search Book">
+                    <field name="name"/>
+                    <field name="author_id"/>
+                    <field name="language_id"/>
+                    <field name="edition"/>
+                    <field name="description"/>
+                    <separator/>
+                    <filter name="on_hand" string="Books on Hand" domain="[('status', '=', 'on_hand')]"/>
+                    <filter name="on_shelf" string="Books on Shelf" domain="[('status', '=', 'on_shelf')]"/>
+                    <filter name="not_available" string="Not Available Books" domain="[('status', '=', 'not_available')]"/>
+                    <separator/>
+                    <filter name="hard_cover" string="Hard Cover" domain="[('cover', '=', 'hard')]"/>
+                    <filter name="soft_cover" string="Soft Cover" domain="[('cover', '=', 'soft')]"/>
+                    <group expand="1" string="Group By">
+                        <filter name="book_status" string="Book Status" context="{'group_by': 'status'}"/>
+                    </group>
+<!--                    <searchpanel>-->
+<!--                        <field name="company_id" groups="base.group_multi_company" icon="fa-building" enable_counters="1"/>-->
+<!--                        <field name="department_id" icon="fa-users" enable_counters="1"/>-->
+<!--                    </searchpanel>-->
+                </search>
+             </field>
+        </record>
+
+
         <record id="book_form_view" model="ir.ui.view">
             <field name="name">Book form view</field>
             <field name="model">library.book</field>
@@ -35,6 +112,7 @@
                          <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
                      </header>
                     <sheet>
+                            <field name="image" widget="image" class="oe_avatar"/>
                             <div class="oe_title">
                                 <label for="name"/>
                                 <h1><field name="name"/></h1>
@@ -84,6 +162,7 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                    
                         <div class="oe_title">
                             <label for="name"/>
                             <h1><field name="name"/></h1>

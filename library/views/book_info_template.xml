@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <template id="book">
+            <t t-call="website.layout">
+                <div class="oe_structure">
+                    <div class="container">
+                        <h1><t t-esc="book.display_name"/></h1>
+                        <table>
+                            <td>
+                                <img class="ml-3 img img-fluid"  style="max-height: 200px;"  t-att-src="image_data_uri(book.image)"/>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li t-esc="book.author_id.name"/>
+                                    <li t-esc="book.language_id.name"/>
+                                    <li t-esc="book.status"/>
+                                </ul>
+                            </td>
+                        </table>
+                        <p t-esc="book.description"/>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

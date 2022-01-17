@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <template id="books_list">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'homepage'"/>
+                <t t-set="title" t-value="'Books'"/>
+                <div id="wrap" class="oe_structure oe_empty">
+                    <ul class="container list-unstyled">
+                        <li t-foreach="books" t-as="book">
+                            <a t-attf-href="#{ root }/book/#{ slug(book) }">
+                                <t t-esc="book.display_name"/>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
