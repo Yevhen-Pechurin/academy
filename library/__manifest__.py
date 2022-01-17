@@ -24,6 +24,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'wizards/view_wizard_od_hand.xml',
         'views/views.xml',
         'views/templates.xml',
     ],

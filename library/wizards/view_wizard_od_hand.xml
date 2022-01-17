@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="library.action_wizard">
+        <field name="name">Wizard On Hand</field>
+        <field name="res_model">library.wizard.on_hand</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="library.wizard_on_hand_view">
+        <field name="name">On Hand2</field>
+        <field name="model">library.wizard.on_hand</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="due_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="On Hand" name="action_wizard_on_hand" type="object" class="oe_highlight"/>
+                    <button string="Cancel" name="action_cancale" type="object"/>
+                </footer>
+            </form>
+        </field>
+
+    </record>
+</odoo>
+
+
+

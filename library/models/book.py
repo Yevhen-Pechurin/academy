@@ -48,3 +48,11 @@ class Book(models.Model):
     def action_done(self):
         self.write({'status': 'done'})
 
+    def action_on_hand(self):
+        return {
+            "name": "On Hand %s" % self.name,
+            'view_mode': "form",
+            'res_model': "library.wizard.on_hand",
+            'type': 'ir.actions.act_window',
+            'target': "new",
+            }

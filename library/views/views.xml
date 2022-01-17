@@ -30,7 +30,8 @@
       <field name="arch" type="xml">
         <form>
           <header>
-            <button string="In Progress"  name="action_in_progress" class="oe_highlight"  type="object"/>
+            <button string="On Hand"  name="action_on_hand" class="oe_highlight"  type="object"/>
+<!--            <button string="On Hand2"  name="%(library.wizard_on_hand_view)d" class="oe_highlight"  type="action"/>-->
             <button string="Done" name="action_done" type="object"/>
             <field name="status" widget="statusbar"/>
           </header>
