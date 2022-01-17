@@ -14,6 +14,28 @@
     </field>
 </record>
 
+
+
+
+<!-- explicit search view definition -->
+<record model="ir.ui.view" id="car_search_view">
+    <field name="name">rental search</field>
+    <field name="model">rental.car</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('model_id', 'ilike', self), ('description', 'ilike', self)]"/>
+            <field name="model_id"/>
+            <field name="partner_id" string="Client"/>
+            <filter name="active" string="Archive" domain="[('active','=',False)]"/>
+            <separator/>
+            <filter name="on_rent" string="On Rent" domain="[('status','=', 'on_rent')]"/>
+            <filter name="in_garage" string="In Garage" domain="[('status','=', 'in_garage')]"/>
+            <filter name="group_status" string="Status" context="{'group_by':'status'}"/>
+        </search>
+    </field>
+</record>
+
+
 <!-- form view for cars -->
 <record model="ir.ui.view" id="car_info_form_view">
     <field name="name">car.form.view</field>
@@ -21,7 +43,6 @@
     <field name="arch" type="xml">
         <form>
             <sheet>
-
                 <div class="oe_title">
                     <label for="name"/>
                     <h1><field class="o_text_overflow" name="name" placeholder="e.g. Opel"/></h1>
@@ -45,7 +66,6 @@
         </form>
     </field>
 </record>
-
 
 
 <record model="ir.ui.view" id="car_form_view">
@@ -103,14 +123,14 @@
     <field name="name">Cars on Rent</field>
     <field name="res_model">rental.car</field>
     <field name="view_mode">tree,kanban,form</field>
-<!--    <field name="context">{'search_default_on_hand': 1,}</field>-->
+    <field name="context">{'search_default_on_rent': 1,}</field>
 </record>
 
 <record model="ir.actions.act_window" id="action_car_in_garage">
-    <field name="name">Car in Garage</field>
+    <field name="name">Cars in Garage</field>
     <field name="res_model">rental.car</field>
     <field name="view_mode">tree,kanban,form</field>
-<!--    <field name="context">{'search_default_on_shelf': 1,}</field>-->
+    <field name="context">{'search_default_in_garage': 1,}</field>
 </record>
 
 <record model="ir.actions.act_window" id="action_car_info">
@@ -123,8 +143,8 @@
 <menuitem name="rental" id="menu_root">
    <menuitem name="Cars" id="cars">
        <menuitem name="All" id="menu_all_cars" action="action_car" sequence="1"/>
-       <menuitem name="Car on Rent" id="on_rent" action="action_car_on_rent" sequence="2"/>
-       <menuitem name="Car in Garage" id="in_garage" action="action_car_in_garage" sequence="3"/>
+       <menuitem name="Cars on Rent" id="on_rent" action="action_car_on_rent" sequence="2"/>
+       <menuitem name="Cars in Garage" id="in_garage" action="action_car_in_garage" sequence="3"/>
     </menuitem>
     <menuitem name="Configuration" id="configuration">
          <menuitem name="Car Info" id="menu_car_info" action="action_car_info"/>
