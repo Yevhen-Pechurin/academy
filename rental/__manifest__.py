@@ -26,6 +26,7 @@
 
     # always loaded
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_car_on_rent.xml',
         'views/car_views.xml',
