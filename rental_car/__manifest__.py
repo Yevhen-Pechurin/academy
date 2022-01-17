@@ -23,7 +23,7 @@ apps.rental-car.com""",
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -31,5 +31,6 @@ apps.rental-car.com""",
     'demo': [
         'demo/demo.xml',
     ],
-    'applications': True
+    "application": True,
+    'license': 'LGPL-3',
 }

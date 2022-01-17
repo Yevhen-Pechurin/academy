@@ -8,9 +8,10 @@ class Car(models.Model):
     _description = 'Car'
     _inherit = 'mail.thread'
 
-    name = fields.Char(tracking=True)
+    name = fields.Char(tracking=True, readonly=True, compute='_name_compute')
     number = fields.Char()
     model = fields.Char()
+
 
     status = fields.Selection([
         ('available', 'Available'),
@@ -19,3 +20,7 @@ class Car(models.Model):
         ("unavailable", "Unavailable"),
     ], default='available')
 
+    @api.depends('number', 'model')
+    def _name_compute(self):
+        for record in self:
+            record.name = f'{record.model} {record.number}'

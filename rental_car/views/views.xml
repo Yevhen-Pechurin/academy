@@ -15,13 +15,44 @@
     </record>
 
 
+
+
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="rental_car.action_window">
-      <field name="name">rental_car window</field>
+      <field name="name">Rent car lis</field>
       <field name="res_model">rental_car.car</field>
       <field name="view_mode">tree,form</field>
     </record>
+
+  <record model="ir.ui.view" id="rental_car.car_form_view">
+    <field name="name">Car</field>
+    <field name="model">rental_car.car</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <field name="status" widget="statusbar"/>
+        </header>
+
+        <sheet>
+          <div class="oe_title">
+            <h1><field name="name" placeholder="compute"/></h1>
+            <group>
+              <group>
+<!--                <field name="name"/>-->
+                <field name="model"/>
+                <field name="number"/>
+              </group>
+            </group>
+          </div>
+        </sheet>
+        <div class="oe_chatter">
+            <field name="message_ids" options="{'post_refresh': 'recipients'}" groups="base.group_user"/>
+            <field name="message_follower_ids"/>
+        </div>
+      </form>
+    </field>
+  </record>
 
 
     <!-- server action to the one above -->
@@ -42,11 +73,11 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="rental_car" id="rental_car.menu_root"/>
+    <menuitem name="Rent Car" id="rental_car.menu_root"/>
 
     <!-- menu categories -->
 
-    <menuitem name="Menu 1" id="rental_car.menu_1" parent="rental_car.menu_root"/>
+    <menuitem name="Main Menu" id="rental_car.menu_1" parent="rental_car.menu_root"/>
 <!--    <menuitem name="Menu 2" id="rental_car.menu_2" parent="rental_car.menu_root"/>-->
 
     <!-- actions -->
