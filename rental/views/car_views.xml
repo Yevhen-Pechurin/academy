@@ -46,6 +46,52 @@
     </field>
 </record>
 
+
+
+<record model="ir.ui.view" id="car_form_view">
+    <field name="name">cars.form.view</field>
+    <field name="model">rental.car</field>
+    <field name="mode">primary</field>
+    <field name="inherit_id" ref="rental.car_info_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//sheet" position="before">
+            <header>
+                <button name="action_on_rent" string="On Rent" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_rent', 'unavailable'])]}"/>
+                <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+                <field name="status" widget="statusbar" statusbar_visible="on_rent,in_garage"/>
+            </header>
+        </xpath>
+        <field name="model_id" position="before">
+            <field name="active" invisible="1"/>
+            <field name="number"/>
+            <field name="car_id" groups="base.group_no_one"/>
+       </field>
+        <xpath expr="//notebook/page[@id='description']" position="after">
+            <page string="History">
+                <field name="history_ids" options="{'no_open': True}">
+                    <tree create="false" delete="false" edit="false" default_order="id desc">
+                        <field name="partner_id"/>
+                        <field name="date_on_rent"/>
+                        <field name="date_in_garage"/>
+                        <field name="due_date"/>
+                    </tree>
+                </field>
+            </page>
+        </xpath>
+        <field name="country_id" position="after">
+            <field name="year"/>
+            <field name="mileage"/>
+        </field>
+        <xpath expr="//group/group" position="after">
+            <group string="Client">
+                <field name="partner_id"/>
+                <field name="due_date"/>
+                <field name="image" widget="image"/>
+            </group>
+        </xpath>
+    </field>
+</record>
+
 <!-- actions opening views on models -->
 <record model="ir.actions.act_window" id="action_car">
     <field name="name">Cars</field>

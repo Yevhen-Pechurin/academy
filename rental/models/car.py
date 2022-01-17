@@ -56,7 +56,7 @@ class Car(models.Model):
         ('on_rent', 'On Rent'),
         ('unavailable', 'Unavailable'),
     ], default='in_garage', compute='_compute_status', store=True, tracking=True)
-#     partner_id = fields.Many2one('res.partner')
+    partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('rental.history', 'car_id')
     image = fields.Image(string="Image", max_width=256, max_height=256, help="Select image here", verify_resolution=True)
     description = fields.Text(related='car_id.description')

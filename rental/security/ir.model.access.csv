@@ -4,5 +4,5 @@ rental.access_rental_country,access_rental_country,rental.model_rental_country,b
 rental.access_rental_history,access_rental_history,rental.model_rental_history,base.group_user,1,1,1,0
 rental.access_rental_car_info,access_rental_car_info,rental.model_rental_car_info,base.group_user,1,1,1,1
 rental.access_rental_car,access_rental_car,rental.model_rental_car,base.group_user,1,1,1,1
-rental.access_rental_wizard_on_rent,access_rental_wizard_on_rent,rental.model_rental_wizard_on_rent,base.group_user,1,1,1,1
+
 
