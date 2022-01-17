@@ -36,11 +36,13 @@ class History(models.Model):
     _name = 'rental.history'
     _description = 'History'
 
-    car_id = fields.Many2one('rental_car.car')
+    car_id = fields.Many2one('rental.car')
     partner_id = fields.Many2one('res.partner')
-    date_on_hand = fields.Datetime()
-    date_on_shelf = fields.Datetime()
-    due_date = fields.Date()
+    start_odometer = fields.Integer()
+    finish_odometer = fields.Integer()
+    date_in_garage = fields.Datetime()
+    date_on_loan = fields.Datetime()
+    # due_date = fields.Date()
 
 
 # class BookInfo(models.Model):
@@ -62,11 +64,12 @@ class Car(models.Model):
     # _inherits = {'library.book.info': 'book_id'}
     _description = 'Car'
 
-    name = fields.Char(tracking=True)
+
+    name = fields.Char(compute='_compute_car_name')
     # book_id = fields.Many2one('library.book.info', required=True, ondelete="cascade")
-    number = fields.Char(copy=False)
-    model = fields.Char(copy=False)
-    year = fields.Integer()
+    number = fields.Char(copy=False, tracking=True)
+    model = fields.Char(copy=False, tracking=True)
+    year = fields.Integer(tracking=True)
     status = fields.Selection([
         ('in_garage', 'In Garage'),
         ('on_loan', 'On Loan'),
@@ -82,7 +85,7 @@ class Car(models.Model):
     # due_date = fields.Date()
     # overdue_notification_date = fields.Date()
     active = fields.Boolean(default=True)
-
+    odometer = fields.Integer()
     _sql_constraints = [
         ('number_uniq', 'unique (number)', """Only one number can be defined for each car!"""),
     ]
@@ -95,6 +98,11 @@ class Car(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'new'
         }
+
+    @api.depends('model', 'number')
+    def _compute_car_name(self):
+        for car in self:
+            car.name = f'{car.model}{car.number}'
     #
     # def action_on_shelf(self):
     #     last_history = self.history_ids[-1]

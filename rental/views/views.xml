@@ -2,19 +2,64 @@
   <data>
     <!-- explicit list view definition -->
 
-<!--    <record model="ir.ui.view" id="rental.list">-->
-<!--      <field name="name">rental list</field>-->
-<!--      <field name="model">rental.car</field>-->
-<!--      <field name="arch" type="xml">-->
-<!--        <tree>-->
-<!--          <field name="name"/>-->
-<!--          <field name="value"/>-->
-<!--          <field name="value2"/>-->
-<!--        </tree>-->
-<!--      </field>-->
-<!--    </record>-->
+    <record model="ir.ui.view" id="car_rental_car_form_view">
+        <field name="name">rental.car.form.view</field>
+        <field name="model">rental.car</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="in_garage,tented,on_maintanance,unavailable"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field class="o_text_overflow" name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Info" name="info">
+                            <field name="model"/>
+                            <field name="number"/>
+                            <field name="year"/>
+                            <field name="status"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="History">
+                            <field name="history_ids" options="{'no_open': True}">
+                                <tree create="false" delete="false" edit="false" default_order="id desc">
+                                    <field name="partner_id"/>
+                                    <field name="start_odometer"/>
+                                    <field name="finish_odometer"/>
+                                    <field name="date_in_garage"/>
+                                    <field name="date_on_loan"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
 
-
+    <record id="car_rental_car_view_tree" model="ir.ui.view">
+        <field name="name">rental.car.tree</field>
+        <field name="model">rental.car</field>
+        <field name="arch" type="xml">
+            <tree string="Cars">
+                <field name="name"/>
+                <field name="model"/>
+                <field name="number"/>
+                <field name="year"/>
+                <field name="status"/>
+                <field name="odometer"/>
+            </tree>
+        </field>
+    </record>
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="rental.action_window">
@@ -22,6 +67,7 @@
       <field name="res_model">rental.car</field>
       <field name="view_mode">tree,form</field>
     </record>
+
 
 
     <!-- server action to the one above -->
