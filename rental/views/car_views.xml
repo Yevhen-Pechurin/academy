@@ -9,7 +9,7 @@
         <tree>
             <field name="name"/>
             <field name="model_id"/>
-<!--            <field name="status"/>-->
+            <field name="status"/>
         </tree>
     </field>
 </record>
@@ -86,19 +86,6 @@
 </menuitem>
 
 
-    <!-- Top menu item -->
-<!--    <menuitem name="rental" id="rental.menu_root"/>-->
-
-    <!-- menu categories -->
-<!--    <menuitem name="Menu 1" id="rental.menu_1" parent="rental.menu_root" action="rental.action_car"/>-->
-
-
-<!--
-    <menuitem name="Menu 1" id="rental_car.menu_1" parent="rental.menu_root"/>
-    <menuitem name="Menu 2" id="rental_car.menu_2" parent="rental_car.menu_root"/>
--->
-
-
 
 
     <!-- actions opening views on models -->
@@ -126,25 +113,5 @@
     </record>
 -->
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="rental_car" id="rental_car.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="rental_car.menu_1" parent="rental_car.menu_root"/>
-    <menuitem name="Menu 2" id="rental_car.menu_2" parent="rental_car.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="rental_car.menu_1_list" parent="rental_car.menu_1"
-              action="rental_car.action_window"/>
-    <menuitem name="Server to list" id="rental_car" parent="rental_car.menu_2"
-              action="rental_car.action_server"/>
--->
-
-
-
-
-  </data>
+   </data>
 </odoo>
