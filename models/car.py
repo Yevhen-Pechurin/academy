@@ -15,7 +15,8 @@ class CarMaintananceHistory(models.Model):
 
 class Car(models.Model):
     _name = 'car_rental.car'
-    _description = 'Some minimal placeholder description'
+    _description = 'A car'
+    _inherit = 'mail.thread'
 
     name = fields.Char(compute='_compute_car_name')
     model = fields.Many2one('car_rental.car_model', required=True)
@@ -26,7 +27,7 @@ class Car(models.Model):
         ('rented', 'Rented'),
         ('on_maintanence', 'On maintanance'),
         ('unavailable', 'Unavailable'),
-        ])
+        ], required=True, tracking=True)
     date_rented = fields.Datetime()
     client_id = fields.Many2one('res.partner', copy=False)
     odometer = fields.Integer()
@@ -34,7 +35,7 @@ class Car(models.Model):
     @api.depends('model', 'number')
     def _compute_car_name(self):
         for car in self:
-            car.name = f'{car.model}_{car.number}'
+            car.name = f'{car.model.model_name}_{car.number}'
 
     @api.onchange('status')
     def onchange_status_rented(self):
