@@ -22,14 +22,17 @@
     # any module necessary for this one to work correctly
     'depends': ['base'],
 
+    'license': 'LGPL-3',
+
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views_rental_car.xml',
-        'views/templates.xml',
+        'security/ir.model.access.csv',
+        'views/views_car.xml',
+        # 'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    'application': True,
 }
