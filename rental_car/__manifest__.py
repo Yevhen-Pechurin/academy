@@ -7,8 +7,8 @@
     'website': 'https://www.youtube.com/watch?v=tkqef33yRNA&ab_channel=Oxxxymiron-Topic',
     'depends' : ['base', 'mail'],
     'data': [
-        "security/ir.model.access.csv",
         "security/security.xml",
+        "security/ir.model.access.csv",
         # 'data/ir_cron.xml',
         "wizards/view_car_for_rent.xml",
         "views/views.xml",
