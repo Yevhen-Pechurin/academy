@@ -14,11 +14,11 @@ class Car(models.Model):
     number = fields.Integer()
     model = fields.Many2one()
     year = fields.Integer()
-    status = fields.Selection([
-        ('in_garage', 'In Garage'),
-        ('rented', 'Rented'),
-        ('under_repair', 'Under Repair'),
-        ('unavailable', 'Unavailable'),
-    ], default='in_garage', compute='_compute_status',
-        store=True, tracking=True)
+    # status = fields.Selection([
+    #     ('in_garage', 'In Garage'),
+    #     ('rented', 'Rented'),
+    #     ('under_repair', 'Under Repair'),
+    #     ('unavailable', 'Unavailable'),
+    # ], default='in_garage', compute='_compute_status',
+    #     store=True, tracking=True)
 
