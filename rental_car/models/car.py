@@ -7,8 +7,15 @@ class Odometr(models.Model):
     _name = 'rental_car.odometr'
     _description = 'Odometr'
 
+    name = fields.Char(compute='_name_compute' ,tracking=True)
     disctance = fields.Integer(tracking=True)
     date = fields.Date(tracking=True)
+    # car_id = fields.One2many('rental_car', 'odometr_id')
+
+    @api.depends('disctance')
+    def _name_compute(self):
+        for record in self:
+            record.name = f'{record.disctance}'
 
 
 class History(models.Model):
@@ -21,6 +28,9 @@ class History(models.Model):
     date_to_return = fields.Datetime(tracking=True)
     due_date = fields.Datetime(tracking=True)
     odometr_id = fields.Many2one('rental_car.odometr')
+    odometr_start = fields.Integer(tracking=True)
+    odometr_end = fields.Integer(tracking=True)
+
 
 class Car(models.Model):
     _name = 'rental_car.car'
