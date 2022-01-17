@@ -18,7 +18,7 @@
         <field name="arch" type="xml">
             <tree string="Cars list">
                 <field name="name"/>
-                <field name="model"/>
+                <field name="model_id"/>
                 <field name="number"/>
                 <field name="year"/>
                 <field name="status"/>
@@ -27,7 +27,7 @@
         </field>
     </record>
 
-    <!-- for view -->
+    <!-- form view -->
     <record model="ir.ui.view" id="car_rental_car_form_view">
         <field name="name">car_rental.car.form.view</field>
         <field name="model">car_rental.car</field>
@@ -45,7 +45,7 @@
                     </div>
                     <group>
                         <group string="Info">
-                            <field name="model"/>
+                            <field name="model_id"/>
                             <field name="number"/>
                             <field name="year"/>
                             <field name="status"/>
