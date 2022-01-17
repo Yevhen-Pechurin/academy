@@ -94,7 +94,7 @@ class Car(models.Model):
                 'date_in_garage': fields.Datetime.now()
             })
         self.write({
-            'status': 'on_rent',
+            'status': 'in_garage',
             'partner_id': False
         })
 
