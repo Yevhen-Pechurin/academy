@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+         <record id="action_cars" model="ir.actions.act_window">
+            <field name="name">Car</field>
+            <field name="res_model">rental_car.car</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="action_brands" model="ir.actions.act_window">
+            <field name="name">Brand</field>
+            <field name="res_model">rental_car.brand</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="action_models" model="ir.actions.act_window">
+            <field name="name">Model</field>
+            <field name="res_model">rental_car.model</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+<!--        <record id="res_partner_inherited" model="ir.ui.view">-->
+<!--            <field name="name">Books</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">-->
+<!--                    <button type="object" name="show_books" icon="fa-book" attrs="{'invisible': [('books_count', '=', 0)]}" >-->
+<!--                        <field string="Books" name="books_count" widget="statinfo"></field>-->
+<!--                    </button>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+         <record id="car_kanban_view" model="ir.ui.view">
+            <field name="name">Car Kanban View</field>
+            <field name="model">rental_car.car</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" sample="1">
+                    <field name="name"/>
+                    <field name="status"/>
+                    <field name="client_id"/>
+                    <field name="image"/>
+                    <field name="odometer_value"/>
+                    <field name="year_of_manufacture"/>
+                    <field name="due_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div><field name="image" widget="image" class="oe_centered"/></div>
+                                <div class="oe_kanban_details d-flex flex-column" style="margin-left:30px">
+                                    <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li><field name="odometer_value"/></li>
+                                        <li><field name="year_of_manufacture"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+<!--          <record id="book_search" model="ir.ui.view">-->
+<!--            <field name="name">Book Search</field>-->
+<!--            <field name="model">library.book</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Book">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="author_id"/>-->
+<!--                    <field name="language_id"/>-->
+<!--                    <field name="edition"/>-->
+<!--                    <field name="description"/>-->
+<!--                    <separator/>-->
+<!--                    <filter name="on_hand" string="Books on Hand" domain="[('status', '=', 'on_hand')]"/>-->
+<!--                    <filter name="on_shelf" string="Books on Shelf" domain="[('status', '=', 'on_shelf')]"/>-->
+<!--                    <filter name="not_available" string="Not Available Books" domain="[('status', '=', 'not_available')]"/>-->
+<!--                    <separator/>-->
+<!--                    <filter name="hard_cover" string="Hard Cover" domain="[('cover', '=', 'hard')]"/>-->
+<!--                    <filter name="soft_cover" string="Soft Cover" domain="[('cover', '=', 'soft')]"/>-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter name="book_status" string="Book Status" context="{'group_by': 'status'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--             </field>-->
+<!--        </record>-->
+
+
+        <record id="car_form_view" model="ir.ui.view">
+            <field name="name">Car form view</field>
+            <field name="model">rental_car.car</field>
+            <field name="arch" type="xml">
+                <form>
+                     <header>
+                         <button name="action_for_rent" string="For Rent" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['for_rent', 'unavailable'])]}"/>
+                         <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+                         <field name="status" widget="statusbar" statusbar_visible="in_garage,for_rent,under_repair"/>
+                     </header>
+                    <sheet>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                            <div class="oe_title">
+                                <label for="name"/>
+                                <h1><field name="name"/></h1>
+                            </div>
+                        <group>
+                            <group string="Info">
+                                <field name="brand_id"/>
+                                <field name="number"/>
+                                <field name="year_of_manufacture"/>
+                                <field name="odometer_value"/>
+                            </group>
+                            <group string="Client">
+                                <field name="client_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                 <field name="description"/>
+                            </page>
+                            <page string="Rent History">
+                                <field name="rent_history_id"  options="{'no_open': True}">
+                                          <tree create="false" delete="false" edit="false" default_order="id desc">
+                                                <field name="client_id"/>
+                                                <field name="date_for_rent"/>
+                                                <field name="date_in_garage"/>
+                                                <field name="odometer_start_value"/>
+                                                <field name="odometer_end_value"/>
+                                                <field name="due_date"/>
+                                          </tree>
+                                    </field>
+                              </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="brand_form_view" model="ir.ui.view">
+            <field name="name">Brand form view</field>
+            <field name="model">rental_car.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group string="Info">
+                            <field name="country"/>
+                            <field name="model_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Brand Description">
+                                 <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <record id = "car_tree_view" model="ir.ui.view">
+            <field name="name">Car Tree View</field>
+            <field name="model">rental_car.car</field>
+            <field name="arch" type="xml">
+                <tree string="Car">
+                    <field name="name"/>
+                    <field name="year_of_manufacture"/>
+                    <field name="odometer_value"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_root" name="Rental Car" sequence = "14" />
+        <menuitem id="cars" name = "Cars" parent = "menu_root" action="action_cars"/>
+        <menuitem id="brand" name = "Brands" parent = "menu_root" action="action_brands"/>
+        <menuitem id="model" name = "Models" parent = "menu_root" action="action_models"/>
+    </data>
+</odoo>
