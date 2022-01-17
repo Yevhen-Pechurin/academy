@@ -7,11 +7,11 @@ class CarModel(models.Model):
     
     model_name = fields.Char(required=True)
     manufacturer_logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
-    car_ids = fields.One2many('car_rental.car', 'model')
+    car_ids = fields.One2many('car_rental.car', 'model_id')
 
 
 class CarRentalHistory(models.Model):
-    _name = 'car_rental.car_rental_history'
+    _name = 'car_rental.history'
 
     car_id = fields.Many2one('car_rental.car', required=True)
     date_rented = fields.Datetime()
@@ -45,21 +45,21 @@ class Car(models.Model):
         ('rented', 'Rented'),
         ('on_maintanence', 'On maintanance'),
         ('unavailable', 'Unavailable'),
-        ], required=True, tracking=True)
+        ], default= 'in_garage', required=True, tracking=True)
     date_rented = fields.Datetime()
     client_id = fields.Many2one('res.partner', copy=False)
     odometer = fields.Integer(tracking=True)
     active = fields.Boolean(default=True)
-    rental_history_ids = fields.One2many('car_rental.car_rental_history', 'car_id')
+    rental_history_ids = fields.One2many('car_rental.history', 'car_id')
 
     _sql_constraints = [
         ('unique_number', 'UNIQUE(number)', """Number is unique for every car!"""),
     ]
 
-    @api.depends('model', 'number')
+    @api.depends('model_id', 'number')
     def _compute_car_name(self):
         for car in self:
-            car.name = f'{car.model.model_name}_{car.number}'
+            car.name = f'{car.model_id.model_name}_{car.number}'
 
     @api.onchange('status')
     def onchange_status_rented(self):

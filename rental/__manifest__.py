@@ -3,6 +3,7 @@
 
 {
     'name': 'Car Rental',
+    'category': 'Services/Car Rental',
     'depends': [
         'mail',
 	],
