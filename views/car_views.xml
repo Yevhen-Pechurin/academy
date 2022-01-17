@@ -4,9 +4,58 @@
         <field name="res_model">car_rental.car</field>
         <field name="view_mode">tree,form</field>
     </record>
+    
     <menuitem id="car_rental_menu_root" name="Car Rental">
         <menuitem id="car_rental_first_level_menu" name="Car Menu">
             <menuitem id="car_rental_menu_action" action="car_rental_action"/>
         </menuitem>
     </menuitem>
+
+    <!-- tree view -->
+    <record id="car_rental_car_view_tree" model="ir.ui.view">
+        <field name="name">car_rental.car.tree</field>
+        <field name="model">car_rental.car</field>
+        <field name="arch" type="xml">
+            <tree string="Cars list">
+                <field name="name"/>
+                <field name="model"/>
+                <field name="number"/>
+                <field name="year"/>
+                <field name="status"/>
+                <field name="odometer"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- for view -->
+    <record model="ir.ui.view" id="car_rental_car_form_view">
+        <field name="name">car_rental.car.form.view</field>
+        <field name="model">car_rental.car</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="in_garage,tented,on_maintanance,unavailable"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field class="o_text_overflow" name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Info">
+                            <field name="model"/>
+                            <field name="number"/>
+                            <field name="year"/>
+                            <field name="status"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                </sheet>
+<!--                 <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
 </odoo>

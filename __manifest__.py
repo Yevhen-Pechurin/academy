@@ -4,7 +4,7 @@
 {
     'name': 'Car Rental',
     'depends': [
-        'base',
+        'mail',
 	],
     'data': [
         'security/ir.model.access.csv',
