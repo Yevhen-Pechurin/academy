@@ -3,22 +3,24 @@
     <!-- explicit list view definition -->
 
     <record model="ir.ui.view" id="rental_car.list">
-      <field name="name">rental_car list</field>
-      <field name="model">rental_car.car</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="number"/>
-<!--          <field name="model"/>-->
-          <field name="year"/>
-<!--          <field name="status"/>-->
-          <field name="lease_data"/>
-<!--          <field name="partner_id"/>-->
-<!--          <field name="history_ids"/>-->
-          <field name="logo_image"/>
-          <field name="odometer"/>
-        </tree>
-      </field>
+        <field name="name">rental_car list</field>
+        <field name="model">rental_car.car</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" invisible="1"/>
+                <!--          <field name="number" style="text-transform: uppercase;"/>-->
+                <field name="number"/>
+                <field name="model"/>
+                <field name="year"/>
+                <!--          <field name="status"/>-->
+                <field name="lease_data"/>
+                <field name="partner_id"/>
+                <field name="logo_image"/>
+                <field name="odometer"/>
+            </tree>
+<!--            <field name="history_ids"/>-->
+
+        </field>
     </record>
 
     <!-- actions opening views on models -->
