@@ -1,61 +1,62 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-<!--    <record model="ir.ui.view" id="rental_car.list">-->
-<!--        <field name="name">rental_car list</field>-->
-<!--        <field name="model">rental_car_car</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <tree>-->
-<!--                <field name="name"/>-->
-<!--                <field name="number"/>-->
-<!--                <field name="model"/>-->
-<!--                <field name="year"/>-->
-<!--                <field name="status"/>-->
-<!--                <field name="lease_date"/>-->
-<!--                <field name="partner_id"/>-->
-<!--                <field name="logo_image"/>-->
-<!--                <field name="odometer"/>-->
-<!--            </tree>-->
-<!--&lt;!&ndash;            <field name="history_ids"/>&ndash;&gt;-->
-<!--        </field>-->
-<!--    </record>-->
-  <!-- form view for cars -->
-    <record model="ir.ui.view" id="car_form_view">
-        <field name="name">rental_car view</field>
+    <record model="ir.ui.view" id="rental_car.list">
+        <field name="name">rental_car list</field>
         <field name="model">rental_car.car</field>
         <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1><field class="o_text_overflow" name="name" placeholder="e.g. New Car"/></h1>
-                    </div>
-                    <group>
-                        <group string="Info" name="info">
-                            <field name="name"/>
-                            <field name="number"/>
-                            <field name="model"/>
-                            <field name="year"/>
-                            <field name="status"/>
-                            <field name="lease_date"/>
-                            <field name="partner_id"/>
-                            <field name="logo_image"/>
-                            <field name="odometer"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Description" id="description" class="description">
-                            <field name="description"/>
-                        </page>
-                    </notebook>
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user"/>
-                    <field name="message_ids"/>
-                </div>
-            </form>
+            <tree>
+                <field name="name"/>
+                <field name="number"/>
+                <field name="model_id"/>
+                <field name="year"/>
+                <field name="status"/>
+                <field name="lease_date"/>
+                <field name="partner_id"/>
+                <field name="logo_image"/>
+                <field name="odometer"/>
+            </tree>
+<!--            <field name="history_ids"/>-->
         </field>
     </record>
+
+  <!-- form view for cars -->
+<!--    <record model="ir.ui.view" id="car_form_view">-->
+<!--        <field name="name">rental_car view</field>-->
+<!--        <field name="model">rental_car.car</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <div class="oe_title">-->
+<!--                        <label for="name"/>-->
+<!--                        <h1><field class="o_text_overflow" name="name" placeholder="e.g. New Car"/></h1>-->
+<!--                    </div>-->
+<!--                    <group>-->
+<!--                        <group string="Info" name="info">-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="number"/>-->
+<!--                            <field name="model"/>-->
+<!--                            <field name="year"/>-->
+<!--                            <field name="status"/>-->
+<!--                            <field name="lease_date"/>-->
+<!--                            <field name="partner_id"/>-->
+<!--                            <field name="logo_image"/>-->
+<!--                            <field name="odometer"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <notebook>-->
+<!--                        <page string="Description" id="description" class="description">-->
+<!--                            <field name="description"/>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+<!--                </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
+<!--                    <field name="message_ids"/>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
