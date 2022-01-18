@@ -48,13 +48,13 @@ class History(models.Model):
     _name = 'car.history'
     _description = 'History'
 
+    car_id = fields.Many2one('rental_car.car')
     lease_date = fields.Date()
     partner_id = fields.Many2one('res.partner')
     date_in_garage = fields.Datetime()
     odometer = fields.Integer()
     odometer_start = fields.Integer()
     odometer_end = fields.Integer()
-    car_id = fields.Many2one('rental_car.car')
     date_under_repair = fields.Datetime()
     description = fields.Text(tracking=True, index=True)
 
@@ -65,10 +65,10 @@ class Car(models.Model):
     _description = 'Rental Car'
 
     name = fields.Char(compute='_compute_name', store="True", default='-')
-    car_id = fields.Many2one('library.book.info')
+    car_id = fields.Many2one('rental_car.car.info')
     number = fields.Char()
     # model = fields.Many2one('car.model', tracking=True)
-    model = fields.Char()
+    model = fields.Many2one('car.model')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In Garage'),
@@ -81,7 +81,7 @@ class Car(models.Model):
     partner_id = fields.Many2one('res.partner')
     logo_image = fields.Image(string="Image", max_width=256, max_height=256)
     odometer = fields.Integer()
-    # active = fields.Boolean(default=True)
+    active = fields.Boolean(default=True)
     history_ids = fields.One2many('car.history', 'car_id')
 
     @api.depends('active')
