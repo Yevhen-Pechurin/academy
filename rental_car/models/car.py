@@ -102,7 +102,6 @@ class Car(models.Model):
             'partner_id': False
         })
 
-
     @api.depends('model_id', 'number')
     def _compute_name_order(self):
         for record in self:
