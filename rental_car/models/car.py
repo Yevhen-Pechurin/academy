@@ -7,11 +7,11 @@ from odoo import models, fields, api, _
 
 class CarInfo(models.Model):
     _name = 'rental_car.car.info'
-    # _inherit = 'mail.thread'
+    _inherit = 'mail.thread'
     _description = 'Car Info'
 
     name = fields.Char(tracking=True)
-    model_id = fields.Many2one('car.model', tracking=True)
+    model = fields.Many2one('car.model', tracking=True)
     year = fields.Integer()
     description = fields.Text(tracking=True, index=True)
 
@@ -49,26 +49,25 @@ class History(models.Model):
     _description = 'History'
 
     car_id = fields.Many2one('rental_car.car')
-    lease_date = fields.Date()
     partner_id = fields.Many2one('res.partner')
+    lease_date = fields.Date()
     date_in_garage = fields.Datetime()
+    date_under_repair = fields.Datetime()
     odometer = fields.Integer()
     odometer_start = fields.Integer()
     odometer_end = fields.Integer()
-    date_under_repair = fields.Datetime()
     description = fields.Text(tracking=True, index=True)
 
 
 class Car(models.Model):
-    # _name = 'rental_car.rental_car'
     _name = 'rental_car.car'
+    _inherit = 'mail.thread'
     _description = 'Rental Car'
 
     name = fields.Char(compute='_compute_name', store="True", default='-')
-    car_id = fields.Many2one('rental_car.car.info')
     number = fields.Char()
-    # model = fields.Many2one('car.model', tracking=True)
-    model = fields.Many2one('car.model')
+    model = fields.Char()
+    car_id = fields.Many2one('rental_car.car.info')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In Garage'),
@@ -83,6 +82,7 @@ class Car(models.Model):
     odometer = fields.Integer()
     active = fields.Boolean(default=True)
     history_ids = fields.One2many('car.history', 'car_id')
+    description = fields.Text(related='car_id.description')
 
     @api.depends('active')
     def _compute_status(self):

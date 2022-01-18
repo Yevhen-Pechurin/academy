@@ -1,39 +1,61 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-
-    <record model="ir.ui.view" id="rental_car.list">
-        <field name="name">rental_car list</field>
-        <field name="model">rental_car.car</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <!--          <field name="number" style="text-transform: uppercase;"/>-->
-                <field name="number"/>
-                <field name="model"/>
-                <field name="year"/>
-                <field name="status"/>
-                <field name="lease_date"/>
-                <field name="partner_id"/>
-                <field name="logo_image"/>
-                <field name="odometer"/>
-            </tree>
-<!--            <field name="history_ids"/>-->
-        </field>
-    </record>
-  <!-- form view for books -->
+<!--    <record model="ir.ui.view" id="rental_car.list">-->
+<!--        <field name="name">rental_car list</field>-->
+<!--        <field name="model">rental_car_car</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="name"/>-->
+<!--                <field name="number"/>-->
+<!--                <field name="model"/>-->
+<!--                <field name="year"/>-->
+<!--                <field name="status"/>-->
+<!--                <field name="lease_date"/>-->
+<!--                <field name="partner_id"/>-->
+<!--                <field name="logo_image"/>-->
+<!--                <field name="odometer"/>-->
+<!--            </tree>-->
+<!--&lt;!&ndash;            <field name="history_ids"/>&ndash;&gt;-->
+<!--        </field>-->
+<!--    </record>-->
+  <!-- form view for cars -->
     <record model="ir.ui.view" id="car_form_view">
         <field name="name">rental_car view</field>
         <field name="model">rental_car.car</field>
         <field name="arch" type="xml">
-
-            <tree>
-
-            </tree>
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field class="o_text_overflow" name="name" placeholder="e.g. New Car"/></h1>
+                    </div>
+                    <group>
+                        <group string="Info" name="info">
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="model"/>
+                            <field name="year"/>
+                            <field name="status"/>
+                            <field name="lease_date"/>
+                            <field name="partner_id"/>
+                            <field name="logo_image"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" id="description" class="description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
         </field>
     </record>
-
-
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
@@ -41,18 +63,25 @@
       <field name="res_model">rental_car.car</field>
       <field name="view_mode">tree,form,kanban</field>
     </record>
+    <record model="ir.actions.act_window" id="rental_car.action_window_info">
+      <field name="name">New order</field>
+      <field name="res_model">rental_car.car.info</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
 
     <!-- Top menu item -->
     <menuitem name="Rental car" id="rental_car.menu_root"/>
     <!-- menu categories -->
-    <menuitem name="Car Info" id="rental_car.menu_1" parent="rental_car.menu_root"/>
+    <menuitem name="Car " id="rental_car.menu_car" parent="rental_car.menu_root"/>
+    <menuitem name="Car Info" id="rental_car.menu_car_info" parent="rental_car.menu_root"/>
     <!-- actions -->
-    <menuitem name="All" id="rental_car.menu_1_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="1"/>
-    <menuitem name="In Garage" id="rental_car.menu_2_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="2"/>
-    <menuitem name="Rented" id="rental_car.menu_3_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="3"/>
-    <menuitem name="Under Repair" id="rental_car.menu_4_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="4"/>
-    <menuitem name="Unavailable" id="rental_car.menu_5_list" parent="rental_car.menu_1" action="rental_car.action_window" sequence="5"/>
+    <menuitem name="All" id="rental_car.menu_1_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="1"/>
+    <menuitem name="In Garage" id="rental_car.menu_2_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="2"/>
+    <menuitem name="Rented" id="rental_car.menu_3_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="3"/>
+    <menuitem name="Under Repair" id="rental_car.menu_4_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="4"/>
+    <menuitem name="Unavailable" id="rental_car.menu_5_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="5"/>
+    <menuitem name="Car Info" id="rental_car.menu_5_list" parent="rental_car.menu_car_info" action="rental_car.action_window_info"/>
 
   </data>
 </odoo>
