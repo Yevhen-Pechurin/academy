@@ -20,6 +20,7 @@ class CarInfo(models.Model):
     name = fields.Char(tracking=True)
     model_id = fields.Many2one('car.model', tracking=True)
     year = fields.Integer(tracking=True)
+    odometer = fields.Integer()
     description = fields.Text(tracking=True)
 
 
@@ -61,7 +62,7 @@ class History(models.Model):
 
 class Car(models.Model):
     _name = 'rental_car.car'
-    # _inherit = 'mail.thread'
+    _inherit = 'mail.thread'
     _description = 'Rental Car'
 
     car_id = fields.Many2one('rental_car.car.info')

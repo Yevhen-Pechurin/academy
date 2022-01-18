@@ -47,8 +47,7 @@
                         </group>
                     </group>
                     <notebook>
-<!--                        <page string="Description" id="description" class="description">-->
-                        <page string="Description">
+                        <page string="Description" id="description" class="description">
                             <field name="description"/>
                         </page>
                     </notebook>
@@ -62,10 +61,10 @@
         </field>
     </record>
 
-    <!-- form view for books -->
+    <!-- form info for car -->
     <record model="ir.ui.view" id="car_info_form_view">
-        <field name="name">rental_car.view.form.view</field>
-        <field name="model">rental_car.car</field>
+        <field name="name">rental_car.info.form</field>
+        <field name="model">rental_car.car.info</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -75,7 +74,9 @@
                     </div>
                     <group>
                         <group string="Info" name="info">
-                            <field name="number"/>
+                            <field name="name"/>
+                            <field name="model_id"/>
+                            <field name="year"/>
                             <field name="odometer"/>
                         </group>
                     </group>
