@@ -22,6 +22,9 @@
     'demo': [
         'demo/library_demo.xml',
     ],
+    'web.assets_backend': [
+        'library/static/src/js/**/*',
+    ],
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',

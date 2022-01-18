@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+
+    <div t-name="zoom_info.zoom_info_template">
+        <button class="increment_btn">Increment</button>
+        <button class="start_timer" style="border:none;">start</button>
+        <span class="val"><t t-esc="widget.count"/></span>
+    </div>
+</templates>
