@@ -95,4 +95,3 @@ class LoanHistory(models.Model):
     partner_id = fields.Many2one('res.partner')
     due_date = fields.Date()
     car_id = fields.Many2one('rental.car')
-

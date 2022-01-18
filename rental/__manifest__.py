@@ -13,11 +13,21 @@
         'security/ir.model.access.csv',
         'views/car_rental_view.xml',
         'wizards/wizard_loan.xml',
-        'data/ir_cron.xml'
+        'data/ir_cron.xml',
+
     ],
     'demo': [
         'demo/car_rental_demo.xml',
     ],
+    "assets": {
+        "web.assets_backend": [
+            'rental/static/src/js/car.js',
+        ],
+        'web.assets_qweb': [
+            'rental/static/src/xml/actions.xml',
+        ],
+    },
+
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
