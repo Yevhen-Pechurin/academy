@@ -5,6 +5,13 @@ from random import randint
 from odoo import models, fields, api, _
 
 
+class CarModel(models.Model):
+    _name = 'car.model'
+    _description = 'Car Model'
+
+    name = fields.Char()
+
+
 class CarInfo(models.Model):
     _name = 'rental_car.car.info'
     _inherit = 'mail.thread'
@@ -12,15 +19,8 @@ class CarInfo(models.Model):
 
     name = fields.Char(tracking=True)
     model_id = fields.Many2one('car.model', tracking=True)
-    year = fields.Integer()
-    description = fields.Text(tracking=True, index=True)
-
-
-class CarModel(models.Model):
-    _name = 'car.model'
-    _description = 'Car Model'
-
-    name = fields.Char()
+    year = fields.Integer(tracking=True)
+    description = fields.Text(tracking=True)
 
 
 # class HistoryRepair(models.Model):
@@ -65,10 +65,10 @@ class Car(models.Model):
     _description = 'Rental Car'
 
     car_id = fields.Many2one('rental_car.car.info')
-    name = fields.Char(compute='_compute_name', store="True", default='-')
+    name = fields.Char(related='car_id.name', readonly=False)
     number = fields.Char()
     model_id = fields.Char()
-    car_id = fields.Many2one('rental_car.car.info')
+    name_order = fields.Char(compute='_compute_name_order', store="True", default='-')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In Garage'),
@@ -81,7 +81,7 @@ class Car(models.Model):
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('car.history', 'car_id')
     logo_image = fields.Image(string="Image", max_width=256, max_height=256)
-    # odometer = fields.Integer()
+    odometer = fields.Integer()
     active = fields.Boolean(default=True)
     description = fields.Text()
 
@@ -125,9 +125,9 @@ class Car(models.Model):
     #     })
 
     @api.depends('model_id', 'number')
-    def _compute_name(self):
+    def _compute_name_order(self):
         for record in self:
-            record.name = str(record.model_id) + " " + str(record.number)
+            record.name_order = str(record.model_id) + " " + str(record.number)
 
     # @api.onchange('number')
     # def set_caps(self):

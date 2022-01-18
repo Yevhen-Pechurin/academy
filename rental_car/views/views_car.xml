@@ -14,7 +14,7 @@
                 <field name="lease_date"/>
                 <field name="partner_id"/>
                 <field name="logo_image"/>
-<!--                <field name="odometer"/>-->
+                <field name="odometer"/>
             </tree>
         </field>
     </record>
@@ -38,11 +38,12 @@
                             <field name="year"/>
                             <field name="status"/>
                         </group>
-                        <group>
+                        <group string="Other" name="Other">
+                            <field name="name_order"/>
                             <field name="lease_date"/>
                             <field name="partner_id"/>
-                            <field name="logo_image"/>
-<!--                            <field name="odometer"/>-->
+                            <field name="odometer"/>
+                            <field name="logo_image" widget="image"/>
                         </group>
                     </group>
                     <notebook>
@@ -60,6 +61,40 @@
             </form>
         </field>
     </record>
+
+    <!-- form view for books -->
+    <record model="ir.ui.view" id="car_info_form_view">
+        <field name="name">rental_car.view.form.view</field>
+        <field name="model">rental_car.car</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field class="o_text_overflow" name="name" placeholder="e.g. CAR"/></h1>
+                    </div>
+                    <group>
+                        <group string="Info" name="info">
+                            <field name="number"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" id="description" class="description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
+<!--                    <field name="message_ids"/>-->
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
