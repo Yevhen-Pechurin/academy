@@ -7,44 +7,41 @@
         <field name="model">rental_car.car</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" invisible="1"/>
+                <field name="name"/>
                 <!--          <field name="number" style="text-transform: uppercase;"/>-->
                 <field name="number"/>
                 <field name="model"/>
                 <field name="year"/>
-                <!--          <field name="status"/>-->
-                <field name="lease_data"/>
+                <field name="status"/>
+                <field name="lease_date"/>
                 <field name="partner_id"/>
                 <field name="logo_image"/>
                 <field name="odometer"/>
             </tree>
 <!--            <field name="history_ids"/>-->
-
         </field>
     </record>
+  <!-- form view for books -->
+    <record model="ir.ui.view" id="car_form_view">
+        <field name="name">rental_car view</field>
+        <field name="model">rental_car.car</field>
+        <field name="arch" type="xml">
+
+            <tree>
+
+            </tree>
+        </field>
+    </record>
+
+
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
       <field name="name">New order</field>
       <field name="res_model">rental_car.car</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="rental_car.action_server">
-      <field name="name">rental_car server</field>
-      <field name="model_id" ref="model_rental_car_rental_car"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
 
     <!-- Top menu item -->
     <menuitem name="Rental car" id="rental_car.menu_root"/>
