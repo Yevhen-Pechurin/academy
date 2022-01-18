@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+
+    <div t-name="rental.car">
+        <button class="backward_btn">Move backward</button>
+        <button class="forward_btn">Move forward</button>
+        <span class="val"><t t-esc="widget.pos"/></span>
+    </div>
+</templates>

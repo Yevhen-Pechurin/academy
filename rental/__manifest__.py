@@ -33,4 +33,13 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_qweb': [
+            'rental/static/src/xml/*.xml',
+        ],
+        'web.assets_backend': [
+            'rental/static/src/js/*.js',
+        ],
+    },
+    'license': 'LGPL-3',
 }
