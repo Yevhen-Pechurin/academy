@@ -53,14 +53,14 @@ class Car(models.Model):
         self.sudo().write({'status': 'in_garage', 'partner_id': False})
         try:
             if self.loan_history_ids[-1]:
-                self.loan_history_ids[-1].end = True
+                self.sudo().loan_history_ids[-1].end = True
         except IndexError:
             pass
 
         try:
             if self.repair_history_ids[-1]:
-                self.repair_history_ids[-1].end = True
-                self.repair_history_ids[-1].end_date = fields.Date.today()
+                self.sudo().repair_history_ids[-1].end = True
+                self.sudo().repair_history_ids[-1].end_date = fields.Date.today()
         except IndexError:
             pass
 
@@ -95,3 +95,4 @@ class LoanHistory(models.Model):
     partner_id = fields.Many2one('res.partner')
     due_date = fields.Date()
     car_id = fields.Many2one('rental.car')
+
