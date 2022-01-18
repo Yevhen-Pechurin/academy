@@ -39,31 +39,42 @@ class Car(models.Model):
         }
 
     def action_unavailable(self):
-        self.write({'status': 'unavailable'})
+        self.sudo().write({'status': 'unavailable'})
 
     def action_repair(self):
         self.env['rental.repair'].sudo().create({
             'car_id': self.id
         })
-        self.write({'status': 'under_repair'})
+
+        self.sudo().write({'status': 'under_repair'})
 
     def action_garage(self):
-        self.write({'status': 'in_garage', 'partner_id': False})
-        if self.loan_history_ids[-1]:
-            self.loan_history_ids[-1].end = True
 
-        if self.repair_history_ids[-1]:
-            self.repair_history_ids[-1].end = True
-            self.repair_history_ids[-1].end_date = fields.Date.today()
+        self.sudo().write({'status': 'in_garage', 'partner_id': False})
+        try:
+            if self.loan_history_ids[-1]:
+                self.loan_history_ids[-1].end = True
+        except IndexError:
+            pass
+
+        try:
+            if self.repair_history_ids[-1]:
+                self.repair_history_ids[-1].end = True
+                self.repair_history_ids[-1].end_date = fields.Date.today()
+        except IndexError:
+            pass
 
     def _cron_overdue_messages(self):
         cars = self.env['rental.car'].search([])
-        for car in cars:
-            last_history = car.loan_history_ids[-1]
-            if car.status == 'on_loan' and last_history.due_date < fields.Date.today():
-                car.message_post(body=f'{car.partner_id.name} верните машину {car.name}',
-                                 partner_ids=car.partner_id.ids, message_type='comment',
-                                 subtype_id=self.env.ref('mail.mt_comment').id)
+        try:
+            for car in cars:
+                last_history = car.loan_history_ids[-1]
+                if car.status == 'on_loan' and last_history.due_date < fields.Date.today():
+                    car.message_post(body=f'{car.partner_id.name} верните машину {car.name}',
+                                     partner_ids=car.partner_id.ids, message_type='comment',
+                                     subtype_id=self.env.ref('mail.mt_comment').id)
+        except IndexError:
+            pass
 
 
 class RepairHistory(models.Model):
