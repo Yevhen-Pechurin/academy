@@ -7,11 +7,11 @@ from odoo import models, fields, api, _
 
 class CarInfo(models.Model):
     _name = 'rental_car.car.info'
-    # _inherit = 'mail.thread'
+    _inherit = 'mail.thread'
     _description = 'Car Info'
 
     name = fields.Char(tracking=True)
-    # model = fields.Many2one('car.model', tracking=True)
+    model_id = fields.Many2one('car.model', tracking=True)
     year = fields.Integer()
     description = fields.Text(tracking=True, index=True)
 
@@ -51,7 +51,7 @@ class History(models.Model):
     car_id = fields.Many2one('rental_car.car')
     partner_id = fields.Many2one('res.partner')
     lease_date = fields.Date()
-    # date_in_garage = fields.Datetime()
+    date_in_garage = fields.Datetime()
     # date_under_repair = fields.Datetime()
     # odometer = fields.Integer()
     odometer_start = fields.Integer()
@@ -64,10 +64,11 @@ class Car(models.Model):
     # _inherit = 'mail.thread'
     _description = 'Rental Car'
 
+    car_id = fields.Many2one('rental_car.car.info')
     name = fields.Char(compute='_compute_name', store="True", default='-')
     number = fields.Char()
     model_id = fields.Char()
-    # car_id = fields.Many2one('rental_car.car.info')
+    car_id = fields.Many2one('rental_car.car.info')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In Garage'),
@@ -78,10 +79,10 @@ class Car(models.Model):
         store=True, tracking=True)
     lease_date = fields.Date()
     partner_id = fields.Many2one('res.partner')
-    logo_image = fields.Image(string="Image", max_width=256, max_height=256)
-    odometer = fields.Integer()
-    active = fields.Boolean(default=True)
     history_ids = fields.One2many('car.history', 'car_id')
+    logo_image = fields.Image(string="Image", max_width=256, max_height=256)
+    # odometer = fields.Integer()
+    active = fields.Boolean(default=True)
     description = fields.Text()
 
     @api.depends('active')
