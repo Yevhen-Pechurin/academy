@@ -24,27 +24,6 @@ class CarInfo(models.Model):
     description = fields.Text(tracking=True)
 
 
-# class HistoryRepair(models.Model):
-#     _name = 'car.history_repair'
-#     _description = 'History Repair'
-#
-#     lease_date = fields.Date()
-#     partner_id = fields.Many2one('res.partner')
-#     date_in_garage = fields.Datetime()
-#     odometer_start = fields.Integer()
-#     odometer_end = fields.Integer()
-#     car_id = fields.Many2one('rental_car.car')
-
-
-# class HistoryRented(models.Model):
-#     _name = 'car.history_rented'
-#     _description = 'History Rented'
-#
-#     date_under_repair = fields.Datetime()
-#     description = fields.Text(tracking=True, index=True)
-#     car_id = fields.Many2one('rental_car.car')
-#     odometer = fields.Integer()
-
 class History(models.Model):
     _name = 'car.history'
     _description = 'History'
@@ -94,36 +73,35 @@ class Car(models.Model):
             else:
                 car.status = car.status
 
-    # def action_rented(self):
-    #     return {
-    #         'name': _('Rented %s') % self.name,
-    #         'view_mode': 'form',
-    #         'res_model': 'library.wizard.rented',
-    #         'type': 'ir.actions.act_window',
-    #         'target': 'new'
-    #     }
+    def action_rented(self):
+        return {
+            'name': _('Rented %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental_car.wizard.rented',
+            'type': 'ir.actions.act_window',
+            'target': 'new'
+        }
 
-    # def action_in_garage(self):
-    #     last_history = self.history_ids[-1]
-    #     if last_history:
-    #         last_history.write({
-    #             'date_in_garage': fields.Datetime.now()
-    #         })
-    #     self.write({
-    #         'status': 'in_garage',
-    #         'partner_id': False
-    #     })
+    def action_under_repair(self):
+        return {
+            'name': _('Under Repair %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental_car.wizard.under_repair',
+            'type': 'ir.actions.act_window',
+            'target': 'new'
+        }
 
-    # def action_under_repair(self):
-    #     last_history = self.history_ids[-1]
-    #     if last_history:
-    #         last_history.write({
-    #             'date_under_repair': fields.Datetime.now()
-    #         })
-    #     self.write({
-    #         'status': 'under_repair',
-    #         'partner_id': False
-    #     })
+    def action_in_garage(self):
+        last_history = self.history_ids[-1]
+        if last_history:
+            last_history.write({
+                'date_in_garage': fields.Datetime.now()
+            })
+        self.write({
+            'status': 'in_garage',
+            'partner_id': False
+        })
+
 
     @api.depends('model_id', 'number')
     def _compute_name_order(self):

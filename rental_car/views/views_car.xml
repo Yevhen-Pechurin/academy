@@ -53,9 +53,8 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
-<!--                    <field name="message_follower_ids"/>-->
-<!--                    <field name="message_ids"/>-->
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
@@ -87,15 +86,12 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
-<!--                    <field name="message_ids"/>-->
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
     </record>
-
-
-
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="rental_car.action_window">
@@ -109,14 +105,13 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-
     <!-- Top menu item -->
     <menuitem name="Rental car" id="rental_car_menu"/>
     <!-- menu categories -->
-    <menuitem name="Car " id="rental_car.menu_car" parent="rental_car_menu"/>
+    <menuitem name="Car" id="rental_car.menu_car" parent="rental_car_menu"/>
     <menuitem name="Car Info" id="menu_car_info" parent="rental_car_menu"/>
     <!-- actions -->
-    <menuitem name="All" id="rental_car.menu_car_1_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="1"/>
+    <menuitem name="All Cars" id="rental_car.menu_car_1_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="1"/>
     <menuitem name="In Garage" id="rental_car.menu_car_2_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="2"/>
     <menuitem name="Rented" id="rental_car.menu_car_3_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="3"/>
     <menuitem name="Under Repair" id="rental_car.menu_car_4_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="4"/>
