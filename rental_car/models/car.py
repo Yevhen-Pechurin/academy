@@ -56,3 +56,21 @@ class Car(models.Model):
     def _name_compute(self):
         for record in self:
             record.name = f'{record.model} {record.number}'
+
+    def action_in_garage(self):
+        return {
+            "name": "In Garage %s" % self.name,
+            'view_mode': "form",
+            'res_model': "rental_car.wizard.in_garage",
+            'type': 'ir.actions.act_window',
+            'target': "new",
+            }
+
+    # def action_to_rent(self):
+    #     return {
+    #         "name": "To Rent %s" % self.name,
+    #         'view_mode': "form",
+    #         'res_model': "",
+    #         'type': 'ir.actions.act_window',
+    #         'target': "new",
+    #         }

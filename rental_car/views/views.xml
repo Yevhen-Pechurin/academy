@@ -31,7 +31,9 @@
     <field name="arch" type="xml">
       <form>
         <header>
+<!--          <button string="To rent" type="object" name="action_to_rent"/>-->
           <button string="To rent"/>
+          <button string="In Garage" type="object" name="action_in_garage"/>
           <field name="status" widget="statusbar"/>
         </header>
 

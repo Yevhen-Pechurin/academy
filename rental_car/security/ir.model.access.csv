@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 rental_car.access_rental_car_car,access_rental_car_car,rental_car.model_rental_car_car,base.group_user,1,1,1,1
 rental_car.access_rental_car_history,access_rental_car_history,rental_car.model_rental_car_history,base.group_user,1,1,1,1
 rental_car.access_rental_car_odometr,access_rental_car_odometr,rental_car.model_rental_car_odometr,base.group_user,1,1,1,1
+rental_car.access_rental_car_wizard_in_garage,access_rental_car_wizard_in_garage,rental_car.model_rental_car_wizard_in_garage,base.group_user,1,1,1,1

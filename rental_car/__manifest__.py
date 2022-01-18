@@ -24,6 +24,7 @@ apps.rental-car.com""",
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'wizard/view_wizard_in_garage.xml',
         'views/views.xml',
         'views/templates.xml',
     ],

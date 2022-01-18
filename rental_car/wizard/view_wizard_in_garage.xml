@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="rental_car.action_wizard_garage">
+        <field name="name">Wizard to rent</field>
+        <field name="res_model">rental_car.wizard.in_garage</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="rental_car.wizard_in_garage_view">
+        <field name="name">On Hand</field>
+        <field name="model">rental_car.wizard.in_garage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="due_date"/>
+                            <field name="date_to_return"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="In Garage" name="action_wizard_in_garage" type="object" class="oe_highlight"/>
+                    <button string="Cancel" name="action_cancel" type="object"/>
+<!--                    <button string="Cancel" />-->
+
+                </footer>
+            </form>
+        </field>
+
+    </record>
+</odoo>
+
+
+
