@@ -136,7 +136,7 @@
                                 <div class="oe_kanban_content flex-grow-1" style="display:flex">
                                     <div>
                                         <field
-                                                name="image_128"
+                                                name="logo"
                                                 widget="image"
                                                 class="oe_centered"
                                         />
