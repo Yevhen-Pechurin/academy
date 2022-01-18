@@ -99,10 +99,32 @@
       <field name="res_model">rental_car.car</field>
       <field name="view_mode">tree,form,kanban</field>
     </record>
-    <record model="ir.actions.act_window" id="rental_car.action_window_info">
-      <field name="name">New order</field>
-      <field name="res_model">rental_car.car.info</field>
-      <field name="view_mode">tree,form</field>
+
+    <record model="ir.actions.act_window" id="action_car_in_garage">
+        <field name="name">In Garage</field>
+        <field name="res_model">rental_car.car</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'search_default_in_garage': 1,}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_car_on_rent">
+        <field name="name">Rented</field>
+        <field name="res_model">rental_car.car</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'search_default_rented': 1,}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_car_under_repair">
+        <field name="name">Under Repair</field>
+        <field name="res_model">rental_car.car</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'search_default_under_repair': 1,}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_car_info">
+        <field name="name">Cars Info</field>
+        <field name="res_model">rental_car.car.info</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Top menu item -->
@@ -116,7 +138,7 @@
     <menuitem name="Rented" id="rental_car.menu_car_3_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="3"/>
     <menuitem name="Under Repair" id="rental_car.menu_car_4_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="4"/>
     <menuitem name="Unavailable" id="rental_car.menu_car_5_list" parent="rental_car.menu_car" action="rental_car.action_window" sequence="5"/>
-    <menuitem name="Car Info" id="menu_car_info_menu" parent="menu_car_info" action="rental_car.action_window_info"/>
+    <menuitem name="Car Info" id="menu_car_info_menu" parent="menu_car_info" action="action_car_info"/>
 
   </data>
 </odoo>
