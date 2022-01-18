@@ -6,5 +6,6 @@ rental.access_rental_car_info_user,access_rental_car_info,rental.model_rental_ca
 rental.access_rental_car_info_manager,access_rental_car_info,rental.model_rental_car_info,rental.group_rental_manager,1,1,1,0
 rental.access_rental_car_user,access_rental_car,rental.model_rental_car,,1,0,0,0
 rental.access_rental_car_manager,access_rental_car,rental.model_rental_car,rental.group_rental_manager,1,1,1,0
+rental.access_rental_wizard_on_rent,access_rental_wizard_on_rent,rental.model_rental_wizard_on_rent,base.group_user,1,1,1,1
 
 
