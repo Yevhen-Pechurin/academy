@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <templates>
-
     <div t-name="rental_car.car">
         <button class="add_car_btn">Add number car</button>
         <button class="remove_car_btn">Remove number car</button>
         <button class="multiply_car_btn">Multiply number car</button>
         <span class="val"><t t-esc="widget.count"/></span>
     </div>
-
 </templates>
 

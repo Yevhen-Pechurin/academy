@@ -36,21 +36,17 @@ odoo.define('rental_car.frame', function (require) {
             this.$('.val').text(this.count);
         },
         _remove: function () {
-            setInterval(() => {
-                this.count++;
-                this.$('.val').text(this.count);
-            }, 100)
+            this.count = this.count - 2;
+            this.$('.val').text(this.count);
         },
         _multiply: function () {
-            setInterval(() => {
-                this.count++;
-                this.$('.val').text(this.count);
-            }, 100)
+            this.count = this.count * 2;
+            this.$('.val').text(this.count);
         }
     });
 
     require('web.dom_ready')
-    var counter = new Counter(this, 4);
+    const counter = new Counter(this, 4);
 // Render and insert into DOM
     counter.appendTo("body");
 
