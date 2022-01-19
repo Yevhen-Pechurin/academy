@@ -35,11 +35,15 @@
 
     'assets': {
     'web.assets_backend': [
+        'rental/static/src/js/model_widget.js',
         'rental/static/src/js/animal.js',
         'rental/static/src/js/dog.js',
         'rental/static/src/js/engine.js',
         'rental/static/src/js/car.js',
-    ],
+     ],
+    'web.assets_qweb': {
+        'rental/static/src/xml/model_widget.xml',
+        },
     },
 
     'demo': [
