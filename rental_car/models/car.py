@@ -44,8 +44,7 @@ class Car(models.Model):
     _inherit = 'mail.thread'
     _description = 'Rental Car'
 
-    car_id = fields.Many2one('rental_car.car.info')
-    name = fields.Char(related='car_id.name', readonly=False)
+    name = fields.Char()
     number = fields.Char()
     model_id = fields.Char()
     name_order = fields.Char(compute='_compute_name_order', store="True", default='-')
