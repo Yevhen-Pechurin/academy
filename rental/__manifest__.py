@@ -32,7 +32,14 @@
         'views/car_views.xml',
         'views/templates.xml',
     ],
-    # only loaded in demonstration mode
+
+    'assets': {
+    'web.assets_backend': [
+        'rental/static/src/js/animal.js',
+        'rental/static/src/js/dog.js',
+    ],
+    },
+
     'demo': [
         'demo/demo.xml',
     ],
