@@ -11,6 +11,8 @@
         "security/ir.model.access.csv",
         # 'data/ir_cron.xml',
         "wizards/view_car_for_rent.xml",
+        "wizards/view_car_ingarage.xml",
+        "wizards/view_car_under_repair.xml",
         "views/views.xml",
 
     ],

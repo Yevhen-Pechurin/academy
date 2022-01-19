@@ -30,31 +30,4 @@
         </field>
       </record>
 
-    <record model="ir.actions.act_window" id="action_car_in_garage">
-        <field name="name">In Garage</field>
-        <field name="res_model">rental_car.car.for_rent</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
-    <record model="ir.ui.view" id="form_view_car_in_garage">
-        <field name="name">In Garage</field>
-        <field name="model">rental_car.car.for_rent</field>
-        <field name="arch" type="xml">
-              <form>
-                    <sheet>
-                          <group>
-                                <group>
-                                    <field name="odometer_end_value"/>
-                                </group>
-                          </group>
-                    </sheet>
-                    <footer>
-                          <button string="In Garage" name="action_in_garage" type="object" class="oe_highlight" />
-                          <button string="Cancel" class="btn btn-secondary" special="cancel" />
-                    </footer>
-              </form>
-        </field>
-      </record>
-
 </odoo>

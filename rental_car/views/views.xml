@@ -101,8 +101,10 @@
             <field name="arch" type="xml">
                 <form>
                      <header>
-                         <button name="action_for_rent" string="For Rent" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['for_rent', 'unavailable'])]}"/>
-                         <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+                         <button name="action_for_rent" string="For Rent" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['for_rent', 'unavailable', 'under_repair'])]}"/>
+                         <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable', 'under_repair'])]}"/>
+                         <button name="action_under_repair" string="Into Repair" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['under_repair', 'for_rent'])]}"/>
+                         <button name="action_back_from_repair" string="Return to Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'for_rent'])]}"/>
                          <field name="status" widget="statusbar" statusbar_visible="in_garage,for_rent,under_repair"/>
                      </header>
                     <sheet>
@@ -138,6 +140,15 @@
                                           </tree>
                                     </field>
                               </page>
+                            <page string="Repair History">
+                                <field name="repair_history_id"  options="{'no_open': True}">
+                                      <tree create="false" delete="false" edit="false" default_order="id desc">
+                                            <field name="repair_description"/>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                      </tree>
+                                </field>
+                            </page>
                         </notebook>
                     </sheet>
                      <div class="oe_chatter">

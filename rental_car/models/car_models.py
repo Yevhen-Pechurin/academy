@@ -33,6 +33,16 @@ class RentHistory(models.Model):
     due_date = fields.Datetime()
 
 
+class RepairHistory(models.Model):
+    _name = "rental_car.repair_history"
+    _description = "Repair History"
+
+    car_id = fields.Many2one("rental_car.car")
+    start_date = fields.Datetime()
+    end_date = fields.Datetime()
+    repair_description = fields.Char()
+
+
 class Car(models.Model):
     _name = "rental_car.car"
     _description = "Car"
@@ -50,10 +60,11 @@ class Car(models.Model):
         ('for_rent', 'For Rent'),
         ('under_repair', 'Under Repair'),
         ('not_available', 'Not Available'),
-    ])
+    ], tracking=True)
     due_date = fields.Datetime()
     client_id = fields.Many2one("res.partner")
     image = fields.Image(string="Image", max_width=256, max_height=256)
+    repair_history_id = fields.One2many('rental_car.repair_history', 'car_id')
 
 
 
@@ -82,10 +93,29 @@ class Car(models.Model):
         return {
             'name': _('In Garage'),
             'view_mode': 'form',
-            'res_model': 'rental_car.car.for_rent',
+            'res_model': 'rental_car.car.in_garage',
             'type': 'ir.actions.act_window',
             'target': 'new'
         }
+
+    def action_under_repair(self):
+        return {
+            'name': _('Under Repair'),
+            'view_mode': 'form',
+            'res_model': 'rental_car.car.under_repair',
+            'type': 'ir.actions.act_window',
+            'target': 'new'
+        }
+
+    def action_back_from_repair(self):
+        last_history = self.repair_history_id[-1]
+        if last_history:
+            last_history.write({
+                'end_date': fields.Datetime.now()
+            })
+        self.write({
+            'status': 'in_garage',
+        })
 
     # def overdue_notification(self):
     #     today = fields.Datetime.now()
