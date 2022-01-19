@@ -2,18 +2,19 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 class CarModel(models.Model):
-    _name = 'car_rental.car_model'
+    _name = 'rental.car_model'
     _description = 'Car model'
     
     model_name = fields.Char(required=True)
     manufacturer_logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
-    car_ids = fields.One2many('car_rental.car', 'model_id')
+    car_ids = fields.One2many('rental.car', 'model_id')
 
 
 class CarRentalHistory(models.Model):
-    _name = 'car_rental.history'
+    _name = 'rental.history'
+    _description = 'Car rental history'
 
-    car_id = fields.Many2one('car_rental.car', required=True)
+    car_id = fields.Many2one('rental.car', required=True)
     date_rented = fields.Datetime()
     rentee_id = fields.Many2one('res.partner')
     date_returned = fields.Datetime()
@@ -27,16 +28,17 @@ class CarRentalHistory(models.Model):
 
 
 class CarMaintananceHistory(models.Model):
-    _name = 'car_rental.car_maintanance_history'
+    _name = 'rental.maintanance_history'
+    _description = 'Car maintanance history'
 
 
 class Car(models.Model):
-    _name = 'car_rental.car'
+    _name = 'rental.car'
     _description = 'A car'
     _inherit = 'mail.thread'
 
     name = fields.Char(compute='_compute_car_name')
-    model_id = fields.Many2one('car_rental.car_model', required=True)
+    model_id = fields.Many2one('rental.car_model', required=True)
     number = fields.Char(required=True)
     logo = fields.Image(related='model_id.manufacturer_logo')
     year = fields.Integer()
@@ -50,7 +52,7 @@ class Car(models.Model):
     client_id = fields.Many2one('res.partner', copy=False)
     odometer = fields.Integer(tracking=True)
     active = fields.Boolean(default=True)
-    rental_history_ids = fields.One2many('car_rental.history', 'car_id')
+    rental_history_ids = fields.One2many('rental.history', 'car_id')
 
     _sql_constraints = [
         ('unique_number', 'UNIQUE(number)', """Number is unique for every car!"""),

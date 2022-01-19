@@ -1,7 +1,7 @@
 <odoo>
     <record id="car_rental_action" model="ir.actions.act_window">
         <field name="name">All Cars</field>
-        <field name="res_model">car_rental.car</field>
+        <field name="res_model">rental.car</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -13,8 +13,8 @@
 
     <!-- tree view -->
     <record id="car_rental_car_view_tree" model="ir.ui.view">
-        <field name="name">car_rental.car.tree</field>
-        <field name="model">car_rental.car</field>
+        <field name="name">rental.car.tree</field>
+        <field name="model">rental.car</field>
         <field name="arch" type="xml">
             <tree string="Cars list">
                 <field name="name"/>
@@ -29,8 +29,8 @@
 
     <!-- form view -->
     <record model="ir.ui.view" id="car_rental_car_form_view">
-        <field name="name">car_rental.car.form.view</field>
-        <field name="model">car_rental.car</field>
+        <field name="name">rental.car.form.view</field>
+        <field name="model">rental.car</field>
         <field name="arch" type="xml">
             <form>
                 <header>

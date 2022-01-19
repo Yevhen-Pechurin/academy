@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <div t-name="car_interface_template" style="display: flex; align-items: center; justify-content: center;">
+        <button id="start_engine_btn">Start engine</button>
+        <button id="accelarate_btn">Accelerate</button>
+        <button id="upshift_btn">Upshift</button>
+        <button id="downshift_btn">Downshift</button>
+        <button id="neutral_gear_btn">Neutral gear</button>
+        <button id="brake_btn">Brake</button>
+        <button id="stop_btn">Stop</button>
+        <button id="reverse_gear_btn">Reverse gear</button>
+        <button id="stop_engine_btn">Stop engine</button>
+        <span class="val" style="background-color: #ABC; margine-left: 1rem;"><t>Current gear: neutral</t></span>
+    </div>
+</templates>
