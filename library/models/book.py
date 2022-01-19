@@ -67,6 +67,7 @@ class BookInfo(models.Model):
 
     name = fields.Char(tracking=True)
     author_id = fields.Many2one('library.author', tracking=True)
+    city = fields.Char(related='author_id.city')
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
     tag2_ids = fields.Many2many(comodel_name='library.tag', relation='rel_tag2', column1='book_id', column2='tag_id', tracking=True)
