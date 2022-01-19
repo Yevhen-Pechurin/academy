@@ -10,6 +10,6 @@
         <button id="stop_btn">Stop</button>
         <button id="reverse_gear_btn">Reverse gear</button>
         <button id="stop_engine_btn">Stop engine</button>
-        <span class="val" style="background-color: #ABC; margine-left: 1rem;"><t>Current gear: neutral</t></span>
+        <span class="val" style="background-color: #ABC; margin-left: 1.5rem;"><t>Current gear: neutral</t></span>
     </div>
 </templates>

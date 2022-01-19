@@ -5,7 +5,7 @@ odoo.define('rental.car_interface', function(require) {
     const Widget = require('web.Widget');
 
     const ManualGearboxMixin = {
-        gear: 0,
+        gear: 'neutral',
         reverse: function() {
             if (this.gear === 'neutral') {
                 this.gear = 'reverse';
@@ -89,7 +89,7 @@ odoo.define('rental.car_interface', function(require) {
     });
 
     ManualCar.include({
-        events: _.extend({}, ManualCar.events, {
+        events: _.extend({}, ManualCar.prototype.events, {
             'click #stop_btn': 'stopCar',
             'click #upshift_btn': 'upshift',
             'click #downshift_btn': 'downshift',
