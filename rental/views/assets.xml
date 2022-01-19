@@ -5,6 +5,8 @@
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/rental/static/src/js/animal.js"/>
                 <script type="text/javascript" src="/rental/static/src/js/dog.js"/>
+                <script type="text/javascript" src="/rental/static/src/js/engine.js"/>
+                <script type="text/javascript" src="/rental/static/src/js/car.js"/>
             </xpath>
         </template>
     </data>

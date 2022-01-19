@@ -2,7 +2,13 @@ odoo.define('rental.dog', function (require) {
     'use strict';
     const Animal = require('rental.animal');
 
-    const Dog = Animal.extend({
+    const DanceMixin = {
+        dance: function () {
+            console.log('dancing...');
+        },
+    };
+
+    const Dog = Animal.extend(DanceMixin,{
         move: function () {
             this.bark();
             this._super.apply(this, arguments);
