@@ -34,5 +34,15 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_qweb': [
+            'rental_car/static/src/xml/car.xml',
+        ],
+        'web.assets_backend': [
+            'rental_car/static/src/js/car.js',
+            'rental_car/static/src/js/engine.js',
+            'rental_car/static/src/js/frame.js',
+        ],
+    },
     'application': True,
 }
