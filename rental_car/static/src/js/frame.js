@@ -25,7 +25,7 @@ odoo.define('rental_car.frame', function (require) {
         events: {
             'click .add_car_btn': '_add',
             'click .remove_car_btn': '_remove',
-            'multiply_car_btn': '_multiply',
+            'click .multiply_car_btn': '_multiply',
         },
         init: function (parent, value) {
             this._super(parent);
