@@ -4,6 +4,7 @@ odoo.define('rental_car.car', function (require) {
     const Widget = require('web.Widget');
 
     const Car = Widget.extend({
+        xmlDependencies: ['/rental_car/static/src/xml/car.xml'],
         template: 'rental_car.car',
         events: {
             'click .add_car_btn': '_add',
@@ -21,6 +22,7 @@ odoo.define('rental_car.car', function (require) {
         _remove: function () {
             this.count = this.count - 2;
             this.$('.val').text(this.count);
+            // console.log('My Test Field - 11');
         },
         _multiply: function () {
             this.count = this.count * 2;

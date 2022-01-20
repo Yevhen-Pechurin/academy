@@ -2,17 +2,29 @@ odoo.define('rental_car.car_widget', function (require) {
     'use strict';
 
     const Widget = require('web.Widget');
+    const FieldChar = require('web.basic_fields').FieldChar;
+    const fieldRegistry = require('web.field_registry');
 
-    const CarWidget = Widget.extend({
+    const CustomFieldChar = FieldChar.extend({
+        className: 'o_field_partner_rental_car',
+
+        events: _.extend({}, FieldChar.prototype.events, {
+            'input': '_onInput',
+        }),
+
         init: function () {
-            console.log('Test01 test02 test03');
+            this._super.apply(this, arguments);
+            console.log('My Test Field - 222');
             this.data = [];
         },
 
-        // start: function () {
-        //     this._super(this, arguments);
-        // },
+        _onInput: function () {
+            console.log(this.$el.val());
+        }
     });
 
-    return {CarWidget}
+    fieldRegistry.add('my_custom_field', CustomFieldChar);
+
+    // return {CustomFieldChar, Widget}
 })
+

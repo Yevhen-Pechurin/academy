@@ -36,7 +36,7 @@
                             <group string="Info" name="info">
                                 <field name="name"/>
                                 <field name="number"/>
-                                <field name="model_id"/>
+                                <field name="model_id" widget="my_custom_field"/>
                                 <field name="year"/>
                                 <field name="status"/>
                             </group>
