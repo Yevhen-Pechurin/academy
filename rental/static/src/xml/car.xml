@@ -7,4 +7,20 @@
         <button class="forward_btn">Move forward</button>
         <span class="val"><t t-esc="widget.pos"/></span>
     </div>
+
+    <t t-name="rental.model_list">
+        <div class="zoom_search_div">
+            <span class="list_car_span" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>
+<!--            <ul class="zoom_search_ul list-unstyled">-->
+<!--            <li t-foreach="list_search" t-as="item_list" class="zoom_search_li">-->
+<!--                <span class="list_car_span" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>-->
+<!--            </li>-->
+<!--            </ul>-->
+        </div>
+    </t>
+
+
+    <t t-name="rental.model_list">
+        <div class="list_car_span" t-esc="data" t-att-data-id="item_list['id']"/>
+    </t>
 </templates>
