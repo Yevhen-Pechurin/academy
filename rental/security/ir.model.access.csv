@@ -3,7 +3,7 @@ rental.access_rental_model,access_rental_model,rental.model_rental_model,base.gr
 rental.access_rental_country,access_rental_country,rental.model_rental_country,base.group_user,1,1,1,1
 rental.access_rental_history,access_rental_history,rental.model_rental_history,base.group_user,1,1,1,0
 rental.access_rental_car_info_user,access_rental_car_info,rental.model_rental_car_info,,1,0,0,0
-rental.access_rental_car_info_manager,access_rental_car_info,rental.model_rental_car_info,rental.group_rental_manager,1,1,1,0
+rental.access_rental_car_info_manager,access_rental_car_info,rental.model_rental_car_info,rental.group_rental_manager,1,1,1,1
 rental.access_rental_car_user,access_rental_car,rental.model_rental_car,,1,0,0,0
 rental.access_rental_car_manager,access_rental_car,rental.model_rental_car,rental.group_rental_manager,1,1,1,0
 rental.access_rental_wizard_on_rent,access_rental_wizard_on_rent,rental.model_rental_wizard_on_rent,base.group_user,1,1,1,1

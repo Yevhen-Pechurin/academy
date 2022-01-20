@@ -98,7 +98,7 @@
                 </div>
                 <group>
                     <group string="Info" name="info">
-                        <field name="model_id"/>
+                        <field name="model_id" widget="my_custom_field"/>
                         <field name="country_id"/>
                     </group>
                 </group>
