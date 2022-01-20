@@ -5,7 +5,7 @@
     'version' : '1.0',
     'category': 'Car',
     'website': 'https://www.youtube.com/watch?v=tkqef33yRNA&ab_channel=Oxxxymiron-Topic',
-    'depends' : ['base', 'mail'],
+    'depends' : ['base', 'mail', 'website'],
     'data': [
         "security/security.xml",
         "security/ir.model.access.csv",
@@ -19,6 +19,17 @@
     # 'demo': [
     #     'demo/demo.xml',
     # ],
+
+    "assets": {
+        'web.assets_qweb': [
+            'static/src/xml/my_widget.xml',
+        ],
+        "web.assets_backend": [
+            'rental_car/static/src/js/my_widget.js',
+
+        ],
+
+    },
 
     'installable': True,
     'application': True,

@@ -1,80 +1,80 @@
-<odoo>
-    <data>
-        <!-- Authors -->
-        <record id="author_rowling" model="library.author">
-            <field name="name">Joan Rowling</field>
-        </record>
-        <record id="author_hamsun" model="library.author">
-            <field name="name">Кнут Гамсун</field>
-        </record>
-        <!-- Languages -->
-        <record id="language_english" model="library.language">
-            <field name="name">English</field>
-        </record>
-        <record id="language_russian" model="library.language">
-            <field name="name">Русский</field>
-        </record>
-        <!-- Tags -->
-        <record id="fantasy" model="library.tag">
-            <field name="name">Fantasy</field>
-        </record>
-        <record id="novel" model="library.tag">
-            <field name="name">Novel</field>
-        </record>
-        <record id="fiction" model="library.tag">
-            <field name="name">Fiction</field>
-        </record>
-         <!-- Editions -->
-        <record id="edition_mahaon" model="library.edition">
-            <field name="name">Mahaon</field>
-        </record>
-        <record id="edition_eidiltd" model="library.edition">
-            <field name="name">Эй-Ди-Лтд</field>
-        </record>
-        <!-- Books -->
-        <record id="book_harry_potter" model="library.book">
-            <field name="name">Harry Potter and the Philosopher’s Stone</field>
-            <field name="lang_id" ref="language_english"/>
-            <field name="author_id" ref="author_rowling"/>
-            <field name="tag_id" eval="[(5, 0), (6, 0, [ref('fantasy')])]"/>
-            <field name="edition" ref="edition_mahaon"/>
-            <field name="pages">410</field>
-            <field name="cover">hard</field>
-            <field name="number">3465342634</field>
-            <field name="status">on_hand</field>
-            <field name="client_id" ref="base.res_partner_address_28"/>
-            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
-            <field name="history_id" eval="[(5, 0), (0, 0, {
-                'client_id': ref('base.res_partner_address_28'),
-                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
-                'due_date': DateTime.today()
-            })]"/>
-            <field name="description">
-Пока в дом № 4 по Тисовой улице не стали доставлять письма, Гарри Поттер ничего не знал о Хогвартсе. Зеленые чернила на желтом пергаменте с лиловой печатью. Со скоростью света дядя и тетя отбирали эти письма. И вот однажды на 11-й День рождения Гарри к ним врывается великан по имени Рубиус Хагрид. Ко всеобщему удивлению он объявляет Гарри Поттера волшебником, утверждая, что его место в Хогварсте, Школе Чародейства и Волшебства. Фантастические приключения начинаются!
+<!--<odoo>-->
+<!--    <data>-->
+<!--        &lt;!&ndash; Authors &ndash;&gt;-->
+<!--        <record id="author_rowling" model="library.author">-->
+<!--            <field name="name">Joan Rowling</field>-->
+<!--        </record>-->
+<!--        <record id="author_hamsun" model="library.author">-->
+<!--            <field name="name">Кнут Гамсун</field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Languages &ndash;&gt;-->
+<!--        <record id="language_english" model="library.language">-->
+<!--            <field name="name">English</field>-->
+<!--        </record>-->
+<!--        <record id="language_russian" model="library.language">-->
+<!--            <field name="name">Русский</field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Tags &ndash;&gt;-->
+<!--        <record id="fantasy" model="library.tag">-->
+<!--            <field name="name">Fantasy</field>-->
+<!--        </record>-->
+<!--        <record id="novel" model="library.tag">-->
+<!--            <field name="name">Novel</field>-->
+<!--        </record>-->
+<!--        <record id="fiction" model="library.tag">-->
+<!--            <field name="name">Fiction</field>-->
+<!--        </record>-->
+<!--         &lt;!&ndash; Editions &ndash;&gt;-->
+<!--        <record id="edition_mahaon" model="library.edition">-->
+<!--            <field name="name">Mahaon</field>-->
+<!--        </record>-->
+<!--        <record id="edition_eidiltd" model="library.edition">-->
+<!--            <field name="name">Эй-Ди-Лтд</field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Books &ndash;&gt;-->
+<!--        <record id="book_harry_potter" model="library.book">-->
+<!--            <field name="name">Harry Potter and the Philosopher’s Stone</field>-->
+<!--            <field name="lang_id" ref="language_english"/>-->
+<!--            <field name="author_id" ref="author_rowling"/>-->
+<!--            <field name="tag_id" eval="[(5, 0), (6, 0, [ref('fantasy')])]"/>-->
+<!--            <field name="edition" ref="edition_mahaon"/>-->
+<!--            <field name="pages">410</field>-->
+<!--            <field name="cover">hard</field>-->
+<!--            <field name="number">3465342634</field>-->
+<!--            <field name="status">on_hand</field>-->
+<!--            <field name="client_id" ref="base.res_partner_address_28"/>-->
+<!--            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>-->
+<!--            <field name="history_id" eval="[(5, 0), (0, 0, {-->
+<!--                'client_id': ref('base.res_partner_address_28'),-->
+<!--                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),-->
+<!--                'due_date': DateTime.today()-->
+<!--            })]"/>-->
+<!--            <field name="description">-->
+<!--Пока в дом № 4 по Тисовой улице не стали доставлять письма, Гарри Поттер ничего не знал о Хогвартсе. Зеленые чернила на желтом пергаменте с лиловой печатью. Со скоростью света дядя и тетя отбирали эти письма. И вот однажды на 11-й День рождения Гарри к ним врывается великан по имени Рубиус Хагрид. Ко всеобщему удивлению он объявляет Гарри Поттера волшебником, утверждая, что его место в Хогварсте, Школе Чародейства и Волшебства. Фантастические приключения начинаются!-->
 
-Новое издание классической серии международного бестселлера, многократного лауреата премий представлено в новой обложке с очаровательными, созданными для детей иллюстрациями Джонни Даддла, которые привлекут новых читателей книг о Гарри Поттере. Пришло время передать магию новому поколению.</field>
-        </record>
+<!--Новое издание классической серии международного бестселлера, многократного лауреата премий представлено в новой обложке с очаровательными, созданными для детей иллюстрациями Джонни Даддла, которые привлекут новых читателей книг о Гарри Поттере. Пришло время передать магию новому поколению.</field>-->
+<!--        </record>-->
 
-        <record id="book_soki_zemli" model="library.book">
-            <field name="name">Соки Земли</field>
-            <field name="lang_id" ref="language_russian"/>
-            <field name="author_id" ref="author_hamsun"/>
-            <field name="tag_id" eval="[(5, 0), (6, 0, [ref('novel'), ref('fiction')])]"/>
-            <field name="edition" ref="edition_eidiltd"/>
-            <field name="pages">320</field>
-            <field name="number">346qw852634</field>
-            <field name="cover">hard</field>
-            <field name="status">on_hand</field>
-            <field name="client_id" ref="base.res_partner_address_27"/>
-            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
-            <field name="history_id" eval="[(5, 0), (0, 0, {
-                'client_id': ref('base.res_partner_address_27'),
-                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
-                'due_date': DateTime.today()
-            })]"/>
-            <field name="description">
-                «Соки земли» – одно из самых монументальных эпических произведений мировой литературы XX века, за которое Гамсун получил Нобелевскую премию. В пустошь, никем не обработанную лесистую местность с удобной землей, приходит человек по имени Исаак и начинает на ней работать. Валит деревья, корчует пни, строит жилье и пашет отвоеванную у леса землю. И так как человек не может жить один, к нему приходит женщина – Ингер. Сначала она нанимается к Исааку в работницы, потом становится его женой. «Соки земли» – история их жизни.</field>
-        </record>
+<!--        <record id="book_soki_zemli" model="library.book">-->
+<!--            <field name="name">Соки Земли</field>-->
+<!--            <field name="lang_id" ref="language_russian"/>-->
+<!--            <field name="author_id" ref="author_hamsun"/>-->
+<!--            <field name="tag_id" eval="[(5, 0), (6, 0, [ref('novel'), ref('fiction')])]"/>-->
+<!--            <field name="edition" ref="edition_eidiltd"/>-->
+<!--            <field name="pages">320</field>-->
+<!--            <field name="number">346qw852634</field>-->
+<!--            <field name="cover">hard</field>-->
+<!--            <field name="status">on_hand</field>-->
+<!--            <field name="client_id" ref="base.res_partner_address_27"/>-->
+<!--            <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>-->
+<!--            <field name="history_id" eval="[(5, 0), (0, 0, {-->
+<!--                'client_id': ref('base.res_partner_address_27'),-->
+<!--                'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),-->
+<!--                'due_date': DateTime.today()-->
+<!--            })]"/>-->
+<!--            <field name="description">-->
+<!--                «Соки земли» – одно из самых монументальных эпических произведений мировой литературы XX века, за которое Гамсун получил Нобелевскую премию. В пустошь, никем не обработанную лесистую местность с удобной землей, приходит человек по имени Исаак и начинает на ней работать. Валит деревья, корчует пни, строит жилье и пашет отвоеванную у леса землю. И так как человек не может жить один, к нему приходит женщина – Ингер. Сначала она нанимается к Исааку в работницы, потом становится его женой. «Соки земли» – история их жизни.</field>-->
+<!--        </record>-->
 
-    </data>
-</odoo>
+<!--    </data>-->
+<!--</odoo>-->

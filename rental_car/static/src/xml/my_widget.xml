@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates>
+     <t t-name="rental_car.brand_list">
+        <div>
+            <ul>
+                <li t-foreach="list_brand" t-as="item_list" >
+                    <span class="list" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>
+                </li>
+            </ul>
+        </div>
+    </t>
+</templates>

@@ -74,6 +74,13 @@ class Car(models.Model):
          'Choose another value - it has to be unique!')
     ]
 
+    @api.model
+    def brand_list(self, name):
+        values = [{'id': "qwdeid", 'name': "ede"}]
+        for i in self.env['rental_car.brand'].sudo().search([('name', 'ilike', name)]):
+            values.append({'id': i.id, 'name': i.name})
+        return values
+
 
     @api.depends('brand_id', 'number')
     def _compute_car_name(self):
