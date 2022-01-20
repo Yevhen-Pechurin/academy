@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+
+    <div t-name="rental.actions">
+        <button class="drive">Drive</button>
+        <button class="speed_up">Speed Up</button>
+        <button class="check_max_speed">Check Max Speed</button>
+
+    </div>
+</templates>
