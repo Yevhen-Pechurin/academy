@@ -78,3 +78,10 @@ class Car(models.Model):
                 car.status = 'unavailable'
             else:
                 car.status = 'in_garage'
+
+    @api.model
+    def get_model(self, query):
+        values = {}
+        values['model_id'] = self.env['rental.car'].sudo().search([('model', 'ilike', query)],
+                                                                        limit=1).id
+        return values
