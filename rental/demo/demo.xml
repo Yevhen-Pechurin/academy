@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <!-- Car models -->
+        <record id="test_model_1" model="rental.car_model">
+            <field name="model_name">test model</field>
+        </record>
+        <record id="some_model" model="rental.car_model">
+            <field name="model_name">another model</field>
+        </record>
+
+    </data>
+</odoo>

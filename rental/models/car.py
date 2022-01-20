@@ -7,7 +7,7 @@ class CarModel(models.Model):
     
     model_name = fields.Char(required=True)
     manufacturer_logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
-    car_ids = fields.One2many('rental.car', 'model_id')
+    #car_ids = fields.One2many('rental.car', 'model_id')
 
 
 class CarRentalHistory(models.Model):
@@ -38,9 +38,9 @@ class Car(models.Model):
     _inherit = 'mail.thread'
 
     name = fields.Char(compute='_compute_car_name')
-    model_id = fields.Many2one('rental.car_model', required=True)
+    model = fields.Char(required=True) #model_id = fields.Many2one('rental.car_model', required=True)
     number = fields.Char(required=True)
-    logo = fields.Image(related='model_id.manufacturer_logo')
+    #logo = fields.Image(related='model_id.manufacturer_logo')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In garage'),
@@ -58,10 +58,16 @@ class Car(models.Model):
         ('unique_number', 'UNIQUE(number)', """Number is unique for every car!"""),
     ]
 
-    @api.depends('model_id', 'number')
+    @api.model
+    def get_model(self, model_name):
+        values = {}
+        values['model_id'] = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)], limit=1).id
+        return values
+
+    @api.depends('model', 'number')
     def _compute_car_name(self):
         for car in self:
-            car.name = f'{car.model_id.model_name}_{car.number}'
+            car.name = f'{car.model}_{car.number}'
 
     @api.onchange('status')
     def onchange_status_rented(self):
