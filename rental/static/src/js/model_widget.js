@@ -9,7 +9,7 @@ odoo.define('rental.model_widget', function (require) {
         className: 'o_field_partner_rental',
 
         // xmlDependencies: ['/rental/static/src/xml/model_widget.xml'],
-        template: 'rental.rental_template',
+        // template: 'rental.rental_template',
 
         events: _.extend({}, FieldChar.prototype.events, {
             'input': '_onInput',

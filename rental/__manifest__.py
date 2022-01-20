@@ -35,16 +35,16 @@
 
     'assets': {
         'web.assets_qweb': [
-            'rental/static/src/xml/counter_widget.xml',
+            # 'rental/static/src/xml/counter_widget.xml',
             # 'rental/static/src/xml/model_widget.xml',
         ],
         'web.assets_backend': [
-            'rental/static/src/js/counter_widget.js',
-            # 'rental/static/src/js/model_widget.js',
-            'rental/static/src/js/animal.js',
-            'rental/static/src/js/dog.js',
-            'rental/static/src/js/engine.js',
-            'rental/static/src/js/car.js',
+            # 'rental/static/src/js/counter_widget.js',
+            'rental/static/src/js/model_widget.js',
+            # 'rental/static/src/js/animal.js',
+            # 'rental/static/src/js/dog.js',
+            # 'rental/static/src/js/engine.js',
+            # 'rental/static/src/js/car.js',
         ],
     },
 
