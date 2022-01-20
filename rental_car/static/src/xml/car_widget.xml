@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <div t-name="rental_car.car.info">
+        <record model="ir.ui.view" id="car_info_form_view">
+            <field name="model_id"/>
+        </record>
+    </div>
+</templates>
