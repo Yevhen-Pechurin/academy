@@ -22,7 +22,7 @@
 
     "assets": {
         'web.assets_qweb': [
-            'static/src/xml/my_widget.xml',
+            'rental_car/static/src/xml/my_widget.xml',
         ],
         "web.assets_backend": [
             'rental_car/static/src/js/my_widget.js',
