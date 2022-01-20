@@ -4,6 +4,7 @@ odoo.define('rental.model_widget', function (require) {
     const Widget = require('web.Widget');
 
     const Counter = Widget.extend({
+        xmlDependencies: ['/rental/static/src/xml/model_widget.xml'],
         template: 'rental.rental_template',
         events: {
             'click button': '_onClick',
@@ -18,6 +19,7 @@ odoo.define('rental.model_widget', function (require) {
         },
     });
     const counter = new Counter(this, 4);
+    require('web.dom_ready');
     counter.appendTo("body");
 
 })

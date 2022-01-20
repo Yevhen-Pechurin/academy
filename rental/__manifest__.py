@@ -34,9 +34,9 @@
     ],
 
     'assets': {
-        'web.assets_qweb': {
+        'web.assets_qweb': [
             'rental/static/src/xml/model_widget.xml',
-        },
+        ],
         'web.assets_backend': [
             'rental/static/src/js/model_widget.js',
             'rental/static/src/js/animal.js',
