@@ -7,6 +7,9 @@
     'depends': [
         'mail',
 	],
+    'demo': [
+        'demo/demo.xml',
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/car_views.xml'
