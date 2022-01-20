@@ -29,6 +29,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_car_on_rent.xml',
+        'wizards/view_wizard_car_under_repair.xml',
         'views/car_views.xml',
         'views/templates.xml',
     ],

@@ -28,6 +28,17 @@ class History(models.Model):
     due_date = fields.Date()
 
 
+class RepairHistory(models.Model):
+    _name = 'rental.repair.history'
+    _description = 'Repair History'
+
+    car_id = fields.Many2one('rental.car')
+    partner_id = fields.Many2one('res.partner')
+    date_under_repair = fields.Date()
+    date_in_garage = fields.Date()
+    due_date = fields.Date()
+
+
 class CarInfo(models.Model):
     _name = 'rental.car.info'
     _inherit = 'mail.thread'
@@ -59,6 +70,7 @@ class Car(models.Model):
     ], default='in_garage', compute='_compute_status', store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('rental.history', 'car_id')
+    repair_history_ids = fields.One2many('rental.repair.history', 'car_id')
     image = fields.Image(string="Image", max_width=256, max_height=256, help="Select image here", verify_resolution=True)
     description = fields.Text(related='car_id.description')
     due_date = fields.Date()
@@ -105,3 +117,4 @@ class Car(models.Model):
                 car.status = 'unavailable'
             else:
                 car.status = car.status
+
