@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <!-- Car -->
+        <record id="demo_car" model="rental.car">
+            <field name="model">Aston Martin DB</field>
+            <field name="number">11</field>
+            <field name="odometer">10000</field>
+            <field name="repair_history_ids" eval="[(5,0),(0,0,{
+            'start_date':DateTime.today(),
+            'end_date':DateTime.today(),
+            'end':True,
+            })]"/>
+            <field name="loan_history_ids" eval="[(5,0),(0,0,{
+            'due_date':DateTime.today(),
+            'end':True,
+            'partner_id':ref('base.res_partner_1')
+            })]"/>
+        </record>
+
+    </data>
+</odoo>
