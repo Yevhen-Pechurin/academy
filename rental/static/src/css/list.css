@@ -1,0 +1,23 @@
+.list_ul {
+    list-style-type: none; /* Убираем маркеры */
+    cursor: pointer;
+
+    padding: 0;
+
+
+}
+
+.list_li {
+
+    border: 1px solid #6f42c1;;
+    margin-left: 0;
+    width: inherit;
+    height: inherit;
+    height: 25.5px;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.list_li:not(:last-child) {
+    margin-bottom: 5px;
+}

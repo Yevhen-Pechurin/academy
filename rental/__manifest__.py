@@ -21,12 +21,16 @@
     ],
     "assets": {
         "web.assets_backend": [
-            'rental/static/src/js/car.js',
+
+            'rental/static/src/js/list.js',
+            'rental/static/src/css/list.css'
         ],
         'web.assets_qweb': [
-            'rental/static/src/xml/actions.xml',
+
+            'rental/static/src/xml/list.xml'
         ],
     },
+
 
     'application': True,
     'auto_install': False,

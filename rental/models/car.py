@@ -76,6 +76,14 @@ class Car(models.Model):
         except IndexError:
             pass
 
+    @api.model
+    def get_cars(self, key):
+        return self.env['rental.car'].search_read([('model', 'like', key), ('model', '!=', False)], fields=['model','id'])
+
+    @api.model
+    def get_cars_info(self,id):
+        return self.env['rental.car'].search_read([('id', '=', id)], fields=['model'])
+
 
 class RepairHistory(models.Model):
     _name = 'rental.repair'
