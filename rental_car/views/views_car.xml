@@ -1,30 +1,44 @@
 <odoo>
     <data>
         <!-- explicit list view definition -->
-        <record model="ir.ui.view" id="rental_car_list">
-            <field name="name">rental_car list</field>
-            <field name="model">rental_car.car</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                    <field name="number"/>
-                    <field name="model_id"/>
-                    <field name="year"/>
-                    <field name="status"/>
-                    <field name="lease_date"/>
-                    <field name="partner_id"/>
-                    <field name="logo_image"/>
-                    <field name="odometer"/>
-                </tree>
-            </field>
-        </record>
+<!--        <record model="ir.ui.view" id="rental_car_list">-->
+<!--            <field name="name">rental_car list</field>-->
+<!--            <field name="model">rental_car.car</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="number"/>-->
+<!--                    <field name="model_id"/>-->
+<!--                    <field name="year"/>-->
+<!--                    <field name="status"/>-->
+<!--                    <field name="lease_date"/>-->
+<!--                    <field name="partner_id"/>-->
+<!--                    <field name="logo_image"/>-->
+<!--                    <field name="odometer"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- form view for cars -->
         <record model="ir.ui.view" id="car_form_view">
             <field name="name">rental_car.view</field>
             <field name="model">rental_car.car</field>
             <field name="arch" type="xml">
+
+
                 <form>
+                    <xpath expr="//sheet" position="before">
+                        <header>
+    <!--                        <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>-->
+                            <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object"/>
+                            <button name="action_rented" string="Rented" class="oe_highlight" type="object"/>
+                            <button name="action_under_repair" string="Under Repair" class="oe_highlight" type="object"/>
+                            <button name="action_rented" string="Unavailable" class="oe_highlight" type="object"/>
+                            <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
+                            <field name="status" widget="statusbar" statusbar_visible="in_garage,rented,under_repair,unavailable"/>
+                        </header>
+                    </xpath>
+
                     <sheet>
                         <div class="oe_title">
                             <label for="name"/>
@@ -132,7 +146,7 @@
         </record>
 
         <!-- Top menu item -->
-        <menuitem name="Rental car" id="rental_car_menu"/>
+        <menuitem name="Rental Car" id="rental_car_menu"/>
         <!-- menu categories -->
         <menuitem name="Car" id="rental_car.menu_car" parent="rental_car_menu"/>
         <menuitem name="Car Info" id="menu_car_info" parent="rental_car_menu"/>

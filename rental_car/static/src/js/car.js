@@ -22,7 +22,7 @@ odoo.define('rental_car.car', function (require) {
         _remove: function () {
             this.count = this.count - 2;
             this.$('.val').text(this.count);
-            // console.log('My Test Field - 11');
+            console.log('My Test Field - 11');
         },
         _multiply: function () {
             this.count = this.count * 2;
