@@ -40,7 +40,7 @@ class Car(models.Model):
     name = fields.Char(compute='_compute_car_name')
     model = fields.Char(required=True) #model_id = fields.Many2one('rental.car_model', required=True)
     number = fields.Char(required=True)
-    #logo = fields.Image(related='model_id.manufacturer_logo')
+    logo = fields.Image()    #related='model_id.manufacturer_logo')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In garage'),
@@ -61,7 +61,9 @@ class Car(models.Model):
     @api.model
     def get_model(self, model_name):
         values = {}
-        values['model_id'] = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)], limit=1).id
+        values['models'] = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
+        #records = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)])
+        #values['models'] = [[r.id, r.model_name] for r in records]
         return values
 
     @api.depends('model', 'number')
