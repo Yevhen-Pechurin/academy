@@ -81,7 +81,7 @@ class Car(models.Model):
     @api.model
     def get_model(self, query):
         values = {
-            'model_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', query)], fields = ['name', 'id'], limit=5)
+            'model_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', query)], fields = ['model', 'id'], limit=5)
         }
         return values
 

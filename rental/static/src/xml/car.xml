@@ -15,7 +15,7 @@
         <div class="rental_search_div">
             <ul class="rental_search_ul list-unstyled">
                 <li t-foreach="list_partner" t-as="car" class="rental_search_li">
-                    <p class="list_person_span" t-esc="car['name']" t-att-data-id="car['id']"/>
+                    <p class="list_person_span" t-esc="car['model']" t-att-data-id="car['id']"/>
                 </li>
             </ul>
         </div>

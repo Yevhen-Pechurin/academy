@@ -55,7 +55,7 @@ odoo.define('rental.car', function (require) {
                     year: data[0].year || '',
                     model: data[0].model || '',
                 }
-                self.$el.val(data[0].name);
+                self.$el.val(data[0].model);
                 self.trigger_up('field_changed', {
                     dataPointID: self.dataPointID,
                     operation: 'UPDATE',
