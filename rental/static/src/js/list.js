@@ -33,12 +33,16 @@ odoo.define('rental.list', function (require) {
                 const elem = $(QWeb.render('rental.list', {
                     data: res,
                 }));
-                elem.find('.list_ul').on('click', self.setFunction.bind(self));
-                $('#' + self.$el['0'].id).blur(function () {
+                $(document).mouseup(function (e) {
+                    var div = $(".list_div");
+                    if (!div.is(e.target)
+                        && div.has(e.target).length === 0) {
                         self.$el.parent().find('.list_div').remove();
-                        console.log(Math.random())
+
                     }
-                )
+                });
+                elem.find('.list_div').on('click', self.setFunction.bind(self));
+
                 self.$el.after(elem);
             });
         },
@@ -49,6 +53,7 @@ odoo.define('rental.list', function (require) {
                 method: 'get_cars_info',
                 args: [params.target.dataset.id]
             }).then(res => {
+                console.log(res[0].model)
                 self.$el.val(res[0].model);
                 self.trigger_up('field_changed', {
                     dataPointID: self.dataPointID,
@@ -57,8 +62,7 @@ odoo.define('rental.list', function (require) {
                 });
                 self.$el.parent().find('.list_div').remove();
             });
-        }
-        ,
+        },
     });
     fieldRegistry.add('list_widget', List);
 })
