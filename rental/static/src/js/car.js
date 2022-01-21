@@ -9,6 +9,7 @@ odoo.define('rental.car', function (require) {
     const CustomFieldChar = FieldChar.extend({
         events: _.extend({}, FieldChar.prototype.events, {
             'input': '_onInput',
+            'focusout' : '_onFocusOut'
         }),
         init: function () {
             this._super.apply(this, arguments);
@@ -32,6 +33,9 @@ odoo.define('rental.car', function (require) {
                 }
             })
         },
+        _onFocusOut: function () {
+            this.$el.parent().find('.rental_search_div').remove()
+        },
         onClickList: function (e) {
             const self = this;
             const id = e.target.dataset.id
@@ -40,13 +44,14 @@ odoo.define('rental.car', function (require) {
             }
             this._rpc({
                 model: 'rental.car',
-                method: 'get_model_info',
-                args: [id],
+                method: 'read',
+                args: [[+id], ['name', 'year', 'model']],
             }).then(function (data) {
 
                 const changes = {
                     name: data[0].name || '',
-                    number: data[0].number || '',
+                    year: data[0].year || '',
+                    model: data[0].model || '',
                 }
                 self.$el.val(data[0].name);
                 self.trigger_up('field_changed', {

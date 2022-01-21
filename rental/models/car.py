@@ -85,6 +85,3 @@ class Car(models.Model):
         }
         return values
 
-    @api.model
-    def get_model_info(self, id):
-        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['name', 'number'])
