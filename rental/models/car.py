@@ -22,11 +22,10 @@ class Car(models.Model):
     _inherit = 'mail.thread'
     _description = 'Car'
 
-
     name = fields.Char(compute='_compute_car_name')
-    number = fields.Char(copy=False, tracking=True)
-    model = fields.Char(copy=False, tracking=True)
-    year = fields.Integer(tracking=True)
+    number = fields.Char(copy=False, tracking=True, required=True)
+    model = fields.Char(copy=False, tracking=True, required=True)
+    year = fields.Integer(tracking=True, required=True)
     status = fields.Selection([
         ('in_garage', 'In Garage'),
         ('on_loan', 'On Loan'),
@@ -81,7 +80,11 @@ class Car(models.Model):
 
     @api.model
     def get_model(self, query):
-        values = {}
-        values['model_id'] = self.env['rental.car'].sudo().search([('model', 'ilike', query)],
-                                                                        limit=1).id
+        values = {
+            'model_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', query)], fields = ['name', 'id'], limit=5)
+        }
         return values
+
+    @api.model
+    def get_model_info(self, id):
+        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['name', 'number'])

@@ -5,22 +5,20 @@
     <div t-name="rental.car">
         <button class="backward_btn">Move backward</button>
         <button class="forward_btn">Move forward</button>
-        <span class="val"><t t-esc="widget.pos"/></span>
+        <span class="val">
+            <t t-esc="widget.pos"/>
+        </span>
     </div>
 
-    <t t-name="rental.model_list">
-        <div class="zoom_search_div">
-            <span class="list_car_span" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>
-<!--            <ul class="zoom_search_ul list-unstyled">-->
-<!--            <li t-foreach="list_search" t-as="item_list" class="zoom_search_li">-->
-<!--                <span class="list_car_span" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>-->
-<!--            </li>-->
-<!--            </ul>-->
+
+    <t t-name="rental.list_car">
+        <div class="rental_search_div">
+            <ul class="rental_search_ul list-unstyled">
+                <li t-foreach="list_partner" t-as="car" class="rental_search_li">
+                    <p class="list_person_span" t-esc="car['name']" t-att-data-id="car['id']"/>
+                </li>
+            </ul>
         </div>
     </t>
 
-
-    <t t-name="rental.model_list">
-        <div class="list_car_span" t-esc="data" t-att-data-id="item_list['id']"/>
-    </t>
 </templates>
