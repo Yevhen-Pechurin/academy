@@ -1,0 +1,17 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+<!--&lt;!&ndash;        <template id="assets_backend" name="stss planing assets" inherit_id="web.assets_backend">&ndash;&gt;-->
+<!--        <template id="assets_backend" name="stss planing assets" >-->
+<!--            <xpath expr="." position="inside">-->
+<!--&lt;!&ndash;            <xpath expr="//script[last()]" position="after">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <link rel="stylesheet" type="text/scss" href="/rental_car/static/src/scss/list_search.scss"/>&ndash;&gt;-->
+
+<!--                <script type="text/javascript" src="/rental_car/static/src/js/role.js"/>-->
+<!--&lt;!&ndash;                <script type="text/javascript" src="/rental_car/static/src/js/dog.js"/>&ndash;&gt;-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+<!--    </data>-->
+<!--</odoo>-->

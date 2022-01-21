@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<templates>-->
+
+<!--    <div t-name="rental_car.counter">-->
+<!--        <button class="increment_btn">Increment</button>-->
+<!--&lt;!&ndash;        <input class="my-custom" widget="my-custom-field"/>&ndash;&gt;-->
+<!--        <button class="start_timer" style="border:none;">start</button>-->
+<!--        <span class="val"><t t-esc="widget.count"/></span>-->
+<!--    </div>-->
+<!--</templates>-->
