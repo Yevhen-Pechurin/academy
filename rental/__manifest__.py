@@ -25,6 +25,7 @@
         ],
         'web.assets_qweb': [
             'rental/static/src/xml/actions.xml',
+            'rental/static/src/xml/car_list.xml',
         ],
     },
 

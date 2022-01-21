@@ -29,6 +29,17 @@ class Car(models.Model):
         for i in self:
             i.name = str(i.model) + str(i.number)
 
+    @api.model
+    def get_car_list(self, input):
+        value = {
+            'car_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', input)], fields=['model'])
+        }
+        return value
+
+    @api.model
+    def get_car_info(self, id):
+        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['year', 'odometer', 'model'])
+
     def action_loan(self):
         return {
             'name': _('On Loan'),
