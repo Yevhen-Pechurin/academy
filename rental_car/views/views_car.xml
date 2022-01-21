@@ -34,7 +34,7 @@
                             <button name="action_rented" string="Rented" class="oe_highlight" type="object"/>
                             <button name="action_under_repair" string="Under Repair" class="oe_highlight" type="object"/>
                             <button name="action_rented" string="Unavailable" class="oe_highlight" type="object"/>
-                            <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
+<!--                            <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>-->
                             <field name="status" widget="statusbar" statusbar_visible="in_garage,rented,under_repair,unavailable"/>
                         </header>
                     </xpath>
