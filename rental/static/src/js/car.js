@@ -9,7 +9,7 @@ odoo.define('rental.car', function (require) {
     const CustomFieldChar = FieldChar.extend({
         events: _.extend({}, FieldChar.prototype.events, {
             'input': '_onInput',
-            'focusout' : '_onFocusOut'
+            'focusout': '_onFocusOut'
         }),
         init: function () {
             this._super.apply(this, arguments);
@@ -34,7 +34,9 @@ odoo.define('rental.car', function (require) {
             })
         },
         _onFocusOut: function () {
-            this.$el.parent().find('.rental_search_div').remove()
+            setTimeout(() => {
+                this.$el.parent().find('.rental_search_div').remove()
+            }, 100);
         },
         onClickList: function (e) {
             const self = this;
