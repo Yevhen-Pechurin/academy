@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="zoom_info.list_partner">
+        <div class="zoom_search_div">
+            <ul class="zoom_search_ul list-unstyled">
+                <li t-foreach="list_partner" t-as="partner" class="zoom_search_li">
+                    <p class="list_person_span" t-esc="partner['name']" t-att-data-id="partner['id']"/>
+                </li>
+            </ul>
+        </div>
+    </t>
+</templates>
