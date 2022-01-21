@@ -47,15 +47,16 @@ odoo.define('rental.car', function (require) {
             this._rpc({
                 model: 'rental.car',
                 method: 'read',
-                args: [[+id], ['name', 'year', 'model']],
+                args: [[+id], ['year', 'model']],
             }).then(function (data) {
 
                 const changes = {
-                    name: data[0].name || '',
                     year: data[0].year || '',
                     model: data[0].model || '',
                 }
                 self.$el.val(data[0].model);
+                self.$el.closest('table').find('input[name="year"]').val(data[0].year)
+                debugger;
                 self.trigger_up('field_changed', {
                     dataPointID: self.dataPointID,
                     operation: 'UPDATE',
