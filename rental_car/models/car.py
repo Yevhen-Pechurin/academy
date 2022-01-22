@@ -30,12 +30,12 @@ class History(models.Model):
 
     car_id = fields.Many2one('rental_car.car')
     partner_id = fields.Many2one('res.partner')
-    lease_date = fields.Date()
     date_in_garage = fields.Datetime()
-    # date_under_repair = fields.Datetime()
-    # odometer = fields.Integer()
     odometer_start = fields.Integer()
     odometer_end = fields.Integer()
+    date_under_repair = fields.Datetime()
+    lease_date = fields.Date()
+    # odometer = fields.Integer()
     # description = fields.Text(tracking=True, index=True)
 
 

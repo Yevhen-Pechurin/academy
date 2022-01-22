@@ -59,15 +59,21 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Description" id="description" class="description">
+                            <page string="Description">
                                 <field name="description"/>
                             </page>
-                            <page string="Description2" id="description" class="description">
-                                <field name="description"/>
-                            </page>
-                            <page string="Description3" id="description" class="description">
-                                <field name="description"/>
-                            </page>
+                            <page string="Rent History">
+                                <field name="history_ids" options="{'no_open': True}">
+                                          <tree create="false" delete="false" edit="false">
+                                                <field name="partner_id"/>
+                                                <field name="date_in_garage"/>
+                                                <field name="odometer_start"/>
+                                                <field name="odometer_end"/>
+                                                <field name="date_under_repair"/>
+                                                <field name="lease_date"/>
+                                          </tree>
+                                    </field>
+                              </page>
 
                         </notebook>
                     </sheet>
