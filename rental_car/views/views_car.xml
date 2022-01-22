@@ -24,17 +24,13 @@
             <field name="name">rental_car.view</field>
             <field name="model">rental_car.car</field>
             <field name="arch" type="xml">
-
-
                 <form>
                     <xpath expr="//sheet" position="before">
                         <header>
-    <!--                        <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>-->
-                            <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object"/>
-                            <button name="action_rented" string="Rented" class="oe_highlight" type="object"/>
-                            <button name="action_under_repair" string="Under Repair" class="oe_highlight" type="object"/>
-                            <button name="action_rented" string="Unavailable" class="oe_highlight" type="object"/>
-<!--                            <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>-->
+                            <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+                            <button name="action_rented" string="Rented" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['rented', 'unavailable'])]}"/>
+                            <button name="action_under_repair" string="Under Repair" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['under_repair', 'unavailable'])]}"/>
+                            <button name="action_rented" string="Unavailable" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'rented', 'under_repair', 'unavailable'])]}"/>
                             <field name="status" widget="statusbar" statusbar_visible="in_garage,rented,under_repair,unavailable"/>
                         </header>
                     </xpath>
@@ -48,17 +44,17 @@
                         </div>
                         <group>
                             <group string="Info" name="info">
-                                <field name="name"/>
+<!--                                <field name="name"/>-->
                                 <field name="number"/>
                                 <field name="model_id" widget="my_custom_field"/>
                                 <field name="year"/>
-                                <field name="status"/>
+                                <field name="odometer"/>
+<!--                                <field name="status"/>-->
                             </group>
                             <group string="Other" name="Other">
-                                <field name="name_order"/>
-                                <field name="lease_date"/>
-                                <field name="partner_id"/>
-                                <field name="odometer"/>
+<!--                                <field name="name_order"/>-->
+<!--                                <field name="lease_date"/>-->
+<!--                                <field name="partner_id"/>-->
                                 <field name="logo_image" widget="image"/>
                             </group>
                         </group>
@@ -66,6 +62,13 @@
                             <page string="Description" id="description" class="description">
                                 <field name="description"/>
                             </page>
+                            <page string="Description2" id="description" class="description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Description3" id="description" class="description">
+                                <field name="description"/>
+                            </page>
+
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">

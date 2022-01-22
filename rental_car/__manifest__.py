@@ -36,7 +36,7 @@
     ],
     'assets': {
         'web.assets_qweb': [
-            'rental_car/static/src/xml/car_widget.xml',
+            # 'rental_car/static/src/xml/car_widget.xml',
             # 'rental_car/static/src/xml/car.xml',
         ],
         'web.assets_backend': [
