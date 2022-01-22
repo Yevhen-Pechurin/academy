@@ -37,7 +37,7 @@
     'assets': {
         'web.assets_qweb': [
             # 'rental/static/src/xml/counter_widget.xml',
-            # 'rental/static/src/xml/model_widget.xml',
+            'rental/static/src/xml/model_widget.xml',
         ],
         'web.assets_backend': [
             # 'rental/static/src/js/counter_widget.js',

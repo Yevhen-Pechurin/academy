@@ -49,6 +49,14 @@ class CarInfo(models.Model):
     country_id = fields.Many2one('rental.country', tracking=True)
     description = fields.Text(tracking=True)
 
+    @api.model
+    def get_car_list(self, name):
+        return self.env['rental.car'].sudo().search_read([('name', 'ilike', name)], fields=['name', 'id'])
+
+    @api.model
+    def get_car_info(self, id):
+        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['name', 'model', 'country'])
+
 
 class Car(models.Model):
     _name = 'rental.car'
@@ -118,3 +126,8 @@ class Car(models.Model):
             else:
                 car.status = car.status
 
+
+
+#
+# fields=['model']
+# env['res.users'].search_read([], ['name', 'email', 'login'])

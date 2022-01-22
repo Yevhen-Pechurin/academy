@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<templates>
-<!--    <div t-name="rental.rental_template">-->
-<!--        <span class="val"><t t-esc="widget.count"/></span>-->
-<!--        <button>Increment</button>-->
-<!--    </div>-->
+<templates xml:space="preserve">
+    <t t-name="rental.list_car">
+        <div class="rental_search_div">
+            <ul class="rental_search_ul list-unstyled">
+                <li t-foreach="list_car" t-as="car" class="rental_search_li">
+                    <p class="list_car_span" t-esc="car['name']" t-att-data-id="car['id']"/>
+                </li>
+            </ul>
+        </div>
+    </t>
 </templates>
