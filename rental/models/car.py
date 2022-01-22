@@ -49,13 +49,13 @@ class CarInfo(models.Model):
     country_id = fields.Many2one('rental.country', tracking=True)
     description = fields.Text(tracking=True)
 
-    @api.model
-    def get_car_list(self, name):
-        return self.env['rental.car'].sudo().search_read([('name', 'ilike', name)], fields=['name', 'id'])
-
-    @api.model
-    def get_car_info(self, id):
-        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['name', 'model', 'country'])
+    # @api.model
+    # def get_car_list(self, name):
+    #     return self.env['rental.car'].sudo().search_read([('name', 'ilike', name)], fields=['name', 'id'], limit=4)
+    #
+    # @api.model
+    # def get_car_info(self, id):
+    #     return self.env['rental.car'].sudo().browse(int(id)).read(fields=['name', 'model', 'country'])
 
 
 class Car(models.Model):
@@ -79,7 +79,8 @@ class Car(models.Model):
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('rental.history', 'car_id')
     repair_history_ids = fields.One2many('rental.repair.history', 'car_id')
-    image = fields.Image(string="Image", max_width=256, max_height=256, help="Select image here", verify_resolution=True)
+    image = fields.Image(string="Image", max_width=256, max_height=256, help="Select image here",
+                         verify_resolution=True)
     description = fields.Text(related='car_id.description')
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
@@ -125,8 +126,6 @@ class Car(models.Model):
                 car.status = 'unavailable'
             else:
                 car.status = car.status
-
-
 
 #
 # fields=['model']

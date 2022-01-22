@@ -100,8 +100,8 @@
                         <div class="oe_title">
                             <label for="name"/>
                             <h1>
-                                <field class="o_text_overflow" name="name" placeholder="e.g. Opel"
-                                       widget="my_custom_field"/>
+                                <field class="o_text_overflow" name="name" placeholder="e.g. Opel"/>
+<!--                                widget="my_custom_field"-->
                             </h1>
                         </div>
                         <group>
