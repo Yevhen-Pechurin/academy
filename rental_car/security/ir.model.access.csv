@@ -4,3 +4,4 @@ rental_car.access_car_history,access_car_history,rental_car.model_car_history,ba
 rental_car.access_car_model,access_car_model,rental_car.model_car_model,base.group_user,1,1,1,1
 rental_car.access_rental_car_car_info,access_rental_car_car_info,rental_car.model_rental_car_car_info,base.group_user,1,1,1,1
 rental_car.access_rental_car_wizard_rented,access_rental_car_wizard_rented,rental_car.model_rental_car_wizard_rented,base.group_user,1,1,1,1
+rental_car.access_rented_wizard_under_repair,access_rented_wizard_under_repair,rental_car.model_rented_wizard_under_repair,base.group_user,1,1,1,1

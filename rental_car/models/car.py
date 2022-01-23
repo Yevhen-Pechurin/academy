@@ -90,6 +90,15 @@ class Car(models.Model):
             'target': 'new'
         }
 
+    # def action_in_garage(self):
+    #     return {
+    #         'name': _('In Garage'),
+    #         'view_mode': 'form',
+    #         'res_model': 'rental_car.wizard.in_garage',
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new'
+    #     }
+
     def action_in_garage(self):
         last_history = self.history_ids[-1]
         if last_history:
