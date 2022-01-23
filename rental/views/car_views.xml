@@ -1,7 +1,7 @@
 <odoo>
     <data>
 
-        <!-- explicit list view definition -->
+        <!-- explicit car list view definition -->
         <record model="ir.ui.view" id="car_list_view">
             <field name="name">rental list</field>
             <field name="model">rental.car</field>
@@ -20,6 +20,7 @@
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
                 <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+<!--                <kanban>-->
                     <field name="name"/>
                     <field name="model_id"/>
                     <field name="status"/>
@@ -124,7 +125,6 @@
             </field>
         </record>
 
-
         <record model="ir.ui.view" id="car_form_view">
             <field name="name">cars.form.view</field>
             <field name="model">rental.car</field>
@@ -145,7 +145,8 @@
                 <field name="model_id" position="before">
                     <field name="active" invisible="1"/>
                     <field name="number"/>
-                    <field name="car_id" groups="base.group_no_one"/>
+                    <field name="car_id"/>
+<!--                    groups="base.group_no_one"-->
                 </field>
 
                 <xpath expr="//notebook/page[@id='description']" position="after">
@@ -188,6 +189,50 @@
             </field>
         </record>
 
+        <!-- explicit task list view definition -->
+        <record model="ir.ui.view" id="task_list_view">
+            <field name="name">task list</field>
+            <field name="model">rental.task</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="car_id"/>
+                    <field name="stage"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view for tasks -->
+        <record model="ir.ui.view" id="task_form_view">
+            <field name="name">task.form.view</field>
+            <field name="model">rental.task</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field class="o_text_overflow" name="name" placeholder="e.g. Task"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Info" name="info">
+                                <field name="car_id"/>
+                                <field name="duration"/>
+                                <field name="stage"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" id="description" class="description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="action_car">
             <field name="name">Cars</field>
@@ -222,6 +267,12 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record model="ir.actions.act_window" id="action_task">
+            <field name="name">Task</field>
+            <field name="res_model">rental.task</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
 
         <menuitem name="rental" id="menu_root">
             <menuitem name="Cars" id="cars">
@@ -232,6 +283,9 @@
             </menuitem>
             <menuitem name="Configuration" id="configuration">
                 <menuitem name="Car Info" id="menu_car_info" action="action_car_info"/>
+            </menuitem>
+            <menuitem name="Tasks" id="tasks">
+                <menuitem name="All" id="menu_all_tasks" action="action_task"/>
             </menuitem>
         </menuitem>
 

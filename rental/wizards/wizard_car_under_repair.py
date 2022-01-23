@@ -19,7 +19,7 @@ class WizardUnderRepair(models.TransientModel):
             'due_date': self.due_date,
             'status': 'under_repair',
         })
-        self.env['rental.repair_history'].create({
+        self.env['rental.repair.history'].create({
             'car_id': car.id,
             'partner_id': self.partner_id.id,
             'date_under_repair': today,

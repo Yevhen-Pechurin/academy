@@ -127,6 +127,18 @@ class Car(models.Model):
             else:
                 car.status = car.status
 
+
+    class Task(models.Model):
+        _name = 'rental.task'
+        _description = 'Task'
+
+        name = fields.Char()
+        car_id = fields.Many2one('rental.car')
+        description = fields.Text()
+        duration = fields.Integer()
+        stage = fields.Text()
+
+
 #
 # fields=['model']
 # env['res.users'].search_read([], ['name', 'email', 'login'])
