@@ -1,23 +1,23 @@
 <odoo>
     <data>
         <!-- explicit list view definition -->
-        <!--        <record model="ir.ui.view" id="rental_car_list">-->
-        <!--            <field name="name">rental_car list</field>-->
-        <!--            <field name="model">rental_car.car</field>-->
-        <!--            <field name="arch" type="xml">-->
-        <!--                <tree>-->
-        <!--                    <field name="name"/>-->
-        <!--                    <field name="number"/>-->
-        <!--                    <field name="model_id"/>-->
-        <!--                    <field name="year"/>-->
-        <!--                    <field name="status"/>-->
-        <!--                    <field name="lease_date"/>-->
-        <!--                    <field name="partner_id"/>-->
-        <!--                    <field name="logo_image"/>-->
-        <!--                    <field name="odometer"/>-->
-        <!--                </tree>-->
-        <!--            </field>-->
-        <!--        </record>-->
+                <record model="ir.ui.view" id="rental_car_list">
+                    <field name="name">rental_car list</field>
+                    <field name="model">rental_car.car</field>
+                    <field name="arch" type="xml">
+                        <tree>
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="model_id"/>
+                            <field name="year"/>
+                            <field name="status"/>
+                            <field name="lease_date"/>
+                            <field name="partner_id"/>
+                            <field name="logo_image"/>
+                            <field name="odometer"/>
+                        </tree>
+                    </field>
+                </record>
 
         <!-- form view for cars -->
         <record model="ir.ui.view" id="car_form_view">

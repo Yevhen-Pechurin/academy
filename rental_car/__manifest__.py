@@ -29,6 +29,7 @@
         'security/ir.model.access.csv',
         'views/views_car.xml',
         # 'views/templates.xml',
+        'wizards/view_wizard_car_rented.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -18,7 +18,7 @@ class WizardRented(models.TransientModel):
             'due_date': self.due_date,
             'status': 'rented',
         })
-        self.env['rental.history'].create({
+        self.env['rental_car.history'].create({
             'car_id': car.id,
             'partner_id': self.partner_id.id,
             'date_rented': today,
@@ -32,6 +32,6 @@ class WizardRented(models.TransientModel):
 
 
 class WizardUnderRepair(models.TransientModel):
-    _name = 'rented.wizard.under_repair'
+    _name = 'rental_car.wizard.under_repair'
     _description = 'Wizard Under Repair'
     pass

@@ -34,6 +34,8 @@ class History(models.Model):
     odometer_start = fields.Integer()
     odometer_end = fields.Integer()
     date_under_repair = fields.Datetime()
+    date_rented = fields.Datetime()
+    due_date = fields.Datetime()
     lease_date = fields.Date()
     # odometer = fields.Integer()
     # description = fields.Text(tracking=True, index=True)
@@ -63,6 +65,7 @@ class Car(models.Model):
     odometer = fields.Integer()
     active = fields.Boolean(default=True)
     description = fields.Text()
+    due_date = fields.Datetime()
 
     @api.depends('active')
     def _compute_status(self):
