@@ -16,9 +16,11 @@ odoo.define('rental.list', function (require) {
         }),
         init: function () {
             const self = this;
+            this.name = '';
             this._super.apply(this, arguments);
         },
         filterFunction: function () {
+            this.name = this.$el['0']['name']
             const self = this;
             if (this.$el.val() == '') {
                 self.$el.parent().find('.list_div').remove();
@@ -27,7 +29,7 @@ odoo.define('rental.list', function (require) {
             this._rpc({
                 model: 'rental.car',
                 method: 'get_cars',
-                args: [this.$el.val()]
+                args: [this.$el.val(), this.name]
             }).then(res => {
                 self.$el.parent().find('.list_div').remove();
                 const elem = $(QWeb.render('rental.list', {
@@ -51,14 +53,15 @@ odoo.define('rental.list', function (require) {
             this._rpc({
                 model: 'rental.car',
                 method: 'get_cars_info',
-                args: [params.target.dataset.id]
+                args: [params.target.dataset.id, this.name]
             }).then(res => {
-                console.log(res[0].model)
-                self.$el.val(res[0].model);
+                var dictionary = {}
+                dictionary[this.name] = res[0][this.name]
+                self.$el.val(res[0][this.name]);
                 self.trigger_up('field_changed', {
                     dataPointID: self.dataPointID,
                     operation: 'UPDATE',
-                    changes: {'model': res[0].model}
+                    changes: dictionary
                 });
                 self.$el.parent().find('.list_div').remove();
             });

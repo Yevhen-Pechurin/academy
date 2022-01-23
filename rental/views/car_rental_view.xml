@@ -86,7 +86,7 @@
                         <group>
                             <group string="Info">
                                 <field name="model" widget="list_widget"/>
-                                <field name="number"/>
+                                <field name="number" />
                                 <field name="year"/>
                                 <field name="odometer"/>
 

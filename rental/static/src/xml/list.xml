@@ -9,7 +9,7 @@
          <div class="list_div">
             <ul class="list_ul">
                 <li t-foreach="data" t-as='one' class="list_li">
-                    <p class="list_person_span" t-esc="one['model']" t-att-data-id="one['id']"/>
+                    <p class="list_person_span" t-esc="one['key']" t-att-data-id="one['id']"/>
                 </li>
             </ul>
         </div>

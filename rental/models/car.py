@@ -77,12 +77,22 @@ class Car(models.Model):
             pass
 
     @api.model
-    def get_cars(self, key):
-        return self.env['rental.car'].search_read([('model', 'like', key), ('model', '!=', False)], fields=['model','id'])
+    def get_cars(self, key, field):
+        mass_all = []
+        mass_model = []
+
+        for i in self.env['rental.car'].search_read([('model', 'like', key), (field, '!=', False)],
+                                                    fields=[field, 'id']):
+            if i[field] not in mass_model:
+                mass_model.append(i[field])
+                i['key'] = i.pop(field)
+                mass_all.append(i)
+
+        return mass_all
 
     @api.model
-    def get_cars_info(self,id):
-        return self.env['rental.car'].search_read([('id', '=', id)], fields=['model'])
+    def get_cars_info(self, id, field):
+        return self.env['rental.car'].search_read([('id', '=', id)], fields=[field])
 
 
 class RepairHistory(models.Model):
