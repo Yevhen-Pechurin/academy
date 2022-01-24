@@ -124,7 +124,7 @@
 
     <record id="extension" model="ir.ui.view">
             <field name="name">Extension</field>
-            <field name="model">demo.demo</field>
+            <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <!-- to insert your fields at the end of the list -->
