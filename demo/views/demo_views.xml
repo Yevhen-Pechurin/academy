@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <!-- explicit demo list view definition -->
+        <record model="ir.ui.view" id="demo_list">
+            <field name="name">demo list</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <!--                    <field name="partner_id"/>-->
+                    <field name="date"/>
+                    <!--                    <field name="state"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view for demo -->
+        <record model="ir.ui.view" id="demo_form_view">
+            <field name="name">demo.form.view</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//sheet" position="before">-->
+<!--                    <header>-->
+<!--                        <button string="On Rent" class="oe_highlight"/>-->
+<!--                        <button string="In Garage" class="oe_highlight"/>-->
+<!--                        <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progres,done,сanceled"/>-->
+<!--                    </header>-->
+<!--                </xpath>-->
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field class="o_text_overflow" name="name" placeholder="e.g. Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Info" name="info">
+                                <field name="user_id"/>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="date"/>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" id="description" class="description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+        <!--         actions opening views on models -->
+        <record model="ir.actions.act_window" id="demo_action_window">
+            <field name="name">My Demo</field>
+            <field name="res_model">demo.demo</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Demo" id="demo_menu_root">
+            <menuitem name="All demo" id="demo_menu">
+                <!-- menu categories -->
+                <menuitem name="All" id="demo_menu_all" action="demo_action_window" sequence="1"/>
+            </menuitem>
+        </menuitem>
+
+    </data>
+</odoo>
