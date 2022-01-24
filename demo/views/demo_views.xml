@@ -20,14 +20,14 @@
             <field name="name">demo.form.view</field>
             <field name="model">demo.demo</field>
             <field name="arch" type="xml">
-                <!--                <xpath expr="//sheet" position="before">-->
-                <!--                    <header>-->
-                <!--                        <button string="On Rent" class="oe_highlight"/>-->
-                <!--                        <button string="In Garage" class="oe_highlight"/>-->
-                <!--                        <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progres,done,сanceled"/>-->
-                <!--                    </header>-->
-                <!--                </xpath>-->
                 <form>
+                <!--                                <xpath expr="//sheet" position="before">-->
+                <header>
+                    <button string="On Rent" class="oe_highlight"/>
+                    <button string="In Garage" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progres,done,сanceled"/>
+                </header>
+                <!--                                </xpath>-->
                     <sheet>
                         <div class="oe_title">
                             <label for="name"/>
@@ -59,6 +59,7 @@
             <field name="name">Demo Kanban</field>
             <field name="model">demo.demo</field>
             <field name="arch" type="xml">
+
                 <kanban default_group_by="state" class="o_kanban_small_column" create="false">
                     <field name="name"/>
                     <field name="partner_id"/>
