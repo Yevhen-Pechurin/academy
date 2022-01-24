@@ -1,0 +1,150 @@
+<odoo>
+  <data>
+    <!-- action for all demos -->
+    <record id="all_demo_action" model="ir.actions.act_window">
+      <field name="name">Demo Soft</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">demo.demo</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+    <!-- action for Scheduled demo -->
+    <record id="scheduled_demo_action" model="ir.actions.act_window">
+      <field name="name">Scheduled</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">demo.demo</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('status', '=', 'scheduled')]</field>
+    </record>
+    <!-- action for In Progress demo -->
+    <record id="in_progress_action" model="ir.actions.act_window">
+      <field name="name">In Progress</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">demo.demo</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('status', '=', 'in_progress')]</field>
+    </record>
+    <!-- action for Done demo -->
+    <record id="done_demo_action" model="ir.actions.act_window">
+      <field name="name">Done</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">demo.demo</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('status', '=', 'done')]</field>
+    </record>
+    <!-- action for Canceled demo -->
+    <record id="canceled_demo_action" model="ir.actions.act_window">
+      <field name="name">Canceled</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">demo.demo</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('status', '=', 'сanceled')]</field>
+    </record>
+
+    <!-- tree view for demo -->
+    <record id="demo_tree_view" model="ir.ui.view">
+      <field name="name">demo.tree.view</field>
+      <field name="model">demo.demo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="user_id"/>
+          <field name="partner_id"/>
+          <field name="date"/>
+          <field name="status"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- form view for Demos -->
+    <record id="demo_form_view" model="ir.ui.view">
+      <field name="name">demo.form.view</field>
+      <field name="model">demo.demo</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <field name="status" widget="statusbar"/>
+            <div class="oe_title">
+              <h1><field name="name"/></h1>
+            </div>
+          </header>
+          <sheet>
+            <group>
+              <group string="Info">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="description"/>
+              </group>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record id="demo_kanban_view" model="ir.ui.view">
+            <field name="name"> demo.kanban</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="status"/>
+                    <field name="date"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
+                                 style="width:60mm; height:40mm;;">
+                                <div class="oe_kanban_content flex-grow-1" style="display:flex">
+                                    <div style="margin-left:10px">
+                                        <div class="o_kanban_record_title o_kanban_details">
+                                            <strong><field name="name"></field></strong>
+                                        </div>
+                                        <div style="max-width:85px">
+                                            <span class="o_text_overflow" t-if="record.partner_id.value"
+                                                  t-esc="record.partner_id.value">
+                                            </span>
+                                            <p><field name="status"></field></p>
+                                            <p><field name="date"></field></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record id="extension" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">demo.demo</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object"
+                            attrs="{'invisible': [('demos_count', '=', 0)]}" name="getdemos">
+                        <field string="Demos" name="demos_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    <!-- Top menu item -->
+    <menuitem id="demo_menu" name="Demo"/>
+    <!-- Menu categories -->
+    <menuitem name="Demo Soft" id="demo" parent="demo_menu"/>
+    <menuitem name="All Demo Soft" id="all_demo" parent="demo" action="all_demo_action"/>
+    <menuitem name="Scheduled" id="scheduled_demo" parent="demo" action="scheduled_demo_action"/>
+    <menuitem name="In Progress" id="in_progress_demo" parent="demo" action="in_progress_action"/>
+    <menuitem name="Done" id="done_demo" parent="demo" action="done_demo_action"/>
+    <menuitem name="Canceled" id="canceled_demo" parent="demo" action="canceled_demo_action"/>
+  </data>
+</odoo>
