@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     def _compute_demos_count(self):
         self.demos_count = len(self.demo_ids)
 
-    def getdemos(self):
+    def get_demos(self):
         demos = self.demo_ids.ids
         return {
             'name': _('Client'),
