@@ -2,7 +2,7 @@ from odoo import fields, models
 
 
 class WizardDemo(models.TransientModel):
-    _name = 'demo.wizard.demo'
+    _name = 'demo.wizard.demos'
 
     _description = 'Wizard for user'
 
