@@ -4,6 +4,7 @@ from odoo import fields, api, models, _
 class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'
+    _description = 'model for partner demo'
 
     demo_ids = fields.One2many('demo.demo', 'partner_id')
     demos_count = fields.Integer(compute='_compute_demos_count')
