@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+    <div t-name="rental.MyCustomFieldRender" owl="1" class="d-block">
+        <input type="text" class="o_input" autofocus="" t-on-input="onValueChange" />
+<!--        <input type="text" class="o_input" autofocus="" t-on-keydown="onValueChange"/>-->
+    </div>
+        <!--        <div>HERE</div>-->
+        <!--        <CheckBox value="boolean" disabled="boolean" t-on-change="onValueChange">-->
+        <!--            Some Text-->
+        <!--        </CheckBox>-->
+        <!--        <table t-if="data.changeLines.length" class="table table-sm">-->
+        <!--            <tbody t-foreach="data.changeLines" t-as="changeLine" t-key="changeLine.id">-->
+        <!--                <ChangeLine changeLine="changeLine" ordering="data.ordering"/>-->
+        <!--            </tbody>-->
+        <!--        </table>-->
+
+
+    <!--    <t t-name="rental.ResequenceChangeLine" owl="1">-->
+    <!--        <tr>-->
+    <!--            <td t-esc="props.changeLine.date"/>-->
+    <!--            <td t-esc="props.changeLine.current_name"/>-->
+    <!--            <td t-if="props.ordering == 'keep'" t-esc="props.changeLine.new_by_name" t-attf-class="{{ props.changeLine.new_by_name != props.changeLine.new_by_date ? 'animate' : ''}}"/>-->
+    <!--            <td t-else="" t-esc="props.changeLine.new_by_date" t-attf-class="{{ props.changeLine.new_by_name != props.changeLine.new_by_date ? 'animate' : ''}}"/>-->
+    <!--        </tr>-->
+    <!--    </t>-->
+</templates>

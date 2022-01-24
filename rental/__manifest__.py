@@ -36,9 +36,11 @@
     'assets': {
         'web.assets_qweb': [
             'rental/static/src/xml/*.xml',
+            'rental/static/src/components/*/*.xml',
         ],
         'web.assets_backend': [
             'rental/static/src/js/*.js',
+            'rental/static/src/components/*/*.js',
         ],
     },
     'license': 'LGPL-3',
