@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record model="ir.actions.act_window" id="rental_car.action_wizard_garage">
-        <field name="name">In Garage</field>
-        <field name="res_model">rental_car.wizard.in_garage</field>
+    <record model="ir.actions.act_window" id="rental_car.action_wizard_to_rent">
+        <field name="name">Wizard to rent</field>
+        <field name="res_model">rental_car.wizard.to_rent</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="target">new</field>
     </record>
 
-    <record model="ir.ui.view" id="rental_car.wizard_in_garage_view">
+    <record model="ir.ui.view" id="rental_car.wizard_to_rent_view">
         <field name="name">On Hand</field>
-        <field name="model">rental_car.wizard.in_garage</field>
+        <field name="model">rental_car.wizard.to_rent</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
                     <group>
                         <group>
 <!--                            <field name="partner_id"/>-->
-                            <field name="odometr_end"/>
+                            <field name="partner_id" string="Уважаемый"/>
+                            <field name="odometr"/>
                         </group>
                         <group>
+<!--                            <field name="due_date"/>-->
 <!--                            <field name="date_to_return"/>-->
                         </group>
                     </group>
                 </sheet>
                 <footer>
-                    <button string="In Garage" name="action_wizard_in_garage" type="object" class="oe_highlight"/>
+                    <button string="To rent" name="action_wizard_to_rent" type="object" class="oe_highlight"/>
                     <button string="Cancel" name="action_cancel" type="object"/>
                 </footer>
             </form>
         </field>
+
     </record>
 </odoo>
 

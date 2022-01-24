@@ -28,10 +28,11 @@ apps.rental-car.com""",
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-
+        'wizard/view_wizard_to_rent.xml',
         'wizard/view_wizard_in_garage.xml',
         'views/views.xml',
         'views/templates.xml',
+        'data/ir_cron.xml',
 
     ],
     # only loaded in demonstration mode
