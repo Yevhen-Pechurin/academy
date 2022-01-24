@@ -20,13 +20,13 @@
             <field name="name">demo.form.view</field>
             <field name="model">demo.demo</field>
             <field name="arch" type="xml">
-<!--                <xpath expr="//sheet" position="before">-->
-<!--                    <header>-->
-<!--                        <button string="On Rent" class="oe_highlight"/>-->
-<!--                        <button string="In Garage" class="oe_highlight"/>-->
-<!--                        <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progres,done,сanceled"/>-->
-<!--                    </header>-->
-<!--                </xpath>-->
+                <!--                <xpath expr="//sheet" position="before">-->
+                <!--                    <header>-->
+                <!--                        <button string="On Rent" class="oe_highlight"/>-->
+                <!--                        <button string="In Garage" class="oe_highlight"/>-->
+                <!--                        <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progres,done,сanceled"/>-->
+                <!--                    </header>-->
+                <!--                </xpath>-->
                 <form>
                     <sheet>
                         <div class="oe_title">
@@ -54,8 +54,39 @@
             </field>
         </record>
 
-
-
+        <!-- explicit demo kanban view definition -->
+        <record model="ir.ui.view" id="demo_kanban_view">
+            <field name="name">Demo Kanban</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                                <div class="oe_kanban_content flex-grow-1">
+                                    <div class="o_kanban_record_title oe_kanban_details">
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
+                                    </div>
+                                    <div>
+                                        Client:
+                                        <field name="partner_id"/>
+                                    </div>
+                                    <div>
+                                        Date:
+                                        <field name="date"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
 
         <!--         actions opening views on models -->
