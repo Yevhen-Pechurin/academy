@@ -30,6 +30,8 @@
         'views/book_views.xml',
         'views/res_partner_views.xml',
         'views/templates.xml',
+        'report/qrcode_book_report.xml',
+        'report/qrcode_book_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
