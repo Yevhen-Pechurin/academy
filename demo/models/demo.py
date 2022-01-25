@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class Demo(models.Model):
@@ -8,13 +8,14 @@ class Demo(models.Model):
     _description = 'Show demo field'
     _inherit = ['mail.thread']
 
-    name = fields.Char(required=True, copy=False)
-    user_id = fields.Many2one('demo.salesperson', 'demo_ids', readonly=True)
-    partner_id = fields.Many2one('res.partner', string='Client')
-    date = fields.Date()
-    status = fields.Selection([('scheduled', 'Scheduled'), ('in_progress', 'In Progress'), ('done', 'Done'), ('сanceled', 'Canceled'), ], default='scheduled',
-        store=True, tracking=True)
-    description = fields.Text()
+    name = fields.Char(required=True, copy=False, tracking=True)
+    user_id = fields.Many2one('res.users', 'Salesperson', default=lambda self: self.env.user.id, tracking=True)
+    partner_id = fields.Many2one('res.partner', string='Client', tracking=True)
+    date = fields.Date(tracking=True)
+    status = fields.Selection(
+        [('scheduled', 'Scheduled'), ('in_progress', 'In Progress'), ('done', 'Done'), ('сanceled', 'Canceled'), ],
+        default='scheduled', tracking=True)
+    description = fields.Text(tracking=True)
 
     _sql_constraints = [
         ('field_unique',
@@ -22,14 +23,11 @@ class Demo(models.Model):
          'Choose another value - it has to be unique!')
     ]
 
-
-class SalesPerson(models.Model):
-    _name = 'demo.salesperson'
-
-    demo_ids = fields.One2many('demo.demo', 'user_id')
-    name = fields.Char(string='Saleperson', required=True, default=lambda self: self.env.user.name)
-
-
-
-
-
+    def action_demo_wizard(self):
+        return {
+            'name': _('Create Demo'),
+            'res_model': 'demo.wizard.demo',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'target': 'new'
+        }
