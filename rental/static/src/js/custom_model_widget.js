@@ -62,7 +62,7 @@ odoo.define('rental.custom_model_widget', function(require) {
             })
         },
 
-        _onFocusoutCleanup: function(ev) {
+        _onFocusoutCleanup: function() {
             //setTimeout is essential here to prevent dropdown list being deleted before ul click event can take place
             setTimeout(() => {
                 this.$el.parent().find('.test_search_div').remove();

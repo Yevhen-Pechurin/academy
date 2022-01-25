@@ -8,29 +8,6 @@ const AbstractFieldOwl = require('web.AbstractFieldOwl');
 const field_registry = require('web.field_registry_owl');
 import { useService } from "@web/core/utils/hooks";
 
-
-/* class Child extends Component {
-    
-
-    setup() {
-        this.state = useState({ value: 0 });
-    }
-
-    _onClickGetModelInfo() {
-        this.state.value = "";
-    }
-}
-
-Object.assign(Child, {
-    props: {
-        placeholder: 'placeholder',
-    },
-    //template: 'rental.ModelsListComponent',
-});
-*/
-
-
-
 class Parent extends AbstractFieldOwl {
     setup() {
         this.rpc = useService("rpc");
@@ -51,21 +28,24 @@ class Parent extends AbstractFieldOwl {
             method: 'read',
             args: [[+ev.target.dataset.id], ['model_name', 'manufacturer_logo']],
             }))[0];
-        this.trigger('field_changed', {
-            dataPointID: this.dataPointID,
-            operation: 'UPDATE',
+        this.trigger('field-changed', {
+            dataPointID: this.dataPointId,
             changes: {model, logo},
-            });
-        console.log(this.props.record.data);
-        debugger;
-        /*
-            TODO: write the values into corresponding fields
-            
-            e.stopPropagation(); */
-    }
+        });
+        ev.target.parentElement.parentElement.previousSibling.value = model;
+        this.state.models = [];
+        ev.stopPropagation();
+    };
+
+    async _onFocusoutCleanup() {
+        //setTimeout is essential here to prevent dropdown list being deleted before ul click event can take place
+        setTimeout(() => {
+            this.state.models = [];
+        }, 200);
+        
+    };
 }
 Parent.template = 'rental.ModelsListComponent';
-//Parent.components = { Child };
 
 field_registry.add('custom-component-wrapper', Parent);
 

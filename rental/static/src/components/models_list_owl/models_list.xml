@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <t t-name="rental.ModelsListComponent" owl="1">
-        <div>
+        <div t-on-focusout="_onFocusoutCleanup">
             <input type="text" t-on-input="_onInput"/>
             <ul t-if="state.models.length" t-on-click="_onClickGetModelInfo" class="list-unstyled">
                 <li t-foreach="state.models" t-as="car_model" t-key="model_index">
