@@ -49,8 +49,8 @@
                     </div>
                     <group>
                         <group string="Info" name="info">
-<!--                            <field name="model" widget="my-custom-field"/>-->
-                            <field name="model" widget="my_custom_field_owl"/>
+                            <field name="model" widget="my-custom-field"/>
+<!--                            <field name="model" widget="my_custom_field_owl"/>-->
                             <field name="number"/>
                             <field name="year"/>
                             <field name="status"/>

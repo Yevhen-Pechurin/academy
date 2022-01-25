@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_carlabel">
+        <table>
+            <tr>
+                <td class="text-center allign-middle table table-bordered mb-0" style="border: 1px solid black;">
+                    <t t-if="car.number">
+                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Codabar', car.name, 300, 88)"
+                             alt="Barcode"/>
+                        <div t-field="car.name"/>
+
+                    </t>
+                    <t t-else="">
+                        <span class="text-muted">No barcode available</span>
+                    </t>
+                </td>
+            </tr>
+        </table>
+
+    </template>
+
+    <template id="report_barcode_car">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="car">
+                    <t t-call="rental.report_carlabel"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>

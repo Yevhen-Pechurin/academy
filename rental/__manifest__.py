@@ -28,6 +28,8 @@
         'wizards/view_wizard_book_on_hand.xml',
         'views/car_views.xml',
         'views/templates.xml',
+        'report/barcode_car_report.xml',
+        'report/barcode_car_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -36,11 +38,9 @@
     'assets': {
         'web.assets_qweb': [
             'rental/static/src/xml/*.xml',
-            'rental/static/src/components/*/*.xml',
         ],
         'web.assets_backend': [
             'rental/static/src/js/*.js',
-            'rental/static/src/components/*/*.js',
         ],
     },
     'license': 'LGPL-3',
