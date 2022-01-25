@@ -7,12 +7,12 @@ class WizardDemo(models.TransientModel):
     _description = 'Wizard for user'
 
     date = fields.Date()
-    partner_id = fields.Many2one('res.partner')
 
     def demo(self):
-        self.env['demo.demo'].sudo().create({
-            'name': 'Demo for %s' % (self.partner_id.name),
-            'user_id': lambda self: self.env.user.name,
-            'partner_id': self.partner_id.id,
+        partner = self.env['res.partner'].sudo().browse(self.env.context['active_ids'])
+        self.env['demo.demo'].create([{
+            'name': 'Demo for %s' % partner.name,
+            'user_id': lambda self: self.env.user.id,
+            'partner_id': partner.id,
             'date': self.date
-        })
+        }])
