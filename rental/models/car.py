@@ -90,3 +90,6 @@ class Car(models.Model):
                 car.status = 'unavailable'
             else:
                 car.status = 'in_garage'
+
+    def print_barcode(self):
+        return self.env['ir.actions.report']._for_xml_id("rental.action_report_car_barcode")

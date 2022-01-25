@@ -17,6 +17,9 @@
         <field name="model">rental.car</field>
         <field name="arch" type="xml">
             <tree string="Cars list">
+                <header>
+                    <button string="Print barcode" type="object" name="print_barcode"/>
+                </header>
                 <field name="name"/>
                 <field name="model" widget="my-custom-field"/> <!-- <field name="model_id"/> -->
                 <field name="number"/>
@@ -34,6 +37,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button string="Print barcode" type="object" name="print_barcode"/>
                     <field name="status" widget="statusbar" statusbar_visible="in_garage,tented,on_maintanance,unavailable"/>
                 </header>
                 <sheet>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_car_barcode_template">
+        <div class="o_label_sheet" t-att-style="padding_page">
+            <table class="table table-sm table-borderless">
+                <tr>
+                    <th class="table-active text-center" style="height: 4rem;">
+                        <strong t-field="car.name"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="text-center align-middle" style="height: 6rem;">
+                        <t t-if="car.status != 'unavailable'">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('UPCA', car.number, 200, 200)" alt="Barcode"/>
+                        </t>
+                        <t t-else=""><span class="text-muted">The car is unavailable</span></t>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_car_barcode">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="car">
+                    <t t-call="rental.report_car_barcode_template" t-lang="car.client_id.lang"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>
