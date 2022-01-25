@@ -45,7 +45,7 @@
                     </div>
                     <group>
                         <group string="Info">
-                            <field name="model" widget="my-custom-field"/>
+                            <field name="model" widget="custom-component-wrapper"/> <!-- widget="my-custom-field" -->
                             <field name="number"/>
                             <field name="year"/>
                             <field name="status"/>

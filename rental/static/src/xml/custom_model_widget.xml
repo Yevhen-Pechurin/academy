@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
-    <t t-name="test_template">
+    <t t-name="custom_model_widget_template">
         <div class="test_search_div">
             <ul class="test_search_ul list-unstyled">
                 <li t-foreach="list_search" t-as="list_item" class="test_search_li">

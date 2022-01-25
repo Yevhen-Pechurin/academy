@@ -60,11 +60,15 @@ class Car(models.Model):
 
     @api.model
     def get_model(self, model_name):
-        values = {}
-        values['models'] = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
-        #records = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)])
+        #Some ways of managing the data:
+        """values = {'models': self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])}
+        """
+        """values = {'models': self.env['rental.car'].sudo().search_read([('model_name', 'ilike', model_name)], fields = ['model_name', 'id'], limit=5)}
+        """
+        """records = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)])
         #values['models'] = [[r.id, r.model_name] for r in records]
-        return values
+        """
+        return self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
 
     @api.depends('model', 'number')
     def _compute_car_name(self):
