@@ -139,3 +139,7 @@ class Book(models.Model):
                 book.status = 'unavailable'
             else:
                 book.status = book.status
+
+    def print_qrcode(self):
+        return self.env['ir.actions.report']._for_xml_id('library.action_report_book')
+
