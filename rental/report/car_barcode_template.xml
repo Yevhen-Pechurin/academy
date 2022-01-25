@@ -5,17 +5,13 @@
         <div class="o_label_sheet" t-att-style="padding_page">
             <table class="table table-sm table-borderless">
                 <tr>
-                    <th class="table-active text-center" style="height: 4rem;">
-                        <strong t-field="car.name"/>
-                    </th>
-                </tr>
-                <tr>
-                    <td class="text-center align-middle" style="height: 6rem;">
+                    <th class="text-center align-middle" style="height: 10rem; width: 10rem;">
                         <t t-if="car.status != 'unavailable'">
-                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('UPCA', car.number, 200, 200)" alt="Barcode"/>
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('UPCA', car.name, 550, 300)" alt="Barcode"/>
+                            <p t-field="car.name"/>
                         </t>
                         <t t-else=""><span class="text-muted">The car is unavailable</span></t>
-                    </td>
+                    </th>
                 </tr>
             </table>
         </div>
