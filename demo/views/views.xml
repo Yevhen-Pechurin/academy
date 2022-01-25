@@ -63,7 +63,8 @@
       <field name="arch" type="xml">
         <form>
           <header>
-            <field name="status" widget="statusbar"/>
+            <button name="action_demo_wizard" string="Open Wizard" class="oe_highlight" type="object"></button>
+            <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
             <div class="oe_title">
               <h1><field name="name"/></h1>
             </div>
@@ -88,54 +89,54 @@
     </record>
 
     <record id="demo_kanban_view" model="ir.ui.view">
-            <field name="name"> demo.kanban</field>
-            <field name="model">demo.demo</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
-                    <field name="name"/>
-                    <field name="partner_id"/>
-                    <field name="status"/>
-                    <field name="date"/>
+      <field name="name"> demo.kanban</field>
+      <field name="model">demo.demo</field>
+      <field name="arch" type="xml">
+        <kanban default_group_by="status" class="o_kanban_small_column" create="true">
+          <field name="name"/>
+          <field name="partner_id"/>
+          <field name="status"/>
+          <field name="date"/>
 
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
-                                 style="width:60mm; height:40mm;;">
-                                <div class="oe_kanban_content flex-grow-1" style="display:flex">
-                                    <div style="margin-left:10px">
-                                        <div class="o_kanban_record_title o_kanban_details">
-                                            <strong><field name="name"></field></strong>
-                                        </div>
-                                        <div style="max-width:85px">
-                                            <span class="o_text_overflow" t-if="record.partner_id.value"
-                                                  t-esc="record.partner_id.value">
-                                            </span>
-                                            <p><field name="status"></field></p>
-                                            <p><field name="date"></field></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column"
+                   style="width:60mm; height:40mm;;">
+                <div class="oe_kanban_content flex-grow-1" style="display:flex">
+                  <div style="margin-left:10px">
+                    <div class="o_kanban_record_title o_kanban_details">
+                      <strong><field name="name"></field></strong>
+                    </div>
+                    <div style="max-width:85px">
+                      <span class="o_text_overflow" t-if="record.partner_id.value"
+                            t-esc="record.partner_id.value">
+                      </span>
+                      <p><field name="status"></field></p>
+                      <p><field name="date"></field></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
 
     <record id="extension" model="ir.ui.view">
-            <field name="name">Extension</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <!-- to insert your fields at the end of the list -->
-                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
-                    <button type="object"
-                            attrs="{'invisible': [('demos_count', '=', 0)]}" name="get_demos">
-                        <field string="Demos" name="demos_count" widget="statinfo"></field>
-                    </button>
-                </xpath>
-            </field>
-        </record>
+      <field name="name">Extension</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <!-- to insert your fields at the end of the list -->
+        <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+          <button type="object"
+                  attrs="{'invisible': [('demos_count', '=', 0)]}" name="get_demos">
+            <field string="Demos" name="demos_count" widget="statinfo"></field>
+          </button>
+        </xpath>
+      </field>
+    </record>
 
     <!-- Top menu item -->
     <menuitem id="demo_menu" name="Demo"/>
