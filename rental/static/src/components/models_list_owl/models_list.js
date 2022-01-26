@@ -19,7 +19,6 @@ class ModelsListComponent extends Component {
             dataPointID: this.props.dataPointId,
             changes: {model, logo}
         });
-        debugger;
         this.trigger("model-chosen", {model: model});
     }
 }
