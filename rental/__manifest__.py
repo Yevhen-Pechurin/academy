@@ -14,12 +14,8 @@
         'views/car_rental_view.xml',
         'wizards/wizard_loan.xml',
         'data/ir_cron.xml',
-<<<<<<< HEAD
         'report/barcode_car_report.xml',
         'report/barcode_car_template.xml',
-=======
-
->>>>>>> origin/15.0-Valentin-rental_car
     ],
     'demo': [
         'demo/car_rental_demo.xml',
