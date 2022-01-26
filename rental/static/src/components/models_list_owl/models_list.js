@@ -8,11 +8,29 @@ const AbstractFieldOwl = require('web.AbstractFieldOwl');
 const field_registry = require('web.field_registry_owl');
 import { useService } from "@web/core/utils/hooks";
 
+class ModelsListComponent extends Component {
+    async _onClickGetModelInfo(ev) {
+        const {model_name: model, manufacturer_logo: logo} = (await this.rpc({
+            model: 'rental.car_model',
+            method: 'read',
+            args: [[+ev.target.dataset.id], ['model_name', 'manufacturer_logo']],
+            }))[0];
+        this.trigger('field-changed', {
+            dataPointID: this.props.dataPointId,
+            changes: {model, logo}
+        });
+        debugger;
+        this.trigger("model-chosen", {model: model});
+    }
+}
+
+ModelsListComponent.template = 'rental.ModelsListComponent';
+
 class WrapperComponent extends AbstractFieldOwl {
     setup() {
         this.rpc = useService("rpc");
         this.state = useState({models: []});
-    };
+    }
 
     async _onInput(ev) {
         if (ev.target.value === '') { this.state.models = []; return; };
@@ -22,34 +40,27 @@ class WrapperComponent extends AbstractFieldOwl {
             args: [ev.target.value]});
         this.trigger('field-changed', {
             dataPointID: this.dataPointId,
-            changes: {model: ev.target.value },
+            changes: { model: ev.target.value },
         });
-    };
+        ev.stopPropagation();
+    }
 
-    async _onClickGetModelInfo(ev) {
-        const {model_name: model, manufacturer_logo: logo} = (await this.rpc({
-            model: 'rental.car_model',
-            method: 'read',
-            args: [[+ev.target.dataset.id], ['model_name', 'manufacturer_logo']],
-            }))[0];
-        this.trigger('field-changed', {
-            dataPointID: this.dataPointId,
-            changes: {model, logo},
-        });
-        ev.target.parentElement.parentElement.previousSibling.value = model;
+    _setFieldToChosenModel(ev) {
+        ev.currentTarget.firstChild.value = ev.detail.model;
         this.state.models = [];
-    };
+    }
 
     async _onFocusoutCleanup() {
         //setTimeout is essential here to prevent dropdown list being deleted before ul click event can take place
         setTimeout(() => {
             this.state.models = [];
         }, 200);
-        
-    };
+    }
 }
-WrapperComponent.template = 'rental.ModelsListComponent';
-//WrapperComponent.components = { ModelsListComponen };
+Object.assign(WrapperComponent, {
+    template: 'rental.WrapperComponent',
+    components: { ModelsListComponent },
+});
 
 field_registry.add('custom-component-wrapper', WrapperComponent);
 
