@@ -1,143 +1,153 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <data>
+        <!-- explicit list view definition -->
 
-      <record model="ir.ui.view" id="book_kanban_view">
-        <field name="name">Cars Kanban</field>
-        <field name="model">rental.car</field>
-        <field name="arch" type="xml">
-            <kanban default_group_by="status" class="o_kanban_small_column" create="false">
-                <field name="name"/>
-                <field name="date_on_loan"/>
-                <field name="partner_id"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
-                            <div class="oe_kanban_content flex-grow-1">
-                                <div class="o_kanban_record_title oe_kanban_details">
-                                    <strong><field name="name"/></strong>
-                                </div>
-                                <div>
-                                    <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
-                                </div>
-                                <div>
-                                    date_on_loan:
-                                    <field name="date_on_loan"/>
+        <record model="ir.ui.view" id="book_kanban_view">
+            <field name="name">Cars Kanban</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                    <field name="name"/>
+                    <field name="date_on_loan"/>
+                    <field name="partner_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                                <div class="oe_kanban_content flex-grow-1">
+                                    <div class="o_kanban_record_title oe_kanban_details">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div>
+                                        <span class="o_text_overflow" t-if="record.partner_id.value"
+                                              t-esc="record.partner_id.value"/>
+                                    </div>
+                                    <div>
+                                        date_on_loan:
+                                        <field name="date_on_loan"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="car_rental_car_form_view">
-        <field name="name">rental.car.form.view</field>
-        <field name="model">rental.car</field>
-        <field name="arch" type="xml">
-            <form>
-                   <header>
-                        <button name="action_on_hand" string="On Loan" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
-                        <button name="action_on_shelf" string="In Garage" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+        <record model="ir.ui.view" id="car_rental_car_form_view">
+            <field name="name">rental.car.form.view</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_on_hand" string="On Loan" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
+                        <button name="action_on_shelf" string="In Garage" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
                         <field name="status" widget="statusbar" statusbar_visible="in_garage,on_loan"/>
                     </header>
-                <sheet>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1><field class="o_text_overflow" name="name"/></h1>
-                    </div>
-                    <group>
-                        <group string="Info" name="info">
-                            <field name="model" widget="my-custom-field"/>
-<!--                            <field name="model" widget="my_custom_field_owl"/>-->
-                            <field name="number"/>
-                            <field name="year"/>
-                            <field name="status"/>
-                            <field name="odometer"/>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field class="o_text_overflow" name="name"/></h1>
+                        </div>
+                        <group>
+                            <group string="Info" name="info">
+                                <field name="model" widget="my-custom-field"/>
+                                <!--                            <field name="model" widget="my_custom_field_owl"/>-->
+                                <field name="number" invisible="1"/>
+                                <field name="year"/>
+                                <field name="status"/>
+                                <field name="odometer"/>
+                            </group>
+                            <group string="Client">
+                                <field name="partner_id"/>
+                                <field name="date_on_loan"/>
+                            </group>
                         </group>
-                        <group string="Client">
-                        <field name="partner_id"/>
-                        <field name="date_on_loan"/>
-                    </group>
-                    </group>
-                    <notebook>
-                        <page string="History">
-                            <field name="history_ids" options="{'no_open': True}">
-                                <tree create="false" delete="false" edit="false" default_order="id desc">
-                                    <field name="partner_id"/>
-                                    <field name="start_odometer"/>
-                                    <field name="finish_odometer"/>
-                                    <field name="date_in_garage"/>
-                                    <field name="date_on_loan"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <div class="oe_chatter">
+                        <notebook>
+                            <page string="History">
+                                <field name="history_ids" options="{'no_open': True}">
+                                    <tree create="false" delete="false" edit="false" default_order="id desc">
+                                        <field name="partner_id"/>
+                                        <field name="start_odometer"/>
+                                        <field name="finish_odometer"/>
+                                        <field name="date_in_garage"/>
+                                        <field name="date_on_loan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
                         <field name="message_follower_ids" groups="base.group_user"/>
                         <field name="message_ids"/>
-                </div>
-            </form>
-        </field>
-    </record>
+                    </div>
+                </form>
+            </field>
+        </record>
 
-    <record id="car_rental_car_view_tree" model="ir.ui.view">
-        <field name="name">rental.car.tree</field>
-        <field name="model">rental.car</field>
-        <field name="arch" type="xml">
-            <tree string="Cars">
-                <field name="name"/>
-                <field name="model"/>
-                <field name="number"/>
-                <field name="year"/>
-                <field name="status"/>
-                <field name="odometer"/>
-            </tree>
-        </field>
-    </record>
-    <!-- actions opening views on models -->
+        <record id="car_pivot_view" model="ir.ui.view">
+            <field name="name">rental.car.pivot</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <pivot string="Cars">
+                    <field name="year" type="col"/>
+                </pivot>
+            </field>
+        </record>
 
-    <record model="ir.actions.act_window" id="rental.action_window">
-      <field name="name">rental window</field>
-      <field name="res_model">rental.car</field>
-      <field name="view_mode">tree,form,kanban</field>
-    </record>
+        <record id="car_rental_car_view_tree" model="ir.ui.view">
+            <field name="name">rental.car.tree</field>
+            <field name="model">rental.car</field>
+            <field name="arch" type="xml">
+                <tree string="Cars">
+                    <field name="name"/>
+                    <field name="model"/>
+                    <field name="number"/>
+                    <field name="year"/>
+                    <field name="status"/>
+                    <field name="odometer"/>
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
 
-
-
-    <!-- server action to the one above -->
-
-    <record model="ir.actions.server" id="rental.action_server">
-      <field name="name">rental server</field>
-      <field name="model_id" ref="model_rental_car"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
+        <record model="ir.actions.act_window" id="rental.action_window">
+            <field name="name">rental window</field>
+            <field name="res_model">rental.car</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        </record>
 
 
-    <!-- Top menu item -->
+        <!-- server action to the one above -->
 
-    <menuitem name="rental" id="rental.menu_root"/>
+        <record model="ir.actions.server" id="rental.action_server">
+            <field name="name">rental server</field>
+            <field name="model_id" ref="model_rental_car"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    "type": "ir.actions.act_window",
+                    "view_mode": "tree,form",
+                    "res_model": model._name,
+                }
+            </field>
+        </record>
 
-    <!-- menu categories -->
 
-<!--    <menuitem name="Menu 1" id="rental.menu_1" parent="rental.menu_root"/>-->
-<!--    <menuitem name="Menu 2" id="rental.menu_2" parent="rental.menu_root"/>-->
 
-    <!-- actions -->
 
-    <menuitem name="Rental" id="rental.menu_1_list" parent="rental.menu_root"
-              action="rental.action_window"/>
-<!--    <menuitem name="Server to list" id="rental" parent="rental.menu_2"-->
-<!--              action="rental.action_server"/>-->
 
-  </data>
+        <!-- menu categories -->
+
+        <!--    <menuitem name="Menu 1" id="rental.menu_1" parent="rental.menu_root"/>-->
+        <!--    <menuitem name="Menu 2" id="rental.menu_2" parent="rental.menu_root"/>-->
+
+        <!-- actions -->
+
+
+        <!--    <menuitem name="Server to list" id="rental" parent="rental.menu_2"-->
+        <!--              action="rental.action_server"/>-->
+
+    </data>
 </odoo>

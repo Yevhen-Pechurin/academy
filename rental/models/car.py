@@ -23,8 +23,8 @@ class Car(models.Model):
     _description = 'Car'
 
     name = fields.Char(compute='_compute_car_name')
-    number = fields.Char(copy=False, tracking=True, required=True)
-    model = fields.Char(copy=False, tracking=True, required=True)
+    number = fields.Char(copy=False, readonly=True, default='New')
+    model = fields.Char(tracking=True, required=True)
     year = fields.Integer(tracking=True, required=True)
     status = fields.Selection([
         ('in_garage', 'In Garage'),
@@ -84,4 +84,10 @@ class Car(models.Model):
             'model_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', query)], fields = ['model', 'id'], limit=5)
         }
         return values
+
+    @api.model
+    def create(self, vals):
+        if vals.get('number', _('New')) == _('New'):
+            vals['number'] = self.env['ir.sequence'].next_by_code('rental.car') or _('New')
+            return super(Car, self).create(vals)
 

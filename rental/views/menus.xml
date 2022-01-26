@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Top menu item -->
+
+    <menuitem name="rental" id="rental.menu_root">
+        <menuitem name="Rental" id="rental.menu_rental">
+            <menuitem name="Cars" id="menu_all_cars" action="rental.action_window"/>
+        </menuitem>
+
+        <menuitem name="Reports" id="rental.menu_reports">
+            <menuitem name="Car Report" id="menu_car_report" action="action_car_report"/>
+        </menuitem>
+
+    </menuitem>
+</odoo>

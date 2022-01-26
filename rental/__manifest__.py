@@ -24,12 +24,15 @@
 
     # always loaded
     'data': [
+        'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_book_on_hand.xml',
         'views/car_views.xml',
         'views/templates.xml',
         'report/barcode_car_report.xml',
         'report/barcode_car_template.xml',
+        'report/car_report_views.xml',
+        'views/menus.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
