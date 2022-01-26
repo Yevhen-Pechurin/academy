@@ -14,7 +14,8 @@
         'views/car_rental_view.xml',
         'wizards/wizard_loan.xml',
         'data/ir_cron.xml',
-
+        'report/barcode_car_report.xml',
+        'report/barcode_car_template.xml',
     ],
     'demo': [
         'demo/car_rental_demo.xml',
