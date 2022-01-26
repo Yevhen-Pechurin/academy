@@ -48,7 +48,7 @@ class BookInfo(models.Model):
     _inherit = 'mail.thread'
     _description = 'Book Info'
 
-    name = fields.Char(tracking=True)
+    name = fields.Char(tracking=True, translate=True)
     author_id = fields.Many2one('library.author', tracking=True)
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
@@ -125,3 +125,6 @@ class Book(models.Model):
                 book.status = 'unavailable'
             else:
                 book.status = book.status
+
+    def print_qrcode(self):
+        return self.env['ir.actions.report']._for_xml_id('library.action_report_book')

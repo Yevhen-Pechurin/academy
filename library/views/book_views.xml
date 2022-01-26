@@ -6,6 +6,9 @@
             <field name="model">library.book</field>
             <field name="arch" type="xml">
                 <tree>
+                    <header>
+                        <button string="Print Qr code" type="object" name="print_qrcode"/>
+                    </header>
                     <field name="name"/>
                     <field name="author_id"/>
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -109,6 +112,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
+                        <button string="Print Qr code" type="object" name="print_qrcode"/>
                         <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
                         <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
                         <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>

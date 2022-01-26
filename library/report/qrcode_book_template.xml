@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_qrcode_book_template">
+        <div style="width: 32%; display: inline-table; height: 10rem;">
+            <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                <tr>
+                    <th class="table-active text-left" style="height: 4rem;">
+                        <strong t-field="book.display_name"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="text-center align-middle">
+                        <t t-if="book.number">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', book.number, 200, 200)" style="height: 10rem;width: 10rem;"/>
+                        </t>
+                        <t t-else=""><span class="text-muted">No number available</span></t>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_qrcode_book">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="book">
+                    <t t-call="library.report_qrcode_book_template"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>
