@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <template id="report_car_qrcode_template">
+            <div style="width: 32%; display: inline-table; height: 10rem;">
+                <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                    <tr>
+                        <th class="table-active text-center" style="height: 4rem;">
+                            <strong t-field="car.name"/>
+                        </th>
+                        <th class="table-active text-center" style="height: 4rem;">
+                            <strong>Car Info</strong>
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <td class="text-center align-middle" style="height: 6rem;">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', car.name, 200, 200)"/>
+                        </td >
+                        <td>
+                            <ul>
+                                <li t-esc="'Модель:: ' + car.name"/>
+                                <li t-esc="'Год випуска: ' + str(car.year_of_manufacture)"/>
+                                <li t-esc="'Одометр: ' + str(car.odometer_value)"/>
+                                <li t-esc="'Статус: ' + car.status"/>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </template>
+        <template id="report_car_qrcode">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="car">
+                        <t t-call="rental_car.report_car_qrcode_template"/>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

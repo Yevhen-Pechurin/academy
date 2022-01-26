@@ -8,10 +8,11 @@ odoo.define('rental_car.my_widget', function (require) {
     var QWeb = core.qweb;
 
 
-    var MyWidget = FieldChar.extend({
+        var MyWidget = FieldChar.extend({
 
         events: _.extend({}, FieldChar.prototype.events, {
             'input': '_onInput',
+            // 'focusout': '_onFocusOut',
         }),
         init: function (){
             this._super.apply(this, arguments);
@@ -41,10 +42,28 @@ odoo.define('rental_car.my_widget', function (require) {
         },
         _onClickBrand: function (e) {
 
-            console.log(e.currentTarget);
+            const self = this;
+            this._rpc({
+                model: 'rental_car.car',
+                method: 'brand_info',
+                args: [e.target.dataset.id]
+            }).then((data) => {
+
+
+                self.trigger_up('field_changed', {
+                    dataPointID: self.dataPointID,
+                    operation: 'UPDATE',
+                    changes: {'number': data[0].name}
+                });
+                self.$el.parent().find('.brand_list').remove()
+            });
         },
+        // _onFocusOut(){
+        //     this.$el.parent().find('.brand_list').remove()
+        // }
 
     })
+
     field_registry.add('my_widget', MyWidget);
     return MyWidget;
 

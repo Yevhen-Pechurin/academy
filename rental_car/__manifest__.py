@@ -13,6 +13,9 @@
         "wizards/view_car_for_rent.xml",
         "wizards/view_car_ingarage.xml",
         "wizards/view_car_under_repair.xml",
+        "report/car_report.xml",
+        "report/qrcode_car_template.xml",
+        "report/barcode_car_template.xml",
         "views/views.xml",
 
     ],
@@ -22,10 +25,11 @@
 
     "assets": {
         'web.assets_qweb': [
-            'rental_car/static/src/xml/my_widget.xml',
+            # 'rental_car/static/src/my_owl_component/my_owl_component.xml',
+            # 'rental_car/static/src/my_owl_component/test.xml',
         ],
         "web.assets_backend": [
-            'rental_car/static/src/js/my_widget.js',
+            # 'rental_car/static/src/my_owl_component/my_owl_component.js',
 
         ],
 

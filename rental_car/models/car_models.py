@@ -76,10 +76,14 @@ class Car(models.Model):
 
     @api.model
     def brand_list(self, name):
-        values = [{'id': "qwdeid", 'name': "ede"}]
+        values = [{'id': "u", 'name': "i"}]
         for i in self.env['rental_car.brand'].sudo().search([('name', 'ilike', name)]):
             values.append({'id': i.id, 'name': i.name})
         return values
+
+    @api.model
+    def brand_info(self, id):
+        return self.env['rental_car.brand'].sudo().browse(int(id)).read(fields=["name"])
 
 
     @api.depends('brand_id', 'number')

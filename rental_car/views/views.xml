@@ -24,7 +24,7 @@
         </record>
 
 
-<!--        <record id="res_partner_inherited" model="ir.ui.view">-->
+<!--        <report id="res_partner_inherited" model="ir.ui.view">-->
 <!--            <field name="name">Books</field>-->
 <!--            <field name="model">res.partner</field>-->
 <!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
@@ -35,7 +35,7 @@
 <!--                    </button>-->
 <!--                </xpath>-->
 <!--            </field>-->
-<!--        </record>-->
+<!--        </report>-->
 
 
          <record id="car_kanban_view" model="ir.ui.view">
@@ -70,7 +70,7 @@
         </record>
 
 
-<!--          <record id="book_search" model="ir.ui.view">-->
+<!--          <report id="book_search" model="ir.ui.view">-->
 <!--            <field name="name">Book Search</field>-->
 <!--            <field name="model">library.book</field>-->
 <!--            <field name="arch" type="xml">-->
@@ -92,7 +92,7 @@
 <!--                    </group>-->
 <!--                </search>-->
 <!--             </field>-->
-<!--        </record>-->
+<!--        </report>-->
 
 
         <record id="car_form_view" model="ir.ui.view">
@@ -115,7 +115,7 @@
                             </div>
                         <group>
                             <group string="Info">
-                                <field name="brand_id" widget="my_widget"/>
+                                <field name="brand_id" />
                                 <field name="number"/>
                                 <field name="year_of_manufacture" />
                                 <field name="odometer_value"/>
