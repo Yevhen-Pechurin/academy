@@ -8,7 +8,7 @@ const AbstractFieldOwl = require('web.AbstractFieldOwl');
 const field_registry = require('web.field_registry_owl');
 import { useService } from "@web/core/utils/hooks";
 
-class Parent extends AbstractFieldOwl {
+class WrapperComponent extends AbstractFieldOwl {
     setup() {
         this.rpc = useService("rpc");
         this.state = useState({models: []});
@@ -20,6 +20,10 @@ class Parent extends AbstractFieldOwl {
             model: 'rental.car', 
             method: 'get_model',
             args: [ev.target.value]});
+        this.trigger('field-changed', {
+            dataPointID: this.dataPointId,
+            changes: {model: ev.target.value },
+        });
     };
 
     async _onClickGetModelInfo(ev) {
@@ -34,7 +38,6 @@ class Parent extends AbstractFieldOwl {
         });
         ev.target.parentElement.parentElement.previousSibling.value = model;
         this.state.models = [];
-        ev.stopPropagation();
     };
 
     async _onFocusoutCleanup() {
@@ -45,8 +48,9 @@ class Parent extends AbstractFieldOwl {
         
     };
 }
-Parent.template = 'rental.ModelsListComponent';
+WrapperComponent.template = 'rental.ModelsListComponent';
+//WrapperComponent.components = { ModelsListComponen };
 
-field_registry.add('custom-component-wrapper', Parent);
+field_registry.add('custom-component-wrapper', WrapperComponent);
 
-export default Parent;
+export default WrapperComponent;
