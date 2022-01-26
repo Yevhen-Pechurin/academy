@@ -46,6 +46,11 @@
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
                 <tree>
+                    <header>
+                        <button name="print_qrcode" string="Qrcode" type="object"/>
+                        <button name="print_barcode" string="Barcode" type="object"/>
+
+                    </header>
                     <field name="name"/>
                     <field name="status"/>
                     <field name="year"/>
@@ -86,7 +91,7 @@
                         <group>
                             <group string="Info">
                                 <field name="model" widget="list_widget"/>
-                                <field name="number" />
+                                <field name="number"/>
                                 <field name="year"/>
                                 <field name="odometer"/>
 

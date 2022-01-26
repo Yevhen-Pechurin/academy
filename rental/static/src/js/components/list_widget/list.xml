@@ -1,0 +1,5 @@
+<templates xml:space="preserve">
+<div t-name="myaddon.MyComponent" owl="1">
+<input t-on-input='input' id="input"/>
+</div>
+</templates>

@@ -94,6 +94,12 @@ class Car(models.Model):
     def get_cars_info(self, id, field):
         return self.env['rental.car'].search_read([('id', '=', id)], fields=[field])
 
+    def print_qrcode(self):
+        return self.env['ir.actions.report']._for_xml_id('rental.action_report_car_qrcode')
+
+    def print_barcode(self):
+        return self.env['ir.actions.report']._for_xml_id('rental.action_report_car_barcode')
+
 
 class RepairHistory(models.Model):
     _name = 'rental.repair'

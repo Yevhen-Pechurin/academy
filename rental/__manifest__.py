@@ -14,6 +14,10 @@
         'views/car_rental_view.xml',
         'wizards/wizard_loan.xml',
         'data/ir_cron.xml',
+        'report/qrcode.xml',
+        'report/qrcode_template.xml',
+        'report/barcode.xml',
+        'report/barcode_template.xml'
 
     ],
     'demo': [
@@ -23,11 +27,13 @@
         "web.assets_backend": [
 
             'rental/static/src/js/list.js',
-            'rental/static/src/css/list.css'
+            'rental/static/src/css/list.css',
+            'rental/static/src/js/components/list_widget/list.js'
         ],
         'web.assets_qweb': [
 
-            'rental/static/src/xml/list.xml'
+            'rental/static/src/xml/list.xml',
+            'rental/static/src/js/components/list_widget/list.xml'
         ],
     },
 

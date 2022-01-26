@@ -1,0 +1,35 @@
+<odoo>
+    <template id="report_barcode_car_obj">
+        <div style="width: 32%; display: inline-table; height: 10rem;">
+            <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                <tr>
+                    <th class="table-active text-left">
+                        <strong t-field="car.name"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="text-center align-middle">
+                        <t t-if="car">
+
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('Codabar', car.name, 500, 150)"/>
+                            <br/>
+                            <span t-field="car.model"/> <span t-field="car.number"/>
+                        </t>
+                        <t t-else=""><span class="text-muted">No number available</span></t>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+    <template id="report_barcode_car">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="car">
+                    <t t-call="rental.report_barcode_car_obj">
+
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

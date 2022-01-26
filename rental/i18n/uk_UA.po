@@ -1,0 +1,447 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* rental
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-26 05:53+0000\n"
+"PO-Revision-Date: 2022-01-26 05:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_needaction
+msgid "Action Needed"
+msgstr "Потрібна Дія"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: rental
+#: model:ir.ui.menu,name:rental.all_cars
+msgid "All"
+msgstr "Всі"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_attachment_count
+msgid "Attachment Count"
+msgstr "Кількість Вкладень"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_loan__car_id
+#: model:ir.model.fields,field_description:rental.field_rental_repair__car_id
+msgid "Car"
+msgstr "Автомобіль"
+
+#. module: rental
+#: model:ir.actions.act_window,name:rental.all_cars_action
+#: model:ir.model.fields,field_description:rental.field_res_partner__cars_ids
+#: model:ir.model.fields,field_description:rental.field_res_users__cars_ids
+#: model:ir.ui.menu,name:rental.cars
+#: model_terms:ir.ui.view,arch_db:rental.extension
+msgid "Cars"
+msgstr "Автомобілі"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_res_partner__cars_count
+#: model:ir.model.fields,field_description:rental.field_res_users__cars_count
+msgid "Cars Count"
+msgstr "Кількість Автомобілей"
+
+#. module: rental
+#. openerp-web
+#: code:addons/rental/static/src/xml/actions.xml:0
+#, python-format
+msgid "Check Max Speed"
+msgstr "Подивитись Максимальну Швидкість"
+
+#. module: rental
+#: model:ir.model,name:rental.model_rental_car
+msgid "Class for cars"
+msgstr "Клас Для Атомобілей"
+
+#. module: rental
+#: model:ir.model,name:rental.model_rental_loan
+msgid "Class for cars loan history"
+msgstr "Клас Для Історії Прокатів"
+
+#. module: rental
+#: model:ir.model,name:rental.model_rental_repair
+msgid "Class for cars repair history"
+msgstr "Клас Для Історії Ремонтів"
+
+#. module: rental
+#: model:ir.model,name:rental.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__create_uid
+#: model:ir.model.fields,field_description:rental.field_rental_loan__create_uid
+#: model:ir.model.fields,field_description:rental.field_rental_repair__create_uid
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__create_uid
+msgid "Created by"
+msgstr "Зроблено Ким"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__create_date
+#: model:ir.model.fields,field_description:rental.field_rental_loan__create_date
+#: model:ir.model.fields,field_description:rental.field_rental_repair__create_date
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__create_date
+msgid "Created on"
+msgstr "Створено"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__display_name
+#: model:ir.model.fields,field_description:rental.field_rental_loan__display_name
+#: model:ir.model.fields,field_description:rental.field_rental_repair__display_name
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__display_name
+msgid "Display Name"
+msgstr "Показати Ім'я"
+
+#. module: rental
+#. openerp-web
+#: code:addons/rental/static/src/xml/actions.xml:0
+#, python-format
+msgid "Drive"
+msgstr "Їхати"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_loan__due_date
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__due_date
+msgid "Due Date"
+msgstr "Дедлайн"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_loan__end
+#: model:ir.model.fields,field_description:rental.field_rental_repair__end
+msgid "End"
+msgstr "Закінчено"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_repair__end_date
+msgid "End Date"
+msgstr "Дедлайн"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_follower_ids
+msgid "Followers"
+msgstr "Підписники"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Підписники (Користувачі)"
+
+#. module: rental
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Get"
+msgstr "Отримати Автомобіль"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__has_message
+msgid "Has Message"
+msgstr "Має Повідомлення"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__id
+#: model:ir.model.fields,field_description:rental.field_rental_loan__id
+#: model:ir.model.fields,field_description:rental.field_rental_repair__id
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__id
+msgid "ID"
+msgstr "ІД"
+
+#. module: rental
+#: model:ir.model.fields,help:rental.field_rental_car__message_needaction
+#: model:ir.model.fields,help:rental.field_rental_car__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Якщо Позначено, Нові Повідомлення Потребують Вашої Уваги."
+
+#. module: rental
+#: model:ir.model.fields,help:rental.field_rental_car__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Якщо Позначено, Деякі Повідомлення Містять Помилку Доставки."
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__image_1920
+msgid "Image"
+msgstr "Зображення"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__image_1024
+msgid "Image 1024"
+msgstr "Зображення 1024"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__image_128
+msgid "Image 128"
+msgstr "Зображення 128"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__image_256
+msgid "Image 256"
+msgstr "Зображення 256"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__image_512
+msgid "Image 512"
+msgstr "Зображення 512"
+
+#. module: rental
+#: model:ir.ui.menu,name:rental.garage_cars
+msgid "In Garage"
+msgstr "В Гаражі"
+
+#. module: rental
+#: model:ir.actions.act_window,name:rental.garage_cars_action
+msgid "In The Garage"
+msgstr "В Гаражі"
+
+#. module: rental
+#: model:ir.model.fields.selection,name:rental.selection__rental_car__status__in_garage
+msgid "In the garage"
+msgstr "В Гаражі"
+
+#. module: rental
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Info"
+msgstr "Інфо"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_is_follower
+msgid "Is Follower"
+msgstr "Є Підписником"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car____last_update
+#: model:ir.model.fields,field_description:rental.field_rental_loan____last_update
+#: model:ir.model.fields,field_description:rental.field_rental_repair____last_update
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan____last_update
+msgid "Last Modified on"
+msgstr "Остання Зміна"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__write_uid
+#: model:ir.model.fields,field_description:rental.field_rental_loan__write_uid
+#: model:ir.model.fields,field_description:rental.field_rental_repair__write_uid
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__write_uid
+msgid "Last Updated by"
+msgstr "Остання Зміна Ким"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__write_date
+#: model:ir.model.fields,field_description:rental.field_rental_loan__write_date
+#: model:ir.model.fields,field_description:rental.field_rental_repair__write_date
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__write_date
+msgid "Last Updated on"
+msgstr "Остання Зміна"
+
+#. module: rental
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Loan"
+msgstr "Прокат"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__loan_date
+msgid "Loan Date"
+msgstr "Дата Початку Проката"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__loan_history_ids
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Loan History"
+msgstr "Історія Прокатів"
+
+#. module: rental
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Logo"
+msgstr "Лого"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Головний Додаток"
+
+#. module: rental
+#: model:res.groups,name:rental.group_rental_manager
+msgid "Manager"
+msgstr "Менеджер"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_has_error
+msgid "Message Delivery error"
+msgstr "Помилка Доставки Повідомлення"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_ids
+msgid "Messages"
+msgstr "Повідомлення"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__model
+msgid "Model"
+msgstr "Модель"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__name
+msgid "Name"
+msgstr "Назва"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__number
+msgid "Number"
+msgstr "Номер"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Кількість Дій"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_has_error_counter
+msgid "Number of errors"
+msgstr "Кількість Помилок"
+
+#. module: rental
+#: model:ir.model.fields,help:rental.field_rental_car__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Кількість Повідомлень, Які Потребують Дій"
+
+#. module: rental
+#: model:ir.model.fields,help:rental.field_rental_car__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Кількість Повідомлень З Помилкою Доставки"
+
+#. module: rental
+#: model:ir.model.fields,help:rental.field_rental_car__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Кількість Непрочитаних Повідомлень"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__odometer
+msgid "Odometer"
+msgstr "Одометр"
+
+#. module: rental
+#: code:addons/rental/models/car.py:0
+#: model:ir.actions.act_window,name:rental.loan_cars_action
+#: model:ir.model.fields.selection,name:rental.selection__rental_car__status__on_loan
+#: model:ir.ui.menu,name:rental.loan_cars
+#: model_terms:ir.ui.view,arch_db:rental.wizard_loan_form_view
+#, python-format
+msgid "On Loan"
+msgstr "На Прокаті"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__partner_id
+#: model:ir.model.fields,field_description:rental.field_rental_loan__partner_id
+#: model:ir.model.fields,field_description:rental.field_rental_wizard_loan__partner_id
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Partner"
+msgstr "Користувач"
+
+#. module: rental
+#: model:ir.module.category,name:rental.module_category_rental
+#: model:ir.ui.menu,name:rental.car_rental_menu
+msgid "Rental"
+msgstr "Прокат"
+
+#. module: rental
+#: model:ir.actions.server,name:rental.ir_cron_data_check_work_permit_validity_ir_actions_server
+#: model:ir.cron,cron_name:rental.ir_cron_data_check_work_permit_validity
+#: model:ir.cron,name:rental.ir_cron_data_check_work_permit_validity
+msgid "Rental: send some messages"
+msgstr "Прокат: Відправка Повідомлень"
+
+#. module: rental
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Repair"
+msgstr "Ремонт"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__repair_history_ids
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Repair History"
+msgstr "Історія Ремонтів"
+
+#. module: rental
+#. openerp-web
+#: code:addons/rental/static/src/xml/actions.xml:0
+#, python-format
+msgid "Speed Up"
+msgstr "Збільшити Швидкість"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_repair__start_date
+msgid "Start Date"
+msgstr "Дата Початку"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__status
+msgid "Status"
+msgstr "Статус"
+
+#. module: rental
+#: model:ir.actions.act_window,name:rental.unavailable_cars_action
+#: model:ir.model.fields.selection,name:rental.selection__rental_car__status__unavailable
+#: model:ir.ui.menu,name:rental.unavailable_cars
+#: model_terms:ir.ui.view,arch_db:rental.books_form_view
+msgid "Unavailable"
+msgstr "Недоступно"
+
+#. module: rental
+#: model:ir.actions.act_window,name:rental.under_repair_cars_action
+#: model:ir.ui.menu,name:rental.repair_cars
+msgid "Under Repair"
+msgstr "На Ремонті"
+
+#. module: rental
+#: model:ir.model.fields.selection,name:rental.selection__rental_car__status__under_repair
+msgid "Under repair"
+msgstr "На Ремонті"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_unread
+msgid "Unread Messages"
+msgstr "Непрочитані Повідомлення"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Лічильник Непрочитаних Повідомлень"
+
+#. module: rental
+#: model:res.groups,name:rental.group_rental_user
+msgid "User"
+msgstr "Користувач"
+
+#. module: rental
+#: code:addons/rental/models/partner.py:0
+#, python-format
+msgid "User Cars"
+msgstr "Автомобілі Користувачів"
+
+#. module: rental
+#: model:ir.model,name:rental.model_rental_wizard_loan
+msgid "Wizard for cars loan"
+msgstr "Вікно Для Прокату Автомобілей"
+
+#. module: rental
+#: model:ir.model.fields,field_description:rental.field_rental_car__year
+msgid "Year"
+msgstr "Рік"
+
+#. module: rental
+#. openerp-web
+#: code:addons/rental/static/src/xml/list.xml:0
+#, python-format
+msgid "yes"
+msgstr "Так"
