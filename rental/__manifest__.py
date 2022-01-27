@@ -6,6 +6,7 @@
     'category': 'Services/Car Rental',
     'depends': [
         'mail',
+        'contacts',
 	],
     'demo': [
         'demo/demo.xml',
@@ -13,6 +14,8 @@
     'data': [
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
+        'views/res_config_settings.xml',
+        'views/res_partner_views.xml',
         'views/car_views.xml',
         'report/car_barcode_report.xml',
         'report/car_barcode_template.xml',
