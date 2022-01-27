@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem name="library" id="menu_root" groups="library.group_library_user">
+        <menuitem name="Books" id="books">
+            <menuitem name="All" id="menu_all_books" action="action_book" sequence="1"/>
+            <menuitem name="Books On Hand" id="on_hand" action="action_book_on_hand" sequence="2"/>
+            <menuitem name="Books On Shelf" id="on_shelf" action="action_book_on_shelf" sequence="3"/>
+        </menuitem>
+        <menuitem name="Configuration" id="configuration" groups="library.group_library_manager">
+            <menuitem name="Books Info" id="menu_book_info" action="action_book_info"/>
+        </menuitem>
+        <menuitem name="Reports" id="reports" groups="library.group_library_manager">
+            <menuitem name="Book Report" id="menu_book_report" action="action_book_report"/>
+        </menuitem>
+    </menuitem>
+
+</odoo>

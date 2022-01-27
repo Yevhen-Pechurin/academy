@@ -63,7 +63,7 @@ class Book(models.Model):
     _description = 'Book'
 
     book_id = fields.Many2one('library.book.info')
-    number = fields.Char(copy=False)
+    number = fields.Char(copy=False, default='New', readonly=True)
     year = fields.Integer()
     status = fields.Selection([
         ('on_shelf', 'On Shelf'),
@@ -128,3 +128,9 @@ class Book(models.Model):
 
     def print_qrcode(self):
         return self.env['ir.actions.report']._for_xml_id('library.action_report_book')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('number', _('New')) == _('New'):
+            vals['number'] = self.env['ir.sequence'].next_by_code('library.book') or _('New')
+        return super(Book, self).create(vals)

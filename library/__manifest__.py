@@ -26,12 +26,15 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'data/ir_cron.xml',
+        'data/ir_sequence_data.xml',
         'wizards/view_wizard_book_on_hand.xml',
         'views/book_views.xml',
         'views/res_partner_views.xml',
         'views/templates.xml',
         'report/qrcode_book_report.xml',
         'report/qrcode_book_template.xml',
+        'report/book_report_views.xml',
+        'views/menus.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

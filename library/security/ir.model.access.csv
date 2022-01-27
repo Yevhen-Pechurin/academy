@@ -8,3 +8,4 @@ library.access_library_tag,access_library_tag,library.model_library_tag,base.gro
 library.access_library_book_info,access_library_book_info,library.model_library_book_info,,1,0,0,0
 library.access_library_book_info_manager,access_library_book_info,library.model_library_book_info,library.group_library_manager,1,1,1,1
 library.access_library_wizard_on_hand,access_library_wizard_on_hand,library.model_library_wizard_on_hand,library.group_library_user,1,1,1,1
+library.access_library_book_report,access_library_book_report,library.model_library_book_report,base.group_user,1,1,1,1

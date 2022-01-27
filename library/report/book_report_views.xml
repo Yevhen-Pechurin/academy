@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_book_report">
+        <field name="name">Books Report</field>
+        <field name="res_model">library.book.report</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="book_pivot_view">
+        <field name="name">library pivot</field>
+        <field name="model">library.book.report</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="author_id" type="col"/>
+                <field name="partner_id" type="row"/>
+                <field name="avg_count" type="measure"/>
+                <field name="max_year" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+</odoo>
