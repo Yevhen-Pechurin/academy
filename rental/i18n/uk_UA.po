@@ -18,7 +18,7 @@ msgstr ""
 #. module: rental
 #: model_terms:ir.ui.view,arch_db:rental.report_car_barcode_template
 msgid "<span class=\"text-muted\">The car is unavailable</span>"
-msgstr "<span class=\"text-muted\">Це авто недоступне</span>""
+msgstr "<span class=\"text-muted\">Це авто недоступне</span>"
 
 #. module: rental
 #: model:ir.model,name:rental.model_rental_car
@@ -56,7 +56,7 @@ msgstr "Усі звіти"
 #. module: rental
 #: model:ir.model.fields,field_description:rental.field_rental_car__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Кількість додатків"
 
 #. module: rental
 #: model:ir.actions.report,name:rental.action_report_car_barcode
@@ -211,18 +211,18 @@ msgstr "Отримано повідомлення"
 #: model:ir.model.fields,field_description:rental.field_rental_history__id
 #: model:ir.model.fields,field_description:rental.field_rental_maintenance_history__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: rental
 #: model:ir.model.fields,help:rental.field_rental_car__message_needaction
 #: model:ir.model.fields,help:rental.field_rental_car__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Необхідно переглянути нові повідомлення"
+msgstr "Необхідно переглянути нові повідомлення."
 
 #. module: rental
 #: model:ir.model.fields,help:rental.field_rental_car__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "При відправці деяких повідомлень сталася помилка"
+msgstr "При відправці деяких повідомлень сталася помилка."
 
 #. module: rental
 #: model:ir.model.fields.selection,name:rental.selection__rental_car__status__in_garage
@@ -464,8 +464,3 @@ msgstr "Вища передача"
 #: model:ir.model.fields,field_description:rental.field_rental_car_report__year
 msgid "Year"
 msgstr "Рік"
-
-#. module: rental
-#: model:ir.actions.report,print_report_name:rental.action_report_car_barcode
-msgid "object.name"
-msgstr ""
