@@ -90,8 +90,9 @@
                         </div>
                         <group>
                             <group string="Info">
-                                <field name="model" widget="list_widget"/>
+                                <field name="model" widget="cringet"/>
                                 <field name="number"/>
+                                <field name="code"/>
                                 <field name="year"/>
                                 <field name="odometer"/>
 
@@ -197,10 +198,45 @@
                 </xpath>
             </field>
         </record>
+        <!-- action for cars report -->
+        <record id="car_report_action" model="ir.actions.act_window">
+            <field name="name">Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.car_report</field>
+            <field name="view_mode">pivot,graph</field>
+        </record>
 
+        <!-- pivot view for cars -->
+        <record id="cars_report_pivot" model="ir.ui.view">
+            <field name="name">cars.report.pivot.view</field>
+            <field name="model">rental.car_report</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="partner_id" type="row"/>
+                    <field name="max_odometr" type="measure"/>
+                    <field name="avg_odometr" type="measure"/>
+                    <field name="all_odometr" type="measure"/>
+                    <field name="min_odometr" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- graph view for cars -->
+        <record id="cars_report_graph" model="ir.ui.view">
+            <field name="name">cars.report.graph.view</field>
+            <field name="model">rental.car_report</field>
+            <field name="arch" type="xml">
+                <graph>
+                    <field name="partner_id"/>
+                    <field name="all_odometr" type="measure"/>
+                </graph>
+            </field>
+        </record>
         <!-- car rental menues -->
         <menuitem id="car_rental_menu" name="Rental" sequence="1"/>
         <menuitem id="cars" name="Cars" parent="car_rental_menu" sequence="1"/>
+        <menuitem id="car_report" name="Report" parent="car_rental_menu" sequence="2" action="car_report_action"/>
+
         <menuitem id="all_cars" name="All" parent="cars" action="all_cars_action" sequence="1"/>
         <menuitem id="garage_cars" name="In Garage" parent="cars" action="garage_cars_action" sequence="2"/>
         <menuitem id="loan_cars" name="On Loan" parent="cars" action="loan_cars_action" sequence="3"/>

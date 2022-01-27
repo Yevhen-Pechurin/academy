@@ -11,6 +11,7 @@ class Car(models.Model):
     model = fields.Char(tracking=True)
     year = fields.Date(tracking=True)
     active = fields.Boolean(string='Active', default=True)
+    code = fields.Char(copy=False, readonly=True)
     status = fields.Selection([
         ('in_garage', "In the garage"),
         ('on_loan', 'On Loan'),
@@ -23,7 +24,6 @@ class Car(models.Model):
     loan_history_ids = fields.One2many('rental.loan', 'car_id')
     repair_history_ids = fields.One2many('rental.repair', 'car_id')
     odometer = fields.Integer(tracking=True)
-
     @api.depends('number', 'model')
     def _compute_name(self):
         for i in self:
@@ -99,6 +99,10 @@ class Car(models.Model):
 
     def print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id('rental.action_report_car_barcode')
+    @api.model
+    def create(self, vals_list):
+        vals_list['code']=self.env['ir.sequence'].next_by_code('rental.car')
+        return super(Car,self).create(vals_list)
 
 
 class RepairHistory(models.Model):

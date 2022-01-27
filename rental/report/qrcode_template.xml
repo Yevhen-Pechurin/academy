@@ -10,9 +10,9 @@
                 <tr>
                     <td class="text-center align-middle">
                         <t t-if="car">
-                           <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', car.number, 200, 200)" style="height: 10rem; width: 10rem;"/>
+                           <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', car.name, 200, 200)" style="height: 10rem; width: 10rem;"/>
                             <br/>
-                            <span t-field="car.number"/>
+                            <span t-field="car.code"/>
                         </t>
                         <t t-else=""><span class="text-muted">No number available</span></t>
                     </td>

@@ -31,6 +31,7 @@ odoo.define('rental.list', function (require) {
                 method: 'get_cars',
                 args: [this.$el.val(), this.name]
             }).then(res => {
+                console.log(res);
                 self.$el.parent().find('.list_div').remove();
                 const elem = $(QWeb.render('rental.list', {
                     data: res,

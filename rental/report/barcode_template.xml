@@ -13,7 +13,7 @@
 
                             <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('Codabar', car.name, 500, 150)"/>
                             <br/>
-                            <span t-field="car.model"/> <span t-field="car.number"/>
+                            <span t-field="car.model"/> <span t-field="car.code"/>
                         </t>
                         <t t-else=""><span class="text-muted">No number available</span></t>
                     </td>
