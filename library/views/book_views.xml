@@ -103,7 +103,7 @@
     </field>
 </record>
 
-<!-- form view for books -->
+<!-- form view for book info -->
 <record model="ir.ui.view" id="book_info_form_view">
     <field name="name">books.form.view</field>
     <field name="model">library.book.info</field>
@@ -156,7 +156,6 @@
         <field name="author_id" position="before">
             <field name="active" invisible="1"/>
             <field name="number"/>
-            <field name="year"/>
             <field name="book_id" groups="base.group_no_one"/>
        </field>
         <xpath expr="//notebook/page[@id='description']" position="after">

@@ -59,7 +59,7 @@ class BookInfo(models.Model):
     _inherit = 'mail.thread'
     _description = 'Book Info'
 
-    name = fields.Char(tracking=True)
+    name = fields.Char(tracking=True, translate=True)
     author_id = fields.Many2one('library.author', tracking=True)
     lang_id = fields.Many2one('library.language', tracking=True)
     tag_ids = fields.Many2many('library.tag', tracking=True)
@@ -73,9 +73,9 @@ class Book(models.Model):
     _description = 'Book'
 
     book_id = fields.Many2one('library.book.info')
-    name = fields.Char(related='book_id.name', readonly=False)
+    name = fields.Char(related='book_id.name', readonly=False, translate=True)
     number = fields.Char(copy=False, default='New', readonly=True)
-    author_id = fields.Many2one(related='book_id.author_id')
+    author_id = fields.Many2one(related='book_id.author_id')    # Char(default='New', readonly=True)
     year = fields.Integer()
     lang_id = fields.Many2one(related='book_id.lang_id')
     status = fields.Selection([
@@ -149,3 +149,11 @@ class Book(models.Model):
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('library.book') or _('New')
         return super(Book, self).create(vals)
+
+
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('author_id', _('New')) == _('New'):
+    #         vals['author_id'] = self.env['ir.sequence'].next_by_code('library.book') or _('New')
+    #     return super(Book, self).create(vals)
+
