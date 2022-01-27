@@ -18,7 +18,9 @@
         'report/qrcode_template.xml',
         'report/barcode.xml',
         'report/barcode_template.xml',
-        'data/ir_sequence_car.xml'
+        'data/ir_sequence_car.xml',
+        'views/res_config_settings.xml',
+        'views/partner.xml'
 
     ],
     'demo': [

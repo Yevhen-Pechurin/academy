@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <!-- Extension of contacts for cars-->
+        <record id="extension" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" icon="fa-car"
+                            attrs="{'invisible': [('cars_count', '=', 0)]}" name="getcars">
+                        <field string="Cars" name="cars_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+         <record id="extension_api" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//field[hasclass('o_address_street')]" position="before">
+                    <field name="ip"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

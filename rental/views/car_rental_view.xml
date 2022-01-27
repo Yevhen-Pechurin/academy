@@ -90,7 +90,7 @@
                         </div>
                         <group>
                             <group string="Info">
-                                <field name="model" widget="cringet"/>
+                                <field name="model" widget="list_widget"/>
                                 <field name="number"/>
                                 <field name="code"/>
                                 <field name="year"/>
@@ -183,21 +183,7 @@
             </field>
         </record>
 
-        <!-- Extension of contacts for cars-->
-        <record id="extension" model="ir.ui.view">
-            <field name="name">Extension</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <!-- to insert your fields at the end of the list -->
-                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
-                    <button type="object" icon="fa-car"
-                            attrs="{'invisible': [('cars_count', '=', 0)]}" name="getcars">
-                        <field string="Cars" name="cars_count" widget="statinfo"></field>
-                    </button>
-                </xpath>
-            </field>
-        </record>
+
         <!-- action for cars report -->
         <record id="car_report_action" model="ir.actions.act_window">
             <field name="name">Report</field>
