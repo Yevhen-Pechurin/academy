@@ -12,9 +12,12 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'views/car_views.xml',
         'report/car_barcode_report.xml',
         'report/car_barcode_template.xml',
+        'report/car_report_views.xml',
+        'views/car_menus.xml',
     ],
     'assets': {
         'web.assets_qweb': [
@@ -28,5 +31,5 @@
     },
     'application': True,
     'installable': True,
-    'license': 'GPL-3'
+    'license': 'LGPL-3'
 }
