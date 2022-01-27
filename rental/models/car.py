@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 class CarModel(models.Model):
@@ -28,8 +28,8 @@ class CarRentalHistory(models.Model):
 
 
 class CarMaintananceHistory(models.Model):
-    _name = 'rental.maintanance_history'
-    _description = 'Car maintanance history'
+    _name = 'rental.maintenance_history'
+    _description = 'Car maintenance history'
 
 
 class Car(models.Model):
@@ -39,13 +39,13 @@ class Car(models.Model):
 
     name = fields.Char(compute='_compute_car_name')
     model = fields.Char(required=True) #model_id = fields.Many2one('rental.car_model', required=True)
-    number = fields.Char(required=True)
+    number = fields.Char(required=True, default='New', readonly=True)
     logo = fields.Image()    #related='model_id.manufacturer_logo')
     year = fields.Integer()
     status = fields.Selection([
         ('in_garage', 'In garage'),
         ('rented', 'Rented'),
-        ('on_maintanence', 'On maintanance'),
+        ('on_maintenence', 'On maintenance'),
         ('unavailable', 'Unavailable'),
         ], default= 'in_garage', required=True, tracking=True)
     date_rented = fields.Datetime()
@@ -69,6 +69,12 @@ class Car(models.Model):
         #values['models'] = [[r.id, r.model_name] for r in records]
         """
         return self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
+
+    @api.model
+    def create(self, vals):
+        if vals.get('number', _('New')) == _('New'):
+            vals['number'] = self.env['ir.sequence'].next_by_code('rental.car') or _('New')
+        return super(Car, self).creat(vals)
 
     @api.depends('model', 'number')
     def _compute_car_name(self):
