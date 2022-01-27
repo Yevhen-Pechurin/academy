@@ -75,14 +75,14 @@ class Book(models.Model):
     book_id = fields.Many2one('library.book.info')
     name = fields.Char(related='book_id.name', readonly=False, translate=True)
     number = fields.Char(copy=False, default='New', readonly=True)
-    author_id = fields.Many2one(related='book_id.author_id')    # Char(default='New', readonly=True)
+    author_id = fields.Many2one(related='book_id.author_id')      # Char(default='New', readonly=True)
     year = fields.Integer()
     lang_id = fields.Many2one(related='book_id.lang_id')
     status = fields.Selection([
         ('on_shelf', 'On Shelf'),
         ('on_hand', 'On Hand'),
         ('unavailable', 'Unavailable'),
-    ], default='on_shelf', compute='_compute_status', store=True, tracking=True)
+    ], default='on_shelf', compute='_compute_status', group_expand='_expand_statuses', store=True, tracking=True)
     partner_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
     tag_ids = fields.Many2many(related='book_id.tag_ids')
@@ -96,6 +96,15 @@ class Book(models.Model):
     _sql_constraints = [
         ('number_unig', 'unique (number)', """Only one number can be defined for each book!""")
     ]
+
+
+    def _expand_statuses(self, statuses, domain, order):
+        return[key for key, val in type(self).status.selection]
+
+    # def _expand_statuses(self, statuses, domain, order):
+    #     new_list = [key for key, val in type(self).status.selection]
+    #     return new_list.remove('unavailable')   # it doesn`t work
+
 
     def action_on_hand(self):
         return {
