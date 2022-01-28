@@ -23,11 +23,4 @@ class Demo(models.Model):
          'Choose another value - it has to be unique!')
     ]
 
-    def action_demo_wizard(self):
-        return {
-            'name': _('Create Demo'),
-            'res_model': 'demo.wizard.demo',
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'target': 'new'
-        }
+
