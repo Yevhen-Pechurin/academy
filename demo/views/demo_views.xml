@@ -1,5 +1,50 @@
 <odoo>
   <data>
+
+<!-- explicit list view definition -->
+<record model="ir.ui.view" id="demo_list_view">
+    <field name="name">demo list</field>
+    <field name="model">demo.demo</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="salesperson"/>
+            <field name="partner_id" string="Client"/>
+            <field name="date"/>
+            <field name="state"/>
+        </tree>
+    </field>
+</record>
+
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_demo">
+        <field name="name">Demo</field>
+        <field name="res_model">demo.demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_my_demos">
+        <field name="name">My Demos</field>
+        <field name="res_model">demo.demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <!-- menu -->
+    <menuitem name="Demo" id="menu_root">
+        <menuitem name="Demo" id="demo">
+            <menuitem name="All Demos" id="menu_demo" action="action_demo"/>
+        </menuitem>
+        <menuitem name="My Demos" id="my_demos">
+            <menuitem name="All My Demos" id="menu_my_demos" action="action_my_demos"/>
+        </menuitem>
+    </menuitem>
+
+  </data>
+</odoo>
+
+
     <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="demo.list">
@@ -56,5 +101,3 @@
     <menuitem name="Server to list" id="demo" parent="demo.menu_2"
               action="demo.action_server"/>
 -->
-  </data>
-</odoo>

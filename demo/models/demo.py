@@ -9,16 +9,16 @@ class Demo(models.Model):
     _description = 'Demo soft'
 
     name = fields.Char(readonly=False, tracking=True)
-    user_id = fields.Char(readonly=False, tracking=True)
-    partner_id = fields.Many2one('res.partner')
+    salesperson = fields.Char(tracking=True)  # user_id =
+    partner_id = fields.Many2one('res.partner', tracking=True)  # client
     date = fields.Date()
     state = fields.Selection([
         ('scheduled', 'Scheduled'),
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
         ('canceled', 'Canceled'),
-    ], default='scheduled', group_expand='_expand_statuses', store=True, tracking=True)
-    description = fields.Text()
+    ], group_expand='_expand_statuses', store=True, tracking=True)  # default='scheduled',
+    description = fields.Text(tracking=True)
 
 
     _sql_constraints = [

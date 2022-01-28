@@ -22,13 +22,12 @@
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['mail', 'website'],
+    'depends': ['mail', 'contacts', 'website'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'security/ir.model.access.csv',
+        'views/demo_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
