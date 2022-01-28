@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="partner_view_demo_button">
+        <field name="name">partner.view.demo.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="action_view_demo" icon="fa-desktop" attrs="{'invisible': [('demo_count', '=', 0)]}">
+                        <div class="o_stat_info">
+                            <field name="demo_count" class="o_stat_value"/>
+                            <span class="o_stat_text" attrs="{'invisible': [('demo_count', '&lt;', 2)]}"> Demos</span>
+                            <span class="o_stat_text" attrs="{'invisible': [('demo_count', '&gt;', 1)]}"> Demo</span>
+                        </div>
+                    </button>
+                </div>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_view_demo_button_tree">
+        <field name="name">partner.view.tree.demo.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+           <field name="display_name" position="after">
+               <field name="demo_count"/>
+           </field>
+        </field>
+    </record>
+</odoo>
