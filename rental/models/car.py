@@ -17,12 +17,15 @@ class Car(models.Model):
         ('under_repair', 'Under repair'),
         ('unavailable', 'Unavailable')
 
-    ], default='in_garage', tracking=True)
+    ], default='in_garage', tracking=True, group_expand='_expand_states')
     loan_date = fields.Date(tracking=True)
     partner_id = fields.Many2one('res.partner', readonly=True)
     loan_history_ids = fields.One2many('rental.loan', 'car_id')
     repair_history_ids = fields.One2many('rental.repair', 'car_id')
     odometer = fields.Integer(tracking=True)
+
+    def _expand_states(self):
+        return [key for key, in type(self).status.selection]
 
     @api.depends('number', 'model')
     def _compute_name(self):
