@@ -17,7 +17,7 @@ class Demo(models.Model):
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
         ('canceled', 'Canceled'),
-    ], group_expand='_expand_statuses', store=True, tracking=True)  # default='scheduled',
+    ], group_expand='_expand_states', store=True, tracking=True)  # default='scheduled',
     description = fields.Text(tracking=True)
 
 
