@@ -123,40 +123,32 @@
     </record>
 
     <record id="extension" model="ir.ui.view">
-      <field name="name">Extension</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
-        <!-- to insert your fields at the end of the list -->
         <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
           <button type="object"
                   attrs="{'invisible': [('demos_count', '=', 0)]}" name="get_demos">
             <field string="Demos" name="demos_count" widget="statinfo"></field>
           </button>
         </xpath>
+        <xpath expr="//div[@role='alert']" position="before">
+        <header>
+          <button name="action_demo_wizard" string="Create Demo" class="oe_highlight" type="object"></button>
+        </header>
+        </xpath>
       </field>
     </record>
 
-    <record id="inherited_button" model="ir.ui.view">
-      <field name="name">demo.wizard.demo.inherited</field>
-      <field name="model">demo.wizard.demo</field>
-      <field name="inherit_id" ref="base.view_partner_form"/>
-      <field name="arch" type="xml">
-        <xpath expr="//div[hasclass('o_form_buttons_view')]" position="inside">
-          <button name="action_demo_wizard" string="Create Demo" class="oe_highlight" type="object"></button>
-      </xpath>
-    </field>
-  </record>
 
-
-  <!-- Top menu item -->
-  <menuitem id="demo_menu" name="Demo"/>
-  <!-- Menu categories -->
-  <menuitem name="Demo Soft" id="demo" parent="demo_menu"/>
-  <menuitem name="All Demo Soft" id="all_demo" parent="demo" action="all_demo_action"/>
-  <menuitem name="Scheduled" id="scheduled_demo" parent="demo" action="scheduled_demo_action"/>
-  <menuitem name="In Progress" id="in_progress_demo" parent="demo" action="in_progress_action"/>
-  <menuitem name="Done" id="done_demo" parent="demo" action="done_demo_action"/>
-  <menuitem name="Canceled" id="canceled_demo" parent="demo" action="canceled_demo_action"/>
-</data>
-    </odoo>
+    <!-- Top menu item -->
+    <menuitem id="demo_menu" name="Demo"/>
+    <!-- Menu categories -->
+    <menuitem name="Demo Soft" id="demo" parent="demo_menu"/>
+    <menuitem name="All Demo Soft" id="all_demo" parent="demo" action="all_demo_action"/>
+    <menuitem name="Scheduled" id="scheduled_demo" parent="demo" action="scheduled_demo_action"/>
+    <menuitem name="In Progress" id="in_progress_demo" parent="demo" action="in_progress_action"/>
+    <menuitem name="Done" id="done_demo" parent="demo" action="done_demo_action"/>
+    <menuitem name="Canceled" id="canceled_demo" parent="demo" action="canceled_demo_action"/>
+  </data>
+</odoo>
