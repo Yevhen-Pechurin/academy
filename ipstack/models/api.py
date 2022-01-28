@@ -34,6 +34,14 @@ class IpstackApi(object):
         return sep.join(url_list)
 
 
+    # def join_url(self, *args):
+    #     return "/".join(arg.strip("/") for arg in args)
+
+    # def join_url(self, *args):
+    #     arguments = [argument.strip("/ ") for argument in args]
+    #     return "/".join(arguments)
+
+
 if __name__ == "__main__":
     api = IpstackApi('eb7728351239287e12c4710297a5dd4d')
     print(api.get_ip_data('46.219.214.231'))
