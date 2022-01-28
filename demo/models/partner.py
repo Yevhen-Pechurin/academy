@@ -22,3 +22,12 @@ class ResPartner(models.Model):
             'type': 'ir.actions.act_window',
             'domain': [('id', 'in', demos)]
         }
+
+    def action_demo_wizard(self):
+        return {
+            'name': _('Create Demo'),
+            'res_model': 'demo.wizard.demo',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'target': 'new'
+        }
