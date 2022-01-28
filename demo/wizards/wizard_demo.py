@@ -12,7 +12,7 @@ class WizardDemo(models.TransientModel):
         partner = self.env['res.partner'].sudo().browse(self.env.context['active_ids'])
         self.env['demo.demo'].create([{
             'name': 'Demo for %s' % partner.name,
-            'user_id': lambda self: self.env.user.id,
+            'user_id': self.env.user.id,
             'partner_id': partner.id,
             'date': self.date
         }])
