@@ -1,32 +1,34 @@
 <odoo>
     <data>
+<!--      Demos-->
+        <record id="demo_1" model="demo.demo">
+            <field name="name">The Soft One</field>
+            <field name="salesperson">Nick</field>
+            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="state">done</field>
+            <field name="description">
+                Show the capabilities of the number one product.</field>
+        </record>
 
+        <record id="demo_2" model="demo.demo">
+            <field name="name">The Soft Two</field>
+            <field name="salesperson">Bob</field>
+            <field name="partner_id" ref="base.res_partner_address_3"/>
+            <field name="date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="state">scheduled</field>
+            <field name="description">
+                Show the benefits of the number two product.</field>
+        </record>
 
-<!--
-          <record id="object0" model="demo.demo">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
-          </record>
-
-          <record id="object1" model="demo.demo">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
-          </record>
-
-          <record id="object2" model="demo.demo">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
-
-          <record id="object3" model="demo.demo">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
-
-          <record id="object4" model="demo.demo">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
+        <record id="demo_3" model="demo.demo">
+            <field name="name">New Products Show</field>
+            <field name="salesperson">Jane</field>
+            <field name="partner_id" ref="base.res_partner_address_11"/>
+            <field name="date" eval="DateTime.today()"/>
+            <field name="state">in_progress</field>
+            <field name="description">
+                Overview of new products.</field>
+        </record>
     </data>
 </odoo>
