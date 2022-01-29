@@ -32,10 +32,6 @@
                             <div class="o_kanban_record_title oe_kanban_details">
                                 <strong><field name="name"/></strong>
                             </div>
-<!--                            <div>-->
-<!--                                Client:-->
-<!--                                <field name="partner_id"/>-->
-<!--                            </div>-->
                             <div>
                                 Client:
                                 <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
@@ -85,6 +81,22 @@
     </field>
 </record>
 
+      <!-- explicit search view definition -->
+<record model="ir.ui.view" id="demo_search_view">
+    <field name="name">demo search</field>
+    <field name="model">demo.demo</field>
+    <field name="arch" type="xml">
+        <search>
+            <filter name="scheduled" string="Scheduled" domain="[('state','=', 'scheduled')]"/>
+            <filter name="in_progress" string="In Progress" domain="[('state','=', 'in_progress')]"/>
+            <filter name="done" string="Done" domain="[('state','=', 'done')]"/>
+            <filter name="group_state" string="State" context="{'group_by':'state'}"/>
+            <filter name="group_partner_id" string="Client" context="{'group_by':'partner_id'}"/>
+            <filter name="group_salesperson" string="Salesperson" context="{'group_by':'salesperson'}"/>
+        </search>
+    </field>
+</record>
+
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="action_demo">
         <field name="name">Demo</field>
@@ -97,6 +109,7 @@
         <field name="res_model">demo.demo</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
+
 
     <!-- menu -->
     <menuitem name="Demo" id="menu_root">

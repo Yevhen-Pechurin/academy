@@ -26,12 +26,11 @@ class ResPartner(models.Model):
             'context': {'search_default_partner_id': self.id}
         }
 
-    def action_view_new_demo(self):
+    def action_new_demo(self):
         return {
-            # 'name': _('On Hand %s') % self.name,
-            'name': _('Partners Demos'),
+            'name': _('Partners New Demo'),
             'view_mode': 'form',
-            'res_model': 'model.model',
+            'res_model': 'demo.demo',
             'type': 'ir.actions.act_window',
             'target': 'new'
         }
