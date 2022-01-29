@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 demo.access_demo_demo,access_demo_demo,demo.model_demo_demo,base.group_user,1,1,1,1
 demo.access_demo_wizard_new_demo,access_demo_wizard_new_demo,demo.model_demo_wizard_new_demo,base.group_user,1,1,1,1
+demo.access_demo_demo_report,access_demo_demo_report,demo.model_demo_demo_report,base.group_user,1,1,1,1

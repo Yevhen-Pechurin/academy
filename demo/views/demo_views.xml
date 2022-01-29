@@ -16,6 +16,30 @@
     </field>
 </record>
 
+<!-- explicit pivot view definition -->
+    <record model="ir.ui.view" id="demo_pivot_view">
+    <field name="name">demo pivot</field>
+    <field name="model">demo.demo</field>
+    <field name="arch" type="xml">
+        <pivot>
+            <field name="salesperson" type="col"/>
+            <field name="partner_id" type="row"/>
+        </pivot>
+    </field>
+</record>
+
+<!-- explicit graph view definition -->
+    <record model="ir.ui.view" id="demo_graph_view">
+    <field name="name">demo graph</field>
+    <field name="model">demo.demo</field>
+    <field name="arch" type="xml">
+        <graph string="Demo Analysis" type="line" sample="1">
+            <field name="date" interval="day"/>
+            <field name="name" type="measure"/>
+        </graph>
+    </field>
+</record>
+
 <!-- explicit kanban view definition -->
 <record model="ir.ui.view" id="demo_kanban_view">
     <field name="name">Demo Kanban</field>
@@ -101,7 +125,7 @@
     <record model="ir.actions.act_window" id="action_demo">
         <field name="name">Demo</field>
         <field name="res_model">demo.demo</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,tree,form,pivot,graph</field>
     </record>
 
     <record model="ir.actions.act_window" id="action_my_demos">

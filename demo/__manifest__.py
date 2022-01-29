@@ -31,6 +31,7 @@
         'wizards/view_wizard_new_demo.xml',
         'views/demo_views.xml',
         'views/res_partner_views.xml',
+        'report/demo_report_views.xml'
 
     ],
     # only loaded in demonstration mode

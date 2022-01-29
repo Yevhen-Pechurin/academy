@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record model="ir.actions.act_window" id="action_demo_report">
+        <field name="name">Demo Report</field>
+        <field name="res_model">demo.demo.report</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="demo_pivot_view">
+    <field name="name">demo pivot</field>
+    <field name="model">demo.demo.report</field>
+    <field name="arch" type="xml">
+        <pivot>
+            <field name="salesperson" type="col"/>
+            <field name="partner_id" type="row"/>
+<!--            <field name="avg_count" type="measure"/>-->
+<!--            <field name="max_year" type="measure"/>-->
+        </pivot>
+    </field>
+</record>
+
+    <record model="ir.ui.view" id="demo_graph_view">
+    <field name="name">demo graph</field>
+    <field name="model">demo.demo.report</field>
+    <field name="arch" type="xml">
+        <graph string="Demo Analysis" type="line" sample="1">
+            <field name="date" interval="day"/>
+            <field name="name" type="measure"/>
+        </graph>
+    </field>
+</record>
+
+</odoo>
