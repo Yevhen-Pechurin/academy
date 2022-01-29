@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data noupdate="1">
+<!--        sequences for demo salesperson-->
+        <record id="sec_demo_demo" model="ir.sequence">
+            <field name="name">Salesperson</field>
+            <field name="code">demo.demo</field>
+            <field name="prefix">Person</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
