@@ -10,16 +10,16 @@ class WizardDemo(models.TransientModel):
 
     def demo(self):
         partner = self.env['res.partner'].sudo().browse(self.env.context['active_ids'])
-        self.env['demo.demo'].create([{
-            'name': 'Demo for %s' % partner.name,
+        res_id = self.env['demo.demo'].create([{
+            # 'name': 'Demo for %s' % partner.name,
             'user_id': self.env.user.id,
             'partner_id': partner.id,
             'date': self.date
-        }])
-        action = self.env['ir.model.data']._xmlid_to_res_id('demo.all_demo_action')
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "demo.demo",
-            "view_mode": 'form',
-            "res_id": action,
-        }
+        }]).id
+        action = self.env["ir.actions.actions"]._for_xml_id('demo.all_demo_action')
+        action.update({
+            'view_mode': 'form',
+            'res_id': res_id,
+            'views': [(False, 'form')],
+        })
+        return action
