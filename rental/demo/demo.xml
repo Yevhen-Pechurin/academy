@@ -3,6 +3,7 @@
         <!-- Car models -->
         <record id="test_model_1" model="rental.car_model">
             <field name="model_name">test model</field>
+            <field name="manufacturer_logo" type="base64" file="rental/static/img/tesla.jpg"/>
         </record>
         <record id="some_model" model="rental.car_model">
             <field name="model_name">another model</field>
