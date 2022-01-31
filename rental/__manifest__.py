@@ -4,6 +4,7 @@
 {
     'name': 'Car Rental',
     'category': 'Services/Car Rental',
+    'sequence': -50,
     'depends': [
         'mail',
         'contacts',
