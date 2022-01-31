@@ -15,6 +15,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'wizards/wizard_demo.xml',
+        'data/ir_sequence_data.xml'
     ],
     'demo': [
         'demo/demo.xml',
