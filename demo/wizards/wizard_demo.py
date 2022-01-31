@@ -16,3 +16,5 @@ class WizardDemo(models.TransientModel):
             'partner_id': partner.id,
             'date': self.date
         }])
+        action = self.env['ir.model.data']._xmlid_to_res_id('demo.all_demo_action')
+        return
