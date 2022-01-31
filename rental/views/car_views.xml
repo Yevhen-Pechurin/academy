@@ -10,10 +10,16 @@
                     <field name="name"/>
                     <field name="date_on_loan"/>
                     <field name="partner_id"/>
+                    <field name="id"/>
+                    <field name="image"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
                                 <div class="oe_kanban_content flex-grow-1">
+                                    <div class="o_kanban_image">
+                                        <img alt="Car image"
+                                             t-att-src="kanban_image('rental.car', 'image', record.id.raw_value)"/>
+                                    </div>
                                     <div class="o_kanban_record_title oe_kanban_details">
                                         <strong><field name="name"/></strong>
                                     </div>
@@ -39,9 +45,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="action_on_hand" string="On Loan" class="oe_highlight" type="object"
+                        <button name="action_on_loan" string="On Loan" class="oe_highlight" type="object"
                                 attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
-                        <button name="action_on_shelf" string="In Garage" class="oe_highlight" type="object"
+                        <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object"
                                 attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
                         <field name="status" widget="statusbar" statusbar_visible="in_garage,on_loan"/>
                     </header>
@@ -50,6 +56,9 @@
                             <label for="name"/>
                             <h1><field class="o_text_overflow" name="name"/></h1>
                         </div>
+                        <xpath expr="//div[hasclass('oe_title')]" position="before">
+                            <field name="image" widget='image' class="oe_avatar" options='{"preview_image": "image"}'/>
+                        </xpath>
                         <group>
                             <group string="Info" name="info">
                                 <field name="model" widget="my-custom-field"/>
@@ -133,9 +142,6 @@
                 }
             </field>
         </record>
-
-
-
 
 
         <!-- menu categories -->

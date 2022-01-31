@@ -2,14 +2,14 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
 
 
-class WizardOnHand(models.TransientModel):
-    _name = 'rental.wizard.on_hand'
-    _description = 'Wizard On Hand'
+class WizardOnLoan(models.TransientModel):
+    _name = 'rental.wizard.on_loan'
+    _description = 'Wizard On Loan'
 
     partner_id = fields.Many2one('res.partner')
     date_on_loan = fields.Date()
 
-    def action_on_hand(self):
+    def action_on_loan(self):
         ctx = self._context
         car = self.env[ctx['active_model']].sudo().browse(ctx['active_ids'])
         today = fields.Datetime().now()
@@ -25,7 +25,7 @@ class WizardOnHand(models.TransientModel):
             })]
         })
 
-    @api.constrains('due_date')
+    @api.constrains('date_on_loan')
     def constrain_due_date(self):
-        if self.due_date <= fields.Date.today():
+        if self.date_on_loan <= fields.Date.today():
             raise ValidationError('Вы не можете выбрать такую дату')

@@ -1,30 +1,35 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="rental.rental">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
-          </record>
+        <!--Books Books-->
+        <record id="car_1" model="rental.car">
+            <field name="model">Model1</field>
+            <field name="year">2021</field>
+            <field name="status">in_garage</field>
+            <field name="odometer">123456</field>
+            <field name="partner_id" ref="base.res_partner_address_28"/>
+            <field name="date_on_loan" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id' : ref('base.res_partner_address_28'),
+                'date_in_garage' : (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
+                'date_on_loan' : DateTime.today()
+            })]"/>
+        </record>
 
-          <record id="object1" model="rental.rental">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
-          </record>
+        <record id="car_2" model="rental.car">
+            <field name="model">BMW</field>
+            <field name="year">2022</field>
+            <field name="status">in_garage</field>
+            <field name="odometer">32456</field>
+            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="date_on_loan" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="history_ids" eval="[(5, 0), (0, 0, {
+                'partner_id' : ref('base.res_partner_address_28'),
+                'date_in_garage' : (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
+                'date_on_loan' : DateTime.today()
+            })]"/>
+            <field name="image" type="base64" file="rental/static/img/bmw.png"/>
+        </record>
 
-          <record id="object2" model="rental.rental">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
 
-          <record id="object3" model="rental.rental">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
-
-          <record id="object4" model="rental.rental">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
     </data>
 </odoo>

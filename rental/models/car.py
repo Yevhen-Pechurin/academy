@@ -44,12 +44,11 @@ class Car(models.Model):
         ('number_uniq', 'unique (number)', """Only one number can be defined for each car!"""),
     ]
 
-    def action_on_hand(self):
-        pass
+    def action_on_loan(self):
         return {
-            'name': _('On Hand %s') % self.name,
+            'name': _('On Loan %s') % self.name,
             'view_mode': 'form',
-            'res_model': 'rental.wizard.on_hand',
+            'res_model': 'rental.wizard.on_loan',
             'type': 'ir.actions.act_window',
             'target': 'new'
         }
@@ -59,9 +58,9 @@ class Car(models.Model):
         for car in self:
             car.name = f'{car.model}{car.number}'
 
-    def action_on_shelf(self):
-        last_history = self.history_ids[-1]
-        if last_history:
+    def action_in_garage(self):
+        if self.history_ids:
+            last_history = self.history_ids[-1]
             last_history.write({
                 'date_in_garage': fields.Datetime.now()
             })
@@ -76,7 +75,7 @@ class Car(models.Model):
             if not car.active:
                 car.status = 'unavailable'
             else:
-                car.status = 'in_garage'
+                car.status = car.status
 
     @api.model
     def get_model(self, query):

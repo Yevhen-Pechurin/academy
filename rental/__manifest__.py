@@ -26,7 +26,7 @@
     'data': [
         'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',
-        'wizards/view_wizard_book_on_hand.xml',
+        'wizards/view_wizard_book_on_loan.xml',
         'views/car_views.xml',
         'views/templates.xml',
         'report/barcode_car_report.xml',

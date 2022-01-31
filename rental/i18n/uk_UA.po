@@ -290,13 +290,13 @@ msgstr "Одометр"
 #. module: rental
 #: model:ir.actions.act_window,name:rental.action_wizard_on_hand
 #: model_terms:ir.ui.view,arch_db:rental.form_view_wizard_on_hand
-msgid "On Hand"
+msgid "On Loan"
 msgstr "Під рукою"
 
 #. module: rental
 #: code:addons/rental/models/car.py:0
 #, python-format
-msgid "On Hand %s"
+msgid "On Loan %s"
 msgstr "На руках %s"
 
 #. module: rental
@@ -365,7 +365,7 @@ msgstr "Лічильник непрочитаних повідомлень"
 
 #. module: rental
 #: model:ir.model,name:rental.model_rental_wizard_on_hand
-msgid "Wizard On Hand"
+msgid "Wizard On Loan"
 msgstr "Майстер під рукою"
 
 #. module: rental
