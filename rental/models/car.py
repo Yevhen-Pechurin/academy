@@ -1,12 +1,21 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+class CarManufacturer(models.Model):
+    _name = 'rental.car_manufacturer'
+    _description = 'Car manufacturer'
+
+    name = fields.Char(required=True)
+    logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
+
+
 class CarModel(models.Model):
     _name = 'rental.car_model'
     _description = 'Car model'
     
     model_name = fields.Char(required=True)
-    manufacturer_logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
+    manufacturer_id = fields.Many2one('rental.car_manufacturer', required=True)
+    manufacturer_logo = fields.Image(related='manufacturer_id.logo')
     #car_ids = fields.One2many('rental.car', 'model_id')
 
 
@@ -15,7 +24,7 @@ class CarRentalHistory(models.Model):
     _description = 'Car rental history'
 
     car_id = fields.Many2one('rental.car', required=True)
-    date_rented = fields.Datetime()
+    date_rented = fields.Datetime(default=fields.Datetime.now)
     rentee_id = fields.Many2one('res.partner')
     date_returned = fields.Datetime()
     initial_odometer_value = fields.Integer(default=lambda self: self.car_id.odometer)
@@ -23,7 +32,7 @@ class CarRentalHistory(models.Model):
 
     @api.constrains('final_odometer_value')
     def check_final_odometer_value(self):
-        if self.initial_odometer_value > self.final_odometer_value:
+        if self.final_odometer_value and self.initial_odometer_value > self.final_odometer_value:
             raise ValidationError('Invalid input: odometer value after rental cannot be smaller than before rental.')
 
 
@@ -45,7 +54,7 @@ class Car(models.Model):
     status = fields.Selection([
         ('in_garage', 'In garage'),
         ('rented', 'Rented'),
-        ('on_maintenence', 'On maintenance'),
+        ('on_maintenance', 'On maintenance'),
         ('unavailable', 'Unavailable'),
         ], default= 'in_garage', required=True, tracking=True)
     date_rented = fields.Datetime()
@@ -74,7 +83,7 @@ class Car(models.Model):
     def create(self, vals):
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('rental.car') or _('New')
-        return super(Car, self).creat(vals)
+        return super(Car, self).create(vals)
 
     @api.depends('model', 'number')
     def _compute_car_name(self):
