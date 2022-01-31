@@ -16,11 +16,11 @@ class Demo(models.Model):
         [('scheduled', 'Scheduled'), ('in_progress', 'In Progress'), ('done', 'Done'), ('сanceled', 'Canceled'), ],
         default='scheduled', tracking=True)
     description = fields.Text(tracking=True)
-
-    _sql_constraints = [
-        ('field_unique',
-         'unique(name)',
-         'Choose another value - it has to be unique!')
-    ]
+    #
+    # _sql_constraints = [
+    #     ('field_unique',
+    #      'unique(name)',
+    #      'Choose another value - it has to be unique!')
+    # ]
 
 

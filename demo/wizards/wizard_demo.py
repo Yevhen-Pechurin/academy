@@ -17,4 +17,9 @@ class WizardDemo(models.TransientModel):
             'date': self.date
         }])
         action = self.env['ir.model.data']._xmlid_to_res_id('demo.all_demo_action')
-        return
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "demo.demo",
+            "view_mode": 'form',
+            "res_id": action,
+        }
