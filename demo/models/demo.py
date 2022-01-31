@@ -8,7 +8,7 @@ class Demo(models.Model):
     _description = 'Show demo field'
     _inherit = ['mail.thread']
 
-    name = fields.Char(required=True, copy=False, tracking=True)
+    name = fields.Char(required=True, copy=False, tracking=True, default='New Demo')
     user_id = fields.Many2one('res.users', 'Salesperson', default=lambda self: self.env.user.id, tracking=True)
     partner_id = fields.Many2one('res.partner', string='Client', tracking=True)
     date = fields.Date(tracking=True)
@@ -22,5 +22,12 @@ class Demo(models.Model):
     #      'unique(name)',
     #      'Choose another value - it has to be unique!')
     # ]
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New Demo') == "New Demo":
+            vals['name'] = self.env['ir.sequence'].next_by_code('demo.demo') or _('New')
+        result = super(Demo, self).create(vals)
+        return result
 
 
