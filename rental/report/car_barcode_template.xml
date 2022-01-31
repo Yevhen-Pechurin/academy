@@ -2,10 +2,10 @@
 <odoo>
 
     <template id="report_car_barcode_template">
-        <div class="o_label_sheet" t-att-style="padding_page">
+        <div t-att-style="padding_page">
             <table class="table table-sm table-borderless">
                 <tr>
-                    <th class="text-center align-middle" style="height: 10rem; width: 10rem;">
+                    <th class="text-center align-middle">
                         <t t-if="car.status != 'unavailable'">
                             <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('UPCA', car.name, 550, 300)" alt="Barcode"/>
                             <p t-field="car.name"/>
