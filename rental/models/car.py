@@ -139,6 +139,10 @@ class Car(models.Model):
         stage = fields.Text()
 
 
+    def print_qrcode(self):
+        return self.env['ir.actions.report']._for_xml_id('rental.action_report_car')
+
+
 #
 # fields=['model']
 # env['res.users'].search_read([], ['name', 'email', 'login'])

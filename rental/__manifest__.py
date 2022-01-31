@@ -32,6 +32,8 @@
         'wizards/view_wizard_car_under_repair.xml',
         'views/car_views.xml',
         'views/templates.xml',
+        'report/qrcode_car_report.xml',
+        'report/qrcode_car_template.xml',
     ],
 
     'assets': {
