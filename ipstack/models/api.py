@@ -2,23 +2,28 @@ import logging
 import requests
 
 _logger = logging.getLogger(__name__)
-
+URL = 'http://api.ipstack.com/'
 
 class IpStackAPI(object):
 
-    def __init__(self, key, url=URL, timeout=10):
+    def __init__(self, key, url, timeout=10):
         self.url = url
         self.key = key
         self.timeout = timeout
 
     def get_ip_data(self, ip):
         url = self.join_url(self.url, ip)
-        response = requests.get(url, params={'access_key': self.key}, timeout=self.timeout)
+        params = {'access_key': self.key}
+        _logger.info('Send request to ipstack on url %s and param: \n%s' % (url, params))
+        response = requests.get(url, params=params, timeout=self.timeout)
         response.raise_for_status()
-        return response.json()
+        result = response.json()
+        _logger.info('Resaived result for ipstack: %s ' % result)
+        return
 
     def join_url(self, *args):
         return "/".join(arg.strip("/") for arg in args)
+
 
 if __name__ == "__main__":
     api = IpStackAPI('f9f17c8a2e83b94a4dab3115b4d64698')
