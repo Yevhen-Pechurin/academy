@@ -14,7 +14,7 @@ class WizardOnHand(models.TransientModel):
         book = self.env[ctx['active_model']].sudo().browse(ctx['active_ids'])
         # book = self.env[ctx['active_model']].with_user(SUPERUSER_ID).browse(ctx['active_ids'])
         today = fields.Datetime().now()
-        book.write({
+        book.with_context(mail_notrack=True).write({     # with_context - no tracking in chat
             'partner_id': self.partner_id.id,
             'due_date': self.due_date,
             'status': 'on_hand',

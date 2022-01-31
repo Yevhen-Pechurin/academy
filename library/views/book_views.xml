@@ -147,6 +147,11 @@
 
                 <button string="Print Qr code" type="object" name="print_qrcode"/>
 
+                <button string="Send notification (5 days)" type="object" name="send_notification" context="{'days': 5}"/>
+                <button string="Send notification (10 days)" type="object" name="send_notification" context="{'days': 10}"/>
+                <button string="Send notification (15 days)" type="object" name="send_notification" context="{'days': 15}"/>
+                <button string="Send notification (20 days)" type="object" name="send_notification" context="{'days': 20}"/>
+
                 <button name="action_on_hand" string="On Hand" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_hand', 'unavailable'])]}"/>
                 <button name="action_on_shelf" string="On Shelf" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['on_shelf', 'unavailable'])]}"/>
                 <field name="status" widget="statusbar" statusbar_visible="on_shelf,on_hand"/>
@@ -156,7 +161,9 @@
         <field name="author_id" position="before">
             <field name="active" invisible="1"/>
             <field name="number"/>
-            <field name="book_id" groups="base.group_no_one"/>
+            <field name="book_id"/>
+<!--            groups="base.group_no_one"-->
+            <field name="company_id" groups="base.group_multi_company"/>
        </field>
         <xpath expr="//notebook/page[@id='description']" position="after">
             <page string="History">
