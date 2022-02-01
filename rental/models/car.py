@@ -45,6 +45,14 @@ class CarMaintananceHistory(models.Model):
     _name = 'rental.maintenance.history'
     _description = 'Car maintenance history'
 
+    date_finished = fields.Datetime()
+    action = fields.Selection([
+        ('vehicle_inspection', 'Vehicle inspection'),
+        ('repairment', 'Repairment')
+        ], required=True)
+    description = fields.Text()
+    odometer_value = fields.Integer()
+
 
 class Car(models.Model):
     _name = 'rental.car'
@@ -74,14 +82,6 @@ class Car(models.Model):
 
     @api.model
     def get_model(self, model_name):
-        #Some ways of managing the data:
-        """values = {'models': self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])}
-        """
-        """values = {'models': self.env['rental.car'].sudo().search_read([('model_name', 'ilike', model_name)], fields = ['model_name', 'id'], limit=5)}
-        """
-        """records = self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)])
-        #values['models'] = [[r.id, r.model_name] for r in records]
-        """
         return self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
 
     @api.model
