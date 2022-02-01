@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
 from random import randint
 
 from odoo import models, fields, api, _
@@ -50,7 +51,11 @@ class Car(models.Model):
             'view_mode': 'form',
             'res_model': 'rental.wizard.on_loan',
             'type': 'ir.actions.act_window',
-            'target': 'new'
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_date_on_loan': fields.Datetime.now() + timedelta(days=10)
+            }
         }
 
     @api.depends('model', 'number')
@@ -88,5 +93,5 @@ class Car(models.Model):
     def create(self, vals):
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('rental.car') or _('New')
-            return super(Car, self).create(vals)
+        return super(Car, self).create(vals)
 
