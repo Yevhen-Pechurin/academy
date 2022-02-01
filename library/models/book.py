@@ -122,8 +122,8 @@ class Book(models.Model):
         }
 
     def action_on_shelf(self):
-        last_history = self.history_ids[-1]
-        if last_history:
+        if self.history_ids:
+            last_history = self.history_ids[-1]
             last_history.write({
                 'date_on_shelf': fields.Datetime.now()
             })
