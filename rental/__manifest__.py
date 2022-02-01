@@ -24,6 +24,7 @@
     "assets": {
         "web.assets_backend": [
             'rental/static/src/js/car.js',
+            'rental/static/src/js/tours/rental_tour.js'
         ],
         'web.assets_qweb': [
             'rental/static/src/xml/actions.xml',
