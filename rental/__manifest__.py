@@ -26,11 +26,11 @@
     ],
     'assets': {
         'web.assets_qweb': [
-            'rental/static/src/xml/*.xml',
+            'rental/static/src/xml/custom_model_widget.xml',
             'rental/static/src/components/*/*.xml',
         ],
         'web.assets_backend': [
-            'rental/static/src/js/*.js',
+            'rental/static/src/js/custom_model_widget.js',
             'rental/static/src/components/*/*.js',
             'rental/static/src/js/tours/*.js',
         ],
