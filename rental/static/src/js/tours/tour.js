@@ -7,7 +7,7 @@ import tour from 'web_tour.tour';
 tour.register('rental_tour', {
     url: "/web",
     rainbowManMessage: _t("Congrats, best of luck catching such big fish! :)"),
-    sequence: 10,
+    sequence: 1,
 }, [tour.stepUtils.showAppsMenuItem(),
     {
         trigger: '.o-dropdown',
@@ -41,8 +41,35 @@ tour.register('rental_tour', {
         },
     },
     {
-        trigger: '.btn-primary[name="action_repair"]',
-        content: Markup(_t("<b>Click Repair button</b>")),
+        trigger: '.btn-primary[name="action_loan"]',
+        content: Markup(_t("<b>Click Loan button/b>")),
+        position: 'bottom',
+    },
+    {
+        trigger: ".ui-autocomplete-input",
+        content: Markup(_t('<b>Write car partner</b>.')),
+        position: "top",
+        run: function (actions) {
+            actions.text('Azure Interior', this.$anchor);
+        },
+    },
+    {
+        trigger: '.ui-menu-item-wrapper',
+        content: Markup(_t("<b>End.</b>")),
+        position: 'bottom',
+    },
+    {
+        trigger: ".datetimepicker-input",
+        content: Markup(_t('<b>Sa</b>.')),
+        position: "top",
+        run: function (actions) {
+            actions.text('02/24/2022', this.$anchor);
+        },
+    },
+
+    {
+        trigger: '.btn-primary',
+        content: Markup(_t("<b>End.</b>")),
         position: 'bottom',
     },
     {
