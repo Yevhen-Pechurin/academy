@@ -1,5 +1,6 @@
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged, Form, HttpCase
+from odoo.tools import mute_logger
 from .common import TestBookCommonBase
 from psycopg2.errors import UniqueViolation
 from odoo import fields
@@ -17,7 +18,7 @@ class TestBook(TestBookCommonBase):
         self.assertFalse(self.book_1.partner_id)
 
     def test_02_name_constrain(self):
-        with self.assertRaises(UniqueViolation):
+        with self.assertRaises(UniqueViolation), mute_logger('odoo.sql_db'):
             self.Book.create({
                 'number': self.book_1.number
             })
