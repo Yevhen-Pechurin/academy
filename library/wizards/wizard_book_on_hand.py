@@ -13,7 +13,8 @@ class WizardOnHand(models.TransientModel):
         ctx = self._context
         book = self.env[ctx['active_model']].sudo().browse(ctx['active_ids'])
         today = fields.Datetime().now()
-        book.write({
+        # self._context.get('mail_create_nolog') and not self._context.get('mail_notrack')
+        book.with_context(mail_notrack=True).write({
             'partner_id': self.partner_id.id,
             'due_date': self.due_date,
             'status': 'on_hand',

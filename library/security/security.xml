@@ -21,4 +21,10 @@
         <field name="implied_ids" eval="[(4, ref('group_library_user'))]"/>
         <field name="users" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
     </record>
+
+    <record model="ir.rule" id="rule_book_multicompany">
+        <field name="name">Book multi-company</field>
+        <field name="model_id" ref="model_library_book"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>

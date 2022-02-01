@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
 from random import randint
 
 from odoo import models, fields, api, _
@@ -78,6 +79,7 @@ class Book(models.Model):
     due_date = fields.Date()
     overdue_notification_date = fields.Date()
     active = fields.Boolean(default=True)
+    company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
 
     _sql_constraints = [
         ('number_uniq', 'unique (number)', """Only one number can be defined for each book!"""),
@@ -89,12 +91,16 @@ class Book(models.Model):
             'view_mode': 'form',
             'res_model': 'library.wizard.on_hand',
             'type': 'ir.actions.act_window',
-            'target': 'new'
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_due_date': fields.Datetime.now() + timedelta(days=10)
+            }
         }
 
     def action_on_shelf(self):
-        last_history = self.history_ids[-1]
-        if last_history:
+        if self.history_ids:
+            last_history = self.history_ids[-1]
             last_history.write({
                 'date_on_shelf': fields.Datetime.now()
             })
@@ -134,3 +140,10 @@ class Book(models.Model):
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('library.book') or _('New')
         return super(Book, self).create(vals)
+
+    def send_notification(self):
+        days = self._context.get('days', 5)
+        for book in self:
+            body = '%s пожалуйста верните книгу %s через %s дней' % (book.partner_id.name, book.name, days)
+            subtype = self.env.ref('mail.mt_comment')
+            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
