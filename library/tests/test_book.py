@@ -1,5 +1,5 @@
 from odoo.exceptions import ValidationError
-from odoo.tests import tagged, Form
+from odoo.tests import tagged, Form, HttpCase
 from .common import TestBookCommonBase
 from psycopg2.errors import UniqueViolation
 from odoo import fields
@@ -51,3 +51,10 @@ class TestBook(TestBookCommonBase):
     def test_04_sequence(self):
         self.assertEqual(self.book_1.number, 'Book000001')
         self.assertEqual(self.book_2.number, 'Book000002')
+
+
+@tagged('book')
+class TestBookJs(HttpCase):
+
+    def test_tour(self):
+        self.start_tour("/web", 'library_tour', login='admin', timeout=180)
