@@ -11,10 +11,10 @@ class TestCarCommonBase(TransactionCase):
     def setUp(self):
         super(TestCarCommonBase, self).setUp()
         self.Car = self.env['rental.car']
-        self.CarManufacturer = self.env['rental.car_manufacturer']
+        self.CarManufacturer = self.env['rental.car.manufacturer']
         self.CarModel = self.env['rental.car.model']
         self.CarRentalHistory = self.env['rental.history']
-        self.CarMaintenanceHistory = self.env['rental.maintenance_history']
+        self.CarMaintenanceHistory = self.env['rental.maintenance.history']
         self.Rentee = self.env['res.partner']
 
         self.rentee_1 = self.Rentee.create({
