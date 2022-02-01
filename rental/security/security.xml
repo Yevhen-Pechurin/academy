@@ -19,5 +19,11 @@
         <record id="base.user_admin" model="res.users">
             <field name="groups_id" eval="[(4,ref('rental.group_rental_manager'))]"></field>
         </record>
+
+        <record id="rule_car_multicompany" model="ir.rule">
+            <field name="name">Car multicompany</field>
+            <field name="model_id" ref="model_rental_car"></field>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
     </data>
 </odoo>
