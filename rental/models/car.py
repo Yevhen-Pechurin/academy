@@ -23,6 +23,7 @@ class Car(models.Model):
     loan_history_ids = fields.One2many('rental.loan', 'car_id')
     repair_history_ids = fields.One2many('rental.repair', 'car_id')
     odometer = fields.Integer(tracking=True)
+    company_id = fields.Many2one('res.company', required=True, readonly=True, default=lambda self: self.env.company)
 
     def _expand_states(self):
         return [key for key, in type(self).status.selection]
@@ -30,7 +31,7 @@ class Car(models.Model):
     @api.depends('number', 'model')
     def _compute_name(self):
         for i in self:
-            i.name = str(i.model) + str(i.number)
+            i.name = str(i.model) + ' ' + str(i.number)
 
     @api.model
     def get_car_list(self, input):
