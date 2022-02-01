@@ -12,11 +12,16 @@ class CarManufacturer(models.Model):
 class CarModel(models.Model):
     _name = 'rental.car.model'
     _description = 'Car model'
+    _inherit = 'mail.thread'
     
     model_name = fields.Char(required=True)
     manufacturer_id = fields.Many2one('rental.car.manufacturer', required=True)
     manufacturer_logo = fields.Image(related='manufacturer_id.logo')
     #car_ids = fields.One2many('rental.car', 'model_id')
+
+    _sql_constraints = [
+        ('unique_model_name', 'UNIQUE(model_name, manufacturer_id)', """Such a model for this manufacturer already exists!"""),
+    ]
 
 
 class CarRentalHistory(models.Model):
