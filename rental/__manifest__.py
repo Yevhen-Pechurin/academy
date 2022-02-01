@@ -31,7 +31,8 @@
         ],
         'web.assets_backend': [
             'rental/static/src/js/*.js',
-            'rental/static/src/components/*/*.js'
+            'rental/static/src/components/*/*.js',
+            'rental/static/src/js/tours/*.js',
         ],
     },
     'application': True,
