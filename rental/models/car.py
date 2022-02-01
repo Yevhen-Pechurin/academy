@@ -6,7 +6,7 @@ class Car(models.Model):
     _description = 'Class for cars'
     _inherit = ['image.mixin', 'mail.thread']
 
-    name = fields.Char(compute='_compute_name', readonly=True)
+    name = fields.Char(compute='_compute_name', readonly=True, store=True)
     number = fields.Integer(tracking=True)
     model = fields.Char(tracking=True)
     year = fields.Date(tracking=True)
