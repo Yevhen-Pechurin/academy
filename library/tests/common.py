@@ -37,3 +37,9 @@ class TestBookCommonBase(TransactionCase):
             'status': 'on_shelf',
             'partner_id': self.partner_1.id
         })
+
+
+
+
+# -c /home/olga/PycharmProjects/academy/odoo.conf
+# --test-enable -d library -i library --log-level=test --stop-after-init --test-tags book --dev=xml
