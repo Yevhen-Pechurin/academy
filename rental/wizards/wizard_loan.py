@@ -11,6 +11,7 @@ class WizardLoan(models.TransientModel):
 
     def on_loan(self):
         ctx = self.env.context
+        print(self.env.context)
         car = self.env['rental.car'].sudo().search([('id', '=', ctx['active_id'])])
         car.write({'partner_id': self.partner_id.id, 'status': 'on_loan'})
         self.env['rental.loan'].sudo().create({

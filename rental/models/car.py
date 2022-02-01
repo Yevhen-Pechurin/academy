@@ -24,6 +24,7 @@ class Car(models.Model):
     loan_history_ids = fields.One2many('rental.loan', 'car_id')
     repair_history_ids = fields.One2many('rental.repair', 'car_id')
     odometer = fields.Integer(tracking=True)
+
     @api.depends('number', 'model')
     def _compute_name(self):
         for i in self:
@@ -35,7 +36,7 @@ class Car(models.Model):
             'res_model': 'rental.wizard.loan',
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
-            'target': 'new'
+            'target': 'new',
         }
 
     def action_unavailable(self):
@@ -99,10 +100,14 @@ class Car(models.Model):
 
     def print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id('rental.action_report_car_barcode')
+
     @api.model
     def create(self, vals_list):
-        vals_list['code']=self.env['ir.sequence'].next_by_code('rental.car')
-        return super(Car,self).create(vals_list)
+        vals_list['code'] = self.sequence()
+        return super(Car, self).create(vals_list)
+
+    def sequence(self):
+        return self.env['ir.sequence'].next_by_code('rental.car')
 
 
 class RepairHistory(models.Model):

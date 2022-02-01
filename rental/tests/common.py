@@ -4,16 +4,22 @@ from datetime import datetime
 
 @tagged('post_install', '-at_install')
 class RentalTestCar(TransactionCase):
-    @classmethod
-    def setUpClass(self):
-        super(RentalTestCar, self).setUpClass()
-        self.seq_value = self.env['ir.sequence'].next_by_code('rental.car')
-        print(self.seq_value)
+
+    def setUp(self):
+        super(RentalTestCar, self).setUp()
+
+        def patched_sequnce(self):
+            seq = self.env['ir.sequence'].search([('name', '=', 'Car')])
+            return seq.prefix + str(seq.number_next_actual).zfill(seq.padding)
+
+        self.patch(type(self.env['rental.car']), 'sequence', patched_sequnce)
+
         self.test_car = self.env['rental.car'].create({
             'model': 'Test',
             'number': 0,
             'year': datetime.now()
         })
+        self.test_car_id = self.test_car.id
 
         self.test_partner = self.env['res.partner'].create({
             'name': 'Test Test',
