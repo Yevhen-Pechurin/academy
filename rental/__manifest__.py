@@ -19,6 +19,7 @@
     ],
     'demo': [
         'demo/car_rental_demo.xml',
+        'demo/demo_car_company.xml',
     ],
     "assets": {
         "web.assets_backend": [
