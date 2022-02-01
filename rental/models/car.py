@@ -2,7 +2,7 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 class CarManufacturer(models.Model):
-    _name = 'rental.car_manufacturer'
+    _name = 'rental.car.manufacturer'
     _description = 'Car manufacturer'
 
     name = fields.Char(required=True)
@@ -10,11 +10,11 @@ class CarManufacturer(models.Model):
 
 
 class CarModel(models.Model):
-    _name = 'rental.car_model'
+    _name = 'rental.car.model'
     _description = 'Car model'
     
     model_name = fields.Char(required=True)
-    manufacturer_id = fields.Many2one('rental.car_manufacturer', required=True)
+    manufacturer_id = fields.Many2one('rental.car.manufacturer', required=True)
     manufacturer_logo = fields.Image(related='manufacturer_id.logo')
     #car_ids = fields.One2many('rental.car', 'model_id')
 
@@ -37,7 +37,7 @@ class CarRentalHistory(models.Model):
 
 
 class CarMaintananceHistory(models.Model):
-    _name = 'rental.maintenance_history'
+    _name = 'rental.maintenance.history'
     _description = 'Car maintenance history'
 
 
@@ -47,7 +47,7 @@ class Car(models.Model):
     _inherit = 'mail.thread'
 
     name = fields.Char(compute='_compute_car_name')
-    model = fields.Char(required=True) #model_id = fields.Many2one('rental.car_model', required=True)
+    model = fields.Char(required=True) #model_id = fields.Many2one('rental.car.model', required=True)
     number = fields.Char(required=True, default='New', readonly=True)
     logo = fields.Image()    #related='model_id.manufacturer_logo')
     year = fields.Integer()
@@ -70,14 +70,14 @@ class Car(models.Model):
     @api.model
     def get_model(self, model_name):
         #Some ways of managing the data:
-        """values = {'models': self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])}
+        """values = {'models': self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])}
         """
         """values = {'models': self.env['rental.car'].sudo().search_read([('model_name', 'ilike', model_name)], fields = ['model_name', 'id'], limit=5)}
         """
-        """records = self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)])
+        """records = self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)])
         #values['models'] = [[r.id, r.model_name] for r in records]
         """
-        return self.env['rental.car_model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
+        return self.env['rental.car.model'].sudo().search([('model_name', 'ilike', model_name)]).read(['id', 'model_name'])
 
     @api.model
     def create(self, vals):

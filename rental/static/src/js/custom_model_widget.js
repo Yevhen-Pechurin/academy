@@ -42,7 +42,7 @@ odoo.define('rental.custom_model_widget', function(require) {
         _onClickGetModelInfo: function(ev) {
             const self = this;
             this._rpc({
-                model: 'rental.car_model',
+                model: 'rental.car.model',
                 method: 'read',
                 args: [[+ev.target.dataset.id], ['model_name', 'manufacturer_logo']],
             }).then((res) => {

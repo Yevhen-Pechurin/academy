@@ -1,29 +1,29 @@
 <odoo>
     <data>
         <!-- Car manufacturers -->
-        <record id="test_manufacturer_1" model="rental.car_manufacturer">
+        <record id="test_manufacturer_1" model="rental.car.manufacturer">
             <field name="name">Tesla</field>
             <field name="logo" type="base64" file="rental/static/img/tesla.jpg"/>
         </record>
-        <record id="test_manufacturer_2" model="rental.car_manufacturer">
+        <record id="test_manufacturer_2" model="rental.car.manufacturer">
             <field name="name">BMW</field>
             <field name="logo" type="base64" file="rental/static/img/bmw.png"/>
         </record>
-        <record id="test_manufacturer_3" model="rental.car_manufacturer">
+        <record id="test_manufacturer_3" model="rental.car.manufacturer">
             <field name="name">Citroën</field>
             <field name="logo" type="base64" file="rental/static/img/citroen.png"/>
         </record>
 
         <!-- Car models -->
-        <record id="test_model_1" model="rental.car_model">
+        <record id="test_model_1" model="rental.car.model">
             <field name="model_name">Model X</field>
             <field name="manufacturer_id" ref="test_manufacturer_1"/>
         </record>
-        <record id="test_model_2" model="rental.car_model">
+        <record id="test_model_2" model="rental.car.model">
             <field name="model_name">BMW 750i G11 (2015-2019)</field>
             <field name="manufacturer_id" ref="test_manufacturer_2"/>
         </record>
-        <record id="test_model_3" model="rental.car_model">
+        <record id="test_model_3" model="rental.car.model">
             <field name="model_name">Citroën C3</field>
             <field name="manufacturer_id" ref="test_manufacturer_3"/>
         </record>

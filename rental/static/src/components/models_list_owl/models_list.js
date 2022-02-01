@@ -11,7 +11,7 @@ import { useService } from "@web/core/utils/hooks";
 class ModelsListComponent extends Component {
     async _onClickGetModelInfo(ev) {
         const {model_name: model, manufacturer_logo: logo} = (await this.rpc({
-            model: 'rental.car_model',
+            model: 'rental.car.model',
             method: 'read',
             args: [[+ev.target.dataset.id], ['model_name', 'manufacturer_logo']],
             }))[0];

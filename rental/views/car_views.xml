@@ -1,8 +1,24 @@
 <odoo>
-    <record id="car_rental_action" model="ir.actions.act_window">
-        <field name="name">All Cars</field>
+    <record id="display_all_cars_action" model="ir.actions.act_window">
+        <field name="name">All cars</field>
         <field name="res_model">rental.car</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="display_all_models_action">
+            <field name="name">All models</field>
+            <field name="res_model">rental.car.model</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="car_rental_car_model_view_tree" model="ir.ui.view">
+        <field name="name">rental.car.model.tree</field>
+        <field name="model">rental.car.model</field>
+        <field name="arch" type="xml">
+            <tree string="Cars models list">
+                <field name="model_name"/>
+            </tree>
+        </field>
     </record>
 
     <!-- tree view -->
