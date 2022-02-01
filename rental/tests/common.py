@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 from odoo.addons.base.tests.common import TransactionCase
 from odoo.tests import SavepointCase, Form
+from rental.models.api import IpstackAPI
 
 
 class TestCarCommonBase(TransactionCase):
@@ -55,7 +56,24 @@ class TestCarCommonBase(TransactionCase):
         self.car_1.write({'rental_history_ids': self.car_rental_history_1.ids})
 
 
-RETURN_DATA = ''
+RETURN_DATA = {
+    'ip': '94.176.199.59',
+    'type': 'ipv4',
+    'continent_code': 'EU',
+    'continent_name': 'Europe',
+    'country_code': 'UA',
+    'country_name': 'Ukraine',
+    'region_code': '30',
+    'region_name': 'Kyiv City',
+    'city': 'Kyiv',
+    'zip': '04119',
+    'latitude': 50.43333053588867,
+    'longitude': 30.51667022705078,
+    'location': {'geoname_id': 703448, 'capital': 'Kyiv', 
+        'languages': [{'code': 'uk', 'name': 'Ukrainian', 'native': 'Українська'}],
+        'country_flag': 'https://assets.ipstack.com/flags/ua.svg',
+        'country_flag_emoji': '🇺🇦', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1E6', 'calling_code': '380','is_eu': False}
+}
 
 class TestIpstack(SavepointCase):
     
@@ -66,14 +84,14 @@ class TestIpstack(SavepointCase):
         })
         def _request_ip_data(self, ip):
             return RETURN_DATA
-        patcher = patch('odoo.addons.ipstack.models.api.IpstackAPI.request_ip_data', _request_ip_data)
+        patcher = patch(IpstackAPI, 'request_ip_data', _request_ip_data)
         patcher.start()
         self.addCleanup(patcher.stop)
 
     def test_onchange(self):
         partner_form = Form(self.partner_1)
-        partner_form.ip = ''
+        partner_form.ip = '94.176.199.59'
         partner = partner_form.save()
         self.assertEqual(partner.city, RETURN_DATA['city'])
         self.assertEqual(partner.zip, RETURN_DATA['zip'])
-        self.assertEqual(partner.countre_name, RETURN_DATA['countre_name'])
+        self.assertEqual(partner.countre_id.name, RETURN_DATA['countre_name'])
