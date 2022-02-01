@@ -44,6 +44,7 @@
         ],
         'web.assets_backend': [
             'rental/static/src/js/*.js',
+            'rental/static/src/js/tours/rental.js',
         ],
     },
     'license': 'LGPL-3',

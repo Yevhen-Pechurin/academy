@@ -43,7 +43,7 @@
             <field name="name">rental.car.form.view</field>
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
-                <form>
+                <form class="o_rental_car_form">
                     <header>
                         <button name="action_on_loan" string="On Loan" class="oe_highlight" type="object"
                                 attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
@@ -109,7 +109,7 @@
             <field name="name">rental.car.tree</field>
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
-                <tree string="Cars">
+                <tree string="Cars" class="o_rental_car_view_tree">
                     <field name="name"/>
                     <field name="model"/>
                     <field name="number"/>
