@@ -11,7 +11,7 @@ from odoo.exceptions import ValidationError
 @tagged('book')
 class TestBook(TestBookCommonBase):
 
-    @unittest.skip("demonstrating skipping")
+    # @unittest.skip("demonstrating skipping")
     def test_01_action_on_shelf(self):
         self.assertEqual(self.book_1.status, 'on_hand', 'Status is not on_hand')
         self.assertTrue(self.book_1.partner_id)
