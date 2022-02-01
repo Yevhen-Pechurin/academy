@@ -109,8 +109,8 @@ class Car(models.Model):
         }
 
     def action_in_garage(self):
-        last_history = self.history_ids[-1]
-        if last_history:
+        if self.history_ids:
+            last_history = self.history_ids[-1]
             last_history.write({
                 'date_in_garage': fields.Datetime.now()
             })
@@ -118,6 +118,7 @@ class Car(models.Model):
             'status': 'in_garage',
             'partner_id': False
         })
+
 
     @api.depends('active')
     def _compute_status(self):
@@ -143,6 +144,4 @@ class Car(models.Model):
         return self.env['ir.actions.report']._for_xml_id('rental.action_report_car')
 
 
-#
-# fields=['model']
-# env['res.users'].search_read([], ['name', 'email', 'login'])
+
