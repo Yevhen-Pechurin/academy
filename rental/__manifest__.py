@@ -19,6 +19,7 @@
         'views/res_config_settings.xml',
         'views/res_partner_views.xml',
         'views/car_views.xml',
+        'views/car_model_views.xml',
         'report/car_barcode_report.xml',
         'report/car_barcode_template.xml',
         'report/car_report_views.xml',

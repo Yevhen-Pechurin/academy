@@ -22,12 +22,13 @@
         </field>
     </record>
 
+    <!-- Menu actions -->
     <record id="display_all_cars_action" model="ir.actions.act_window">
         <field name="name">All cars</field>
         <field name="res_model">rental.car</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
     </record>
-    <!-- Currently not called anywhere. active_id doesn't exist if accessed through menu -->
+                    <!-- Currently not called anywhere. active_id doesn't exist if accessed through menu -->
     <record id="display_clients_cars_action" model="ir.actions.act_window">
         <field name="name">Client's cars</field>
         <field name="res_model">rental.car</field>
@@ -54,44 +55,6 @@
         <field name="res_model">rental.car</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
         <field name="context">{'search_default_rented': 1,}</field>
-    </record>
-
-    <record model="ir.actions.act_window" id="display_all_models_action">
-            <field name="name">All models</field>
-            <field name="res_model">rental.car.model</field>
-            <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="car_rental_car_model_view_tree" model="ir.ui.view">
-        <field name="name">rental.car.model.tree</field>
-        <field name="model">rental.car.model</field>
-        <field name="arch" type="xml">
-            <tree string="Cars models list" class="o_rental_car_model_tree">
-                <field name="model_name"/>
-                <field name="manufacturer_id"/>
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="car_rental_car_model_form_view">
-        <field name="name">rental.car.model.form.view</field>
-        <field name="model">rental.car.model</field>
-        <field name="arch" type="xml">
-            <form class="o_rental_car_model_form">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="model_name" />
-                            <field name="manufacturer_id"/>
-                        </group>
-                    </group>
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user"/>
-                    <field name="message_ids"/>
-                </div>
-            </form>
-        </field>
     </record>
 
     <!-- tree view -->
@@ -158,4 +121,5 @@
             </form>
         </field>
     </record>
+    
 </odoo>
