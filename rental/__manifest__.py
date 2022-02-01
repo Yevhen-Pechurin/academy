@@ -31,7 +31,8 @@
 
             'rental/static/src/js/list.js',
             'rental/static/src/css/list.css',
-            'rental/static/src/js/components/list_widget/list.js'
+            'rental/static/src/js/components/list_widget/list.js',
+            'rental/static/src/js/tours/tour.js'
         ],
         'web.assets_qweb': [
 

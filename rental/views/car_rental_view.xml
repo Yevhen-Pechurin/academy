@@ -45,7 +45,7 @@
             <field name="name">cars.tree.view</field>
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree class="car_tree_view">
                     <header>
                         <button name="print_qrcode" string="Qrcode" type="object"/>
                         <button name="print_barcode" string="Barcode" type="object"/>
@@ -65,7 +65,7 @@
             <field name="name">cars.form.view</field>
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
-                <form>
+                <form class="car_form_view">
                     <header>
                         <button attrs="{'invisible':['|',('status','=','on_loan'),'|',('status','=','under_repair'),('status','=','unavailable')]}"
                                 string="Loan" class="oe_highlight"
@@ -219,7 +219,7 @@
             </field>
         </record>
         <!-- car rental menues -->
-        <menuitem id="car_rental_menu" name="Rental" sequence="1"/>
+        <menuitem id="car_rental_menu" name="Rental" sequence="100"/>
         <menuitem id="cars" name="Cars" parent="car_rental_menu" sequence="1"/>
         <menuitem id="car_report" name="Report" parent="car_rental_menu" sequence="2" action="car_report_action"/>
 
