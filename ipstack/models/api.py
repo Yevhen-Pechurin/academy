@@ -23,8 +23,8 @@ class IpstackApi(object):
         _logger.info('Received response from ipstack: %s' % result)
         return result
 
-    def join_url(self, *arg):
-        return ''
+    def join_url(self, *args):
+        return "/".join(arg.strip("/") for arg in args)
 
 
 if __name__ == "__main__":
