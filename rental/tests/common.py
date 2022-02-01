@@ -1,6 +1,9 @@
+from unittest.mock import patch
 from dateutil.relativedelta import relativedelta
 from odoo import fields
 from odoo.addons.base.tests.common import TransactionCase
+from odoo.tests import SavepointCase, Form
+
 
 class TestCarCommonBase(TransactionCase):
 
@@ -50,3 +53,27 @@ class TestCarCommonBase(TransactionCase):
         })
 
         self.car_1.write({'rental_history_ids': self.car_rental_history_1.ids})
+
+
+RETURN_DATA = ''
+
+class TestIpstack(SavepointCase):
+    
+    def setUp(self):
+        super(TestIpstack, self).setUp()
+        self.partner_1 = self.env['res.partner'].create({
+            'name': 'Tester',
+        })
+        def _request_ip_data(self, ip):
+            return RETURN_DATA
+        patcher = patch('odoo.addons.ipstack.models.api.IpstackAPI.request_ip_data', _request_ip_data)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_onchange(self):
+        partner_form = Form(self.partner_1)
+        partner_form.ip = ''
+        partner = partner_form.save()
+        self.assertEqual(partner.city, RETURN_DATA['city'])
+        self.assertEqual(partner.zip, RETURN_DATA['zip'])
+        self.assertEqual(partner.countre_name, RETURN_DATA['countre_name'])
