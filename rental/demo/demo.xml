@@ -13,6 +13,10 @@
             <field name="name">Citroën</field>
             <field name="logo" type="base64" file="rental/static/img/citroen.png"/>
         </record>
+        <record id="test_manufacturer_4" model="rental.car.manufacturer">
+            <field name="name">Volvo</field>
+            <field name="logo" type="base64" file="rental/static/img/volvo.jpeg"/>
+        </record>
 
         <!-- Car models -->
         <record id="test_model_1" model="rental.car.model">
