@@ -139,7 +139,7 @@
             <field name="name"> cars.book.kanban</field>
             <field name="model">rental.car</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="status" class="o_kanban_small_column" create="false">
+                <kanban default_group_by="status" class="o_kanban_small_column" create="true">
                     <field name="name"/>
                     <field name="partner_id"/>
                     <field name="status"/>
