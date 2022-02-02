@@ -6,7 +6,7 @@ import tour from 'web_tour.tour';
 
 tour.register('rental_tour', {
     url: "/web",
-    rainbowManMessage: _t("Congrats, the first your car just created! :)"),
+    rainbowManMessage: _t("Congrats, you have just created your first car! :)"),
     sequence: 10,
 },
     [tour.stepUtils.showAppsMenuItem(), {
