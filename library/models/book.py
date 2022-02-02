@@ -72,7 +72,7 @@ class Book(models.Model):
         ('unavailable', 'Unavailable'),
     ], default='on_shelf', compute='_compute_status',
         store=True, tracking=True)
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
     publishing_house_id = fields.Many2one('res.partner')
     image = fields.Image(string="Image", max_width=256, max_height=256)
@@ -106,7 +106,7 @@ class Book(models.Model):
             })
         self.write({
             'status': 'on_shelf',
-            'partner_id': False
+            'client_id': False
         })
 
     def _cron_overdue_book_notification(self):
@@ -117,9 +117,9 @@ class Book(models.Model):
             ('overdue_notification_date', '!=', today)
         ])
         for book in overdue_books:
-            body = '%s пожалуйста верните книгу %s' % (book.partner_id.name, book.name)
+            body = '%s пожалуйста верните книгу %s' % (book.client_id.name, book.name)
             subtype = self.env.ref('mail.mt_comment')
-            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
+            book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)
             book.write({
                 'overdue_notification_date': fields.Datetime.now()
             })
@@ -144,6 +144,6 @@ class Book(models.Model):
     def send_notification(self):
         days = self._context.get('days', 5)
         for book in self:
-            body = '%s пожалуйста верните книгу %s через %s дней' % (book.partner_id.name, book.name, days)
+            body = '%s пожалуйста верните книгу %s через %s дней' % (book.client_id.name, book.name, days)
             subtype = self.env.ref('mail.mt_comment')
-            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
+            book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)

@@ -36,7 +36,7 @@
             <field name="arch" type="xml">
                 <pivot>
                     <field name="author_id" type="col"/>
-                    <field name="partner_id" type="row"/>
+                    <field name="client_id" type="row"/>
                 </pivot>
             </field>
         </record>
@@ -51,7 +51,7 @@
                     <field name="author_id"/>
                     <field name="tag_ids"/>
                     <field name="status"/>
-                    <field name="partner_id"/>
+                    <field name="client_id"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
@@ -60,7 +60,7 @@
                                         <strong><field name="name"/></strong>
                                     </div>
                                     <div>
-                                        <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+                                        <span class="o_text_overflow" t-if="record.client_id.value" t-esc="record.client_id.value"/>
                                     </div>
                                     <div>
                                         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -85,7 +85,7 @@
                 <search>
                     <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('author_id', 'ilike', self), ('description', 'ilike', self)]"/>
                     <field name="author_id"/>
-                    <field name="partner_id" string="Client"/>
+                    <field name="client_id" string="Client"/>
                     <filter name="active" string="Archive" domain="[('active','=',False)]"/>
                     <separator/>
                     <filter name="on_shelf" string="On Shelf" domain="[('status','=', 'on_shelf')]"/>
@@ -171,7 +171,7 @@
                 </xpath>
                 <xpath expr="//group/group" position="after">
                     <group string="Client">
-                        <field name="partner_id"/>
+                        <field name="client_id"/>
                         <field name="due_date"/>
                     </group>
                 </xpath>

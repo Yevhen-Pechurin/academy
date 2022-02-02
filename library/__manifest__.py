@@ -14,7 +14,7 @@
     'website': "https://smartteksas.com/",
 
     'category': 'Services/Library',
-    'version': '0.1',
+    'version': '0.2',
 
     # any module necessary for this one to work correctly
     'depends': ['mail', 'website'],
@@ -44,5 +44,5 @@
         'web.assets_backend': [
             'library/static/src/js/tours/library.js',
         ],
-    }
+    },
 }
