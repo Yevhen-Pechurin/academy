@@ -5,8 +5,8 @@
         <field name="model">rental.car</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" filter_domain="['|', '|', ('model', 'ilike', self), ('number', 'ilike', self), ('client_id', 'ilike', self)]"/>
-                <field name="client_id" string="Rentee"/>
+                <field name="name" filter_domain="['|', '|', ('model', 'ilike', self), ('number', 'ilike', self), ('rentee_id', 'ilike', self)]"/>
+                <field name="rentee_id" string="Rentee"/>
                 <field name="year"/>
                 <field name="year" string="From year" filter_domain="[('year', '&gt;', self)]"/>
                 <field name="year" string="Before year" filter_domain="[('year', '&lt;', self)]"/>
@@ -33,7 +33,7 @@
         <field name="name">Client's cars</field>
         <field name="res_model">rental.car</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
-        <field name="context">{'search_default_client_id': active_id}</field>
+        <field name="context">{'search_default_rentee_id': active_id}</field>
     </record>
 
     <record id="display_available_cars_action" model="ir.actions.act_window">
@@ -95,6 +95,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_pass_to_client" string="Pass to client" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['rented', 'on_maintenance', 'unavailable'])]}"/>
                     <button string="Print barcode" type="object" name="print_barcode"/>
                     <field name="status" widget="statusbar" statusbar_visible="in_garage,rented,on_maintenance,unavailable"/>
                 </header>
@@ -112,7 +113,7 @@
                             <field name="year"/>
                             <field name="odometer"/>
                         </group>
-                        <group>
+                        <group string="Owner">
                             <field name="company_id"/>
                         </group>
                     </group>

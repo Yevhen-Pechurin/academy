@@ -31,11 +31,11 @@ class CarRentalHistory(models.Model):
     _name = 'rental.history'
     _description = 'Car rental history'
 
-    car_id = fields.Many2one('rental.car', required=True)
-    date_rented = fields.Datetime(default=fields.Datetime.now)
-    rentee_id = fields.Many2one('res.partner')
-    date_returned = fields.Datetime()
-    initial_odometer_value = fields.Integer(default=lambda self: self.car_id.odometer)
+    car_id = fields.Many2one('rental.car', readonly=True)
+    date_rented = fields.Datetime(readonly=True)
+    rentee_id = fields.Many2one('res.partner', required=True)
+    date_returned = fields.Datetime(readonly=True)
+    initial_odometer_value = fields.Integer(readonly=True)
     final_odometer_value = fields.Integer()
 
     @api.constrains('final_odometer_value')
@@ -44,7 +44,7 @@ class CarRentalHistory(models.Model):
             raise ValidationError('Invalid input: odometer value after rental cannot be smaller than before rental.')
 
 
-class CarMaintananceHistory(models.Model):
+class CarMaintenanceHistory(models.Model):
     _name = 'rental.maintenance.history'
     _description = 'Car maintenance history'
 
@@ -74,7 +74,7 @@ class Car(models.Model):
         ('unavailable', 'Unavailable'),
         ], default= 'in_garage', required=True, tracking=True)
     date_rented = fields.Datetime()
-    client_id = fields.Many2one('res.partner', copy=False)
+    rentee_id = fields.Many2one('res.partner', copy=False)
     odometer = fields.Integer(tracking=True)
     active = fields.Boolean(default=True)
     rental_history_ids = fields.One2many('rental.history', 'car_id')
@@ -118,4 +118,14 @@ class Car(models.Model):
     def print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id("rental.action_report_car_barcode")
 
-    
+    def action_pass_to_client(self):
+        return {
+            'name': _('Pass to client %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.pass_to_client',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'default_initial_odometer_value': self.odometer,
+            }
+        }

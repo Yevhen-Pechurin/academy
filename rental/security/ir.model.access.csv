@@ -6,3 +6,4 @@ rental.access_rental_car_user,access_rental_car,rental.model_rental_car,rental.g
 rental.access_rental_car_manager,access_rental_car,rental.model_rental_car,rental.group_car_rental_manager,1,1,1,0
 rental.access_rental_car_report,access_rental_car_report,rental.model_rental_car_report,rental.group_car_rental_manager,1,1,1,1
 rental.access_rental_car_manufacturer,access_rental_car_manufacturer,rental.model_rental_car_manufacturer,rental.group_car_rental_manager,1,1,1,0
+rental.access_rental_wizard_pass_to_client,access_rental_wizard_pass_to_client,rental.model_rental_wizard_pass_to_client,rental.group_car_rental_manager,1,1,1,0
