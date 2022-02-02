@@ -7,7 +7,10 @@
             <menuitem id="display_rented_cars_menu_action" action="display_rented_cars_action"/>
             <menuitem id="display_fixed_cars_menu_action" action="display_fixed_cars_action"/>
         </menuitem>
-        <menuitem name="Reports" id="reports" groups="base.group_user">
+        <menuitem name="Configurations" id="configurations" groups="rental.group_car_rental_manager">
+            <menuitem id="display_all_manufacturers_menu_action" action="display_all_manufacturers_action"/>
+        </menuitem>
+        <menuitem name="Reports" id="reports" groups="rental.group_car_rental_manager">
             <menuitem name="Car reports" id="menu_car_reports" action="action_car_report"/>
         </menuitem>
     </menuitem>

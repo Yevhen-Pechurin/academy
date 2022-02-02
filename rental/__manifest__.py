@@ -4,6 +4,7 @@
 {
     'name': 'Car Rental',
     'category': 'Services/Car Rental',
+    'version': '0.1',
     'sequence': -50,
     'depends': [
         'mail',
@@ -20,6 +21,7 @@
         'views/res_partner_views.xml',
         'views/car_views.xml',
         'views/car_model_views.xml',
+        'views/car_manufacturer_views.xml',
         'report/car_barcode_report.xml',
         'report/car_barcode_template.xml',
         'report/car_report_views.xml',
