@@ -21,4 +21,10 @@
         <field name="implied_ids" eval="[(4, ref('group_car_rental_user'))]"/>
         <field name="users" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
     </record>
+
+    <record model="ir.rule" id="rule_car_multicompany">
+        <field name="name">Car multicompany</field>
+        <field name="model_id" ref="model_rental_car"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>

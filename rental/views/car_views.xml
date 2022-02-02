@@ -112,6 +112,9 @@
                             <field name="year"/>
                             <field name="odometer"/>
                         </group>
+                        <group>
+                            <field name="company_id"/>
+                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -121,5 +124,6 @@
             </form>
         </field>
     </record>
-    
+
+    <!-- kanban view -->
 </odoo>

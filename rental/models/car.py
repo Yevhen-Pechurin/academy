@@ -1,9 +1,11 @@
+from datetime import timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 class CarManufacturer(models.Model):
     _name = 'rental.car.manufacturer'
     _description = 'Car manufacturer'
+    _inherit = 'mail.thread'
 
     name = fields.Char(required=True)
     logo = fields.Image(string="Manufacturer logo", max_width=256, max_height=256)
@@ -17,6 +19,7 @@ class CarModel(models.Model):
     model_name = fields.Char(required=True)
     manufacturer_id = fields.Many2one('rental.car.manufacturer', required=True)
     manufacturer_logo = fields.Image(related='manufacturer_id.logo')
+    active = fields.Boolean(default=True)
     #car_ids = fields.One2many('rental.car', 'model_id')
 
     _sql_constraints = [
@@ -75,6 +78,7 @@ class Car(models.Model):
     odometer = fields.Integer(tracking=True)
     active = fields.Boolean(default=True)
     rental_history_ids = fields.One2many('rental.history', 'car_id')
+    company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
 
     _sql_constraints = [
         ('unique_number', 'UNIQUE(number)', """Number is unique for every car!"""),
@@ -113,3 +117,5 @@ class Car(models.Model):
 
     def print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id("rental.action_report_car_barcode")
+
+    
