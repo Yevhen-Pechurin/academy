@@ -1,7 +1,7 @@
 from datetime import timedelta
 from odoo import fields
 from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests.common import Form, HttpCase
 from .common import TestBookCommonBase
 from psycopg2.errors import UniqueViolation
 import unittest

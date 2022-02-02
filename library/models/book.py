@@ -84,7 +84,7 @@ class Book(models.Model):
         ('on_hand', 'On Hand'),
         ('unavailable', 'Unavailable'),
     ], default='on_shelf', compute='_compute_status', group_expand='_expand_statuses', store=True, tracking=True)
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('library.history', 'book_id')
     tag_ids = fields.Many2many(related='book_id.tag_ids')
     publishing_house_id = fields.Many2one('res.partner')
@@ -129,7 +129,7 @@ class Book(models.Model):
             })
         self.write({
             'status': 'on_shelf',
-            'partner_id': False
+            'client_id': False
         })
 
     def _cron_overdue_book_notification(self):
@@ -140,9 +140,9 @@ class Book(models.Model):
             ('overdue_notification_date', '!=', today)
         ])
         for book in overdue_books:
-            body = '%s Пожалуйста, верните книгу. %s' % (book.partner_id.name, book.name)
+            body = '%s Пожалуйста, верните книгу. %s' % (book.client_id.name, book.name)
             subtype = self.env.ref('mail.mt_comment')
-            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
+            book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)
             book.write({
                 'overdue_notification_date': fields.Datetime.now()
             })
@@ -178,8 +178,8 @@ class Book(models.Model):
         # days = 0
         days = self._context.get('days', 5)
         for book in self:
-            body = '%s Пожалуйста, верните книгу. %s через %s дней' % (book.partner_id.name, book.name, days)
+            body = '%s Пожалуйста, верните книгу. %s через %s дней' % (book.client_id.name, book.name, days)
             subtype = self.env.ref('mail.mt_comment')
-            book.message_post(body=body, partner_ids=book.partner_id.ids, message_type='comment', subtype_id=subtype.id)
+            book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)
 
 
