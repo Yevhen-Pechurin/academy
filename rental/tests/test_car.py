@@ -35,7 +35,7 @@ class TestCar(TestCarCommonBase):
             }
         }
         self.assertItemsEqual(expected_result, result)
-        form_data = self.env['rental.wizard.on_loan'].with_context(**result['context'], active_model='rental.car.migrated', active_ids=self.car_2.ids)
+        form_data = self.env['rental.wizard.on_loan'].with_context(**result['context'], active_model='rental.car', active_ids=self.car_2.ids)
         form_on_loan = Form(form_data)
         form_on_loan.client_id = self.partner_1
         with self.assertRaises(ValidationError):
@@ -51,5 +51,4 @@ class TestCar(TestCarCommonBase):
 class TestCarJs(HttpCase):
 
     def test_tour(self):
-        kwar = {'password': '1111'}
         self.start_tour("/web", 'rental_tour', login='admin', timeout=180, *kwar)
