@@ -48,6 +48,7 @@ class CarMaintenanceHistory(models.Model):
     _name = 'rental.maintenance.history'
     _description = 'Car maintenance history'
 
+    car_id = fields.Many2one('rental.car', readonly=True)
     date_finished = fields.Datetime()
     action = fields.Selection([
         ('vehicle_inspection', 'Vehicle inspection'),
@@ -78,6 +79,7 @@ class Car(models.Model):
     odometer = fields.Integer(tracking=True)
     active = fields.Boolean(default=True)
     rental_history_ids = fields.One2many('rental.history', 'car_id')
+    maintenance_history_ids = fields.One2many('rental.maintenance.history', 'car_id')
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
 
     _sql_constraints = [
@@ -115,7 +117,7 @@ class Car(models.Model):
             else:
                 car.status = 'in_garage'
 
-    def print_barcode(self):
+    def action_print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id("rental.action_report_car_barcode")
 
     def action_pass_to_client(self):
@@ -127,5 +129,17 @@ class Car(models.Model):
             'target': 'new',
             'context': {
                 'default_initial_odometer_value': self.odometer,
+            }
+        }
+
+    def action_pass_for_maintenance(self):
+        return {
+            'name': _('Pass for maintenance %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.pass_for_maintenance',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'default_odometer_value': self.odometer,
             }
         }

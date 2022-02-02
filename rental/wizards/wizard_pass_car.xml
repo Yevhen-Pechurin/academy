@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-  <!-- <record model="ir.actions.act_window" id="action_wizard_pass_to_client">
-    <field name="name">Pass to Client</field>
-    <field name="res_model">rental.wizard.pass_to_client</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-  </record> -->
 
   <record model="ir.ui.view" id="form_view_wizard_pass_to_client">
     <field name="name">Pass to Client</field>
@@ -21,6 +15,26 @@
         </sheet>
         <footer>
           <button string="Confirm" name="action_pass_car_to_client" type="object" class="oe_highlight" data-hotkey="q"/>
+          <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="form_view_wizard_pass_for_maintenance">
+    <field name="name">Pass for Maintenance</field>
+    <field name="model">rental.wizard.pass_for_maintenance</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="action"/>
+            </group>
+          </group>
+        </sheet>
+        <footer>
+          <button string="Confirm" name="action_pass_car_for_maintenance" type="object" class="oe_highlight" data-hotkey="q"/>
           <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
         </footer>
       </form>
