@@ -6,7 +6,7 @@ import tour from 'web_tour.tour';
 
 tour.register('library_tour', {
     url: "/web",
-    rainbowManMessage: _t("Congrats, best of luck catching such big fish! :)"),
+    rainbowManMessage: _t("Congrats, you have just created your first book info! :)"),
     sequence: 10,
 },
     [tour.stepUtils.showAppsMenuItem(), {
@@ -79,15 +79,21 @@ tour.register('library_tour', {
     auto: true,
     in_modal: false,
 }, {
+    trigger: ".o_form_view .o_field_widget[name='description']",
+    content: Markup(_t('Set a <b>description</b>')),
+    position: "bottom",
+    run: function (actions) {
+        actions.text("Dark times have come to Hogwarts...", this.$anchor.find('input'));
+    }
+}, {
     trigger: 'button.o_form_button_save',
     extra_trigger: '.o_library_book_info_form',
     content: Markup(_t("<b>Save your first book info.</b>")),
     position: 'bottom',
-
 }, {
     mobile: false,
     trigger: ".breadcrumb-item:first",
-    content: Markup(_t("Use the breadcrumbs to <b>go back to products</b>.")),
+    content: Markup(_t("Use the breadcrumbs to <b>go back to books</b>.")),
     position: "bottom",
     run: function (actions) {
         actions.auto(".breadcrumb-item:not(.active):last");

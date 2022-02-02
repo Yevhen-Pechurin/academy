@@ -120,7 +120,7 @@
     <field name="name">books.form.view</field>
     <field name="model">library.book.info</field>
     <field name="arch" type="xml">
-        <form>
+        <form class="o_library_book_info_form">
             <sheet>
                 <div class="oe_title">
                     <label for="name"/>
