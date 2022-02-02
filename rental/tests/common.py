@@ -22,3 +22,11 @@ class TestCarCommonBase(TransactionCase):
             'status': 'on_loan',
             'partner_id': self.partner_1.id
         })
+        self.car_2 = self.Car.create({
+            'number': 31216,
+            'model': 'First',
+            'year': Datetime.now(),
+            'odometer': 50000,
+            'status': 'on_loan',
+            'partner_id': self.partner_1.id
+        })
