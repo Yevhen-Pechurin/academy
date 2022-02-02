@@ -39,9 +39,9 @@
                         <group>
                             <field name="name"/>
                         </group>
-                    </group>
-                    <group>
-                        <field name="logo" widget="image"/>
+                        <group>
+                            <field name="logo" widget="image" string=""/>
+                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
