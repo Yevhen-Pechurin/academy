@@ -25,6 +25,8 @@ class TestCarCommonBase(TransactionCase):
         # })
 
         self.car_1 = self.Car.create({
+            'name': 'Opel',
+            'number': '75643',
             'car_id': self.car_info_1.id,
             'status': 'on_rent',
             'partner_id': self.partner_1.id

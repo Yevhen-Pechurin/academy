@@ -52,10 +52,14 @@
             # 'rental/static/src/js/car.js',
         ],
     },
-
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'rental/static/src/js/tours/rental.js',
+        ],
+    },
     'application': True,
     'installable': True,
 }

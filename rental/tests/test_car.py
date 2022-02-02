@@ -1,9 +1,10 @@
 from datetime import timedelta
 from odoo import fields
 from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests.common import Form, HttpCase
 from .common import TestCarCommonBase
 from psycopg2.errors import UniqueViolation
+from odoo.tools import mute_logger
 import unittest
 from odoo.exceptions import ValidationError
 
@@ -21,7 +22,7 @@ class TestCar(TestCarCommonBase):
 
 
     def test_02_action_in_garage(self):
-        with self.assertRaises(UniqueViolation):
+        with self.assertRaises(UniqueViolation), mute_logger('odoo.sql_db'):
             self.Car.create({
                 'number': self.car_1.number
             })
@@ -57,3 +58,10 @@ class TestCar(TestCarCommonBase):
     # def test_004_action_on_hand(self):       # 004 - helps to be the first
     #     self.assertEqual(self.book_1.number, 'Book000001')
     #     self.assertEqual(self.book_2.number, 'Book000002')
+
+
+@tagged('car')
+class TestCarJs(HttpCase):
+
+    def test_tour(self):
+        self.start_tour("/web", 'rental_tour', login='admin', timeout=180)
