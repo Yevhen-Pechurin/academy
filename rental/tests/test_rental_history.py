@@ -1,9 +1,9 @@
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged
-from .common import TestCarCommonBase
+from .common import TestRentalCommonBase
 
 @tagged('car')
-class TestCarRentalHistory(TestCarCommonBase):
+class TestCarRentalHistory(TestRentalCommonBase):
 
     def test_01_check_final_odometer_value_constraint(self):
         with self.assertRaises(ValidationError):
