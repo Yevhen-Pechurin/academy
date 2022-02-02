@@ -35,7 +35,7 @@ class Car(models.Model):
     ], default='in_garage', compute='_compute_status',
         store=True, tracking=True)
     rental_start_date = fields.Date()
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('rental.history', 'car_id')
     image = fields.Image(string="Image", max_width=256, max_height=256)
     active = fields.Boolean(default=True)
@@ -71,7 +71,7 @@ class Car(models.Model):
             })
         self.sudo().write({
             'status': 'in_garage',
-            'partner_id': False
+            'client_id': False
         })
 
     @api.depends('active')

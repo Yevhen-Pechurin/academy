@@ -9,7 +9,7 @@
                 <kanban default_group_by="status" class="o_kanban_small_column" create="false">
                     <field name="name"/>
                     <field name="date_on_loan"/>
-                    <field name="partner_id"/>
+                    <field name="client_id"/>
                     <field name="id"/>
                     <field name="image"/>
                     <templates>
@@ -24,8 +24,8 @@
                                         <strong><field name="name"/></strong>
                                     </div>
                                     <div>
-                                        <span class="o_text_overflow" t-if="record.partner_id.value"
-                                              t-esc="record.partner_id.value"/>
+                                        <span class="o_text_overflow" t-if="record.client_id.value"
+                                              t-esc="record.client_id.value"/>
                                     </div>
                                     <div>
                                         date_on_loan:
@@ -69,7 +69,7 @@
                                 <field name="odometer"/>
                             </group>
                             <group string="Client">
-                                <field name="partner_id"/>
+                                <field name="client_id"/>
                                 <field name="date_on_loan"/>
                             </group>
                         </group>

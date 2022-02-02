@@ -1,7 +1,7 @@
 from odoo.tests import TransactionCase, SavepointCase
 
 
-class TestCarCommonBase(SavepointCase):
+class TestCarCommonBase(TransactionCase):
 
     def setUp(self):
         super(TestCarCommonBase, self).setUp()
@@ -21,7 +21,7 @@ class TestCarCommonBase(SavepointCase):
             'year': '2021',
             'status': 'on_loan',
             'odometer': '10000',
-            'partner_id': self.partner_1.id,
+            'client_id': self.partner_1.id,
         })
 
         self.car_2 = self.Car.create({
@@ -29,6 +29,6 @@ class TestCarCommonBase(SavepointCase):
             'year': '2019',
             'status': 'in_garage',
             'odometer': '22222',
-            'partner_id': self.partner_1.id,
+            'client_id': self.partner_1.id,
         })
 

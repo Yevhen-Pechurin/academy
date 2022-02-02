@@ -6,7 +6,7 @@
             <field name="year">2021</field>
             <field name="status">in_garage</field>
             <field name="odometer">123456</field>
-            <field name="partner_id" ref="base.res_partner_address_28"/>
+            <field name="client_id" ref="base.res_partner_address_28"/>
             <field name="date_on_loan" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
             <field name="history_ids" eval="[(5, 0), (0, 0, {
                 'partner_id' : ref('base.res_partner_address_28'),
@@ -20,7 +20,7 @@
             <field name="year">2022</field>
             <field name="status">in_garage</field>
             <field name="odometer">32456</field>
-            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="client_id" ref="base.res_partner_address_31"/>
             <field name="date_on_loan" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
             <field name="history_ids" eval="[(5, 0), (0, 0, {
                 'partner_id' : ref('base.res_partner_address_28'),

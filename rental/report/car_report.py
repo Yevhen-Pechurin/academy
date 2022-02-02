@@ -18,7 +18,7 @@ class CarReport(models.Model):
                 rc.id,
                 rc.id car_id,
                 rc.date_on_loan date_on_loan,
-                partner_id,
+                client_id,
                 COALESCE (odometer, 0) max_odometer
             FROM rental_car rc                
         """
