@@ -17,7 +17,6 @@ class History(models.Model):
     date_on_loan = fields.Datetime()
 
 
-
 class Car(models.Model):
     _name = 'rental.car'
     _inherit = 'mail.thread'
