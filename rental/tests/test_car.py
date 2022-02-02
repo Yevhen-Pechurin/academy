@@ -13,7 +13,7 @@ class StartTest(RentalTestCar):
         self.assertEqual(self.test_car.name, self.test_car.model + str(self.test_car.number))
 
     def test_sequence_car(self):
-        self.assertEqual(self.test_car.code, 'Car00002')
+        self.assertEqual(self.test_car.code, 'Car00007')
 
     def test_statuses(self):
         self.test_car.action_unavailable()

@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Rental',
-    'version': '1.0',
+    'version': '3.0',
     'summary': 'Test Car Rental',
     'description': """Test module <Car Rental> made by Inspiration679""",
     'category': 'Cars',
