@@ -47,7 +47,7 @@ class TestCar(TestCarCommonBase):
         self.assertEqual(self.car_2.status, 'on_loan', 'Status is not on_loan')
 
 
-@tagged('car')
+@tagged('post_install', 'car')
 class TestCarJs(HttpCase):
 
     def test_tour(self):
