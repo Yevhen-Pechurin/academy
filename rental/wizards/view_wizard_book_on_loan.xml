@@ -15,7 +15,7 @@
         <sheet>
           <group>
             <group>
-              <field name="partner_id"/>
+              <field name="client_id"/>
             </group>
             <group>
               <field name="date_on_loan"/>

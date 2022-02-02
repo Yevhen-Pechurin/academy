@@ -8,7 +8,7 @@ class CarReport(models.Model):
 
     car_id = fields.Many2one('rental.car')
     date_on_loan = fields.Date()
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     max_odometer = fields.Integer(group_operator='max')
 
     @property
