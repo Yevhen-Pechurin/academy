@@ -95,17 +95,13 @@
         <field name="arch" type="xml">
             <form>
                 <header groups="rental.group_car_rental_manager">
-                <!--
-                    <button string="Send notification (5 days)" type="object" name="send_notification" context="{'days': 5}"/>
-                    <button string="Send notification (10 days)" type="object" name="send_notification" context="{'days': 10}"/>
-                    <button string="Send notification (15 days)" type="object" name="send_notification" context="{'days':15}"/>
-                    <button string="Send notification (20 days)" type="object" name="send_notification" context="{'days': 20}"/>
-                -->
+                    <button string="Print barcode" type="object" name="action_print_barcode"/>
                     <button name="action_pass_to_client" string="Pass to client" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['rented', 'on_maintenance', 'unavailable'])]}"/>
                     <button name="action_pass_for_maintenance" string="Pass for maintenance" class="oe_highlight" type="object" attrs="{'invisible': [('status', 'in', ['rented', 'on_maintenance'])]}"/>
                     <button name="%(action_return_to_garage_from_client)d" string="Return to garage" class="oe_highlight" type="action" attrs="{'invisible': ['!', ('status', '=', 'rented')]}"/>
                     <button name="%(action_return_to_garage_from_maintenance)d" string="Return to garage" class="oe_highlight" type="action" attrs="{'invisible': ['!', ('status', '=', 'on_maintenance')]}"/>
-                    <button string="Print barcode" type="object" name="action_print_barcode"/>
+                    <button string="Send return notification (1 day)" type="object" name="action_send_notification" context="{'days': 1}" attrs="{'invisible': ['!', ('status', '=', 'rented')]}"/>             
+                    <button string="Send return notification (5 days)" type="object" name="action_send_notification" context="{'days': 5}" attrs="{'invisible': ['!', ('status', '=', 'rented')]}"/>
                     <field name="status" widget="statusbar" statusbar_visible="in_garage,rented,on_maintenance,unavailable"/>
                 </header>
                 <sheet>
@@ -122,8 +118,8 @@
                             <field name="year"/>
                             <field name="odometer"/>
                         </group>
-                        <group string="Owner">
-                            <field name="company_id" groups="base.group_multi_company"/>
+                        <group string="Owner" groups="base.group_multi_company">
+                            <field name="company_id"/>
                         </group>
                     </group>
                 </sheet>

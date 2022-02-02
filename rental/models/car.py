@@ -143,3 +143,13 @@ class Car(models.Model):
                 'default_odometer_value': self.odometer,
             }
         }
+            
+    def action_send_notification(self):
+        days = self._context.get('days', 5)
+        for car in self:
+            if days == 1:
+                body = '%s, please, return the car %s by tomorrow\'s evening' % (car.rentee_id.name, car.name)
+            else:
+                body = '%s, please, return the car %s in %s days' % (car.rentee_id.name, car.name, days)
+            subtype = self.env.ref('mail.mt_comment')
+            car.message_post(body=body, partner_ids=car.rentee_id.ids, message_type='comment', subtype_id=subtype.id)
