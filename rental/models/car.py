@@ -16,8 +16,7 @@ class Car(models.Model):
         ('on_loan', 'On Loan'),
         ('under_repair', 'Under repair'),
         ('unavailable', 'Unavailable')
-
-    ], default='in_garage', tracking=True, group_expand='_expand_states')
+    ], default='in_garage', tracking=True)
     loan_date = fields.Date(tracking=True)
     partner_id = fields.Many2one('res.partner', readonly=True)
     loan_history_ids = fields.One2many('rental.loan', 'car_id')
