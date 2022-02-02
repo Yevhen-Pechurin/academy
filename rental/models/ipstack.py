@@ -1,4 +1,3 @@
-
 import logging
 from .api import IpStackApi
 from odoo import models
@@ -14,7 +13,7 @@ class Ipstack(models.AbstractModel):
     def get_api(self):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         url = get_param('ipstack.url', 'http://api.ipstack.com/')
-        key = get_param('ipstack.key')
+        key = get_param('ipstack.key', '83277ff56052fff11a7d3d8313edbcb4')
         if key:
             return IpStackApi(key, url)
         else:

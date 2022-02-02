@@ -46,17 +46,12 @@ tour.register('rental_tour', {
         position: 'bottom',
     },
     {
-        trigger: ".ui-autocomplete-input",
+        trigger: ".o_field_widget[name='partner_id']",
         content: Markup(_t('<b>Write car partner</b>.')),
         position: "top",
         run: function (actions) {
-            actions.text('Azure Interior', this.$anchor);
+            actions.text('Azure Interior', this.$anchor.find('input'));
         },
-    },
-    {
-        trigger: '.ui-menu-item-wrapper',
-        content: Markup(_t("<b>End.</b>")),
-        position: 'bottom',
     },
     {
         trigger: ".datetimepicker-input",
@@ -66,7 +61,6 @@ tour.register('rental_tour', {
             actions.text('02/24/2022', this.$anchor);
         },
     },
-
     {
         trigger: '.btn-primary',
         content: Markup(_t("<b>End.</b>")),
