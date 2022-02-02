@@ -40,6 +40,11 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'library/static/src/js/tours/library.js',
+        ],
+    },
     'application': True,
     'installable': True,
 }

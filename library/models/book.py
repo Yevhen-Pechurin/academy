@@ -73,7 +73,7 @@ class Book(models.Model):
     _inherit = 'mail.thread'
     _description = 'Book'
 
-    book_id = fields.Many2one('library.book.info')
+    book_id = fields.Many2one('library.book.info', ondelete="cascade", required=True)
     name = fields.Char(related='book_id.name', readonly=False, translate=True)
     number = fields.Char(copy=False, default='New', readonly=True)
     author_id = fields.Many2one(related='book_id.author_id')      # Char(default='New', readonly=True)

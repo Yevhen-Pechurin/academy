@@ -59,3 +59,10 @@ class TestBook(TestBookCommonBase):
         self.assertEqual(self.book_2.number, 'Book000002')
 
 
+@tagged('book')
+class TestBookJs(HttpCase):
+
+    def test_tour(self):
+        self.start_tour("/web", 'library_tour', login='admin', timeout=180)
+
+
