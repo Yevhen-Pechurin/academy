@@ -51,4 +51,4 @@ class TestCar(TestCarCommonBase):
 class TestCarJs(HttpCase):
 
     def test_tour(self):
-        self.start_tour("/web", 'rental_tour', login='admin', timeout=180, *kwar)
+        self.start_tour("/web", 'rental_tour', login='admin', timeout=180)
