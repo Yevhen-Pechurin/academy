@@ -49,7 +49,7 @@ class History(models.Model):
     _description = 'History'
 
     book_id = fields.Many2one('library.book')
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     date_on_hand = fields.Date()
     date_on_shelf = fields.Date()
     due_date = fields.Date()

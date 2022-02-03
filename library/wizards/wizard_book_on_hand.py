@@ -6,7 +6,7 @@ class WizardOnHand(models.TransientModel):
     _name = 'library.wizard.on_hand'
     _description = 'Wizard On Hand'
 
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     due_date = fields.Date()
 
     def action_on_hand(self):
@@ -15,13 +15,13 @@ class WizardOnHand(models.TransientModel):
         # book = self.env[ctx['active_model']].with_user(SUPERUSER_ID).browse(ctx['active_ids'])
         today = fields.Datetime().now()
         book.with_context(mail_notrack=True).write({     # with_context - no tracking in chat
-            'partner_id': self.partner_id.id,
+            'client_id': self.client_id.id,
             'due_date': self.due_date,
             'status': 'on_hand',
         })
         self.env['library.history'].create({
             'book_id': book.id,
-            'partner_id': self.partner_id.id,
+            'client_id': self.client_id.id,
             'date_on_hand': today,
             'due_date': self.due_date,
         })

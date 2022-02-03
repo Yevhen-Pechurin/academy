@@ -29,13 +29,13 @@ class TestBookCommonBase(TransactionCase):
         self.book_1 = self.Book.create({
             'book_id': self.book_info_1.id,
             'status': 'on_hand',
-            'partner_id': self.partner_1.id
+            'client_id': self.partner_1.id
         })
 
         self.book_2 = self.Book.create({
             'book_id': self.book_info_1.id,
             'status': 'on_shelf',
-            'partner_id': self.partner_1.id
+            'client_id': self.partner_1.id
         })
 
 

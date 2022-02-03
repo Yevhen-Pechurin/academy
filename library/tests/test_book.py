@@ -14,10 +14,10 @@ class TestBook(TestBookCommonBase):
     # @unittest.skip("demonstrating skipping")
     def test_01_action_on_shelf(self):
         self.assertEqual(self.book_1.status, 'on_hand', 'Status is not on_hand')
-        self.assertTrue(self.book_1.partner_id)
+        self.assertTrue(self.book_1.client_id)
         self.book_1.action_on_shelf()
         self.assertEqual(self.book_1.status, 'on_shelf', 'Status is not on_hand')
-        self.assertFalse(self.book_1.partner_id)
+        self.assertFalse(self.book_1.client_id)
 
 
     def test_02_action_on_shelf(self):
@@ -44,7 +44,7 @@ class TestBook(TestBookCommonBase):
         self.assertItemsEqual(expected_result, result)
         form_data = self.env['library.wizard.on_hand'].with_context(**result['context'], active_model='library.book', active_ids=self.book_2.ids)
         form_on_hand = Form(form_data)
-        form_on_hand.partner_id = self.partner_1
+        form_on_hand.client_id = self.partner_1
         # with self.assertRaises(ValidationError):           # test constrain date
         #     form_on_hand.due_date = fields.Datetime.now() - timedelta(days=1)
         #     form_on_hand.save()

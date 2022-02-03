@@ -6,7 +6,7 @@ class BookReport(models.Model):
     _auto = False
 
     book_id = fields.Many2one('library.book')
-    partner_id = fields.Many2one('res.partner')
+    client_id = fields.Many2one('res.partner')
     avg_count = fields.Float(group_operator='avg')
     max_year = fields.Integer(group_operator='max')
     author_id = fields.Many2one('library.author')

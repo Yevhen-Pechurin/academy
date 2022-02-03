@@ -14,7 +14,7 @@
     'website': "http://www.smartteksas.com",
 
     'category': 'Library',
-    'version': '0.2',
+    'version': '0.3',
 
     'license': 'LGPL-3',
 

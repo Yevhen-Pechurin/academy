@@ -42,11 +42,11 @@ Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudl
             <field name="year">2014</field>
             <field name="image" type="base64" file="library/img/Harry_Potter_and_the_Order_of_the_Phoenix.jpg"/>
             <field name="book_id" ref="book_info_1"/>
-            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="client_id" ref="base.res_partner_address_31"/>
             <field name="status">on_hand</field>
             <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
             <field name="history_ids" eval="[(5, 0), (0, 0, {
-                'partner_id': ref('base.res_partner_address_31'),
+                'client_id': ref('base.res_partner_address_31'),
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>
@@ -95,11 +95,11 @@ The novel's success brought the term "Pollyanna" (along with the adjective "poll
             <field name="year">2019</field>
             <field name="image" type="base64" file="library/img/pollyanna.jpg"/>
             <field name="book_id" ref="book_info_2"/>
-            <field name="partner_id" ref="base.res_partner_address_10"/>
+            <field name="client_id" ref="base.res_partner_address_10"/>
             <field name="status">on_hand</field>
             <field name="due_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
             <field name="history_ids" eval="[(5, 0), (0, 0, {
-                'partner_id': ref('base.res_partner_address_10'),
+                'client_id': ref('base.res_partner_address_10'),
                 'date_on_hand': (DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d'),
                 'due_date': DateTime.today()
             })]"/>

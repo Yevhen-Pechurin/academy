@@ -181,7 +181,7 @@
             <page string="History">
                 <field name="history_ids" options="{'no_open': True}">
                     <tree create="false" delete="false" edit="false" default_order="id desc">
-                        <field name="partner_id"/>
+                        <field name="client_id"/>
                         <field name="date_on_hand"/>
                         <field name="date_on_shelf"/>
                         <field name="due_date"/>
