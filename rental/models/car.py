@@ -1,4 +1,3 @@
-from datetime import timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -101,6 +100,7 @@ class Car(models.Model):
         for car in self:
             car.name = f'{car.model}_{car.number}'
 
+    #should just disable the possibility of manually changing status
     @api.onchange('status')
     def onchange_status_rented(self):
         if self.status == 'rented':
@@ -115,7 +115,7 @@ class Car(models.Model):
             if not car.active:
                 car.status = 'unavailable'
             else:
-                car.status = 'in_garage'
+                return
 
     def action_print_barcode(self):
         return self.env['ir.actions.report']._for_xml_id("rental.action_report_car_barcode")

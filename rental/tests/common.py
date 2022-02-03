@@ -1,9 +1,7 @@
-from unittest.mock import patch
 from dateutil.relativedelta import relativedelta
 from odoo import fields
 from odoo.addons.base.tests.common import TransactionCase
-from odoo.tests import SavepointCase, Form
-from rental.models.api import IpstackAPI
+from ..models.api import IpstackAPI
 
 RETURN_DATA = {
     'ip': '94.176.199.59',
@@ -24,7 +22,7 @@ RETURN_DATA = {
         'country_flag_emoji': '🇺🇦', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1E6', 'calling_code': '380','is_eu': False}
 }
 
-class TestIpstack(SavepointCase):
+class TestIpstack(TransactionCase):
     
     def setUp(self):
         super(TestIpstack, self).setUp()
@@ -33,9 +31,7 @@ class TestIpstack(SavepointCase):
         })
         def _request_ip_data(self, ip):
             return RETURN_DATA
-        patcher = patch(IpstackAPI, 'request_ip_data', _request_ip_data)
-        patcher.start()
-        self.addCleanup(patcher.stop)
+        self.patch(IpstackAPI, 'request_ip_data', _request_ip_data)
 
 
 class TestRentalCommonBase(TransactionCase):
@@ -78,7 +74,7 @@ class TestRentalCommonBase(TransactionCase):
             'status': 'on_maintenance',
             'year': 2019,
             'odometer': 7446,
-            'client_id': False,
+            'rentee_id': False,
             'date_rented': False,
             'rental_history_ids': False,
         })
@@ -99,26 +95,37 @@ class TestRentalCommonBase(TransactionCase):
             'status': 'rented',
             'year': 2020,
             'odometer': 2406,
-            'client_id': self.rentee_1.id,
+            'rentee_id': self.rentee_1.id,
             'date_rented': (fields.Datetime.today() - relativedelta(days=1)).strftime('%Y-%m-%d'),
             'rental_history_ids': False,
         })
 
-        self.car_rental_history_2 = self.CarRentalHistory.create([{
+        self.car_rental_history_2 = self.CarRentalHistory.create({
             'car_id': self.car_2.id,
             'rentee_id': self.rentee_1.id,
             'date_rented': (fields.Datetime.today() - relativedelta(months=2)).strftime('%Y-%m-%d'),
             'date_returned': (fields.Datetime.today() - relativedelta(days=56)).strftime('%Y-%m-%d'),
             'initial_odometer_value': 1500,
             'final_odometer_value': 1970
-            },
+            })
+        
+        self.car_rental_history_3 = self.CarRentalHistory.create(
             {'car_id': self.car_2.id,
-            'rentee_id': self.rentee_2.id,
+            'rentee_id': self.rentee_1.id,
             'date_rented': (fields.Datetime.today() - relativedelta(days=1)).strftime('%Y-%m-%d'),
             'date_returned': False,
             'initial_odometer_value': 2406,
-            'final_odometer_value': False}
-            ])
+            'final_odometer_value': False
+            })
 
-        self.car_2.write({'rental_history_ids': self.car_rental_history_2.ids})
+        self.car_2.write({'rental_history_ids': [self.car_rental_history_2.ids, self.car_rental_history_3.ids]})
 
+        self.car_3 = self.Car.create({
+            'model': 'Citroën C3',
+            'status': 'in_garage',
+            'year': 2016,
+            'odometer': 18400,
+            'rentee_id': False,
+            'date_rented': False,
+            'rental_history_ids': False,
+        })
