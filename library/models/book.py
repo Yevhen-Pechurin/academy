@@ -181,5 +181,3 @@ class Book(models.Model):
             body = '%s Пожалуйста, верните книгу. %s через %s дней' % (book.client_id.name, book.name, days)
             subtype = self.env.ref('mail.mt_comment')
             book.message_post(body=body, partner_ids=book.client_id.ids, message_type='comment', subtype_id=subtype.id)
-
-
