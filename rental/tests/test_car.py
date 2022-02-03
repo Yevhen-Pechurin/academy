@@ -19,7 +19,7 @@ class TestCar(TestCarCommonBase):
         self.car_1.action_repair()
         self.assertEqual(self.car_1.status, 'under_repair', 'Car status is not correct\nStatus:%s' % self.car_1.status)
 
-    def test_01_action_garage(self):
+    def test_action_garage(self):
         self.assertEqual(self.car_1.status, 'on_loan', 'Car status is not correct\nStatus:%s' % self.car_1.status)
         self.assertTrue(self.car_1.partner_id, 'Car partner did not take off \nStatus:%s' % self.car_1.partner_id)
         self.car_1.action_garage()
@@ -42,8 +42,9 @@ class TestCar(TestCarCommonBase):
         car_info = self.Car.get_car_info(self.car_1.id)
         self.assertEqual(car_info, [{'id': int(self.car_1.id), 'year': self.car_1.year, 'odometer': 100000, 'model': 'First'}])
 
-    def test_cron_overdue_messages(self):
-        result = self.Car._cron_overdue_messages()
-        self.assertEqual(result, {}, result)
+    def test_01_cron_overdue_messages(self):
+        self.Car._cron_overdue_messages()
+        message = self.env['mail.message'].search_read([('record_name', '=', self.car_1.name)])
+        self.assertEqual(message, '')
 
 
