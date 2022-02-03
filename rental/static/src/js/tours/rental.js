@@ -34,12 +34,26 @@ tour.register('rental_tour', {
         actions.text("Opel", this.$anchor);
     }
 }, {
+    trigger: ".o_form_view textarea.o_field_widget",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+}, {
     trigger: ".o_form_view .o_field_widget[name='model_id']",
     content: Markup(_t('Set a <b>model</b>')),
     position: "bottom",
     run: function (actions) {
         actions.text("Astra", this.$anchor.find('input'));
     }
+}, {
+    trigger: ".ui-menu-item > a",     // for dropdown fields
+    auto: true,
+    in_modal: false,
+}, {
+    trigger: ".o_form_view textarea.o_field_widget",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
 }, {
     trigger: ".o_form_view .o_field_widget[name='country_id']",
     content: Markup(_t('Set a <b>country</b>')),
@@ -48,12 +62,26 @@ tour.register('rental_tour', {
         actions.text("Germany", this.$anchor.find('input'));
     }
 }, {
-    trigger: ".o_form_view .o_field_widget[name='description']",
+    trigger: ".ui-menu-item > a",
+    auto: true,
+    in_modal: false,
+}, {
+    trigger: ".o_form_view textarea.o_field_widget",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+}, {
+    trigger: ".o_form_view textarea.o_field_widget",
     content: Markup(_t('Set a <b>description</b>')),
     position: "bottom",
     run: function (actions) {
-        actions.text("The Opel Astra is a compact car/small family car...", this.$anchor.find('input'));
+        actions.text("The Opel Astra is a compact car/small family car...", this.$anchor);
     }
+},{
+    trigger: ".o_form_view textarea.o_field_widget",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
 }, {
     trigger: 'button.o_form_button_save',
     extra_trigger: '.o_rental_car_info_form',
