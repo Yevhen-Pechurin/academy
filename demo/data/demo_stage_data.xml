@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record model="demo.stage" id="stage_lead1">
+        <field name="name">Scheduled</field>
+    </record>
+    <record model="demo.stage" id="stage_lead2">
+        <field name="name">In Progress</field>
+    </record>
+    <record model="demo.stage" id="stage_lead3">
+        <field name="name">Canceled</field>
+    </record>
+    <record model="demo.stage" id="stage_lead4">
+        <field name="name">Done</field>
+        <field name="fold" eval="False"/>
+    </record>
+</odoo>

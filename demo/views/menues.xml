@@ -1,0 +1,6 @@
+<odoo>
+    <data>
+        <menuitem id="demo_menu" name="Demo" sequence="1"/>
+        <menuitem id="demonstrations_menu" name="Demonstrations" sequence="1" parent="demo.demo_menu" action="demo.demonstrations_action"/>
+    </data>
+</odoo>
