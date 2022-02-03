@@ -9,6 +9,7 @@
     'description': """
         Long description of module's purpose
     """,
+
     'author': "Smartteksas",
     'website': "http://www.smartteksas.com",
 
