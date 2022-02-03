@@ -118,7 +118,7 @@ class TestRentalCommonBase(TransactionCase):
             'final_odometer_value': False
             })
 
-        self.car_2.write({'rental_history_ids': [self.car_rental_history_2.ids, self.car_rental_history_3.ids]})
+        self.car_2.write({'rental_history_ids': [(4, 0, self.car_rental_history_2, self.car_rental_history_3)]})
 
         self.car_3 = self.Car.create({
             'model': 'Citroën C3',
