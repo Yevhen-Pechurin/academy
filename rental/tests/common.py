@@ -1,3 +1,5 @@
+from datetime import timedelta, datetime
+
 from odoo.addons.base.tests.common import TransactionCase
 from odoo.fields import Datetime
 
@@ -22,7 +24,7 @@ class TestCarCommonBase(TransactionCase):
             'status': 'on_loan',
             'partner_id': self.partner_1.id,
             'loan_history_ids': self.Loan_history.create({
-                'due_date': Datetime.today(),
+                'due_date': datetime.now() + timedelta(days=1),
                 'end': False,
                 'partner_id': self.partner_1.id
             })
