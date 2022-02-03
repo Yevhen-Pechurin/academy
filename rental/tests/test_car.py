@@ -1,4 +1,4 @@
-from odoo.tests import tagged
+from odoo.tests import tagged, HttpCase
 from .common import TestCarCommonBase
 
 
@@ -47,4 +47,10 @@ class TestCar(TestCarCommonBase):
         message = self.env['mail.message'].search_read([('record_name', '=', self.car_1.name)])
         self.assertEqual(message, '')
 
+
+@tagged('-at_install', 'post_install', 'car')
+class TestCarJs(HttpCase):
+
+    def test_tour(self):
+        self.start_tour("/web", 'rental_tour', login='admin', timeout=180)
 
