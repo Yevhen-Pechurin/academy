@@ -8,7 +8,7 @@ class TestCarCommonBase(TransactionCase):
         self.Car = self.env['rental.car']
         self.Partner = self.env['res.partner']
         # self.repair_history = self.env['rental.repair']
-        # self.loan_history = self.env['rental.loan']
+        self.Loan_history = self.env['rental.loan']
 
         self.partner_1 = self.Partner.create({
             'name': 'Test Partner'
@@ -20,8 +20,14 @@ class TestCarCommonBase(TransactionCase):
             'year': Datetime.now(),
             'odometer': 100000,
             'status': 'on_loan',
-            'partner_id': self.partner_1.id
+            'partner_id': self.partner_1.id,
+            'loan_history_ids': self.Loan_history.create({
+                'due_date': Datetime.today(),
+                'end': False,
+                'partner_id': self.partner_1.id
+            })
         })
+
         self.car_2 = self.Car.create({
             'number': 31216,
             'model': 'First',
