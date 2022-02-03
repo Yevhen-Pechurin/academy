@@ -41,6 +41,15 @@ tour.register('library_tour', {
         actions.text("J. K. Rowling", this.$anchor.find('input'));
     }
 }, {
+    trigger: ".ui-menu-item > a",
+    auto: true,
+    in_modal: false,
+},{
+    trigger: ".o_field_widget[name='author_id'] input",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+},{
     trigger: ".o_form_view .o_field_widget[name='lang_id']",
     content: Markup(_t('Set a <b>language</b>')),
     position: "bottom",
@@ -51,7 +60,12 @@ tour.register('library_tour', {
     trigger: ".ui-menu-item > a",
     auto: true,
     in_modal: false,
-}, {
+},{
+    trigger: ".o_field_widget[name='lang_id'] input",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+},{
     trigger: ".o_form_view .o_field_widget[name='tag_ids']",
     content: Markup(_t('Add <b>tags</b>')),
     position: "bottom",
@@ -79,13 +93,23 @@ tour.register('library_tour', {
     auto: true,
     in_modal: false,
 }, {
-    trigger: ".o_form_view .o_field_widget[name='description']",
+    trigger: ".o_badge_text[title='Adventures']",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+}, {
+    trigger: ".o_form_view textarea.o_field_widget",
     content: Markup(_t('Set a <b>description</b>')),
     position: "bottom",
     run: function (actions) {
-        actions.text("Dark times have come to Hogwarts...", this.$anchor.find('input'));
+        actions.text("Dark times have come to Hogwarts...", this.$anchor);
     }
-}, {
+},{
+    trigger: ".o_form_view textarea.o_field_widget",
+    auto: true,
+    run: function () {
+    }                 // wait for the tag creation
+},{
     trigger: 'button.o_form_button_save',
     extra_trigger: '.o_library_book_info_form',
     content: Markup(_t("<b>Save your first book info.</b>")),
