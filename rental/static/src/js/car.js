@@ -49,13 +49,13 @@ odoo.define('rental.car', function (require) {
                     model: data[0].model
                 }
 
-                self.$el.val(data[0].model)
-                self.trigger_up('field.changed', {
+                self.$el.val(data[0].model);
+                self.trigger_up('field_changed', {
                     dataPointID: self.dataPointID,
                     operation: 'UPDATE',
                     changes: changes
                 });
-                self.$el._parent().find('zoom_search_div').remove()
+                self.$el.parent().find('.car_search_list').remove()
         })
     }})
 
