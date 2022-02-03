@@ -129,8 +129,8 @@ msgid "Cars pivot"
 msgstr "Таблична інфографіка"
 
 #. module: rental
-#: model:ir.model.fields,field_description:rental.field_rental_car__client_id
-#: model:ir.model.fields,field_description:rental.field_rental_car_report__client_id
+#: model:ir.model.fields,field_description:rental.field_rental_car__rentee_id
+#: model:ir.model.fields,field_description:rental.field_rental_car_report__rentee_id
 msgid "Client"
 msgstr "Клієнт"
 

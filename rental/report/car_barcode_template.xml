@@ -21,7 +21,7 @@
         <t t-call="web.basic_layout">
             <div class="page">
                 <t t-foreach="docs" t-as="car">
-                    <t t-call="rental.report_car_barcode_template" t-lang="car.client_id.lang"/>
+                    <t t-call="rental.report_car_barcode_template" t-lang="car.rentee_id.lang"/>
                 </t>
             </div>
         </t>
