@@ -39,7 +39,7 @@
             <field name="status">on_maintenance</field>
             <field name="year" eval="2019"/>
             <field name="odometer" eval="7446"/>
-            <field name="client_id" eval="False"/>
+            <field name="rentee_id" eval="False"/>
             <field name="date_rented" eval="False"/>
             <field name="rental_history_ids" eval="[(5, 0), (0, 0, {
                 'rentee_id': ref('base.res_partner_address_25'),
@@ -56,7 +56,7 @@
             <field name="status">rented</field>
             <field name="year" eval="2017"/>
             <field name="odometer" eval="3045"/>
-            <field name="client_id" ref="base.res_partner_address_5"/>
+            <field name="rentee_id" ref="base.res_partner_address_5"/>
             <field name="date_rented" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d %H:%M')"/>
             <field name="rental_history_ids" eval="[(5, 0), (0, 0, {
                 'rentee_id': ref('base.res_partner_address_5'),
