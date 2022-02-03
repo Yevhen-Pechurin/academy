@@ -35,13 +35,13 @@ class Car(models.Model):
     @api.model
     def get_car_list(self, input):
         value = {
-            'car_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', input)], fields=['model'])
+            'car_list': self.env['rental.car'].sudo().search_read([('model', 'ilike', input)], fields=['model', 'id'], limit=5)
         }
         return value
 
     @api.model
-    def get_car_info(self, id):
-        return self.env['rental.car'].sudo().browse(int(id)).read(fields=['year', 'odometer', 'model'])
+    def get_car_info(self, car_id):
+        return self.env['rental.car'].sudo().browse(int(car_id)).read(fields=['year', 'odometer', 'model'])
 
     def action_loan(self):
         return {
@@ -84,9 +84,9 @@ class Car(models.Model):
             for car in cars:
                 last_history = car.loan_history_ids[-1]
                 if car.status == 'on_loan' and last_history.due_date < fields.Date.today():
-                    car.message_post(body=f'{car.partner_id.name} верните машину {car.name}',
-                                     partner_ids=car.partner_id.ids, message_type='comment',
-                                     subtype_id=self.env.ref('mail.mt_comment').id)
+                    return car.message_post(body=f'{car.partner_id.name} верните машину {car.name}',
+                                            partner_ids=car.partner_id.ids, message_type='comment',
+                                            subtype_id=self.env.ref('mail.mt_comment').id)
         except IndexError:
             pass
 
