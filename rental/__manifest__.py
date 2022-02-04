@@ -24,6 +24,7 @@
 
     # always loaded
     'data': [
+        'security/security.xml',
         'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',
         'wizards/view_wizard_on_loan.xml',

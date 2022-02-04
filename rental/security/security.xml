@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_rental">
+        <field name="name">Rental</field>
+    </record>
+
+     <record id="group_rental_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_rental"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+     <record id="group_rental_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_rental"/>
+        <field name="implied_ids" eval="[(4, ref('group_rental_user'))]"/>
+    </record>
+
+    <record model="res.users" id="base.user_admin">
+        <field eval="[(4,ref('rental.group_rental_manager'))]" name="groups_id"/>
+    </record>
+</odoo>
