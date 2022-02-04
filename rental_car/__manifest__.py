@@ -10,13 +10,16 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         # 'data/ir_cron.xml',
+        "data/ir_sequence.xml",
         "wizards/view_car_for_rent.xml",
         "wizards/view_car_ingarage.xml",
         "wizards/view_car_under_repair.xml",
         "report/car_report.xml",
         "report/qrcode_car_template.xml",
         "report/barcode_car_template.xml",
+        "report/reports.xml",
         "views/views.xml",
+
 
     ],
     # 'demo': [
@@ -26,10 +29,10 @@
     "assets": {
         'web.assets_qweb': [
             # 'rental_car/static/src/my_owl_component/my_owl_component.xml',
-            # 'rental_car/static/src/my_owl_component/test.xml',
+            # 'rental_car/static/src/my_owl_component/tests.xml',
         ],
         "web.assets_backend": [
-            # 'rental_car/static/src/my_owl_component/my_owl_component.js',
+            'rental_car/static/src/js/tours/rental_car.js',
 
         ],
 

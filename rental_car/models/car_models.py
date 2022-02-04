@@ -3,9 +3,11 @@ from odoo import fields, models, api, _
 
 class Model(models.Model):
     _name = "rental_car.model"
+    _inherit = 'mail.thread'
     _description = "Model"
 
-    name = fields.Char(tracking=True)
+    name = fields.Char(required=True)
+    year_of_manufacture = fields.Integer(required=True)
 
 
 class Brand(models.Model):
@@ -13,9 +15,8 @@ class Brand(models.Model):
     _description = "Car`s Brand"
     _inherit = 'mail.thread'
 
-    name = fields.Char(tracking=True)
-    country = fields.Many2one("res.country", tracking=True)
-    model_id = fields.Many2one("rental_car.model", tracking=True)
+    name = fields.Char(required=True)
+    country = fields.Many2one("res.country", required=True)
     image = fields.Image(string="Image", max_width=256, max_height=256)
     description = fields.Text(tracking=True)
 
@@ -49,22 +50,24 @@ class Car(models.Model):
     _inherit = 'mail.thread'
 
     brand_id = fields.Many2one("rental_car.brand", tracking=True)
-    number = fields.Char(tracking=True)
-    description = fields.Text()
+    number = fields.Char(tracking=True, required=True, copy=False, readonly=True, default="AA")
+    model_id = fields.Many2one("rental_car.model")
+    description = fields.Text(tracking=True)
     rent_history_id = fields.One2many("rental_car.history", "car_id")
-    name = fields.Char(compute='_compute_car_name')
-    year_of_manufacture = fields.Integer()
+    name = fields.Char(compute='_compute_car_name', default=" ")
+    year_of_manufacture = fields.Integer(related="model_id.year_of_manufacture")
     odometer_value = fields.Integer(tracking=True)
     status = fields.Selection([
         ('in_garage', 'In Garage'),
         ('for_rent', 'For Rent'),
         ('under_repair', 'Under Repair'),
         ('not_available', 'Not Available'),
-    ], tracking=True)
+    ], tracking=True, default="in_garage")
     due_date = fields.Datetime()
     client_id = fields.Many2one("res.partner")
     image = fields.Image(string="Image", max_width=256, max_height=256)
     repair_history_id = fields.One2many('rental_car.repair_history', 'car_id')
+    company_id = fields.Many2one("res.company")
 
 
 
@@ -82,14 +85,20 @@ class Car(models.Model):
         return values
 
     @api.model
+    def create(self, vals):
+        if vals.get('number', _('AA')) == _('AA'):
+            vals['number'] = self.env['ir.sequence'].next_by_code('rental_car.car') or _('AA')
+            return super(Car, self).create(vals)
+
+    @api.model
     def brand_info(self, id):
         return self.env['rental_car.brand'].sudo().browse(int(id)).read(fields=["name"])
 
 
-    @api.depends('brand_id', 'number')
+    @api.depends('brand_id', 'number', 'model_id')
     def _compute_car_name(self):
         for record in self:
-            record.name = (str(record.brand_id.name) + " " + str(record.number))
+            record.name = (str(record.brand_id.name) + " " + str(record.model_id.name) + " " + str(record.number))
 
     def action_for_rent(self):
         return {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="action_car_report" model="ir.actions.act_window">
+            <field name="name">REPORT</field>
+            <field name="res_model">rental_car.report</field>
+            <field name="view_mode">pivot,graph</field>
+        </record>
+    </data>
+</odoo>
