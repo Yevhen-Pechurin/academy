@@ -18,9 +18,9 @@ class Demo(models.Model):
     _inherit = 'mail.thread'
     _description = 'Demo soft'
 
-    name = fields.Char(readonly=False, tracking=True)
-    salesperson = fields.Char(default='New', readonly=True, tracking=True)  # user_id =
-    partner_id = fields.Many2one('res.partner',string='Client', tracking=True)
+    name = fields.Char(default='New', readonly=True, tracking=True)
+    user_id = fields.Many2one('res.users', string='Salesperson', required=False, default=lambda self: self.env.user)
+    partner_id = fields.Many2one('res.partner', string='Client', tracking=True)
     date = fields.Date()
     state_id = fields.Many2one('demo.state', string='State', group_expand='_read_group_state_ids',
                                readonly=False, store=True, tracking=True)
@@ -45,8 +45,8 @@ class Demo(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('salesperson', _('New')) == _('New'):
-            vals['salesperson'] = self.env['ir.sequence'].next_by_code('demo.demo') or _('New')
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('demo.demo') or _('New')
         return super(Demo, self).create(vals)
 
 
