@@ -15,6 +15,8 @@
         'views/menues.xml',
         'data/ir_sequence_demo_name.xml',
         'data/demo_stage_data.xml',
+        'wizards/wizard_demo.xml',
+        'data/ir_cron_old_demoes.xml'
 
     ],
     'demo': [

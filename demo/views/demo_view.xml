@@ -1,11 +1,34 @@
 <odoo>
     <data>
+        <record id="my_demoes_filter" model="ir.ui.view">
+            <field name="name">demo.filter</field>
+            <field name="model">demo.demo</field>
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <search string="Search Opportunities">
+                    <separator/>
+                    <filter string="My Demoes"
+                            domain="[('user_id', '=', uid)]" name="my_demoes"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="my_demonstrations_action" model="ir.actions.act_window">
+            <field name="name">Demonstrations</field>
+            <field name="res_model">demo.demo</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('user_id', '=', uid)]</field>
+        </record>
+
         <record id="demonstrations_action" model="ir.actions.act_window">
             <field name="name">Demonstrations</field>
             <field name="res_model">demo.demo</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="type">ir.actions.act_window</field>
+            <field name="context"> {'search_default_my_demoes': 1}</field>
         </record>
+
         <record id="demo_form_view" model="ir.ui.view">
             <field name="name">demo.form.view</field>
             <field name="model">demo.demo</field>
@@ -27,9 +50,14 @@
                             <field name="date"/>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
                 </form>
             </field>
         </record>
+
         <record id="demo_tree_view" model="ir.ui.view">
             <field name="name">demo.tree.view</field>
             <field name="model">demo.demo</field>
@@ -43,11 +71,13 @@
                 </tree>
             </field>
         </record>
+
         <record id="devo_kanban_view" model="ir.ui.view">
             <field name="name"> demo.kanban.view</field>
             <field name="model">demo.demo</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="stage_id" class="o_kanban_small_column o_kanban_mobile" archivable="false" sample="1">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column o_kanban_mobile" archivable="false"
+                        sample="1">
                     <field name="name"/>
                     <field name="user_id"/>
                     <field name="date"/>
@@ -68,6 +98,21 @@
                 </kanban>
             </field>
         </record>
+
+        Extension of contacts for demoes
+        <record id="extension" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button string="Create New Demo" class="oe_highlight" type="object" name="call_wizard_demo"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
 
     </data>
 </odoo>

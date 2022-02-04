@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="wizard_demo_form_view" model="ir.ui.view">
+            <field name="name">wizard.demo.form.view</field>
+            <field name="model">demo.wizard.demo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group><field name="date"/></group>
+
+                        <footer>
+                            <button string="Create" class="oe_highlight" type="object" name="demo_create"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
