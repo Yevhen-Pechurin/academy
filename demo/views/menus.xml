@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Top menu item -->
+
+    <menuitem name="demo" id="demo.menu_root" action="demo.action_window">
+        <menuitem name="All Demos" id="demo.menu_all_demos" action="demo.action_window"/>
+
+        <menuitem name="My Demos" id="demo.menu_my_demos" action="demo.action_window"/>
+
+
+    </menuitem>
+</odoo>
