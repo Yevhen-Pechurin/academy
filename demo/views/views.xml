@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+         <record id="action_my_demo" model="ir.actions.act_window">
+            <field name="name">Demo</field>
+            <field name="res_model">demo.demo</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_my_demo":1}</field>
+        </record>
+
+
+        <record id="action_demo" model="ir.actions.act_window">
+            <field name="name">Demo</field>
+            <field name="res_model">demo.demo</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+
+        <record id="action_status" model="ir.actions.act_window">
+            <field name="name">Status</field>
+            <field name="res_model">demo.status</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <record id="res_partner" model="ir.ui.view">
+            <field name="name">ResPartner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="show_demos" icon="fa-meh-o"  >
+                        <field string="Demos" name="demos_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+                <xpath expr="//div[hasclass('alert')]" position="after">
+                    <button name="create_new_demo" string="New Demo" class="btn btn-primary" type="object"/>
+                </xpath>
+            </field>
+        </record>
+
+
+         <record id="demo_kanban_view" model="ir.ui.view">
+            <field name="name">Demo kanban view</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_id" class="o_res_partner_kanban"  sample="1">
+                    <field name="name"/>
+                    <field name="status_id" options="{&quot;group_by_tooltip&quot;: {&quot;requirements&quot;: &quot;Description&quot;}}"/>
+                    <field name="partner_id"/>
+                    <field name="status_id"/>
+                    <field name="date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="oe_kanban_details d-flex flex-column" style="margin-left:30px">
+                                    <div class="o_kanban_record_title oe_kanban_details">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li><field name="date"/></li>
+                                        <li><field name="partner_id"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+          <record id="demo_search" model="ir.ui.view">
+            <field name="name">Demo Search</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <search string="Search Demo">
+                    <field name="name"/>
+                    <field name="status_id"/>
+                    <separator/>
+                    <filter  string="My Demo" name="my_demo" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
+                    <filter name="status_1" string="Scheduled" domain="[('status_id.name', '=', 'Scheduled')]"/>
+                    <filter name="status_2" string="In Progress" domain="[('status_id.name', '=', 'In Progress')]"/>
+                    <filter name="status_3" string="Done" domain="[('status_id.name', '=', 'Done')]"/>
+                    <filter name="status_4" string="Canceled" domain="[('status_id.name', '=', 'Canceled')]"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter name="book_status" string="Book Status" context="{'group_by': 'status_id'}"/>
+                    </group>
+                </search>
+             </field>
+        </record>
+
+
+        <record id="demo_form_view" model="ir.ui.view">
+            <field name="name">DEmo form view</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <form>
+                     <header>
+                         <field name="status_id" widget="statusbar" />
+                     </header>
+                    <sheet>
+                            <div class="oe_title">
+                                <label for="name"/>
+                                <h1><field name="name"/></h1>
+                            </div>
+                        <group>
+                            <group string="Demonstration info">
+                                <field name="date"/>
+                                <field name="partner_id"/>
+                                <field name="user_id"/>
+                                <field name="status_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                 <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id = "book_tree_view" model="ir.ui.view">
+            <field name="name">Demo Tree View</field>
+            <field name="model">demo.demo</field>
+            <field name="arch" type="xml">
+                <tree string="Demo">
+                    <field name="name"/>
+                    <field name="status_id"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+<!--         <record id="res_partner_inherited" model="ir.ui.view">-->
+<!--            <field name="name">Demos</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">-->
+<!--                    <button type="object" name="show_books" icon="fa-book" attrs="{'invisible': [('books_count', '=', 0)]}" >-->
+<!--                        <field string="Books" name="books_count" widget="statinfo"></field>-->
+<!--                    </button>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <menuitem id="menu_root" name="Demo" sequence = "20" />
+        <menuitem id="demo" name = "Demo" parent = "menu_root" action="action_demo"/>
+        <menuitem id="all_demos" name = "All Demos" parent = "demo" action="action_demo"/>
+        <menuitem id="my_demos" name = "My Demos" parent = "demo" action="action_my_demo"/>
+        <menuitem id="status" name = "Statuses" parent = "menu_root" action="action_status"/>
+    </data>
+</odoo>

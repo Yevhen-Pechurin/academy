@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="demo.module_category" model="ir.module.category">
+        <field name="name">Demonstrations</field>
+    </record>
+
+    <record id="group_demo_user" model="res.groups">
+        <field name="name">Client</field>
+        <field name="category_id" ref="demo.module_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_demo_user_see_all" model="res.groups">
+        <field name="name">Client(Sees All Demos</field>
+        <field name="category_id" ref="demo.module_category"/>
+        <field name="implied_ids" eval="[(4, ref('demo.group_demo_user'))]"/>
+    </record>
+
+    <record id="group_demo_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="demo.module_category"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="implied_ids" eval="[(4, ref('demo.group_demo_user_see_all'))]"/>
+    </record>
+
+    <record model="ir.rule" id="user_see_rule">
+        <field name="name">Own demo</field>
+        <field name="model_id" ref="model_demo_demo"/>
+        <field name="domain_force">[("user_id", "=", user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_demo_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="admin_rule">
+        <field name="name">Admin demo</field>
+        <field name="model_id" ref="model_demo_demo"/>
+        <field name="domain_force">[(1,'=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_demo_administrator'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="upper_user_rule">
+        <field name="name">User Sees All Demos</field>
+        <field name="model_id" ref="model_demo_demo"/>
+        <field name="domain_force">[(1,'=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_demo_user_see_all')), ()]"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="False"/>
+    </record>
+
+    <record model="ir.rule" id="upper_user_rule_cr">
+        <field name="name">User Sees All Demos</field>
+        <field name="model_id" ref="model_demo_demo"/>
+        <field name="domain_force">[("user_id", "=", user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_demo_user_see_all')), ()]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+</odoo>
