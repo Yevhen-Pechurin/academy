@@ -1,12 +1,13 @@
 <odoo>
     <data>
+
 <!--      Demos-->
         <record id="demo_1" model="demo.demo">
             <field name="name">The Soft One</field>
             <field name="salesperson">Nick</field>
             <field name="partner_id" ref="base.res_partner_address_31"/>
             <field name="date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
-            <field name="state">done</field>
+            <field name="state-id" ref="state_demo4"/>
             <field name="description">
                 Show the capabilities of the number one product.</field>
         </record>
@@ -16,7 +17,7 @@
             <field name="salesperson">Bob</field>
             <field name="partner_id" ref="base.res_partner_address_3"/>
             <field name="date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
-            <field name="state">scheduled</field>
+            <field name="state-id" ref="state_demo1"/>
             <field name="description">
                 Show the benefits of the number two product.</field>
         </record>
@@ -26,7 +27,7 @@
             <field name="salesperson">Jane</field>
             <field name="partner_id" ref="base.res_partner_address_11"/>
             <field name="date" eval="DateTime.today()"/>
-            <field name="state">in_progress</field>
+            <field name="state-id" ref="state_demo2"/>
             <field name="description">
                 Overview of new products.</field>
         </record>

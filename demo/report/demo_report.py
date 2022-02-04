@@ -23,6 +23,6 @@ class DemoReport(models.Model):
     #         dd.partner_id,
     #         dd.salesperson,
     #         dd.date,
-    #         dd.state
+    #         dd.state_id
     #         FROM demo_demo dd
     #     """

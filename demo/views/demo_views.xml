@@ -11,7 +11,7 @@
             <field name="salesperson"/>
             <field name="partner_id" string="Client"/>
             <field name="date"/>
-            <field name="state"/>
+            <field name="state_id"/>
         </tree>
     </field>
 </record>
@@ -45,9 +45,10 @@
     <field name="name">Demo Kanban</field>
     <field name="model">demo.demo</field>
     <field name="arch" type="xml">
-        <kanban default_group_by="state" class="o_kanban_small_column" create="false">
+        <kanban default_group_by="state_id" class="o_kanban_small_column" create="true">
             <field name="name"/>
             <field name="partner_id" string="Client"/>
+            <field name="state_id"/>
             <field name="date"/>
             <templates>
                 <t t-name="kanban-box">
@@ -88,7 +89,7 @@
                         <field name="salesperson"/>
                         <field name="partner_id" string="Client"/>
                         <field name="date"/>
-                        <field name="state"/>
+                        <field name="state_id"/>
                     </group>
                 </group>
                 <notebook>
@@ -111,12 +112,9 @@
     <field name="model">demo.demo</field>
     <field name="arch" type="xml">
         <search>
-            <filter name="scheduled" string="Scheduled" domain="[('state','=', 'scheduled')]"/>
-            <filter name="in_progress" string="In Progress" domain="[('state','=', 'in_progress')]"/>
-            <filter name="done" string="Done" domain="[('state','=', 'done')]"/>
-            <filter name="group_state" string="State" context="{'group_by':'state'}"/>
-            <filter name="group_partner_id" string="Client" context="{'group_by':'partner_id'}"/>
-            <filter name="group_salesperson" string="Salesperson" context="{'group_by':'salesperson'}"/>
+            <filter name="group_state_id" string="State" context="{'group_by': 'state_id'}"/>
+            <filter name="group_partner_id" string="Client" context="{'group_by': 'partner_id'}"/>
+            <filter name="group_salesperson" string="Salesperson" context="{'group_by': 'salesperson'}"/>
         </search>
     </field>
 </record>
