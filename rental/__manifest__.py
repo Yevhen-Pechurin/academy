@@ -29,6 +29,8 @@
         'security/ir.model.access.csv',
         'wizards/view_wizard_on_loan.xml',
         'wizards/view_wizard_in_garage.xml',
+        'wizards/view_wizard_in_repair.xml',
+        'wizards/view_wizard_from_repair.xml',
         'views/car_views.xml',
         'views/templates.xml',
         'report/barcode_car_report.xml',

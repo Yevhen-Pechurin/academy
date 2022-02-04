@@ -46,9 +46,13 @@
                 <form class="o_rental_car_form">
                     <header>
                         <button name="action_on_loan" string="On Loan" class="oe_highlight" type="object"
-                                attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable'])]}"/>
+                                attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable', 'under_repair'])]}" groups="rental.group_rental_user"/>
                         <button name="action_in_garage" string="In Garage" class="oe_highlight" type="object"
-                                attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable'])]}"/>
+                                attrs="{'invisible': [('status', 'in', ['in_garage', 'unavailable', 'under_repair'])]}" groups="rental.group_rental_user"/>
+                        <button name="action_in_repair" string="In Repair" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('status', 'in', ['on_loan', 'unavailable', 'under_repair'])]}" groups="rental.group_rental_user"/>
+                        <button name="action_from_repair" string="From Repair" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('status', 'in', ['on_loan', 'in_garage', 'unavailable'])]}" groups="rental.group_rental_user"/>
                         <field name="status" widget="statusbar" statusbar_visible="in_garage,on_loan"/>
                     </header>
                     <sheet>
@@ -82,6 +86,17 @@
                                         <field name="finish_odometer"/>
                                         <field name="date_in_garage"/>
                                         <field name="date_on_loan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Repair">
+                                <field name="repair_ids" options="{'no_open': True}">
+                                    <tree create="false" delete="false" edit="false" default_order="id desc">
+                                        <field name="type"/>
+                                        <field name="start_odometer"/>
+                                        <field name="finish_odometer"/>
+                                        <field name="date_in_repair"/>
+                                        <field name="date_from_repair"/>
                                     </tree>
                                 </field>
                             </page>

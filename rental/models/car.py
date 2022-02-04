@@ -17,6 +17,22 @@ class History(models.Model):
     date_on_loan = fields.Datetime()
 
 
+class Repair(models.Model):
+    _name = 'rental.repair'
+    _description = 'Repair'
+
+    car_id = fields.Many2one('rental.car')
+    start_odometer = fields.Integer()
+    finish_odometer = fields.Integer()
+    date_in_repair = fields.Datetime()
+    date_from_repair = fields.Datetime()
+    description = fields.Char()
+    type = fields.Selection([
+        ('maintenance', 'Maintenance'),
+        ('repair', 'Repair'),
+    ])
+
+
 class Car(models.Model):
     _name = 'rental.car'
     _inherit = 'mail.thread'
@@ -36,6 +52,7 @@ class Car(models.Model):
     rental_start_date = fields.Date()
     client_id = fields.Many2one('res.partner')
     history_ids = fields.One2many('rental.history', 'car_id')
+    repair_ids = fields.One2many('rental.repair', 'car_id')
     image = fields.Image(string="Image", max_width=256, max_height=256)
     active = fields.Boolean(default=True)
     odometer = fields.Integer()
@@ -67,6 +84,33 @@ class Car(models.Model):
             'name': _('In Garage %s') % self.name,
             'view_mode': 'form',
             'res_model': 'rental.wizard.in_garage',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_finish_odometer': self.odometer
+            }
+        }
+
+    def action_in_repair(self):
+        return {
+            'name': _('In Repair %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.in_repair',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_type': 'maintenance',
+                'default_description': 'Default maintenance',
+            }
+        }
+
+    def action_from_repair(self):
+        return {
+            'name': _('From Repair %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.from_repair',
             'type': 'ir.actions.act_window',
             'target': 'new',
             'context': {

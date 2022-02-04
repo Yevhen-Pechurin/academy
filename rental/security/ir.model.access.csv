@@ -1,7 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_rental_car_user,access_rental.car,model_rental_car,,1,0,0,0
-access_rental_car_manager,access_rental.car,model_rental_car,rental.group_rental_manager,1,1,1,1
+access_rental_car_manager,access_rental.car,model_rental_car,rental.group_rental_manager,1,1,1,0
 access_rental_history,access_rental.history,model_rental_history,base.group_user,1,1,1,0
 rental.access_rental_wizard_on_loan,access_rental_wizard_on_loan,rental.model_rental_wizard_on_loan,rental.group_rental_user,1,1,1,1
 rental.access_rental_car_report,access_rental_car_report,rental.model_rental_car_report,base.group_user,1,1,1,1
 rental.access_rental_wizard_in_garage,access_rental_wizard_in_garage,rental.model_rental_wizard_in_garage,rental.group_rental_user,1,1,1,1
+rental.access_rental_repair,access_rental_repair,rental.model_rental_repair,base.group_user,1,1,1,0
+rental.access_rental_wizard_in_repair,access_rental_wizard_in_repair,rental.model_rental_wizard_in_repair,rental.group_rental_user,1,1,1,1
+rental.access_rental_wizard_from_repair,access_rental_wizard_from_repair,rental.model_rental_wizard_from_repair,rental.group_rental_user,1,1,1,1
+access_rental_repair,access_rental.repair,model_rental_repair,base.group_user,1,1,1,0

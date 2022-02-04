@@ -9,6 +9,10 @@ from odoo import fields
 @tagged('car')
 class TestCar(TestCarCommonBase):
 
+    def test_01_sequence(self):
+        self.assertEqual(self.car_1.number, 'Car000001')
+        self.assertEqual(self.car_2.number, 'Car000002')
+
     def test_action_in_garage(self):
         self.assertEqual(self.car_1.status, 'on_loan', 'Status is not on_loan')
         self.assertTrue(self.car_1.client_id)
@@ -37,10 +41,6 @@ class TestCar(TestCarCommonBase):
         wizard = form_in_garage.save()
         wizard.action_in_garage()
         self.assertEqual(self.car_1.status, 'in_garage', 'Status is not in_garage')
-
-    def test_01_sequence(self):
-        self.assertEqual(self.car_1.number, 'Car000001')
-        self.assertEqual(self.car_2.number, 'Car000002')
 
     def test_action_on_loan(self):
         self.assertEqual(self.car_2.status, 'in_garage', 'Status is not in_garage')
