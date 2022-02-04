@@ -63,15 +63,17 @@ class Car(models.Model):
             car.name = f'{car.model}{car.number}'
 
     def action_in_garage(self):
-        if self.history_ids:
-            last_history = self.history_ids[-1]
-            last_history.write({
-                'date_in_garage': fields.Datetime.now()
-            })
-        self.sudo().write({
-            'status': 'in_garage',
-            'client_id': False
-        })
+        return {
+            'name': _('In Garage %s') % self.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.in_garage',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_finish_odometer': self.odometer
+            }
+        }
 
     @api.depends('active')
     def _compute_status(self):

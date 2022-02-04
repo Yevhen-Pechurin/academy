@@ -13,8 +13,30 @@ class TestCar(TestCarCommonBase):
         self.assertEqual(self.car_1.status, 'on_loan', 'Status is not on_loan')
         self.assertTrue(self.car_1.client_id)
         self.car_1.action_in_garage()
+        result = self.car_1.action_in_garage()
+        expected_result = {
+            'name': 'In Garage %s' % self.car_1.name,
+            'view_mode': 'form',
+            'res_model': 'rental.wizard.in_garage',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'additional_data': 'Data',
+                'default_finish_odometer': self.car_1.odometer
+            }
+        }
+        self.assertItemsEqual(expected_result, result)
+        form_data = self.env['rental.wizard.in_garage'].with_context(**result['context'], active_model='rental.car',
+                                                                   active_ids=self.car_1.ids)
+        form_in_garage = Form(form_data)
+        traveled_kilometers = 1000
+        with self.assertRaises(ValidationError):
+            form_in_garage.finish_odometer = self.car_1.odometer - traveled_kilometers
+            form_in_garage.save()
+        form_in_garage.finish_odometer = self.car_1.odometer + traveled_kilometers
+        wizard = form_in_garage.save()
+        wizard.action_in_garage()
         self.assertEqual(self.car_1.status, 'in_garage', 'Status is not in_garage')
-        self.assertFalse(self.car_1.client_id)
 
     def test_01_sequence(self):
         self.assertEqual(self.car_1.number, 'Car000001')

@@ -3,3 +3,4 @@ access_rental_car,rental.car,model_rental_car,base.group_user,1,1,1,1
 access_rental_history,rental.history,model_rental_history,base.group_user,1,1,1,1
 rental.access_rental_wizard_on_loan,access_rental_wizard_on_loan,rental.model_rental_wizard_on_loan,base.group_user,1,1,1,1
 rental.access_rental_car_report,access_rental_car_report,rental.model_rental_car_report,base.group_user,1,1,1,1
+rental.access_rental_wizard_in_garage,access_rental_wizard_in_garage,rental.model_rental_wizard_in_garage,base.group_user,1,1,1,1

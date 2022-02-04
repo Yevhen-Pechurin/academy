@@ -19,6 +19,7 @@ class WizardOnLoan(models.TransientModel):
             'status': 'on_loan',
             'history_ids': [(0, 0, {
                 'car_id': car.id,
+                'start_odometer': car.odometer,
                 'partner_id': self.client_id.id,
                 'date_in_garage': today,
                 'date_on_loan': self.date_on_loan,
