@@ -16,10 +16,6 @@ class Demo(models.Model):
     _inherit = ['mail.thread']
 
     def _expand_stages(self, *kw):
-        print(self.env['demo.stage'].search([('name', 'not in', ['Done', 'Canceled'])]))
-        for i in self.env['demo.stage'].search([('name', 'not in', ['Done', 'Canceled'])]):
-            print(i.name)
-
         return self.env['demo.stage'].search([('name', 'not in', ['Done', 'Canceled'])])
 
     name = fields.Char(readonly=True, tracking=True, default='New')

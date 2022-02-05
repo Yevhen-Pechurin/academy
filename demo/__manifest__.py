@@ -19,7 +19,7 @@
         'data/ir_cron_old_demoes.xml'
 
     ],
-    'demo': [
+    'demo': ['demo/demo_demo.xml'
 
 
     ],

@@ -26,7 +26,7 @@
             <field name="res_model">demo.demo</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="context"> {'search_default_my_demoes': 1}</field>
+<!--            <field name="context"> {'search_default_my_demoes': 1}</field>-->
         </record>
 
         <record id="demo_form_view" model="ir.ui.view">
@@ -100,7 +100,7 @@
         </record>
 
         Extension of contacts for demoes
-        <record id="extension" model="ir.ui.view">
+        <record id="extension_button_create_demoe" model="ir.ui.view">
             <field name="name">Extension</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -113,6 +113,19 @@
             </field>
         </record>
 
-
+        <record id="extension_button_with_demoes" model="ir.ui.view">
+            <field name="name">Extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- to insert your fields at the end of the list -->
+                <xpath expr="//form/sheet/div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="demo_get" icon="fa-desktop"
+                            attrs="{'invisible': [('demoes_count', '=', 0)]}">
+                        <field string="Demoes" name="demoes_count" widget="statinfo"></field>
+                    </button>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

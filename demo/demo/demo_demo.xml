@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <!-- Demo -->
+        <record id="demo_demo_1" model="demo.demo">
+            <field name="partner_id" ref='base.res_partner_1'/>
+            <field name="date" eval="DateTime.today()"/>
+            <field name="stage_id" ref="stage2"/>
+        </record>
+
+        <record id="demo_demo_2" model="demo.demo">
+            <field name="partner_id" ref='base.res_partner_1'/>
+        </record>
+
+        <record id="demo_demo_3" model="demo.demo">
+            <field name="partner_id" ref='base.res_partner_2'/>
+            <field name="date" eval="DateTime.today()"/>
+        </record>
+
+        <record id="demo_demo_4" model="demo.demo">
+            <field name="partner_id" ref='base.res_partner_3'/>
+            <field name="stage_id" ref="stage1"/>
+        </record>
+    </data>
+</odoo>
