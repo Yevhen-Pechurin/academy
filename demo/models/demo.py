@@ -9,6 +9,7 @@ class State(models.Model):
 
     name = fields.Char('State Name', required=True, translate=True)
     sequence = fields.Integer('Sequence', default=1, help="Used to order states. Lower is better.")
+    is_won = fields.Boolean('Is Won Stage?')
     fold = fields.Boolean('Folded in Pipeline',
                           help='This state is folded in the kanban view when there are no records in that state to display.')
 
