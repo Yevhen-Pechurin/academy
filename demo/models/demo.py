@@ -27,20 +27,14 @@ class Demo(models.Model):
     description = fields.Text(tracking=True)
 
 
-    @api.model
-    def _read_group_state_ids(self, states, domain, order):
-        return self.env['demo.state'].search([], order=order)
-
-
-    # def _compute_state_id(self):
-    #     for demo in self:
-    #         if not demo.state_id:
-    #             demo.state_id = demo._state_find(domain=[('fold', '=', False)]).id
-
-
     _sql_constraints = [
         ('name_unig', 'unique (name)', """Only one name can be defined for each demo!""")
     ]
+
+
+    @api.model
+    def _read_group_state_ids(self, states, domain, order):
+        return self.env['demo.state'].search([], order=order)
 
 
     @api.model
@@ -48,6 +42,20 @@ class Demo(models.Model):
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('demo.demo') or _('New')
         return super(Demo, self).create(vals)
+
+
+    # def action_my_demos(self):
+    #     self.ensure_one()
+    #     return {
+    #         'name': _('My Demos'),
+    #         'view_mode': 'tree,form',
+    #         'res_model': 'demo.demo',
+    #         'domain': [('user_id', '=', self.id)],
+    #         'type': 'ir.actions.act_window'
+    #         # 'context': {'search_default_client_id': self.id}
+    #     }
+
+
 
 
     # state = fields.Selection([

@@ -16,14 +16,16 @@ class ResPartner(models.Model):
             partner = self.browse(group['partner_id'][0])
             partner.demo_count = group['partner_id_count']
 
+
     def action_view_demo(self):
         self.ensure_one()
         return {
             'name': _('Partners Demos'),
             'view_mode': 'tree,form',
             'res_model': 'demo.demo',
-            'type': 'ir.actions.act_window',
-            'context': {'search_default_partner_id': self.id}
+            'domain': [('partner_id', '=', self.id)],
+            'type': 'ir.actions.act_window'
+            # 'context': {'search_default_client_id': self.id}
         }
 
     def action_new_demo(self):

@@ -26,14 +26,14 @@
 
     # always loaded
     'data': [
+        # 'security/security.xml',
         'security/ir.model.access.csv',
-        # 'data/demo_state_data.xml'
+        'data/demo_state_data.xml',
         'data/ir_sequence_data.xml',
         'wizards/view_wizard_new_demo.xml',
         'views/demo_views.xml',
         'views/res_partner_views.xml',
-        'report/demo_report_views.xml'
-
+        'report/demo_report_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
