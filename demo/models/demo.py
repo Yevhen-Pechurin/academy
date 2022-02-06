@@ -45,16 +45,16 @@ class Demo(models.Model):
         return super(Demo, self).create(vals)
 
 
-    # def action_my_demos(self):
-    #     self.ensure_one()
-    #     return {
-    #         'name': _('My Demos'),
-    #         'view_mode': 'tree,form',
-    #         'res_model': 'demo.demo',
-    #         'domain': [('user_id', '=', self.id)],
-    #         'type': 'ir.actions.act_window'
-    #         # 'context': {'search_default_client_id': self.id}
-    #     }
+    def action_view_my_demos(self):
+        self.ensure_one()
+        return {
+            'name': _('My Demos'),
+            'view_mode': 'tree,form',
+            'res_model': 'demo.demo',
+            'domain': [('user_id', '=', self.id)],
+            'type': 'ir.actions.act_window'
+            # 'context': {'search_default_client_id': self.id}
+        }
 
 
 

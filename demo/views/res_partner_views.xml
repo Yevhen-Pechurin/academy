@@ -14,7 +14,7 @@
                             <span class="o_stat_text" attrs="{'invisible': [('demo_count', '&gt;', 1)]}"> Demo</span>
                         </div>
                     </button>
-                  <button name="action_new_demo" string="New Demo" class="oe_highlight" type="object" icon="fa-desktop"/>
+                  <button class="oe_stat_button" name="action_new_demo" string="New Demo" type="object" icon="fa-desktop"/>
                 </div>
             </data>
         </field>

@@ -9,13 +9,13 @@
         <tree>
             <field name="name"/>
             <field name="user_id" string="Salesperson"/>
+<!--            groups="base.group_multi_user"-->
             <field name="partner_id" string="Client"/>
             <field name="date"/>
             <field name="state_id"/>
         </tree>
     </field>
 </record>
-
 
 
 <!-- explicit pivot view definition -->
@@ -80,7 +80,7 @@
     <field name="name">demo.form.view</field>
     <field name="model">demo.demo</field>
     <field name="arch" type="xml">
-        <form>
+        <form class="o_demo_demo_form">
             <sheet>
                 <div class="oe_title">
                     <label for="name"/>
@@ -166,17 +166,19 @@
         <field name="view_mode">kanban,tree,form,pivot,graph</field>
     </record>
 
+      <record model="ir.actions.act_window" id="action_view_my_demos">
+        <field name="name">My Demos</field>
+        <field name="res_model">demo.demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+<!--        <field name="context">{'search_default_user_id': active_id}</field>-->
+<!--        <field name="context">{'search_default_user_id': [active_id], 'default_user_id': active_id}</field>-->
+    </record>
+
     <record model="ir.actions.act_window" id="action_demo_states">
         <field name="name">States</field>
         <field name="res_model">demo.state</field>
         <field name="view_mode">tree,form</field>
     </record>
-
-<!--    <record model="ir.actions.act_window" id="action_my_demos">-->
-<!--        <field name="name">My Demos</field>-->
-<!--        <field name="res_model">demo.demo</field>-->
-<!--        <field name="view_mode">kanban,tree,form</field>-->
-<!--    </record>-->
 
 
     <!-- menu -->
@@ -184,12 +186,12 @@
         <menuitem name="Demo" id="demo">
             <menuitem name="All Demos" id="menu_demo" action="action_demo"/>
         </menuitem>
+        <menuitem name="My Demos" id="my_demos">
+            <menuitem name="My Demos" id="menu_my_demos" action="action_view_my_demos"/>
+        </menuitem>
         <menuitem name="Configuration" id="configuration">
             <menuitem name="States" id="menu_demo_states" action="action_demo_states"/>
         </menuitem>
-<!--        <menuitem name="All My Demos" id="all_my_demos">-->
-<!--            <menuitem name="My Demos" id="menu_all_my_demos" action="action_all_my_demos"/>-->
-<!--        </menuitem>-->
     </menuitem>
 
   </data>

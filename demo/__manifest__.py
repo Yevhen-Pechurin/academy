@@ -39,6 +39,11 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'demo/static/src/js/tours/demo.js',
+        ],
+    },
     'application': True,
     'installable': True,
 }
