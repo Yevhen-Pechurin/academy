@@ -1,0 +1,11 @@
+
+<odoo>
+    <template id="reports" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table/thead/tr" position="inside">
+            <th name="th_country" class="text-right">Country</th>
+        </xpath>
+         <xpath expr="//table/tbody/t['1']/tr" position="inside">
+             <td colspan="99" class="text-right"><span t-field="line.country_of_origin"/></td>
+        </xpath>
+    </template>
+</odoo>
