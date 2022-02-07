@@ -1,0 +1,41 @@
+<odoo>
+    <record id="sales_product_country_of_origin" model="ir.ui.view">
+        <field name="name">Country of Origin</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_general']" position="inside">
+                <field name="country_of_origin"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="sales_order_country_of_origin" model="ir.ui.view">
+        <field name="name">Country of Origin</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page//tree//field[@name='name']" position="after">
+                <field name="country_of_origin"/>
+            </xpath>
+        </field>
+    </record>
+
+    <template id="sales_order_report_country_of_origin" inherit_id="sale.report_saleorder_document" name="Report with Country of Origin">
+            <xpath expr="//th[@name='th_description']" position="after">
+                <th name="th_country_of_origin" class="text-right">Country of origin</th>
+            </xpath>
+            <xpath expr="//td[@name='td_name']" position="after">
+                <td name="td_country_of_origin" class="text-right"><span t-field="line.country_of_origin"/></td>
+            </xpath>
+    </template>
+
+    <template id="sales_order_page_country_of_origin" inherit_id="sale.sale_order_portal_content" name="Portal Page with Country of Origin">
+            <xpath expr="//section//thead//th[hasclass('text-left')]" position="after">
+                <th class="text-right">Country of origin</th>
+            </xpath>
+            <xpath expr="//section//tbody//td[@id='product_name']" position="after">
+                <td name="td_country_of_origin" class="text-right"><span t-field="line.country_of_origin"/></td>
+            </xpath>
+    </template>
+</odoo>
