@@ -3,7 +3,12 @@
 from odoo import models, fields, api
 
 
-class SaleOrigin(models.Model):
-    _name = 'sale_origin.country_of_origin'
+class Product(models.Model):
     _description = 'sale_origin.sale_origin'
+    _inherit = 'product.template'
     country_of_origin = fields.Char(string='Country of Origin',)
+
+class SaleOrderLine(models.Model):
+    _description = 'sale_origin.line'
+    _inherit = 'sale.order.line'
+    country_of_origin = fields.Char(string='Country of Origin', related='product_id.country_of_origin')

@@ -17,14 +17,10 @@
     'depends': ['base', 'sale'],
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'reports/sale_origin_templates.xml',
         'views/sale_country_of_origin_product.xml',
-        'views/templates.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
