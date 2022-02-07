@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_origin_report_saleorder_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table[hasclass('o_main_table')]/thead/tr/th[contains(text(), 'Quantity')]" position="before">
+            <th t-value="product.template.country_of_origin" class="text-right">Country Of Origin</th>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]/tbody/t/tr/t/td" position="after">
+            <td name="td_country" class="text-right">
+                <span t-field="line.country_of_origin"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
