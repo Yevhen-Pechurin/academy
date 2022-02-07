@@ -1,37 +1,29 @@
 <odoo>
-<!--    <data>-->
+    <data>
 
-<!--&lt;!&ndash;      Demos&ndash;&gt;-->
-<!--        <record id="demo_1" model="demo.demo">-->
-<!--            <field name="name">The Soft One</field>-->
+<!--      Demos-->
+        <record id="demo_1" model="demo.demo">
+            <field name="partner_id" ref="base.res_partner_address_31"/>
+            <field name="date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="state-id" ref="state_demo4"/>
+            <field name="description">
+                Show the capabilities of the number one product.</field>
+        </record>
 
-<!--            <field name="uesr_id"             >Nick</field>-->
+        <record id="demo_2" model="demo.demo">
+            <field name="partner_id" ref="base.res_partner_address_3"/>
+            <field name="date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="state-id" ref="state_demo1"/>
+            <field name="description">
+                Show the benefits of the number two product.</field>
+        </record>
 
-<!--            <field name="partner_id" ref="base.res_partner_address_31"/>-->
-<!--            <field name="date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>-->
-<!--            <field name="state-id" ref="state_demo4"/>-->
-<!--            <field name="description">-->
-<!--                Show the capabilities of the number one product.</field>-->
-<!--        </record>-->
-
-<!--        <record id="demo_2" model="demo.demo">-->
-<!--            <field name="name">The Soft Two</field>-->
-<!--            <field name="uesr_id"    >     Bob</field>   -->
-<!--            <field name="partner_id" ref="base.res_partner_address_3"/>-->
-<!--            <field name="date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>-->
-<!--            <field name="state-id" ref="state_demo1"/>-->
-<!--            <field name="description">-->
-<!--                Show the benefits of the number two product.</field>-->
-<!--        </record>-->
-
-<!--        <record id="demo_3" model="demo.demo">-->
-<!--            <field name="name">New Products Show</field>-->
-<!--            <field name="uesr_id">Jane</field>-->
-<!--            <field name="partner_id" ref="base.res_partner_address_11"/>-->
-<!--            <field name="date" eval="DateTime.today()"/>-->
-<!--            <field name="state-id" ref="state_demo2"/>-->
-<!--            <field name="description">-->
-<!--                Overview of new products.</field>-->
-<!--        </record>-->
-<!--    </data>-->
+        <record id="demo_3" model="demo.demo">
+            <field name="partner_id" ref="base.res_partner_address_11"/>
+            <field name="date" eval="DateTime.today()"/>
+            <field name="state-id" ref="state_demo2"/>
+            <field name="description">
+                Overview of new products.</field>
+        </record>
+    </data>
 </odoo>

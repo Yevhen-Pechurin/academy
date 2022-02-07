@@ -26,7 +26,7 @@
 
     # always loaded
     'data': [
-        # 'security/security.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
         'data/demo_state_data.xml',
         'data/ir_sequence_data.xml',
