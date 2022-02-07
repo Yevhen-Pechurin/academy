@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="zoom_info.zoom_list">
+        <div class="zoom_search_div">
+            <ul class="zoom_search_ul list-unstyled">
+                <li t-foreach="list_search" t-as="item_list" class="zoom_search_li">
+                    <span class="list_person_span" t-esc="item_list['name']" t-att-data-id="item_list['id']"/>
+                </li>
+            </ul>
+        </div>
+    </t>
+<!---->
+    <t t-name="zoom_info.zoom_list_contact">
+        <div class="zoom_contact_div">
+            <ul class="zoom_contact_ul list-unstyled">
+                <li t-foreach="list_contact" t-as="item_list" class="zoom_contact_li">
+                    <div class="list_contact_div" t-att-data-id="item_list['id']">
+                        <span>
+                            <t t-esc="item_list['firstName']"/>
+                            <t t-esc="item_list['lastName']"/>
+                        </span>
+                        <span><t t-esc="item_list['jobTitle']"/></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </t>
+</templates>
