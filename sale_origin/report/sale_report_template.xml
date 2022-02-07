@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <template id="sale_origin_report" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//table[@class='table table-sm o_main_table']/thead/tr" position="inside">
+                <th name="th_country" class="text-right">Country</th>
+            </xpath>
+            <xpath expr="//table[@class='table table-sm o_main_table']/tbody/t/tr/t" position="inside">
+                <td name="td_country"><span t-field="line.country_of_origin"/></td>
+            </xpath>
+        </template>
+    </data>
+</odoo>
