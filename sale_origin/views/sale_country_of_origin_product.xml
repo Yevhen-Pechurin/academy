@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_country_of_origin_filed" model="ir.ui.view">
+      <field name="model">sale_origin.country_of_origin</field>
+      <field name="inherit_id" ref="product.product_template_form_view"/>
+      <field name="arch" type="xml">
+          <xpath expr='//label[@for="o_field_input_15"]' position="after">
+              <field name="country_of_origin"/>
+          </xpath>
+      </field>
+  </record>
+</odoo>
