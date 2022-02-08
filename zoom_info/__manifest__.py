@@ -26,7 +26,7 @@
     'author': "Smart Tek Solutions and Services",
     'website': "https://smartteksas.com/",
     'depends': [
-        'base',
+        'base_setup',
         'web',
     ],
     'data': [
