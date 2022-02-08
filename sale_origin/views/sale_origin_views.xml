@@ -1,60 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="sale_origin.list">
-      <field name="name">sale_origin list</field>
-      <field name="model">sale_origin.sale_origin</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+   <record id="sale_product_country_of_origin" model="ir.ui.view">
+        <field name="name">Product Country</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_policy']" position="after">
+                <field name="country_of_origin"/>
+            </xpath>
+        </field>
+   </record>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="sale_origin.action_window">
-      <field name="name">sale_origin window</field>
-      <field name="res_model">sale_origin.sale_origin</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="sale_origin.action_server">
-      <field name="name">sale_origin server</field>
-      <field name="model_id" ref="model_sale_origin_sale_origin"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-
-    <!-- Top menu item -->
-<!--
-    <menuitem name="sale_origin" id="sale_origin.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="sale_origin.menu_1" parent="sale_origin.menu_root"/>
-    <menuitem name="Menu 2" id="sale_origin.menu_2" parent="sale_origin.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="sale_origin.menu_1_list" parent="sale_origin.menu_1"
-              action="sale_origin.action_window"/>
-    <menuitem name="Server to list" id="sale_origin" parent="sale_origin.menu_2"
-              action="sale_origin.action_server"/>
--->
-  </data>
+    <record id="sale_order_product_country_of_origin" model="ir.ui.view">
+        <field name="name">Product Country Order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="country_of_origin"/>
+            </xpath>
+        </field>
+   </record>
 </odoo>
