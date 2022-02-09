@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_country_of_origin_filed_order" model="ir.ui.view">
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                <field name="country_of_origin" attrs="{'invisible': [('country_of_origin', '=', 'none')]}"/>
+            </xpath>
+      </data>
+    </field>
+  </record>
+</odoo>
