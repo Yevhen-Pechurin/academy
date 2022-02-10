@@ -4,16 +4,10 @@
         <template id="assets_backend" name="stss planing assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <link rel="stylesheet" type="text/scss" href="/zoom_info/static/src/scss/list_search.scss"/>
-
-
+                <script type="text/javascript" src="/zoom_info/static/src/js/tours/zoom_info_tour.js"></script>
+                <script type="text/javascript" src="/zoom_info/static/src/js/zoom_info_query.js"/>
                 <script type="text/javascript" src="/zoom_info/static/src/js/zoom_list.js"/>
             </xpath>
         </template>
-
-        <!--        <template id="assets_tests" name="stss planing Tests" inherit_id="web.assets_tests">-->
-        <!--            <xpath expr="." position="inside">-->
-        <!--                <script type="text/javascript" src="/mail/static/tests/tours/mail_full_composer_test_tour.js"/>-->
-        <!--            </xpath>-->
-        <!--        </template>-->
     </data>
 </odoo>
