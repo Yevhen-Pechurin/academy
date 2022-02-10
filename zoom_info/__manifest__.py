@@ -22,13 +22,13 @@
     'name': "Zoom Info",
     'summary': """SmartTekSas integration with Zoom Info""",
     'version': '14.0.0.0',
-    'category': 'CRM',
+    'category': 'Tools',
     'author': "Smart Tek Solutions and Services",
     'website': "https://smartteksas.com/",
     'depends': [
         'base',
         'web',
-        'crm',
+        'base_setup',
     ],
     'data': [
         'views/res_config_settings.xml',
