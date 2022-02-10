@@ -6,8 +6,9 @@
     <field name="arch" type="xml">
       <data>
         <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
-                <field name="country_of_origin" attrs="{'invisible': [('country_of_origin', '=', 'none')]}"/>
-            </xpath>
+                <field name="country_of_origin" attrs="{'invisible': [('country_of_origin', '=', False)]}"/>
+                <field name="temperature_regime"/>
+        </xpath>
       </data>
     </field>
   </record>
