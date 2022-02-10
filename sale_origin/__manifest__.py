@@ -18,8 +18,8 @@
     # always loaded
     'data': [
         'reports/sale_origin_templates.xml',
-        'views/sale_country_of_origin_product.xml',
-        'views/sale_country_of_origin_report_template.xml',
+        'views/sale_origin_product.xml',
+        'views/sale_origin_order.xml',
         'views/sale_country_of_origin_templates.xml',
     ],
     # only loaded in demonstration mode
