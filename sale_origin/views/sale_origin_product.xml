@@ -6,8 +6,9 @@
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='uom_id']" position="before">
-          <field name="country_of_origin" string="Country of Origin"/>
-          <h1></h1>
+           <field name="country_of_origin"  position="replace">
+            <field name="country_of_origin" attrs="{'invisible': [('country_of_origin', '=', 'null')]}"/>
+        </field>
           <field name="min_temperature_regime"/>
           <field name="max_temperature_regime"/>
           <field name="temperature_regime" options="{'no_edit': True, 'no_create': True,}"/>
