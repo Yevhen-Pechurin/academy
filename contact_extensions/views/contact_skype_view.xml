@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <record id="view_country_of_origin_filed_order" model="ir.ui.view">
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//group/field[@name='mobile']" position="after">
+            <field name="skype"></field>
+          </xpath>
+          <xpath expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group/field[@name='mobile']" position="after">
+            <field name="skype"></field>
+          </xpath>
+          <xpath expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group/div/div[@name='div_address']/field[@name='street']" position="after">
+            <field name="num_flat" class="o_address_zip" placeholder="59"></field>
+          </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
