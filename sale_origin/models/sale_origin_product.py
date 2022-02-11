@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class Product(models.Model):
     _description = 'sale_origin.sale_origin'
     _inherit = 'product.template'
-    country_of_origin = fields.Char(string='Country of Origin', default=False)
+    country_of_origin = fields.Char(string='Country of Origin', default=None)
     min_temperature_regime = fields.Integer()
     max_temperature_regime = fields.Integer()
     temperature_regime = fields.Char(compute='_compute_temperature_regime', store=True)
