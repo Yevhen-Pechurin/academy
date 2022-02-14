@@ -17,18 +17,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
-
-{
-    'name': "Zoom Info",
+{   'name': "Zoom Info",
     'summary': """SmartTekSas integration with Zoom Info""",
     'version': '14.0.0.0',
     'category': 'Tools',
     'author': "Smart Tek Solutions and Services",
     'website': "https://smartteksas.com/",
     'depends': [
-        'base',
-        'web',
         'base_setup',
+        'web',
         'contacts'
     ],
     'data': [
@@ -42,4 +39,5 @@
     'license': "AGPL-3",
     'installable': True,
     'application': False,
+
 }
