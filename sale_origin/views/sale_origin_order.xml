@@ -8,6 +8,7 @@
       <field name="country_of_origin" position="replace">
         <field name="country_of_origin" attrs="{'invisible': [('country_of_origin', '=', 'null')]}"/>
       </field>
+      </xpath>
     </field>
   </record>
 </odoo>
