@@ -52,5 +52,4 @@ class TestZoomJs(HttpCase):
     def test_tour(self):
         self.start_tour("/web", 'zoom_info_tour', login='admin', timeout=180)
         partner = self.env['res.partner'].search([('name', '=', 'Tesla')], limit=1)
-        self.assertIsNotNone(partner)
         self.assertEqual(partner.name, 'Tesla')
