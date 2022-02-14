@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class SaleOrderLine(models.Model):
@@ -9,4 +8,4 @@ class SaleOrderLine(models.Model):
     temperature_regime = fields.Char(related='product_id.temperature_regime')
 
     def get_sale_order_line_multiline_description_sale(self, product):
-        return super(SaleOrderLine, self).get_sale_order_line_multiline_description_sale(product) + f'\nTemperature Regime: {self.temperature_regime}'
+        return _(f'{super(SaleOrderLine, self).get_sale_order_line_multiline_description_sale(product)}\nTemperature:{self.temperature_regime}')
