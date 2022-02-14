@@ -29,6 +29,7 @@
         'base',
         'web',
         'base_setup',
+        'contacts'
     ],
     'data': [
         'views/res_config_settings.xml',
