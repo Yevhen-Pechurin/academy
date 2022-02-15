@@ -271,7 +271,7 @@ class MRPProduction(models.Model):
             mo.component_requirement_ids = component_requirements
 
     @api.depends('move_finished_ids.move_line_ids.lot_id')
-    def _compute_batch_code_id(self):
+    def _compute_batch_code_id(self):  # TODO useless
         for mo in self:
             if mo.product_id.tracking != 'lot':
                 mo.batch_code_id = False
