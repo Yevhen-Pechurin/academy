@@ -1,0 +1,218 @@
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_form_view_bluesky">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="after">
+                <notebook>
+                    <page string="Control" name="control">
+                        <group>
+                            <group name="control_data">
+                                <field name="customer_id" options="{'no_create': True}"/>
+                                <field name="customer_no"/>
+                                <field name="sale_order_id" options="{'no_create': True}"/>
+                                <field name="order_fulfilment"/>
+                                <field name="min_order_qty"/>
+                                <field name="batch_code_id"
+                                       domain="[('product_id', '=', product_id)]"
+                                       context="{'default_product_id': product_id, 'default_company_id': company_id}"
+                                />
+                                <field name="bulk_required"/>
+                                <field name="ppe_required_ids" widget="many2many_tags"/>
+                            </group>
+                            <group name="control_sign">
+                                <field name="bulk_released_by_sign" widget="signature"
+                                       force_save="1"
+                                       attrs="{'readonly': [('bulk_released_by_sign', '!=', False)]}"
+                                />
+                                <field name="bulk_approved_by_sign" widget="signature"
+                                       force_save="1"
+                                       attrs="{'readonly': [('bulk_approved_by_sign', '!=', False)]}"
+                                />
+                                <field name="samples_retained_sign" widget="signature"
+                                       force_save="1"
+                                       attrs="{'readonly': [('samples_retained_sign', '!=', False)]}"
+                                />
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Bulk Handover" name="bulk_handover">
+                        <group>
+                            <group name="bulk_handover_data">
+                                <field name="bulk_received"/>
+                                <field name="approved_fill_weight"/>
+                                <field name="projected_yield"/>
+                                <field name="min_no_of_units_required"/>
+                            </group>
+                            <group name="bulk_handover_sign">
+                                <field name="mixing_sign" widget="signature"
+                                       force_save="1"
+                                       attrs="{'readonly': [('mixing_sign', '!=', False)]}"
+                                />
+                                <field name="production_sign" widget="signature"
+                                       force_save="1"
+                                       attrs="{'readonly': [('production_sign', '!=', False)]}"
+                                />
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Component Requirements" name="component_requirements">
+                        <field name="component_requirement_ids">
+                            <tree editable="bottom" create="0" delete="0">
+                                <field name="mo_id" invisible="1"/>
+                                <field name="product_id" readonly="1"/>
+                                <field name="uom_id" groups="uom.group_uom" readonly="1"/>
+                                <field name="consumed_qty" string="Consumed" attrs="{'column_invisible': [('parent.state', '=', 'draft')]}" readonly="1"/>
+                                <field name="picked_qty"/>
+                                <field name="returned_qty"/>
+                                <field name="rejected_qty"/>
+                                <field name="sent_to_client_qty"/>
+                                <field name="variance_qty"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Line Instructions" name="line_instructions">
+                        <group string="Line Instructions:">
+                            <field name="line_instructions" nolabel="1"/>
+                        </group>
+                        <group string="Special Instructions:">
+                            <field name="special_instructions" nolabel="1"/>
+                        </group>
+                    </page>
+                    <page string="Labeling &amp; Coding Requirements" name="labeling_and_coding_requirements">
+                        <group string="Coding Requirements">
+                            <field name="coding_requirements" nolabel="1"/>
+                        </group>
+                        <group col="4">
+                            <field name="image_1st" widget="image"/>
+                            <field name="sign_1st" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_1st', '!=', False)]}"
+                            />
+                            <field name="image_2nd" widget="image"/>
+                            <field name="sign_2nd" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_2nd', '!=', False)]}"
+                            />
+                            <field name="image_3rd" widget="image"/>
+                            <field name="sign_3rd" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_3rd', '!=', False)]}"
+                            />
+                            <field name="image_4th" widget="image"/>
+                            <field name="sign_4th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_4th', '!=', False)]}"
+                            />
+                            <field name="image_5th" widget="image"/>
+                            <field name="sign_5th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_5th', '!=', False)]}"
+                            />
+                            <field name="image_6th" widget="image"/>
+                            <field name="sign_6th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_6th', '!=', False)]}"
+                            />
+                            <field name="image_7th" widget="image"/>
+                            <field name="sign_7th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_7th', '!=', False)]}"
+                            />
+                            <field name="image_8th" widget="image"/>
+                            <field name="sign_8th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_8th', '!=', False)]}"
+                            />
+                            <field name="image_9th" widget="image"/>
+                            <field name="sign_9th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_9th', '!=', False)]}"
+                            />
+                            <field name="image_10th" widget="image"/>
+                            <field name="sign_10th" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_10th', '!=', False)]}"
+                            />
+                        </group>
+                    </page>
+                    <page string="Packing &amp; Palletising Instructions" name="packing_and_palletising_instructions">
+                        <group>
+                            <group>
+                                <field name="units_per_shipper"/>
+                                <field name="shippers_per_layer"/>
+                                <field name="max_layers_per_pallet"/>
+                                <field name="max_units_per_pallet"/>
+                                <field name="pallet_requirements"/>
+                            </group>
+                            <group>
+                                <field name="special_label" widget="image"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="First Off Line Production Sample" name="first_off_line_production_sample">
+                        <group col="4">
+                            <field name="image_1st_sample" widget="image"/>
+                            <field name="sign_1st_sample" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_1st_sample', '!=', False)]}"
+                            />
+                            <field name="image_2nd_sample" widget="image"/>
+                            <field name="sign_2nd_sample" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_2nd_sample', '!=', False)]}"
+                            />
+                            <field name="image_3rd_sample" widget="image"/>
+                            <field name="sign_3rd_sample" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_3rd_sample', '!=', False)]}"
+                            />
+                            <field name="image_4th_sample" widget="image"/>
+                            <field name="sign_4th_sample" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_4th_sample', '!=', False)]}"
+                            />
+                            <field name="image_5th_sample" widget="image"/>
+                            <field name="sign_5th_sample" widget="signature"
+                                   force_save="1"
+                                   attrs="{'readonly': [('sign_5th_sample', '!=', False)]}"
+                            />
+                        </group>
+                    </page>
+                    <page string="Bulk Reconciliation" name="bulk_reconciliation">
+                        <group col="4">
+                            <label for="amount_of_bulk_manufactured"/>
+                            <div class="o_row">
+                                <field name="amount_of_bulk_manufactured"/>
+                                <span>(g)</span>
+                            </div>
+                            <label for="amount_of_bulk_returned"/>
+                            <div class="o_row">
+                                <field name="amount_of_bulk_returned"/>
+                                <span>(g)</span>
+                            </div>
+                            <label for="avg_fill_weight"/>
+                            <div class="o_row">
+                                <field name="avg_fill_weight"/>
+                                <span>(g)</span>
+                            </div>
+                            <field name="units_filled_incl_rejects"/>
+                            <field name="total_weight_filled"/>
+                            <label for="amount_of_bulk_wasted"/>
+                            <div class="o_row">
+                                <field name="amount_of_bulk_wasted"/>
+                                <span>(g)</span>
+                            </div>
+                            <label for="bulk_yield"/>
+                            <div class="o_row">
+                                <field name="bulk_yield"/>
+                                <span>%</span>
+                            </div>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>
