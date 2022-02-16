@@ -8,6 +8,8 @@ from odoo.addons.website.tools import MockRequest
 from unittest import mock
 from odoo.addons.zoom_info.models.zoom_api import ZoomApi
 import requests
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 SEARCH_COMPANY = {'maxResults': 1110, 'totalResults': 25, 'currentPage': 1,
                   'data': [{'id': 104333869, 'name': 'Tesla'},
@@ -53,16 +55,7 @@ ENRICH_CONTACT = {'success': True, 'data': {'outputFields': [
          }], 'matchStatus': 'FULL_MATCH'}]}}
 
 
-def _zoom_info_request(self, url, params=None):
-    response = dict()
-    if url == "/search/company":
-        response = SEARCH_COMPANY
-    if url == "/enrich/company":
-        response = ENRICH_COMPANY
-    return response['data']
-
-
-# This method will be used by the mock to replace requests.post
+# This method will be used by the mock to replace requests.request
 def mocked_requests_post(*args, **kwargs):
     class MockResponse:
         def __init__(self, json_data, status_code):
@@ -85,13 +78,17 @@ def mocked_requests_post(*args, **kwargs):
             if http_error_msg:
                 raise requests.HTTPError(http_error_msg, response=self)
 
+        @property
+        def text(self):
+            return 'Unauthorized'
+
     if kwargs['url'] == 'https://api.zoominfo.com/authenticate/':
         return MockResponse({'jwt': "Token123"}, 200)
     elif kwargs['url'] == 'https://api.zoominfo.com/search/company/':
         return MockResponse(SEARCH_COMPANY, 200)
     elif kwargs['url'] == 'https://api.zoominfo.com/enrich/company/':
         return MockResponse(ENRICH_COMPANY, 200)
-    elif kwargs['url'] == 'https://api.zoominfo.com//enrich/contact/':
+    elif kwargs['url'] == 'https://api.zoominfo.com/enrich/contact/':
         return MockResponse(ENRICH_CONTACT, 200)
 
     return MockResponse(None, 401)
@@ -101,7 +98,10 @@ def mocked_requests_post(*args, **kwargs):
 class TestZoomJs(HttpCase):
     def setUp(self):
         super(TestZoomJs, self).setUp()
-        # self.patch(ZoomInfo, 'zoom_info_request', _zoom_info_request)
+        set_param = self.env['ir.config_parameter'].sudo().set_param
+        set_param('zoom_info.username', 'admin')
+        set_param('zoom_info.password', 'admin')
+
 
     @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
     def test_tour(self, mock_post):
@@ -121,11 +121,18 @@ class TestZoomInfo(TransactionCase):
     def setUp(self):
         super(TestZoomInfo, self).setUp()
         self.zoom_info_test = self.env['zoom.info'].create([])
-        # self.patch(ZoomInfo, 'zoom_info_request', _zoom_info_request)
         self.maxDiff = None
+
+    # @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
+    # def test_01_update_token(self, mock_post):
+    #     self.assertRaises(UserError(_('Password or Login not filled for Zoom Info')), self.zoom_info_test.find_company_id('Tesla'))
+    #     pass
 
     @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
     def test_creation(self, mock_post):
+        set_param = self.env['ir.config_parameter'].sudo().set_param
+        set_param('zoom_info.username', 'login')
+        set_param('zoom_info.password', 'login')
         companies = self.zoom_info_test.find_company_id('Tesla')
         expected_companies = [{'id': 104333869, 'name': 'Tesla'},
                               {'id': 460341917, 'name': 'BELGRADE AIRPORT d.o.o'},
