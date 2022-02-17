@@ -113,7 +113,6 @@ class TestZoomJs(HttpCase):
         self.assertItemsEqual(partner.state_id.name, 'Texas')
         self.assertItemsEqual(partner.zip, '78725')
         self.assertItemsEqual(partner.country_id.name, 'United States')
-        self.assertItemsEqual(partner.phone, '(650) 681-5000')
         self.assertItemsEqual(partner.website, self.env['res.partner']._clean_website('www.tesla.com'))
 
 @tagged('zoom_info')
