@@ -122,10 +122,10 @@ class TestZoomInfo(TransactionCase):
         self.zoom_info_test = self.env['zoom.info'].create([])
         self.maxDiff = None
 
-    # @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
-    # def test_01_update_token(self, mock_post):
-    #     self.assertRaises(UserError(_('Password or Login not filled for Zoom Info')), self.zoom_info_test.find_company_id('Tesla'))
-    #     pass
+    @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
+    def test_01_authorisation_failed(self, mock_post):
+        with self.assertRaises(UserError, msg="Password or Login not filled for Zoom Info"):
+            self.zoom_info_test.find_company_id('Tesla')
 
     @mock.patch('odoo.addons.zoom_info.models.zoom_api.requests.request', side_effect=mocked_requests_post)
     def test_creation(self, mock_post):
@@ -133,27 +133,5 @@ class TestZoomInfo(TransactionCase):
         set_param('zoom_info.username', 'login')
         set_param('zoom_info.password', 'login')
         companies = self.zoom_info_test.find_company_id('Tesla')
-        expected_companies = [{'id': 104333869, 'name': 'Tesla'},
-                              {'id': 460341917, 'name': 'BELGRADE AIRPORT d.o.o'},
-                              {'id': 118473316, 'name': 'Tesla Exploration'},
-                              {'id': 430439652, 'name': 'Tesla-TAN'},
-                              {'id': 112033901, 'name': 'TESLA ENGINEERING'},
-                              {'id': 127435456, 'name': 'MicroTesla'},
-                              {'id': 368769862, 'name': 'TESLA Electric'},
-                              {'id': 372554166, 'name': 'Tesla a.s'}, {'id': 431554339, 'name': 'Tesla SRL'},
-                              {'id': 459522004, 'name': 'Tesla'}, {'id': 372615736, 'name': 'teslauia.com'},
-                              {'id': 359519634, 'name': 'Tesla Energy Services'},
-                              {'id': 382363370, 'name': 'Tesla Electric'},
-                              {'id': 60588176, 'name': 'Tesla Power'},
-                              {'id': 68567269, 'name': 'Tesla Offshore'},
-                              {'id': 358654803, 'name': 'Coil Innovation GmbH'},
-                              {'id': 49596315, 'name': 'Everson Tesla'},
-                              {'id': 458930442, 'name': 'TESLA CARGO SOLUTIONS'},
-                              {'id': 370222239, 'name': 'Tesla Outsourcing Services Canada'},
-                              {'id': 532572028, 'name': 'Tesla Engenharia Elétrica'},
-                              {'id': 372624875, 'name': 'Tesla Technologies & Software'},
-                              {'id': 407004731, 'name': 'Nikola Tesla Educational Corporation'},
-                              {'id': 455952800, 'name': 'ecar-rent'},
-                              {'id': 373839676, 'name': 'Tesla InfoTech'},
-                              {'id': 346396693, 'name': 'Tesla Transformers'}]
+        expected_companies = SEARCH_COMPANY['data']
         self.assertItemsEqual(companies, expected_companies)
