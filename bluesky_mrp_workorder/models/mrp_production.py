@@ -270,17 +270,17 @@ class MRPProduction(models.Model):
                 component_requirements += ComponentRequirement.create(vals_list)
             mo.component_requirement_ids = component_requirements
 
-    @api.depends('move_finished_ids.move_line_ids.lot_id')
-    def _compute_batch_code_id(self):  # TODO useless
-        for mo in self:
-            if mo.product_id.tracking != 'lot':
-                mo.batch_code_id = False
-                continue
-            lots = mo.move_finished_ids.move_line_ids.lot_id
-            if len(lots) != 1:
-                mo.batch_code_id = False
-            else:
-                mo.batch_code_id = lots
+    # @api.depends('move_finished_ids.move_line_ids.lot_id')
+    # def _compute_batch_code_id(self):  # TODO useless
+    #     for mo in self:
+    #         if mo.product_id.tracking != 'lot':
+    #             mo.batch_code_id = False
+    #             continue
+    #         lots = mo.move_finished_ids.move_line_ids.lot_id
+    #         if len(lots) != 1:
+    #             mo.batch_code_id = False
+    #         else:
+    #             mo.batch_code_id = lots
 
     @api.depends('bulk_received', 'approved_fill_weight')
     def _compute_projected_yield(self):
